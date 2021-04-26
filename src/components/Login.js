@@ -1,8 +1,8 @@
 import React from 'react';
-import eventGenerator from '../utiles/eventGenerator'
+import { useHistory } from 'react-router-dom';
 
-export default () => {
-
+const Login = () => {
+    let history = useHistory();
     const onLogin = (event, button) => {
         event.preventDefault();
         let path = ''
@@ -12,14 +12,17 @@ export default () => {
                 break;
             case 'Driver':
                 path = '/login/driver'
+                break;
+            default:
+                path = ''
         }
-        eventGenerator(path)
+        history.push(path)
     }
 
     const button = ['Client', 'Driver'].map((button) => {
         return (
             <>
-                <button onClick={(event) => onLogin(event, button)} className="btn btn-outline-success mb-1" type="submit">{button}</button>
+                <button key={button} onClick={(event) => onLogin(event, button)} className="btn btn-outline-success mb-1" type="submit">{button}</button>
                 <br />
             </>
         )
@@ -33,3 +36,5 @@ export default () => {
         </div>
     )
 }
+
+export default Login;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-export default () => {
+const DriverSignup = () => {
     const [phone, setPhone] = useState('')
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
@@ -50,3 +50,5 @@ export default () => {
         </>
     )
 }
+
+export default DriverSignup;

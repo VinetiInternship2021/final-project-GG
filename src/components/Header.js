@@ -1,7 +1,8 @@
 import React from 'react';
-import eventGenerator from '../utiles/eventGenerator'
+import { useHistory } from 'react-router-dom';
 
-export default ({ buttons }) => {
+const Header = ({ buttons }) => {
+    let history = useHistory();
 
     const onSelect = (event, button) => {
         event.preventDefault();
@@ -18,18 +19,21 @@ export default ({ buttons }) => {
                 break;
             case 'Logout':
                 path = '/logout'
+                break;
+            default:
+                path = ''
         }
-        eventGenerator(path)
+        history.push(path)
     }
 
     const button = buttons.map((button) => {
-        return <button onClick={(event) => onSelect(event, button)} className="btn btn-outline-success me-1" type="submit">{button}</button>
+        return <button key={button} onClick={(event) => onSelect(event, button)} className="btn btn-outline-success me-1" type="submit">{button}</button>
     })
 
     return (
         <nav className="navbar navbar-light bg-light">
             <div className="container-fluid">
-                <a className="navbar-brand">GG Clone App</a>
+                <p className="navbar-brand">GG Clone App</p>
                 <form className="d-flex">
                     {button}
                 </form>
@@ -38,3 +42,4 @@ export default ({ buttons }) => {
     )
 }
 
+export default Header

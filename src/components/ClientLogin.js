@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-export default () => {
+const ClientLogin = () => {
+    const history = useHistory();
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
 
     const onClick = (event) => {
         event.preventDefault();
-        axios.post('/login/client', {
-            phone: phone,
-            password: password
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        // axios.post('/login/client', {
+        //     phone: phone,
+        //     password: password
+        // })
+        //     .then(function (response) {
+        //         //if ok
+        //         eventGenerator('/client')
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
         setPhone('');
         setPassword('')
+        history.push('/client')
     }
 
     return (
@@ -37,3 +41,5 @@ export default () => {
         </>
     )
 }
+
+export default ClientLogin;

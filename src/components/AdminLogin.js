@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-export default () => {
+const AdminLogin = () => {
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
 
@@ -37,3 +37,5 @@ export default () => {
         </>
     )
 }
+
+export default AdminLogin;

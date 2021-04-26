@@ -1,25 +1,28 @@
 import React from 'react';
-import eventGenerator from '../utiles/eventGenerator'
+import { useHistory } from 'react-router-dom';
 
-export default () => {
-
+const Signup = () => {
+    let history = useHistory();
+    let path = ''
     const onSignup = (event, button) => {
         event.preventDefault();
-        let path = ''
         switch (button) {
             case 'Client':
                 path = '/signup/client'
                 break;
             case 'Driver':
                 path = '/signup/driver'
+                break;
+            default:
+                path = ''
         }
-        eventGenerator(path)
+        history.push(path)
     }
 
     const button = ['Client', 'Driver'].map((button) => {
         return (
             <>
-                <button onClick={(event) => onSignup(event, button)} className="btn btn-outline-success mb-1" type="submit">{button}</button>
+                <button key={button} onClick={(event) => onSignup(event, button)} className="btn btn-outline-success mb-1" type="submit">{button}</button>
                 <br />
             </>
         )
@@ -33,3 +36,5 @@ export default () => {
         </div>
     )
 }
+
+export default Signup;

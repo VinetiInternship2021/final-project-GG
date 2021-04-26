@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-export default () => {
+const DriverLogin = () => {
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
 
     const onClick = (event) => {
         event.preventDefault();
-        axios.post('/login/driver', {
-            phone: phone,
-            password: password
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        // axios.post('/login/driver', {
+        //     phone: phone,
+        //     password: password
+        // })
+        //     .then(function (response) {
+        //         console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
         setPhone('');
         setPassword('')
     }
@@ -37,3 +37,5 @@ export default () => {
         </>
     )
 }
+
+export default DriverLogin;
