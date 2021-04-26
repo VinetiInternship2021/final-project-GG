@@ -1,34 +1,37 @@
 import React from 'react';
+import eventGenerator from '../utiles/eventGenerator'
 
-export default () => {
+export default ({ buttons }) => {
 
-    const onSignup = (event) => {
+    const onSelect = (event, button) => {
+        event.preventDefault();
         if (event.metaKey || event.ctrlKey) {
             return;
         }
-        event.preventDefault();
-        window.history.pushState({}, '', '/signup')
-        const navEvent = new PopStateEvent('popstate');
-        window.dispatchEvent(navEvent);
+        let path = ''
+        switch (button) {
+            case 'Login':
+                path = '/login'
+                break;
+            case 'Sign up':
+                path = '/signup'
+                break;
+            case 'Logout':
+                path = '/logout'
+        }
+        eventGenerator(path)
     }
 
-    const onLogin = (event) => {
-        if (event.metaKey || event.ctrlKey) {
-            return;
-        }
-        event.preventDefault();
-        window.history.pushState({}, '', '/login')
-        const navEvent = new PopStateEvent('popstate');
-        window.dispatchEvent(navEvent);
-    }
+    const button = buttons.map((button) => {
+        return <button onClick={(event) => onSelect(event, button)} className="btn btn-outline-success me-1" type="submit">{button}</button>
+    })
 
     return (
         <nav className="navbar navbar-light bg-light">
             <div className="container-fluid">
                 <a className="navbar-brand">GG Clone App</a>
                 <form className="d-flex">
-                    <button onClick={onSignup} href='/' className="btn btn-outline-success me-1" type="submit">Sign up</button>
-                    <button onClick={onLogin} className="btn btn-outline-success" type="submit">Login</button>
+                    {button}
                 </form>
             </div>
         </nav>

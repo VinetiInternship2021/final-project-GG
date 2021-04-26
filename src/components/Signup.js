@@ -1,36 +1,35 @@
 import React from 'react';
+import eventGenerator from '../utiles/eventGenerator'
 
 export default () => {
 
-    const onSignupClient = (event) => {
-        if (event.metaKey || event.ctrlKey) {
-            return;
-        }
+    const onSignup = (event, button) => {
         event.preventDefault();
-        window.history.pushState({}, '', '/signup/client')
-        const navEvent = new PopStateEvent('popstate');
-        window.dispatchEvent(navEvent);
+        let path = ''
+        switch (button) {
+            case 'Client':
+                path = '/signup/client'
+                break;
+            case 'Driver':
+                path = '/signup/driver'
+        }
+        eventGenerator(path)
     }
 
-    const onSignupDriver = (event) => {
-        if (event.metaKey || event.ctrlKey) {
-            return;
-        }
-        event.preventDefault();
-        window.history.pushState({}, '', '/signup/driver')
-        const navEvent = new PopStateEvent('popstate');
-        window.dispatchEvent(navEvent);
-    }
+    const button = ['Client', 'Driver'].map((button) => {
+        return (
+            <>
+                <button onClick={(event) => onSignup(event, button)} className="btn btn-outline-success mb-1" type="submit">{button}</button>
+                <br />
+            </>
+        )
+    })
 
     return (
-        <>
-            <div id='select'>
-                <h5 id='h'>Sign up</h5>
-                <p>Select user type</p>
-                <button onClick={onSignupClient} className="btn btn-outline-success mb-1" type="submit">Client</button>
-                <br />
-                <button onClick={onSignupDriver} className="btn btn-outline-success" type="submit">Driver</button>
-            </div>
-        </>
+        <div id='select' className="top-40 start-50">
+            <h5 id='h'>Sign up</h5>
+            <p>Select user type</p>
+            {button}
+        </div>
     )
 }

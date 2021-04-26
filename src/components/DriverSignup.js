@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 export default () => {
-    const [phone, setPhone] = useState(null)
+    const [phone, setPhone] = useState('')
     const [name, setName] = useState('')
     const [password, setPassword] = useState('')
     const [cPassword, setCPassword] = useState('')
@@ -15,11 +15,10 @@ export default () => {
             setCPassword('')
             setPassword('')
         } else {
-            axios.post('/driver/client', {
+            axios.post('/signup/driver', {
                 phone: phone,
                 name: name,
                 password: password
-                //իհարկե չեմ հասցրել password encription ի պահը մտածեմ/ավելացնեմ
             })
                 .then(function (response) {
                     console.log(response);
@@ -32,18 +31,18 @@ export default () => {
 
     return (
         <>
-            <form id='CR'>
+            <form className="mt-2 ms-5 w-25">
                 <div className="mb-3">
                     <br />
                     <h5>Driver registration</h5>
                     <label htmlFor="phone" className="form-label">Phone</label>
-                    <input onChange={(e) => { setPhone(e.target.value) }} type="number" id="phone" className="form-control" value={phone} />
+                    <input onChange={(e) => { setPhone(e.target.value) }} type="number" className="form-control" value={phone} />
                     <label htmlFor="name" className="form-label">Username</label>
-                    <input onChange={(e) => { setName(e.target.value) }} type="text" id="name" className="form-control" value={name} />
+                    <input onChange={(e) => { setName(e.target.value) }} type="text" className="form-control" value={name} />
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input onChange={(e) => { setPassword(e.target.value); setPassAlert('') }} type="password" id="password" className="form-control" value={password} />
+                    <input onChange={(e) => { setPassword(e.target.value); setPassAlert('') }} type="password" className="form-control" value={password} />
                     <label htmlFor="password2" className="form-label">Confirm Password</label>
-                    <input onChange={(e) => { setCPassword(e.target.value); setPassAlert('') }} type="password" id="password2" className="form-control" value={cPassword} />
+                    <input onChange={(e) => { setCPassword(e.target.value); setPassAlert('') }} type="password" className="form-control" value={cPassword} />
                     <p>{passalert}</p>
                 </div>
                 <button onClick={(e) => { onClick(e) }} type="submit" className="btn btn-primary">Submit</button>
