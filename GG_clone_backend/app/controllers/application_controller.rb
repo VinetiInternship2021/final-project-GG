@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
   helper_method :choose_model, :log_in, :remember,
-                :forget
+                :forget, :current_user, :current_user?
 
   def choose_model(model_name)
     case model_name
@@ -15,6 +15,27 @@ class ApplicationController < ActionController::API
     end
 
     [model_name, model]
+  end
+
+
+  def current_user
+    if session[:user_id]
+      if (model_name = session[:model_name])
+        _, model = choose_model(model_name)
+
+        return [@current_user ||= model.find_by(id: session[:user_id]),
+                model_name]
+      end
+    elsif (user_id = cookies.signed[:user_id])
+      if (model_name = cookies.signed[:model_name])
+        _, model = choose_model(model_name)
+        user = model.find_by(id: user_id)
+        if user && user.authenticated?(cookies[:remember_token])
+          log_in(user, model_name)
+          return [@current_user = user, model_name]
+        end
+      end
+    end
   end
 
   def log_in(user, model_name)
@@ -35,6 +56,10 @@ class ApplicationController < ActionController::API
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
     cookies.delete(:model_name)
+  end
+
+  def current_user?(user, model_name)
+    user == current_user[0] && current_user[1]
   end
 
 end

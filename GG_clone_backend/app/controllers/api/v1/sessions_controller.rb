@@ -19,26 +19,6 @@ class Api::V1::SessionsController < ApplicationController
     end
   end
 
-  def current_user
-    if session[:user_id]
-      if (model_name = session[:model_name])
-        _, model = choose_model(model_name)
-
-        return [@current_user ||= model.find_by(id: session[:user_id]),
-                model_name]
-      end
-    elsif (user_id = cookies.signed[:user_id])
-      if (model_name = cookies.signed[:model_name])
-        _, model = choose_model(model_name)
-        user = model.find_by(id: user_id)
-        if user && user.authenticated?(cookies[:remember_token])
-          log_in(user, model_name)
-          return [@current_user = user, model_name]
-        end
-      end
-    end
-  end
-
   def logged_in?
     !current_user.nil?
   end
@@ -48,6 +28,8 @@ class Api::V1::SessionsController < ApplicationController
       user_array = current_user
       @user_in = user_array[0]
       @model_name = user_array[1]
+    else
+      false
     end
   end
 

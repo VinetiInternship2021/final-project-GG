@@ -22,11 +22,19 @@ class Api::V1::DriversController < ApplicationController
   end
 
   def update
-    @user = Driver.find(params[:id])
-    if @user.update(user_params)
-      render status: :updated, location: api_v1_super_users_path(@user)
+    if current_user?(@user, 'Driver')
+      @user = Driver.find(params[:id])
+      if @user.update(user_params)
+        render status: :updated, location: api_v1_super_users_path(@user)
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
     else
-      render json: @user.errors, status: :unprocessable_entity
+      if @user.errors.empty?
+        render json: { 'errors': 'dont have access' }, status: :unprocessable_entity
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
     end
   end
 

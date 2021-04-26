@@ -15,6 +15,7 @@ class Api::V1::SuperUsersController < ApplicationController
   def create
     @user = SuperUser.new(user_params)
     if @user.save
+      log_in @user, 'SuperUser'
       render status: :created, location: api_v1_super_users_path(@user)
     else
       render status: :unprocessable_entity
@@ -23,11 +24,20 @@ class Api::V1::SuperUsersController < ApplicationController
 
   def update
     @user = SuperUser.find(params[:id])
-    if @user.update(user_params)
-      render status: :updated, location: api_v1_super_users_path(@user)
+    if current_user?(@user, 'SuperUser')
+      if @user.update(user_params)
+        render status: :accepted, location: api_v1_super_users_path(@user)
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
     else
-      render json: @user.errors, status: :unprocessable_entity
+      if @user.errors.empty?
+        render json: { 'errors': 'dont have access' }, status: :unprocessable_entity
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
     end
+
   end
 
   private def user_params
