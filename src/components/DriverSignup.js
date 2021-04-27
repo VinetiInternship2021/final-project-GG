@@ -14,6 +14,10 @@ const DriverSignup = () => {
             setPassAlert('incorrect password, try again!')
             setCPassword('')
             setPassword('')
+        } else if (password.length < 6) {
+            setPassAlert('password length should be at least 6 characters, try again!')
+            setCPassword('')
+            setPassword('')
         } else {
             axios.post('/signup/driver', {
                 phone: phone,
@@ -31,21 +35,21 @@ const DriverSignup = () => {
 
     return (
         <>
-            <form className="mt-2 ms-5 w-25">
-                <div className="mb-3">
+            <form className="w-25 border position-absolute top-50 start-50 translate-middle">
+                <div className="me-3 mx-3">
                     <br />
                     <h5>Driver registration</h5>
                     <label htmlFor="phone" className="form-label">Phone</label>
-                    <input onChange={(e) => { setPhone(e.target.value) }} type="number" className="form-control" value={phone} />
+                    <input onChange={(e) => { setPhone(e.target.value) }} id="phone" type="number" className="form-control" value={phone} />
                     <label htmlFor="name" className="form-label">Username</label>
-                    <input onChange={(e) => { setName(e.target.value) }} type="text" className="form-control" value={name} />
+                    <input onChange={(e) => { setName(e.target.value) }} id="name" type="text" className="form-control" value={name} />
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input onChange={(e) => { setPassword(e.target.value); setPassAlert('') }} type="password" className="form-control" value={password} />
-                    <label htmlFor="password2" className="form-label">Confirm Password</label>
-                    <input onChange={(e) => { setCPassword(e.target.value); setPassAlert('') }} type="password" className="form-control" value={cPassword} />
+                    <input onChange={(e) => { setPassword(e.target.value); setPassAlert('') }} id="password" type="password" className="form-control" value={password} />
+                    <label htmlFor="cPassword" className="form-label">Confirm Password</label>
+                    <input onChange={(e) => { setCPassword(e.target.value); setPassAlert('') }} htmlFor="cPassword" type="password" className="form-control" value={cPassword} />
                     <p>{passalert}</p>
                 </div>
-                <button onClick={(e) => { onClick(e) }} type="submit" className="btn btn-primary">Submit</button>
+                <button onClick={(e) => { onClick(e) }} type="submit" className="btn btn-outline-success mx-3 mb-3">Submit</button>
             </form>
         </>
     )

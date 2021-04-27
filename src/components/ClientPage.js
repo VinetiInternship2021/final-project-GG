@@ -26,7 +26,7 @@ const ClientPage = () => {
         history.push(path)
     }
     return (
-        <div id='select' className="card" style={{ width: "18rem", height: "10.3rem" }}>
+        <div className="card text-center position-absolute top-50 start-50 translate-middle" style={{ width: "300px", height: "166px" }}>
             <ul className="list-group list-group-flush">
                 <li onClick={(e) => { onSelect(e) }} className="list-group-item">New order</li>
                 <li onClick={(e) => { onSelect(e) }} className="list-group-item">My history</li>

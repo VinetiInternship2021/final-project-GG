@@ -18,7 +18,7 @@ const Header = ({ buttons }) => {
                 path = '/signup'
                 break;
             case 'Logout':
-                path = '/logout'
+                path = '/'
                 break;
             default:
                 path = ''

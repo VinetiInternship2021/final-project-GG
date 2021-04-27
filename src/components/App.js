@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, useLocation, Switch } from 'react-router-dom';
+import { obj } from '../configs'
 import Header from './Header'
 import Signup from './Signup'
 import Login from './Login'
@@ -12,28 +13,12 @@ import ClientPage from './ClientPage'
 import ClientProfile from './ClientProfile'
 
 const App = () => {
-
-    const obj = {
-        '/signup': ['Login'],
-        '/login': ['Sign up'],
-        '/signup/client': ['Login', 'Sign up'],
-        '/signup/driver': ['Login', 'Sign up'],
-        '/login/client': ['Login', 'Sign up'],
-        '/login/driver': ['Login', 'Sign up'],
-        '/driver': ['Logout'],
-        '/client': ['Logout'],
-        '/client/order': ['Logout'],
-        '/client/history': ['Logout'],
-        '/client/settings': ['Logout'],
-        '/client/profile': ['Logout'],
-    }
-
     const location = useLocation();
 
     return (
         <div>
-            <Header buttons={obj[location.pathname] || ['Login', 'Sign up']} />
-            <Switch>
+            <Header buttons={obj[location.pathname]} />
+            <Switch >
                 <Route path='/signup' exact component={Signup} />
                 <Route path='/login' exact component={Login} />
                 <Route path='/signup/client' exact component={ClientSignup} />
