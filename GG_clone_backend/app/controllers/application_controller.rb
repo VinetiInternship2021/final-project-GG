@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include ::ActionController::Cookies
   helper_method :choose_model, :log_in, :remember,
                 :forget, :current_user, :current_user?
 
@@ -27,7 +28,7 @@ class ApplicationController < ActionController::API
                 model_name]
       end
     elsif (user_id = cookies.signed[:user_id])
-      if (model_name = cookies.signed[:model_name])
+      if (model_name = cookies[:model_name])
         _, model = choose_model(model_name)
         user = model.find_by(id: user_id)
         if user && user.authenticated?(cookies[:remember_token])
