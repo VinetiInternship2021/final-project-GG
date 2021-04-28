@@ -60,7 +60,12 @@ class ApplicationController < ActionController::API
   end
 
   def current_user?(user, model_name)
-    user == current_user[0] && current_user[1]
+    person = current_user
+    if person.nil?
+      return false
+    else
+      user == current_user[0] && model_name == current_user[1]
+    end
   end
 
 end

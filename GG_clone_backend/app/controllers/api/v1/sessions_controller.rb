@@ -20,7 +20,7 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def logged_in?
-    !current_user[0].nil?
+    !current_user.nil?
   end
 
   def user_in
