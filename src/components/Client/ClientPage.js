@@ -5,7 +5,6 @@ const ClientPage = () => {
     const history = useHistory();
 
     const onSelect = (event) => {
-        event.preventDefault();
         let path = ''
         switch (event.target.innerText) {
             case 'New order':

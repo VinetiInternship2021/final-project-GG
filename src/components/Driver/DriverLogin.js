@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-const ClientLogin = () => {
-    const history = useHistory();
+const DriverLogin = () => {
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const [passalert, setPassAlert] = useState('')
@@ -13,8 +11,10 @@ const ClientLogin = () => {
         if (password.length < 6) {
             setPassAlert('password length should be at least 6 characters, try again!')
             setPassword('')
+        } else if (!phone) {
+            setPassAlert('phone is required!')
         } else {
-            axios.post('/login/client', {
+            axios.post('/login/driver', {
                 phone: phone,
                 password: password
             })
@@ -24,9 +24,7 @@ const ClientLogin = () => {
                 .catch(function (error) {
                     console.log(error);
                 });
-            history.push('/client')
         }
-
     }
 
     return (
@@ -34,11 +32,11 @@ const ClientLogin = () => {
             <form className="w-25 border position-absolute top-50 start-50 translate-middle">
                 <div className="me-3 mx-3">
                     <br />
-                    <h5>Client Login</h5>
+                    <h5>Driver Login</h5>
                     <label htmlFor="phone" className="form-label">Phone</label>
-                    <input onClick={(e) => { setPassAlert('') }} onChange={(e) => { setPhone(e.target.value) }} id="phone" type="number" className="form-control" value={phone} />
+                    <input onClick={() => { setPassAlert('') }} onChange={(e) => { setPhone(e.target.value) }} id="phone" type="number" className="form-control" value={phone} />
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input onClick={(e) => { setPassAlert('') }} onChange={(e) => { setPassword(e.target.value) }} id="password" type="password" className="form-control" value={password} />
+                    <input onClick={() => { setPassAlert('') }} onChange={(e) => { setPassword(e.target.value) }} id="password" type="password" className="form-control" value={password} />
                     <p>{passalert}</p>
                 </div>
                 <button onClick={(e) => { onClick(e) }} type="submit" className="btn btn-outline-success mx-3 mb-3">Submit</button>
@@ -47,4 +45,4 @@ const ClientLogin = () => {
     )
 }
 
-export default ClientLogin;
+export default DriverLogin;

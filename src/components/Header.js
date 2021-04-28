@@ -1,29 +1,16 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import { Switch } from '../utils/headerButtonSwitch'
 
 const Header = ({ buttons }) => {
+    const location = useLocation();
     let history = useHistory();
-
+    
     const onSelect = (event, button) => {
-        event.preventDefault();
         if (event.metaKey || event.ctrlKey) {
             return;
         }
-        let path = ''
-        switch (button) {
-            case 'Login':
-                path = '/login'
-                break;
-            case 'Sign up':
-                path = '/signup'
-                break;
-            case 'Logout':
-                path = '/'
-                break;
-            default:
-                path = ''
-        }
-        history.push(path)
+        history.push(Switch(button, location))
     }
 
     const button = buttons.map((button) => {

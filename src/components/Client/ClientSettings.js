@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-const ClientSignup = () => {
+const ClientSettings = () => {
+    const history = useHistory();
     const [phone, setPhone] = useState('')
-    const [name, setName] = useState('')
+    const [name, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [cPassword, setCPassword] = useState('')
     const [passalert, setPassAlert] = useState('')
 
     const onClick = (event) => {
         event.preventDefault();
-        if (password !== cPassword) {
-            setPassAlert('incorrect password, try again!')
-            setCPassword('')
-            setPassword('')
-        } else if (password.length < 6) {
+        if (password.length < 6) {
             setPassAlert('password length should be at least 6 characters, try again!')
-            setCPassword('')
             setPassword('')
+        }  else if (!name) {
+            setPassAlert('username is required!')
+        } else if (!phone) {
+            setPassAlert('phone is required!')
         } else {
-            axios.post('/signup/client', {
+            axios.post('/client/settings', {
                 phone: phone,
-                name: name,
+                username: name,
                 password: password
             })
                 .then(function (response) {
@@ -30,6 +30,7 @@ const ClientSignup = () => {
                 .catch(function (error) {
                     console.log(error);
                 });
+            history.push('/client')
         }
     }
 
@@ -38,15 +39,13 @@ const ClientSignup = () => {
             <form className="w-25 border position-absolute top-50 start-50 translate-middle">
                 <div className="me-3 mx-3">
                     <br />
-                    <h5>Client registration</h5>
+                    <h5>Client Settings</h5>
                     <label htmlFor="phone" className="form-label">Phone</label>
-                    <input onChange={(e) => { setPhone(e.target.value) }} id="phone" type="number" className="form-control" value={phone} />
+                    <input onClick={() => { setPassAlert('') }} onChange={(e) => { setPhone(e.target.value) }} id="phone" type="number" className="form-control" value={phone} />
                     <label htmlFor="name" className="form-label">Username</label>
-                    <input onChange={(e) => { setName(e.target.value) }} id="name" type="text" className="form-control" value={name} />
+                    <input onClick={() => { setPassAlert('') }} onChange={(e) => { setUsername(e.target.value) }} id="username" type="text" className="form-control" value={name} />
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input onChange={(e) => { setPassword(e.target.value); setPassAlert('') }} id="password" type="password" className="form-control" value={password} />
-                    <label htmlFor="cPassword" className="form-label">Confirm Password</label>
-                    <input onChange={(e) => { setCPassword(e.target.value); setPassAlert('') }} htmlFor="cPassword" type="password" className="form-control" value={cPassword} />
+                    <input onClick={() => { setPassAlert('') }} onChange={(e) => { setPassword(e.target.value) }} id="password" type="password" className="form-control" value={password} />
                     <p>{passalert}</p>
                 </div>
                 <button onClick={(e) => { onClick(e) }} type="submit" className="btn btn-outline-success mx-3 mb-3">Submit</button>
@@ -55,4 +54,4 @@ const ClientSignup = () => {
     )
 }
 
-export default ClientSignup;
+export default ClientSettings;
