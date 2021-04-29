@@ -7,7 +7,7 @@ if current_user?(@user, 'Passenger')
     json.id @user.id
     json.phone_number @user.phone_number
     json.first_name @user.first_name
-    json.last_name @user.first_name
+    json.last_name @user.last_name
     json.email @user.email
     end
   end
