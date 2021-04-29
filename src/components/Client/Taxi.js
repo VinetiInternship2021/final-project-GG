@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const Taxi = () => {
     const [message, setMessage] = useState('')
-    
+
     const onSelect = (event) => {
         axios.post('/taxi/rate', {
             rate: event.target.id

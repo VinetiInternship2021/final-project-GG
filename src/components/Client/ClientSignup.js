@@ -2,31 +2,29 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const ClientSignup = () => {
-    const [phone, setPhone] = useState('')
-    const [name, setName] = useState('')
-    const [password, setPassword] = useState('')
-    const [cPassword, setCPassword] = useState('')
-    const [passalert, setPassAlert] = useState('')
+    const [fields, setFields] = useState({
+        phone: '',
+        password: '',
+        cPassword: '',
+        name: '',
+        alert: ''
+    })
 
     const onClick = (event) => {
         event.preventDefault();
-        if (password !== cPassword) {
-            setPassAlert('incorrect password, try again!')
-            setCPassword('')
-            setPassword('')
-        } else if (password.length < 6) {
-            setPassAlert('password length should be at least 6 characters, try again!')
-            setCPassword('')
-            setPassword('')
-        } else if (!name) {
-            setPassAlert('username is required!')
-        } else if (!phone) {
-            setPassAlert('phone is required!')
+        if (fields.password !== fields.cPassword) {
+            setFields({ ...fields, alert: 'incorrect password, try again!', password: '', cPassword: '' })
+        } else if (fields.password.length < 6) {
+            setFields({ ...fields, alert: 'password length should be at least 6 characters, try again!', password: '', cPassword: '' })
+        } else if (!fields.name) {
+            setFields({ ...fields, alert: 'username is required!' })
+        } else if (!fields.phone) {
+            setFields({ ...fields, alert: 'phone is required!' })
         } else {
             axios.post('/signup/client', {
-                phone: phone,
-                name: name,
-                password: password
+                phone: fields.phone,
+                name: fields.name,
+                password: fields.password
             })
                 .then(function (response) {
                     console.log(response);
@@ -44,14 +42,14 @@ const ClientSignup = () => {
                     <br />
                     <h5>Client registration</h5>
                     <label htmlFor="phone" className="form-label">Phone</label>
-                    <input onClick={() => { setPassAlert('') }} onChange={(e) => { setPhone(e.target.value) }} id="phone" type="number" className="form-control" value={phone} />
+                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, phone: e.target.value }) }} id="phone" type="number" className="form-control" value={fields.phone} />
                     <label htmlFor="name" className="form-label">Username</label>
-                    <input onClick={() => { setPassAlert('') }} onChange={(e) => { setName(e.target.value) }} id="name" type="text" className="form-control" value={name} />
+                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, name: e.target.value }) }} id="name" type="text" className="form-control" value={fields.name} />
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input onClick={() => { setPassAlert('') }} onChange={(e) => { setPassword(e.target.value); setPassAlert('') }} id="password" type="password" className="form-control" value={password} />
+                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, password: e.target.value, alert: '' }) }} id="password" type="password" className="form-control" value={fields.password} />
                     <label htmlFor="cPassword" className="form-label">Confirm Password</label>
-                    <input onClick={() => { setPassAlert('') }} onChange={(e) => { setCPassword(e.target.value); setPassAlert('') }} htmlFor="cPassword" type="password" className="form-control" value={cPassword} />
-                    <p>{passalert}</p>
+                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, cPassword: e.target.value, alert: '' }) }} id="cPassword" type="password" className="form-control" value={fields.cPassword} />
+                    <p>{fields.alert}</p>
                 </div>
                 <button onClick={(e) => { onClick(e) }} type="submit" className="btn btn-outline-success mx-3 mb-3">Submit</button>
             </form>

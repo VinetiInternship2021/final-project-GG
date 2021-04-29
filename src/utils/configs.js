@@ -1,30 +1,54 @@
-const login_signup = ['Login', 'Sign up'];
-const login = ['Login'];
-const signup = ['Sign up'];
-const logout = ['Logout'];
-const home_logout = ['Home', 'Logout'];
-
-export const obj = {
-    '/': login_signup,
-    '/signup': login,
-    '/login': signup,
-    '/signup/client': login_signup,
-    '/signup/driver': login_signup,
-    '/login/client': login_signup,
-    '/login/driver': login_signup,
-    '/driver': logout,
-    '/client': logout,
-    '/login/admin': logout,
-    '/admin': logout,
-    '/taxi': home_logout,
-    '/client/order': home_logout,
-    '/client/history': home_logout,
-    '/client/settings': home_logout,
-    '/client/profile': home_logout
+export const appRoutes = {
+    root: '/',
+    signup: '/signup',
+    login: '/login',
+    signupClient: '/signup/client',
+    signupDriver: '/signup/driver',
+    loginClient: '/login/client',
+    loginDriver: '/login/driver',
+    loginAdmin: '/login/admin',
+    client: '/client',
+    driver: '/driver',
+    admin: '/admin',
+    taxi: '/taxi',
+    clientHistory: '/client/history',
+    clientSettings: '/client/settings'
 }
+
+const logintext = 'Login'
+const signuptext = 'Sign up'
+const logouttext = 'Logout'
+const hometext = 'Home'
+
+const login_signup = [logintext, signuptext];
+const login = [logintext];
+const signup = [signuptext];
+const logout = [logouttext];
+const home_logout = [hometext, logouttext];
+const home = [hometext];
+
+export const headerButtons = {
+    [appRoutes.root]: login_signup,
+    [appRoutes.signup]: login,
+    [appRoutes.login]: signup,
+    [appRoutes.signupClient]: login_signup,
+    [appRoutes.signupDriver]: login_signup,
+    [appRoutes.loginClient]: login_signup,
+    [appRoutes.loginDriver]: login_signup,
+    [appRoutes.driver]: logout,
+    [appRoutes.client]: logout,
+    [appRoutes.loginAdmin]: home,
+    [appRoutes.admin]: logout,
+    [appRoutes.taxi]: home_logout,
+    [appRoutes.clientHistory]: logout,
+    [appRoutes.clientSettings]: logout
+}
+
+export const clientPageItems = ['New order', 'My history', 'Settings']
 
 export const buttons = ['Client', 'Driver'];
 
 export const orderTypes = ['Econom', 'Business', 'Child seat', '7 seater', 'Cargo van']
 
 export const rating = [1, 2, 3, 4, 5]
+

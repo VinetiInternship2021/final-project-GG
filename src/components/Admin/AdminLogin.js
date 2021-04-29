@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { appRoutes } from '../../utils/configs'
 
 const AdminLogin = () => {
     const history = useHistory();
-    const [phone, setPhone] = useState('')
-    const [password, setPassword] = useState('')
-    const [passalert, setPassAlert] = useState('')
+    const [fields, setFields] = useState({
+        phone: '',
+        password: '',
+        alert: ''
+    })
 
     const onClick = (event) => {
         event.preventDefault();
-        if (password.length < 6) {
-            setPassAlert('password length should be at least 6 characters, try again!')
-            setPassword('')
-        } else if (!phone) {
-            setPassAlert('phone is required!')
+        if (fields.password.length < 6) {
+            setFields({ ...fields, alert: 'password length should be at least 6 characters, try again!', password: '' })
+        } else if (!fields.phone) {
+            setFields({ ...fields, alert: 'phone is required!' })
         } else {
             axios.post('/login/admin', {
-                phone: phone,
-                password: password
+                phone: fields.phone,
+                password: fields.password
             })
                 .then(function (response) {
                     console.log(response);
@@ -26,7 +28,7 @@ const AdminLogin = () => {
                 .catch(function (error) {
                     console.log(error);
                 });
-            history.push('/admin')
+            history.push(appRoutes.admin)
         }
     }
 
@@ -37,10 +39,10 @@ const AdminLogin = () => {
                     <br />
                     <h5>Admin Login</h5>
                     <label htmlFor="phone" className="form-label">Phone</label>
-                    <input onClick={() => { setPassAlert('') }} onChange={(e) => { setPhone(e.target.value) }} id="phone" type="number" className="form-control" value={phone} />
+                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, phone: e.target.value }) }} id="phone" type="number" className="form-control" value={fields.phone} />
                     <label htmlFor="password" className="form-label">Password</label>
-                    <input onClick={() => { setPassAlert('') }} onChange={(e) => { setPassword(e.target.value) }} id="password" type="password" className="form-control" value={password} />
-                    <p>{passalert}</p>
+                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, password: e.target.value }) }} id="password" type="password" className="form-control" value={fields.password} />
+                    <p>{fields.alert}</p>
                 </div>
                 <button onClick={(e) => { onClick(e) }} type="submit" className="btn btn-outline-success mx-3 mb-3">Submit</button>
             </form>

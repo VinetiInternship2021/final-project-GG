@@ -14,8 +14,7 @@ export const Switch = (button, location) => {
             if (location.pathname === '/taxi' ||
                 location.pathname === '/client/order' ||
                 location.pathname === '/client/history' ||
-                location.pathname === '/client/settings' ||
-                location.pathname === '/client/profile'
+                location.pathname === '/client/settings'
             ) {
                 path = '/client'
             }

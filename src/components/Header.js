@@ -5,7 +5,7 @@ import { Switch } from '../utils/headerButtonSwitch'
 const Header = ({ buttons }) => {
     const location = useLocation();
     let history = useHistory();
-    
+
     const onSelect = (event, button) => {
         if (event.metaKey || event.ctrlKey) {
             return;

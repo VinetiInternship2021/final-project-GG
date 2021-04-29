@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { buttons } from '../utils/configs';
+import { buttons, appRoutes } from '../utils/configs';
 
 const Login = () => {
     let history = useHistory();
@@ -8,10 +8,10 @@ const Login = () => {
         let path = ''
         switch (button) {
             case 'Client':
-                path = '/login/client'
+                path = appRoutes.loginClient
                 break;
             case 'Driver':
-                path = '/login/driver'
+                path = appRoutes.loginDriver
                 break;
             default:
                 path = ''
