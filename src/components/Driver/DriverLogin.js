@@ -5,7 +5,7 @@ import {baseUrl} from '../../utils/configs'
 
 const DriverLogin = () => {
     const history = useHistory()
-    const [loggedIn, setLoggedIn] = useState(
+    const [authData, setAuthData] = useState(
       {
           'loggedIn': false, 'userType': 'None', 'userId': 'None'
       })
@@ -18,12 +18,12 @@ const DriverLogin = () => {
     })
     
     useEffect(() => {
-        function loginStatusChanger(data) {
-            setLoggedIn({  'loggedIn': data.loggedIn,
+        const loginStatusChanger = (data) => {
+            setAuthData({  'loggedIn': data.loggedIn,
                 'userType': data.userType,
                 'userId': data.userId})
         }
-        async function userInChecker() {
+        const userInChecker = async () => {
             await axios.get(`http://localhost:3000/api/v1/user_in`,
               {withCredentials: true})
               .then(response => {
@@ -36,9 +36,8 @@ const DriverLogin = () => {
         }
         userInChecker()
         return () => {
-            if (loggedIn.loggedIn) {
-                console.log(loggedIn)
-                history.push(`/${loggedIn.userType}/${loggedIn.userId}`)
+            if (authData.loggedIn) {
+                history.push(`/${authData.userType}/${authData.userId}`)
             }
         }
     })
