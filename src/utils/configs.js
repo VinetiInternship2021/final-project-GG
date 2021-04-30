@@ -12,7 +12,9 @@ export const appRoutes = {
     admin: '/admin',
     taxi: '/taxi',
     clientHistory: '/client/history',
-    clientSettings: '/client/settings'
+    clientSettings: '/client/settings',
+    driverPage: '/driver/:id',
+    driverProfile: '/driver/:id/profile'
 }
 
 const logintext = 'Login'
@@ -51,4 +53,6 @@ export const buttons = ['Client', 'Driver'];
 export const orderTypes = ['Econom', 'Business', 'Child seat', '7 seater', 'Cargo van']
 
 export const rating = [1, 2, 3, 4, 5]
+
+export const baseUrl = 'http://localhost:3000/api/v1'
 

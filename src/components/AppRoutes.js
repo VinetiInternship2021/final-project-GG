@@ -7,6 +7,8 @@ import Login from './Login'
 import ClientSignup from './Client/ClientSignup'
 import DriverSignup from './Driver/DriverSignup'
 import DriverLogin from './Driver/DriverLogin'
+import DriverPage from './Driver/DriverPage'
+import DriverProfile from './Driver/DriverProfile'
 import ClientLogin from './Client/ClientLogin'
 import AdminLogin from './Admin/AdminLogin'
 import ClientHistory from './Client/ClientHistory'
@@ -19,7 +21,7 @@ const AppRoutes = () => {
 
     return (
         <div>
-            <Header buttons={headerButtons[location.pathname]} />
+            {/*<Header buttons={headerButtons[location.pathname]} />*/}
             <Switch >
                 <Route path={appRoutes.signup} exact component={Signup} />
                 <Route path={appRoutes.login} exact component={Login} />
@@ -32,6 +34,8 @@ const AppRoutes = () => {
                 <Route path={appRoutes.clientHistory} exact component={ClientHistory} />
                 <Route path={appRoutes.clientSettings} exact component={ClientSettings} />
                 <Route path={appRoutes.taxi} exact component={Taxi} />
+                <Route path={appRoutes.driverPage} exact component={DriverPage} />
+                <Route path={appRoutes.driverProfile} exact component={DriverProfile} />
             </Switch>
         </div>
     )
