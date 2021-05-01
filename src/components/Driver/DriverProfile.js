@@ -2,6 +2,7 @@ import React, {Component} from "react"
 import axios from 'axios'
 import ProfileInfoTable from '../../utils/ProfileInfoTable'
 import Loading from '../../utils/Loading'
+import {modelShow} from "../../utils/API";
 
 class DriverProfile extends Component {
   constructor(props) {
@@ -19,14 +20,17 @@ class DriverProfile extends Component {
   }
   
   componentDidMount() {
-    axios.defaults.headers.get['Accept'] = '*/*'
     this.getUserData()
+      .then()
   }
   
   async getUserData() {
-    await axios.get(`http://localhost:3000/api/v1/drivers/${this.state.userId}`, {withCredentials: true})
+    const params = {
+      model: 'drivers',
+      userId: this.state.userId
+    }
+    await modelShow(params)
       .then(response => this.setUserData(response))
-      .then(() => console.log(this.state))
   }
   
   setUserData(response) {

@@ -34,14 +34,14 @@ const DriverPage = () => {
         <li onClick={(e) => { onSelect(e) }} className="list-group-item">Settings</li>
         <li onClick={(e) => { onSelect(e) }} className="list-group-item">Profile</li>
       </ul>
-      < Maps params = {{
-        'mapsMode': 'view',
-        'center': '40.185040, 44.514813',
-        'zoom': '15',
-        'origin': '',
-        'destination': ''
-      }}
-      />
+      {/*< Maps params = {{*/}
+      {/*  'mapsMode': 'view',*/}
+      {/*  'center': '40.185040, 44.514813',*/}
+      {/*  'zoom': '15',*/}
+      {/*  'origin': '',*/}
+      {/*  'destination': ''*/}
+      {/*}}*/}
+      {/*/>*/}
     </div>
   )
 }

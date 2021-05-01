@@ -56,3 +56,11 @@ export const rating = [1, 2, 3, 4, 5]
 
 export const baseUrl = 'http://localhost:3000/api/v1'
 
+export let loginParams = {
+    phone_number: '',
+    password: '',
+    model_name: '',
+    remember_me: false,
+    alert: ''
+}
+

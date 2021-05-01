@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Route, useLocation, Switch } from 'react-router-dom';
 import { appRoutes, headerButtons } from '../utils/configs'
 import Header from './Header'
@@ -15,13 +15,49 @@ import ClientHistory from './Client/ClientHistory'
 import ClientSettings from './Client/ClientSettings'
 import ClientOrder from './Client/ClientOrder'
 import Taxi from './Client/Taxi'
+import {userIn} from "../utils/API";
+import Loading from "../utils/Loading";
 
 const AppRoutes = () => {
     const location = useLocation();
-
+    
+    const [authData, setAuthData] = useState(
+      {
+          'isLoading': true,
+          'loggedIn': false,
+          'userType': 'None',
+          'userId': 'None'
+      })
+    
+    useEffect(() => {
+        userInChecker()
+          .then()
+    },[])
+    
+    const userInChecker = async () => {
+        await userIn()
+          .then(response => {
+              console.log(response)
+              if (response.data.user_in) {
+                  loginStatusChanger({'loggedIn': response.data.user_in,
+                      'userType': response.data.model_name,
+                      'userId': response.data.user.id} )
+              }
+          })
+    }
+    
+    const loginStatusChanger = (data) => {
+        setAuthData({
+            'isLoading': false,
+            'loggedIn': data.loggedIn,
+            'userType': data.userType,
+            'userId': data.userId})
+    }
+    
     return (
         <div>
             {/*<Header buttons={headerButtons[location.pathname]} />*/}
+            {authData.isLoading ? <Loading /> : false}
             <Switch >
                 <Route path={appRoutes.signup} exact component={Signup} />
                 <Route path={appRoutes.login} exact component={Login} />

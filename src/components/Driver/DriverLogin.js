@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-import {baseUrl} from '../../utils/configs'
+import {userIn,
+        login} from '../../utils/API';
+import {loginParams} from "../../utils/configs";
 
 const DriverLogin = () => {
     const history = useHistory()
@@ -10,11 +11,8 @@ const DriverLogin = () => {
           'loggedIn': false, 'userType': 'None', 'userId': 'None'
       })
     const [fields, setFields] = useState({
-        phone_number: '',
-        password: '',
-        model_name: 'Driver',
-        remember_me: false,
-        alert: ''
+        ...loginParams,
+        model_name: 'Driver'
     })
     
     useEffect(() => {
@@ -24,8 +22,7 @@ const DriverLogin = () => {
                 'userId': data.userId})
         }
         const userInChecker = async () => {
-            await axios.get(`http://localhost:3000/api/v1/user_in`,
-              {withCredentials: true})
+          await userIn()
               .then(response => {
                   if (response.data.user_in) {
                       loginStatusChanger({'loggedIn': response.data.user_in,
@@ -49,16 +46,18 @@ const DriverLogin = () => {
         } else if (!fields.phone_number) {
             setFields({ ...fields, alert: 'phone is required!' })
         } else {
-            axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
-            axios.defaults.headers.post['Accept'] = '*/*'
-            axios.post(`${baseUrl}/login`, {
-                  session: {
-                      ...fields,
-                      remember_me: fields.remember_me === true ? '1': '0'
-                  }
-              }, {withCredentials: true}
-            ).then(response => console.log(response))
+          Login()
         }
+    }
+    
+    const Login = () => {
+      const params = {
+        session: {
+          ...fields,
+          remember_me: fields.remember_me === true ? '1': '0'
+        }
+      }
+      login(params).then(response => console.log(response))
     }
 
     return (
