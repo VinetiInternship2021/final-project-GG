@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  phone_number: MyString
+  email: MyString
+  car_manufacturer: MyString
+  car_model: MyString
+  car_registration_number: MyString
+  driver_license_image_id: MyString
+  is_active: false
+  is_verified_by_admin: false
+  car_level: MyString
+
+two:
+  first_name: MyString
+  last_name: MyString
+  phone_number: MyString
+  email: MyString
+  car_manufacturer: MyString
+  car_model: MyString
+  car_registration_number: MyString
+  driver_license_image_id: MyString
+  is_active: false
+  is_verified_by_admin: false
+  car_level: MyString
