@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Switch } from '../utils/headerButtonSwitch'
 import Context from "./context";
@@ -8,21 +8,23 @@ const Header = () => {
     const location = useLocation();
     let history = useHistory();
     const {authData} = useContext(Context)
-    let buttons = headerButtons.loggedOut
+    const [buttons, setButtons] = useState(headerButtons.loggedOut)
     
     useEffect(()=>{
-        console.log('eff')
         if(!authData.isLoading) {
+            console.log(authData, 'header')
             if(authData.loggedIn) {
-                buttons = headerButtons.loggedIn
+                setButtons(headerButtons.loggedIn)
+                console.log(buttons)
             }
             else {
-                buttons = headerButtons.loggedOut
+                setButtons(headerButtons.loggedOut)
             }
         }
-    },[authData.isLoading])
+    },[authData])
 
     const onSelect = (event, button) => {
+        event.preventDefault()
         if (event.metaKey || event.ctrlKey) {
             return;
         }

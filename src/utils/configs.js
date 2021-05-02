@@ -58,8 +58,8 @@ const profileText = 'Profile'
 // const home = [hometext];
 
 export const headerButtons = {
-    loggedIn: [homeText, profileText, loginText, signupText],
-    loggedOut: [homeText, profileText, logoutText]
+    loggedOut: [homeText, loginText, signupText],
+    loggedIn: [homeText, profileText, logoutText]
 }
 
 export const clientPageItems = ['New order', 'My history', 'Settings']

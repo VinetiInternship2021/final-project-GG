@@ -39,24 +39,26 @@ const AppRoutes = () => {
         await userIn()
           .then(response => {
             loadingDone()
-              if (response.data.user_in) {
-                  loginStatusChanger({'loggedIn': response.data.user_in,
-                      'userType': response.data.model_name,
-                      'userId': response.data.user.id} )
-              }
+            if (response.data.user_in) {
+                loginStatusChanger({'loggedIn': response.data.user_in,
+                    'userType': response.data.model_name,
+                    'userId': response.data.user.id} )
+            }
           })
     }
     
     const loginStatusChanger = (data) => {
         setAuthData({
-            'loggedIn': data.loggedIn,
-            'userType': data.userType,
-            'userId': data.userId})
+          ...authData,
+          'isLoading': false,
+          'loggedIn': data.loggedIn,
+          'userType': data.userType,
+          'userId': data.userId})
     }
     const loadingDone = () => {
       setAuthData({
-        ...authData,
-        'isLoading': false
+      ...authData,
+      'isLoading': false
       })
     }
     

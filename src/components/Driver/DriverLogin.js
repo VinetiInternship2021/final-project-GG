@@ -1,45 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import { useHistory } from 'react-router-dom';
 import {userIn,
         login} from '../../utils/API';
 import {loginParams} from "../../utils/configs";
+import Context from "../context";
 
 const DriverLogin = () => {
     const history = useHistory()
-    const [authData, setAuthData] = useState(
-      {
-          'loggedIn': false, 'userType': 'None', 'userId': 'None'
-      })
+    const {authData} = useContext(Context)
+    // const [authData, setAuthData] = useState(
+    //   {
+    //       'loggedIn': false, 'userType': 'None', 'userId': 'None'
+    //   })
     const [fields, setFields] = useState({
         ...loginParams,
         model_name: 'Driver'
     })
-    
+    //
     useEffect(() => {
-        const loginStatusChanger = (data) => {
-            setAuthData({  'loggedIn': data.loggedIn,
-                'userType': data.userType,
-                'userId': data.userId})
+        if (authData.loggedIn) {
+            history.push(`/${authData.userType}/${authData.userId}`)
         }
-        const userInChecker = async () => {
-          await userIn()
-              .then(response => {
-                  if (response.data.user_in) {
-                      loginStatusChanger({'loggedIn': response.data.user_in,
-                          'userType': response.data.model_name,
-                          'userId': response.data.user.id} )
-                  }
-              })
-        }
-        userInChecker()
-        return () => {
-            if (authData.loggedIn) {
-                history.push(`/${authData.userType}/${authData.userId}`)
-            }
-        }
-    })
+    }, [authData])
 
     const onClick = (event) => {
+      console.log(event)
       event.preventDefault();
       Login()
         .then()
@@ -53,7 +38,9 @@ const DriverLogin = () => {
         }
       }
       await login(params)
-        .then(response => console.log(response))
+        .then(response => {
+          history.push(`/${response.data.model_name}/${response.data.user.id}`)
+        })
         .catch(response => {
           setFields({ ...fields, alert: response.message })
         })

@@ -1,4 +1,5 @@
 import React from 'react'
+import {logout} from "../utils/API";
 
 export const Switch = (button, location, authData) => {
     let path = ''
@@ -10,7 +11,8 @@ export const Switch = (button, location, authData) => {
             path = '/signup'
             break;
         case 'Logout':
-            path = '/'
+            logout()
+              .then(r => path = '/')
             break;
         case 'Profile':
             console.log(authData.userType)
