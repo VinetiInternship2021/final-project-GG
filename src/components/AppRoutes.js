@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { Route, useLocation, Switch } from 'react-router-dom';
-import { appRoutes, headerButtons } from '../utils/configs'
+import { appRoutes } from '../utils/configs'
 import Header from './Header'
 import Signup from './Signup'
 import Login from './Login'
@@ -17,6 +17,7 @@ import ClientOrder from './Client/ClientOrder'
 import Taxi from './Client/Taxi'
 import {userIn} from "../utils/API";
 import Loading from "../utils/Loading";
+import Context from "./context"
 
 const AppRoutes = () => {
     const location = useLocation();
@@ -25,8 +26,8 @@ const AppRoutes = () => {
       {
           'isLoading': true,
           'loggedIn': false,
-          'userType': 'None',
-          'userId': 'None'
+          'userType': '',
+          'userId': ''
       })
     
     useEffect(() => {
@@ -37,7 +38,7 @@ const AppRoutes = () => {
     const userInChecker = async () => {
         await userIn()
           .then(response => {
-              console.log(response)
+            loadingDone()
               if (response.data.user_in) {
                   loginStatusChanger({'loggedIn': response.data.user_in,
                       'userType': response.data.model_name,
@@ -48,16 +49,22 @@ const AppRoutes = () => {
     
     const loginStatusChanger = (data) => {
         setAuthData({
-            'isLoading': false,
             'loggedIn': data.loggedIn,
             'userType': data.userType,
             'userId': data.userId})
     }
+    const loadingDone = () => {
+      setAuthData({
+        ...authData,
+        'isLoading': false
+      })
+    }
     
     return (
+      <Context.Provider value={{authData}}>
         <div>
-            {/*<Header buttons={headerButtons[location.pathname]} />*/}
-            {authData.isLoading ? <Loading /> : false}
+          {authData.isLoading ? <Loading /> : false}
+          <Header />
             <Switch >
                 <Route path={appRoutes.signup} exact component={Signup} />
                 <Route path={appRoutes.login} exact component={Login} />
@@ -74,6 +81,7 @@ const AppRoutes = () => {
                 <Route path={appRoutes.driverProfile} exact component={DriverProfile} />
             </Switch>
         </div>
+      </Context.Provider>
     )
 }
 

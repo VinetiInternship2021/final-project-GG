@@ -1,4 +1,6 @@
-export const Switch = (button, location) => {
+import React from 'react'
+
+export const Switch = (button, location, authData) => {
     let path = ''
     switch (button) {
         case 'Login':
@@ -9,6 +11,10 @@ export const Switch = (button, location) => {
             break;
         case 'Logout':
             path = '/'
+            break;
+        case 'Profile':
+            console.log(authData.userType)
+            path = `/${authData.userType}/${authData.userId}`
             break;
         case 'Home':
             if (location.pathname === '/taxi' ||

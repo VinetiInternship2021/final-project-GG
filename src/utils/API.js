@@ -23,6 +23,10 @@ export const login = (params) => {
       .then(resp => {
         resolve(resp)
       })
+      .catch(resp => {
+        console.log(resp.response.data)
+        reject(resp.response.data)
+      })
   }
 )
 }
@@ -48,6 +52,25 @@ export const modelShow = (params) => {
       .then(resp => {
         resolve(resp)
       })
+    }
+  )
+}
+
+export const signUp = (params) => {
+  return new Promise((resolve, reject) => {
+      axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+      axios.defaults.headers.post['Accept'] = '*/*'
+      axios.post(`${baseUrl}/${Object.keys(params)[0]}s`,
+        params,
+        {withCredentials: true}
+      )
+        .then(resp => {
+          resolve(resp)
+        })
+        .catch(resp => {
+          console.log(resp.response.data)
+          reject(resp.response.data)
+        })
     }
   )
 }
