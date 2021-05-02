@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-import { appRoutes } from '../../utils/configs'
+import {userIn,
+    login} from '../../utils/API';
+import {loginParams} from "../../utils/configs";
 
 const ClientLogin = () => {
-    const history = useHistory();
+    const history = useHistory()
+    const [authData, setAuthData] = useState(
+      {
+          'loggedIn': false, 'userType': 'None', 'userId': 'None'
+      })
     const [fields, setFields] = useState({
-        phone: '',
-        password: '',
-        alert: ''
+        ...loginParams,
+        model_name: 'Passenger'
     })
-
     const onClick = (event) => {
         event.preventDefault();
         if (fields.password.length < 6) {
