@@ -22,7 +22,9 @@ const Login = () => {
     const button = buttons.map((button) => {
         return (
             <div key={button} >
-                <button onClick={() => onLogin(button)} className="btn btn-outline-success mb-1 w-50" type="submit">{button}</button>
+                <button onClick={() => onLogin(button)}
+                        className="btn btn-outline-success mb-1 w-50"
+                        type="submit">{button}</button>
                 <br />
             </div >
         )

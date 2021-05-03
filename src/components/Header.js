@@ -1,29 +1,31 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Switch } from '../utils/headerButtonSwitch'
-import Context from "./context";
 import { headerButtons } from "../utils/configs"
-import {logout} from "../utils/API";
+import { logout } from "../utils/API";
+import {ChangeActionLoggedIn,
+        ChangeActionLoading,
+        mapStateToProps} from '../redux/actions'
+import {connect} from "react-redux";
 
-const Header = () => {
+const Header = (props) => {
+    let state = props.appState
+    const dispatch = props.dispatch
     const location = useLocation();
     let history = useHistory();
-    const {authData} = useContext(Context)
     const [buttons, setButtons] = useState(headerButtons.loggedOut)
     
     useEffect(()=>{
-        if(!authData.isLoading) {
-            console.log(authData, 'header')
-            if(localStorage.getItem('loggedIn') === 'true') {
+        console.log('Header useEffect')
+        if(state.isLoading === false) {
+            if(state.loggedIn) {
                 setButtons(headerButtons.loggedIn)
-                console.log(buttons)
             }
             else {
                 setButtons(headerButtons.loggedOut)
-                console.log(buttons)
             }
         }
-    },[localStorage.getItem('loggedIn')])
+    },[state.loggedIn])
 
     const onSelect = async (event, button) => {
         // event.preventDefault()
@@ -31,13 +33,17 @@ const Header = () => {
             return;
         }
         if (button === 'Logout') {
-            console.log('logout')
-            console.log(authData.isLoading)
+            dispatch(ChangeActionLoading({'isLoading': true}))
             await logout()
-              .then(() => localStorage.setItem('loggedIn', 'true'))
-              .then(() => console.log(localStorage.getItem('loggedIn')))
+              .then(() => dispatch(ChangeActionLoggedIn({
+                  'isLoading': false,
+                  'loggedIn': false,
+                  'userType': '',
+                  'userId': ''
+              })))
+              .then()
         }
-        history.push(Switch(button, location, authData))
+        history.push(Switch(button, location, state))
     }
     
     const button = buttons.map((button) => {
@@ -60,4 +66,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default connect(mapStateToProps)(Header)

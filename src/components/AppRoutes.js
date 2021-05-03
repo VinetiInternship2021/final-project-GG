@@ -17,20 +17,11 @@ import ClientOrder from './Client/ClientOrder'
 import Taxi from './Client/Taxi'
 import {userIn} from "../utils/API";
 import Loading from "../utils/Loading";
-import Context from "./context"
 import {ChangeActionLoading,
         ChangeActionLoggedIn} from '../redux/actions'
 
 const AppRoutes = (props) => {
     const location = useLocation();
-    
-    const [authData, setAuthData] = useState(
-      {
-          'isLoading': true,
-          'loggedIn': false,
-          'userType': '',
-          'userId': ''
-      })
     
     useEffect(() => {
         userInChecker()
@@ -42,11 +33,14 @@ const AppRoutes = (props) => {
           .then(response => {
             loadingDone()
             if (response.data.user_in) {
+              console.log(response.data)
               loginStatusChanger({
                 'isLoading': false,
                 'loggedIn': response.data.user_in,
                 'userType': response.data.model_name,
                 'userId': response.data.user.id} )
+              console.log(props.appState , 'AppRoutes useEffect')
+              console.log(response.data.user_in , 'AppRoutes useEffect')
             }
             else {
               loginStatusChanger({
@@ -56,29 +50,19 @@ const AppRoutes = (props) => {
                 'userId': ''} )
             }
           })
+      
     }
     
     const loginStatusChanger = (data) => {
-      console.log('loginStatusChange')
+      console.log(data, 'loginStatusChanger')
       props.dispatch(ChangeActionLoggedIn(data))
-        setAuthData({
-          ...authData,
-          'isLoading': false,
-          'loggedIn': data.loggedIn,
-          'userType': data.userType,
-          'userId': data.userId})
     }
     const loadingDone = () => {
       props.dispatch(ChangeActionLoading(false))
-      // setAuthData({
-      // ...authData,
-      // 'isLoading': false
-      // })
     }
     
     return (
       
-      <Context.Provider value={{authData}}>
         <div>
           {props.appState.isLoading ? <Loading /> : <Header />}
             <Switch >
@@ -97,7 +81,6 @@ const AppRoutes = (props) => {
                 <Route path={appRoutes.driverProfile} exact component={DriverProfile} />
             </Switch>
         </div>
-      </Context.Provider>
     )
 }
 

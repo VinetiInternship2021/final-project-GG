@@ -93,3 +93,10 @@ export let signParams = {
     driver_license_image_id: '',
     car_registration_number: ''
 }
+
+export const loggedInData = {
+    'isLoading': true,
+    'loggedIn': false,
+    'userType': '',
+    'userId': ''
+}

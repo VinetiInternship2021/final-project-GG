@@ -1,6 +1,6 @@
-import React from 'react'
-import axios from 'axios'
-import {baseUrl} from "./configs";
+import React from 'react';
+import axios from 'axios';
+import { baseUrl } from "./configs";
 
 export const userIn = () => {
   return new Promise((resolve, reject) => {

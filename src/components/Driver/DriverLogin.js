@@ -1,31 +1,34 @@
 import React, { useState, useEffect, useContext} from 'react';
 import { useHistory } from 'react-router-dom';
-import {userIn,
-        login} from '../../utils/API';
-import {loginParams} from "../../utils/configs";
-import Context from "../context";
+import { login } from '../../utils/API';
+import { loginParams } from "../../utils/configs";
+import {ChangeActionLoading,
+        ChangeActionLoggedIn,
+        mapStateToProps} from '../../redux/actions'
+import {connect} from "react-redux";
 
-const DriverLogin = () => {
-    const history = useHistory()
-    const {authData} = useContext(Context)
-    // const [authData, setAuthData] = useState(
-    //   {
-    //       'loggedIn': false, 'userType': 'None', 'userId': 'None'
-    //   })
+const DriverLogin = (props) => {
+  const history = useHistory()
+  const dispatch = props.dispatch
+  const state = props.appState
     const [fields, setFields] = useState({
         ...loginParams,
         model_name: 'Driver'
     })
-    //
+  
     useEffect(() => {
-        if (localStorage.getItem('loggedIn') === 'true') {
-            history.push(`/${authData.userType}/${authData.userId}`)
+        if (state.loggedIn) {
+            history.push(`/${state.userType}/${state.userId}`)
         }
-    }, [authData])
+        return (()=>{
+          dispatch(ChangeActionLoggedIn(state))
+        })
+    }, [])
 
     const onClick = (event) => {
-      console.log(event)
-      event.preventDefault();
+      event.preventDefault()
+      dispatch(ChangeActionLoading({'isLoading': true}))
+      // setState({...state, isLoading: true})
       Login(event)
         .then()
     }
@@ -39,10 +42,26 @@ const DriverLogin = () => {
       }
       await login(params)
         .then(response => {
-          localStorage.setItem('loggedIn', 'true')
+          // setState({...state,
+          //   'isLoading': false,
+          //   'loggedIn': true,
+          //   'userType': '',
+          //   'userId': ''})
+          dispatch(ChangeActionLoggedIn({
+            ...state,
+            'isLoading': false,
+            'loggedIn': true,
+            'userType': response.data.model_name,
+            'userId': response.data.user.id
+          }))
           history.push(`/${response.data.model_name}/${response.data.user.id}`)
         })
         .catch(response => {
+          // setState({...state, 'isLoading': false})
+          dispatch(ChangeActionLoggedIn({
+            ...state,
+            'isLoading': false,
+          }))
           setFields({ ...fields, alert: response.message })
         })
     }
@@ -100,4 +119,4 @@ const DriverLogin = () => {
     )
 }
 
-export default DriverLogin;
+export default connect(mapStateToProps)(DriverLogin);

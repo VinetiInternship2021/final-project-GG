@@ -16,7 +16,7 @@ const rootReducer = (state = initState, action) => {
       return {
         ...state,
         'isLoading': action.payload.isLoading,
-        'loggedIn': action.payload.isLoading,
+        'loggedIn': action.payload.loggedIn,
         'userType': action.payload.userType,
         'userId': action.payload.userId}
     case ACTION_CHANGE_LOADING:

@@ -11,6 +11,7 @@ export const ChangeActionLoading = (isLoading) => {
 }
 
 export const ChangeActionLoggedIn = (data) => {
+  console.log(data, 'actions')
   return {
     type: ACTION_CHANGE_LOGGED_IN,
     payload: data
@@ -19,7 +20,6 @@ export const ChangeActionLoggedIn = (data) => {
 
 export const mapStateToProps = (state) => {
   const appState = state
-  console.log(appState, ' redux mapState')
   return {
     appState
   }
