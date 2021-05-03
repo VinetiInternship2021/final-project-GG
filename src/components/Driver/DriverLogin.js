@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../utils/API';
 import { loginParams } from "../../utils/configs";
 import {ChangeActionLoading,
         ChangeActionLoggedIn,
-        mapStateToProps} from '../../redux/actions'
+        mapStateToProps} from '../../redux/actions';
 import {connect} from "react-redux";
+import LoginForm from "../LoginForm";
 
 const DriverLogin = (props) => {
   const history = useHistory()
@@ -27,13 +28,12 @@ const DriverLogin = (props) => {
 
     const onClick = (event) => {
       event.preventDefault()
-      dispatch(ChangeActionLoading({'isLoading': true}))
-      // setState({...state, isLoading: true})
       Login(event)
         .then()
     }
     
     const Login = async (event) => {
+      dispatch(ChangeActionLoading({'isLoading': true}))
       const params = {
         session: {
           ...fields,
@@ -42,11 +42,6 @@ const DriverLogin = (props) => {
       }
       await login(params)
         .then(response => {
-          // setState({...state,
-          //   'isLoading': false,
-          //   'loggedIn': true,
-          //   'userType': '',
-          //   'userId': ''})
           dispatch(ChangeActionLoggedIn({
             ...state,
             'isLoading': false,
@@ -57,7 +52,6 @@ const DriverLogin = (props) => {
           history.push(`/${response.data.model_name}/${response.data.user.id}`)
         })
         .catch(response => {
-          // setState({...state, 'isLoading': false})
           dispatch(ChangeActionLoggedIn({
             ...state,
             'isLoading': false,
@@ -68,53 +62,7 @@ const DriverLogin = (props) => {
 
     return (
         <>
-            <form className="w-25 border position-absolute top-50 start-50 translate-middle">
-                <div className="me-3 mx-3">
-                    <br />
-                    <h5>Driver Login</h5>
-                    <label htmlFor="phone" className="form-label">Phone</label>
-                    <input onClick={() => {
-                      setFields({ ...fields, alert: '' })
-                    }}
-                           onChange={(e) => {
-                             setFields({ ...fields, phone_number: e.target.value })
-                           }}
-                           id="phone"
-                           type="number"
-                           className="form-control"
-                           value={fields.phone} />
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input onClick={() => {
-                      setFields({ ...fields, alert: '' })
-                    }}
-                           onChange={(e) => {
-                             setFields({ ...fields, password: e.target.value })
-                           }}
-                           id="password"
-                           type="password"
-                           className="form-control"
-                           value={fields.password} />
-                  
-                    <label htmlFor="rememberMe" className="form-label">
-                    <input
-                      className="form-check-input"
-                      name="rememberMe"
-                      type="checkbox"
-                      checked={fields.remember_me}
-                      onChange={ (event) =>  setFields({
-                          ...fields,
-                          remember_me: event.target.checked
-                      })
-                      } />
-                        Remember
-                    </label>
-                    <p>{fields.alert}</p>
-                </div>
-                <button onClick={(e) => {
-                  onClick(e)
-                  }
-                } type="submit" className="btn btn-outline-success mx-3 mb-3">Submit</button>
-            </form>
+          <LoginForm fields={fields} setFields={setFields} onClick={onClick} />
         </>
     )
 }

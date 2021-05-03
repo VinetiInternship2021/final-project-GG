@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import {signUp} from '../../utils/API';
 import {signParams} from "../../utils/configs";
 import RegistrationForm from "../RegistrationForm";
+import {ChangeActionLoading,
+        ChangeActionLoggedIn,
+        mapStateToProps} from '../../redux/actions'
+import {connect} from "react-redux";
+import {useHistory} from "react-router-dom";
 
-const DriverSignup = () => {
+const DriverSignup = (props) => {
+    const history = useHistory()
+    const dispatch = props.dispatch
+    const state = props.appState
     const [fields, setFields] = useState({
         ...signParams
     })
@@ -15,9 +22,6 @@ const DriverSignup = () => {
           .then()
     }
     
-    const onClick = (event) => {
-    }
-    
     const onChange = (event) => {
         const params = {
             ...fields,
@@ -25,20 +29,27 @@ const DriverSignup = () => {
         }
         params[event.target.id] = event.target.value
         setFields(params)
-        console.log(fields)
     }
     
     const SignUp = async () => {
+        dispatch(ChangeActionLoading({'isLoading': true}))
         const params = {
             driver: {
                 ...fields
             }
         }
         await signUp(params)
-          .then(response => console.log('success'))
+          .then(response => {
+              dispatch(ChangeActionLoggedIn({
+                  ...state,
+                  'isLoading': false,
+                  'loggedIn': true,
+                  'userType': 'Driver',
+                  'userId': response.data.user.id
+              }))
+              history.push(`/${state.userType}/${state.userId}`)
+          })
           .catch(response => {
-              console.log('catch')
-              console.log(response.status)
               let errors = []
               if (response.status === 500) {
                 errors.push('This phone number registered')
@@ -117,4 +128,4 @@ const DriverSignup = () => {
     )
 }
 
-export default DriverSignup;
+export default connect(mapStateToProps)(DriverSignup);

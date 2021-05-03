@@ -1,60 +1,101 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import {signUp} from '../../utils/API';
+import {signParams} from "../../utils/configs";
+import RegistrationForm from "../RegistrationForm";
+import {ChangeActionLoading,
+        ChangeActionLoggedIn,
+        mapStateToProps} from '../../redux/actions'
+import {connect} from "react-redux";
+import {useHistory} from "react-router-dom";
 
-const ClientSignup = () => {
+const ClientSignup = (props) => {
+    const history = useHistory()
+    const dispatch = props.dispatch
+    const state = props.appState
     const [fields, setFields] = useState({
-        phone: '',
-        password: '',
-        cPassword: '',
-        name: '',
-        alert: ''
+        ...signParams
     })
-
-    const onClick = (event) => {
-        event.preventDefault();
-        if (fields.password !== fields.cPassword) {
-            setFields({ ...fields, alert: 'incorrect password, try again!', password: '', cPassword: '' })
-        } else if (fields.password.length < 6) {
-            setFields({ ...fields, alert: 'password length should be at least 6 characters, try again!', password: '', cPassword: '' })
-        } else if (!fields.name) {
-            setFields({ ...fields, alert: 'username is required!' })
-        } else if (!fields.phone) {
-            setFields({ ...fields, alert: 'phone is required!' })
-        } else {
-            axios.post('/signup/client', {
-                phone: fields.phone,
-                name: fields.name,
-                password: fields.password
-            })
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
+    
+    const onClickBtn = (event) => {
+        event.preventDefault()
+        SignUp()
+          .then()
     }
-
+    
+    const onChange = (event) => {
+        const params = {
+            ...fields,
+            alert: ''
+        }
+        params[event.target.id] = event.target.value
+        setFields(params)
+    }
+    
+    const SignUp = async () => {
+        dispatch(ChangeActionLoading({'isLoading': true}))
+        const params = {
+            driver: {
+                ...fields
+            }
+        }
+        await signUp(params)
+          .then(response => {
+              dispatch(ChangeActionLoggedIn({
+                  ...state,
+                  'isLoading': false,
+                  'loggedIn': true,
+                  'userType': 'Passenger',
+                  'userId': response.data.user.id
+              }))
+              history.push(`/${state.userType}/${state.userId}`)
+          })
+          .catch(response => {
+              let errors = []
+              if (response.status === 500) {
+                  errors.push('This phone number registered')
+              }
+              else {
+                  if (!response.created) {
+                      Object.entries(response.errors).map((error) => {
+                          errors.push(`${error[0]} ${error[1]}`)
+                      })
+                      setFields({ ...fields, alert: errors })
+                  }
+                  else {
+                      setFields({ ...fields, alert: response.message })
+                  }
+              }
+          })
+    }
+    
     return (
-        <>
-            <form className="w-25 border position-absolute top-50 start-50 translate-middle">
-                <div className="me-3 mx-3">
-                    <br />
-                    <h5>Client registration</h5>
-                    <label htmlFor="phone" className="form-label">Phone</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, phone: e.target.value }) }} id="phone" type="number" className="form-control" value={fields.phone} />
-                    <label htmlFor="name" className="form-label">Username</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, name: e.target.value }) }} id="name" type="text" className="form-control" value={fields.name} />
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, password: e.target.value, alert: '' }) }} id="password" type="password" className="form-control" value={fields.password} />
-                    <label htmlFor="cPassword" className="form-label">Confirm Password</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, cPassword: e.target.value, alert: '' }) }} id="cPassword" type="password" className="form-control" value={fields.cPassword} />
-                    <p>{fields.alert}</p>
+      <>
+          <form className="w-25 border position-absolute top-50 start-50 translate-middle">
+              {fields.alert ?
+                <div id="error_explanation">
+                    <div className="alert alert-danger">
+                        In form found {fields.alert.length} errors
+                    </div>
+                    {fields.alert.map((error, index) => {
+                        return (
+                          <ul key={index}>
+                              {error}
+                          </ul>
+                        )
+                    })}
                 </div>
-                <button onClick={(e) => { onClick(e) }} type="submit" className="btn btn-outline-success mx-3 mb-3">Submit</button>
-            </form>
-        </>
+                :
+                false
+              }
+              <div className="me-3 mx-3">
+                  <RegistrationForm onChange={onChange} data={[fields, setFields]}/>
+              </div>
+              <button onClick={(e) => { onClickBtn(e) }}
+                      type="submit"
+                      className="btn btn-outline-success mx-3 mb-3">Submit</button>
+          </form>
+      </>
     )
 }
 
-export default ClientSignup;
+export default connect(mapStateToProps)(ClientSignup);

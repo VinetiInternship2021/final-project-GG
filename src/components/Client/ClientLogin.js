@@ -1,56 +1,71 @@
 import React, {useEffect, useState} from 'react';
 import { useHistory } from 'react-router-dom';
-import {userIn,
-    login} from '../../utils/API';
+import {userIn, login} from '../../utils/API';
 import {loginParams} from "../../utils/configs";
+import {ChangeActionLoading,
+        ChangeActionLoggedIn,
+        mapStateToProps} from '../../redux/actions'
+import {connect} from "react-redux";
+import LoginForm from "../LoginForm";
 
-const ClientLogin = () => {
+const ClientLogin = (props) => {
     const history = useHistory()
-    const [authData, setAuthData] = useState(
-      {
-          'loggedIn': false, 'userType': 'None', 'userId': 'None'
-      })
+    const state = props.appState
+    const dispatch = props.dispatch
+    
     const [fields, setFields] = useState({
         ...loginParams,
         model_name: 'Passenger'
     })
+    
+    useEffect(() => {
+        if (state.loggedIn) {
+            history.push(`/${state.userType}/${state.userId}`)
+        }
+        return (()=>{
+            dispatch(ChangeActionLoggedIn(state))
+        })
+    }, [])
+    
     const onClick = (event) => {
         event.preventDefault();
-        if (fields.password.length < 6) {
-            setFields({ ...fields, alert: 'password length should be at least 6 characters, try again!', password: '' })
-        } else if (!fields.phone) {
-            setFields({ ...fields, alert: 'phone is required!' })
-        } else {
-            axios.post('/login/client', {
-                phone: fields.phone,
-                password: fields.password
-            })
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            history.push(appRoutes.client)
+        Login(event)
+          .then()
         }
+
+    const Login = async (event) => {
+        dispatch(ChangeActionLoading({'isLoading': true}))
+        const params = {
+            session: {
+                ...fields,
+                remember_me: fields.remember_me === true ? '1': '0'
+            }
+        }
+        await login(params)
+          .then(response => {
+              dispatch(ChangeActionLoggedIn({
+                  ...state,
+                  'isLoading': false,
+                  'loggedIn': true,
+                  'userType': response.data.model_name,
+                  'userId': response.data.user.id
+              }))
+              history.push(`/${response.data.model_name}/${response.data.user.id}`)
+          })
+          .catch(response => {
+              dispatch(ChangeActionLoggedIn({
+                  ...state,
+                  'isLoading': false,
+              }))
+              setFields({ ...fields, alert: response.message })
+          })
     }
 
     return (
         <>
-            <form className="w-25 border position-absolute top-50 start-50 translate-middle">
-                <div className="me-3 mx-3">
-                    <br />
-                    <h5>Client Login</h5>
-                    <label htmlFor="phone" className="form-label">Phone</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, phone: e.target.value }) }} id="phone" type="number" className="form-control" value={fields.phone} />
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, password: e.target.value }) }} id="password" type="password" className="form-control" value={fields.password} />
-                    <p>{fields.alert}</p>
-                </div>
-                <button onClick={(e) => { onClick(e) }} type="submit" className="btn btn-outline-success mx-3 mb-3">Submit</button>
-            </form>
+            <LoginForm fields={fields} setFields={setFields} onClick={onClick} />
         </>
     )
 }
 
-export default ClientLogin;
+export default connect(mapStateToProps)(ClientLogin);

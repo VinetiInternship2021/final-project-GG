@@ -1,30 +1,6 @@
 import React, {useContext} from 'react';
 import Context from "../components/context";
 
-// export const appRoutes = () => {
-    //const {authData} = useContext(Context)
-    
-// export const appRoutes = {
-//         root: '/',
-//         signup: '/signup',
-//         login: '/login',
-//         signupClient: '/signup/client',
-//         signupDriver: '/signup/driver',
-//         loginClient: '/login/client',
-//         loginDriver: '/login/driver',
-//         loginAdmin: '/login/admin',
-//         client: '/client',
-//         driver: '/driver/:id',
-//         admin: '/admin',
-//         taxi: '/taxi',
-//         clientHistory: '/client/history',
-//         clientSettings: '/client/settings',
-//         driverPage: ``,
-//         driverProfile: '/driver/:id/profile'
-//     }
-    // return routes
-// }
-
 export const appRoutes = {
     root: '/',
     signup: '/signup',
@@ -49,13 +25,6 @@ const signupText = 'Sign up'
 const logoutText = 'Logout'
 const homeText = 'Home'
 const profileText = 'Profile'
-
-// const login_signup = [logintext, signuptext];
-// const login = [logintext];
-// const signup = [signuptext];
-// const logout = [logouttext];
-// const home_logout = [hometext, logouttext];
-// const home = [hometext];
 
 export const headerButtons = {
     loggedOut: [homeText, loginText, signupText],
