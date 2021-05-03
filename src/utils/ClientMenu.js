@@ -1,5 +1,5 @@
-import { useHistory } from 'react-router-dom';
-import { appRoutes, clientPageItems } from './configs';
+import {useHistory} from 'react-router-dom';
+import {appRoutes, clientPageItems} from './configs';
 
 export const ClientMenu = () => {
     const history = useHistory();
@@ -21,7 +21,12 @@ export const ClientMenu = () => {
         }
         history.push(path)
     }
-    const menuItems = clientPageItems.map(item => <li key={item} onClick={(e) => { handleMenu(e) }} className="list-group-item">{item}</li>)
-
-    return menuItems
+    return clientPageItems.map(item =>
+      <li key={item} onClick={
+          (e) => {
+          handleMenu(e)
+          }
+      }
+          className="list-group-item">{item}</li>
+    )
 }

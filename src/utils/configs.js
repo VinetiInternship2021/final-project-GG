@@ -10,7 +10,7 @@ export const appRoutes = {
     loginClient: '/login/client',
     loginDriver: '/login/driver',
     loginAdmin: '/login/admin',
-    client: '/client',
+    client: '/client/:id',
     driver: '/driver/:id',
     admin: '/admin',
     taxi: '/taxi',
