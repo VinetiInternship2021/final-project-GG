@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Switch } from '../utils/headerButtonSwitch'
 import { headerButtons } from "../utils/configs"
@@ -16,7 +16,6 @@ const Header = (props) => {
     const [buttons, setButtons] = useState(headerButtons.loggedOut)
     
     useEffect(()=>{
-        console.log('Header useEffect')
         if(state.isLoading === false) {
             if(state.loggedIn) {
                 setButtons(headerButtons.loggedIn)
@@ -25,7 +24,8 @@ const Header = (props) => {
                 setButtons(headerButtons.loggedOut)
             }
         }
-    },[state.loggedIn])
+        
+    }, [state.loggedIn])
 
     const onSelect = async (event, button) => {
         // event.preventDefault()

@@ -24,7 +24,6 @@ export const login = (params) => {
         resolve(resp)
       })
       .catch(resp => {
-        console.log(resp.response.data)
         reject(resp.response.data)
       })
   }
@@ -68,7 +67,6 @@ export const signUp = (params) => {
           resolve(resp)
         })
         .catch(resp => {
-          console.log(resp.response.data)
           reject(resp.response.data)
         })
     }

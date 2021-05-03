@@ -32,7 +32,7 @@ const DriverSignup = (props) => {
     }
     
     const SignUp = async () => {
-        dispatch(ChangeActionLoading({'isLoading': true}))
+        //dispatch(ChangeActionLoading({'isLoading': true}))
         const params = {
             driver: {
                 ...fields
@@ -53,9 +53,11 @@ const DriverSignup = (props) => {
               let errors = []
               if (response.status === 500) {
                 errors.push('This phone number registered')
+                  dispatch(ChangeActionLoading({'isLoading': false}))
               }
               else {
                   if (!response.created) {
+                      console.log(response)
                       Object.entries(response.errors).map((error) => {
                           errors.push(`${error[0]} ${error[1]}`)
                       })
@@ -69,24 +71,9 @@ const DriverSignup = (props) => {
     }
 
     return (
-        <>
+        <div>
             <form className="w-25 border position-absolute top-50 start-50 translate-middle">
-                {fields.alert ?
-                  <div id="error_explanation">
-                      <div className="alert alert-danger">
-                          In form found {fields.alert.length} errors
-                      </div>
-                      {fields.alert.map((error, index) => {
-                          return (
-                            <ul key={index}>
-                                {error}
-                            </ul>
-                          )
-                      })}
-                  </div>
-                  :
-                  false
-                }
+                
                 <div className="me-3 mx-3">
                     <RegistrationForm onChange={onChange} data={[fields, setFields]}/>
                     <label htmlFor="car_manufacturer" className="form-label">Car manufacturer</label>
@@ -120,11 +107,29 @@ const DriverSignup = (props) => {
                            type="text"
                            className="form-control"/>
                 </div>
+    
+                {fields.alert ?
+                  <div id="error_explanation">
+                      <div className="alert alert-danger">
+                          In form founds {fields.alert.length} errors
+                      </div>
+                      {fields.alert.map((error, index) => {
+                          return (
+                            <ul key={index}>
+                                {error}
+                            </ul>
+                          )
+                      })}
+                  </div>
+                  :
+                  false
+                }
+                
                 <button onClick={(e) => { onClickBtn(e) }}
                         type="submit"
                         className="btn btn-outline-success mx-3 mb-3">Submit</button>
             </form>
-        </>
+        </div>
     )
 }
 

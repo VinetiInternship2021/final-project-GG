@@ -1,7 +1,8 @@
 import React from 'react'
 
 import { ACTION_CHANGE_LOADING ,
-         ACTION_CHANGE_LOGGED_IN} from './actionTypes'
+         ACTION_CHANGE_LOGGED_IN,
+         ACTION_CHANGE_ALERT} from './actionTypes'
 
 export const ChangeActionLoading = (isLoading) => {
   return {
@@ -11,10 +12,16 @@ export const ChangeActionLoading = (isLoading) => {
 }
 
 export const ChangeActionLoggedIn = (data) => {
-  console.log(data, 'actions')
   return {
     type: ACTION_CHANGE_LOGGED_IN,
     payload: data
+  }
+}
+
+export const ChangeActionAlert = (alert) => {
+  return {
+    type: ACTION_CHANGE_ALERT,
+    payload: alert
   }
 }
 

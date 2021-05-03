@@ -1,5 +1,4 @@
 import React, {Component} from "react"
-import axios from 'axios'
 import ProfileInfoTable from '../../utils/ProfileInfoTable'
 import Loading from '../../utils/Loading'
 import {modelShow} from "../../utils/API";

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import { Route, useLocation, Switch } from 'react-router-dom';
 import { appRoutes } from '../utils/configs'
 import Header from './Header'
@@ -22,12 +22,12 @@ import {ChangeActionLoading,
 
 const AppRoutes = (props) => {
   const location = useLocation();
-  
+
   useEffect(() => {
     userInChecker()
       .then()
   }, [])
-  
+
   const userInChecker = async () => {
     await userIn()
       .then(response => {
@@ -48,16 +48,16 @@ const AppRoutes = (props) => {
           })
         }
       })
-    
+
   }
-  
+
   const loginStatusChanger = (data) => {
     props.dispatch(ChangeActionLoggedIn(data))
   }
   const loadingDone = () => {
     props.dispatch(ChangeActionLoading(false))
   }
-  
+
   return (
     
     <div>

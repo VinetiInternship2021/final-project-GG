@@ -1,4 +1,5 @@
 import React from 'react'
+import {logout} from "../utils/API";
 
 const LoginForm = (props) => {
   const fields = props.fields
@@ -19,8 +20,7 @@ const LoginForm = (props) => {
                }}
                id="phone"
                type="number"
-               className="form-control"
-               value={fields.phone} />
+               className="form-control" />
         <label htmlFor="password" className="form-label">Password</label>
         <input onClick={() => {
           setFields({ ...fields, alert: '' })
@@ -30,8 +30,7 @@ const LoginForm = (props) => {
                }}
                id="password"
                type="password"
-               className="form-control"
-               value={fields.password} />
+               className="form-control"/>
       
         <label htmlFor="rememberMe" className="form-label">
           <input
@@ -48,10 +47,8 @@ const LoginForm = (props) => {
         </label>
         <p>{fields.alert}</p>
       </div>
-      <button onClick={(e) => {
-        onClick(e)
-      }
-      } type="submit" className="btn btn-outline-success mx-3 mb-3">Submit</button>
+      <button onClick={(e)=>onClick(e)}
+              type="submit" className="btn btn-outline-success mx-3 mb-3">Submit</button>
     </form>
   )
 }
