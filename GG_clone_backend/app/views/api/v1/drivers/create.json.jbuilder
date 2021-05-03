@@ -15,5 +15,5 @@ if @user.save
   end
 else
   json.created false
-  json.errors @user.errors  
+  json.errors @user.errors
 end

@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { Switch } from '../utils/headerButtonSwitch'
 import Context from "./context";
 import { headerButtons } from "../utils/configs"
+import {logout} from "../utils/API";
 
 const Header = () => {
     const location = useLocation();
@@ -13,20 +14,28 @@ const Header = () => {
     useEffect(()=>{
         if(!authData.isLoading) {
             console.log(authData, 'header')
-            if(authData.loggedIn) {
+            if(localStorage.getItem('loggedIn') === 'true') {
                 setButtons(headerButtons.loggedIn)
                 console.log(buttons)
             }
             else {
                 setButtons(headerButtons.loggedOut)
+                console.log(buttons)
             }
         }
-    },[authData])
+    },[localStorage.getItem('loggedIn')])
 
-    const onSelect = (event, button) => {
-        event.preventDefault()
+    const onSelect = async (event, button) => {
+        // event.preventDefault()
         if (event.metaKey || event.ctrlKey) {
             return;
+        }
+        if (button === 'Logout') {
+            console.log('logout')
+            console.log(authData.isLoading)
+            await logout()
+              .then(() => localStorage.setItem('loggedIn', 'true'))
+              .then(() => console.log(localStorage.getItem('loggedIn')))
         }
         history.push(Switch(button, location, authData))
     }

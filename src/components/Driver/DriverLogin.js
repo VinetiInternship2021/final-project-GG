@@ -18,7 +18,7 @@ const DriverLogin = () => {
     })
     //
     useEffect(() => {
-        if (authData.loggedIn) {
+        if (localStorage.getItem('loggedIn') === 'true') {
             history.push(`/${authData.userType}/${authData.userId}`)
         }
     }, [authData])
@@ -26,11 +26,11 @@ const DriverLogin = () => {
     const onClick = (event) => {
       console.log(event)
       event.preventDefault();
-      Login()
+      Login(event)
         .then()
     }
     
-    const Login = async () => {
+    const Login = async (event) => {
       const params = {
         session: {
           ...fields,
@@ -39,6 +39,7 @@ const DriverLogin = () => {
       }
       await login(params)
         .then(response => {
+          localStorage.setItem('loggedIn', 'true')
           history.push(`/${response.data.model_name}/${response.data.user.id}`)
         })
         .catch(response => {

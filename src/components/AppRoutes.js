@@ -18,8 +18,10 @@ import Taxi from './Client/Taxi'
 import {userIn} from "../utils/API";
 import Loading from "../utils/Loading";
 import Context from "./context"
+import {ChangeActionLoading,
+        ChangeActionLoggedIn} from '../redux/actions'
 
-const AppRoutes = () => {
+const AppRoutes = (props) => {
     const location = useLocation();
     
     const [authData, setAuthData] = useState(
@@ -40,14 +42,25 @@ const AppRoutes = () => {
           .then(response => {
             loadingDone()
             if (response.data.user_in) {
-                loginStatusChanger({'loggedIn': response.data.user_in,
-                    'userType': response.data.model_name,
-                    'userId': response.data.user.id} )
+              loginStatusChanger({
+                'isLoading': false,
+                'loggedIn': response.data.user_in,
+                'userType': response.data.model_name,
+                'userId': response.data.user.id} )
+            }
+            else {
+              loginStatusChanger({
+                'isLoading': false,
+                'loggedIn': false,
+                'userType': '',
+                'userId': ''} )
             }
           })
     }
     
     const loginStatusChanger = (data) => {
+      console.log('loginStatusChange')
+      props.dispatch(ChangeActionLoggedIn(data))
         setAuthData({
           ...authData,
           'isLoading': false,
@@ -56,17 +69,18 @@ const AppRoutes = () => {
           'userId': data.userId})
     }
     const loadingDone = () => {
-      setAuthData({
-      ...authData,
-      'isLoading': false
-      })
+      props.dispatch(ChangeActionLoading(false))
+      // setAuthData({
+      // ...authData,
+      // 'isLoading': false
+      // })
     }
     
     return (
+      
       <Context.Provider value={{authData}}>
         <div>
-          {authData.isLoading ? <Loading /> : false}
-          <Header />
+          {props.appState.isLoading ? <Loading /> : <Header />}
             <Switch >
                 <Route path={appRoutes.signup} exact component={Signup} />
                 <Route path={appRoutes.login} exact component={Login} />
