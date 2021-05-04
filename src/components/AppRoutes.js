@@ -53,6 +53,7 @@ const AppRoutes = (props) => {
   }
 
   const loginStatusChanger = (data) => {
+    console.log('loggedIn ', data)
     props.dispatch(ChangeActionLoggedIn(data))
   }
   const loadingDone = () => {

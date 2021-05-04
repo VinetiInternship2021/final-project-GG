@@ -40,7 +40,6 @@ const DriverSignup = (props) => {
         }
         await signUp(params)
           .then(response => {
-              console.log('sign up then')
               dispatch(ChangeActionLoggedIn({
                   ...state,
                   'isLoading': false,
@@ -59,7 +58,6 @@ const DriverSignup = (props) => {
               }
               else {
                   if (!response.created) {
-                      console.log('catch ', response)
                       Object.entries(response.errors).map((error) => {
                           errors.push(`${error[0]} ${error[1]}`)
                       })

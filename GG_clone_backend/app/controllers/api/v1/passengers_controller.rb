@@ -1,4 +1,4 @@
-class PassengersController < ApplicationController
+class Api::V1::PassengersController < ApplicationController
 
   def index
     @users = Passenger.all
@@ -40,8 +40,8 @@ class PassengersController < ApplicationController
 
   private def user_params
     params.require(:passenger).permit(:first_name, :last_name, :phone_number,
-                                   :email,
-                                   :password, :password_confirmation)
+                                     :email,
+                                     :password, :password_confirmation)
   end
 
 end

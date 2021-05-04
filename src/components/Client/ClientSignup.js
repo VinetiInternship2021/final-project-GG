@@ -32,9 +32,9 @@ const ClientSignup = (props) => {
     }
     
     const SignUp = async () => {
-        dispatch(ChangeActionLoading({'isLoading': true}))
+        // dispatch(ChangeActionLoading({'isLoading': true}))
         const params = {
-            driver: {
+            passenger: {
                 ...fields
             }
         }
@@ -47,12 +47,14 @@ const ClientSignup = (props) => {
                   'userType': 'Passenger',
                   'userId': response.data.user.id
               }))
-              history.push(`/${state.userType}/${state.userId}`)
+              history.push(`/Passenger/${response.data.user.id}`)
           })
           .catch(response => {
               let errors = []
               if (response.status === 500) {
                   errors.push('This phone number registered')
+                  dispatch(ChangeActionLoading({'isLoading': false}))
+                  setFields({ ...fields, alert: errors })
               }
               else {
                   if (!response.created) {
