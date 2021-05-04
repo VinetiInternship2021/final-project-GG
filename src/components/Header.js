@@ -28,7 +28,6 @@ const Header = (props) => {
     }, [state.loggedIn])
 
     const onSelect = async (event, button) => {
-        // event.preventDefault()
         if (event.metaKey || event.ctrlKey) {
             return;
         }

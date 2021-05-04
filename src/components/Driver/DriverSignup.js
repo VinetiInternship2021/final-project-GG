@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import {signUp} from '../../utils/API';
 import {signParams} from "../../utils/configs";
 import RegistrationForm from "../RegistrationForm";
-import {ChangeActionLoading,
-        ChangeActionLoggedIn,
-        mapStateToProps} from '../../redux/actions'
+import {mapStateToProps} from '../../redux/actions'
 import {connect} from "react-redux";
 import {useHistory} from "react-router-dom";
+import onClickBtn from "../../utils/SignupOnClick";
 
 const DriverSignup = (props) => {
     const history = useHistory()
@@ -15,12 +13,6 @@ const DriverSignup = (props) => {
     const [fields, setFields] = useState({
         ...signParams
     })
-
-    const onClickBtn = (event) => {
-        event.preventDefault()
-        SignUp()
-          .then()
-    }
     
     const onChange = (event) => {
         const params = {
@@ -29,45 +21,6 @@ const DriverSignup = (props) => {
         }
         params[event.target.id] = event.target.value
         setFields(params)
-    }
-    
-    const SignUp = async () => {
-        //dispatch(ChangeActionLoading({'isLoading': true}))
-        const params = {
-            driver: {
-                ...fields
-            }
-        }
-        await signUp(params)
-          .then(response => {
-              dispatch(ChangeActionLoggedIn({
-                  ...state,
-                  'isLoading': false,
-                  'loggedIn': true,
-                  'userType': 'Driver',
-                  'userId': response.data.user.id
-              }))
-              history.push(`/${'Driver'}/${response.data.user.id}`)
-          })
-          .catch(response => {
-              let errors = []
-              if (response.status === 500) {
-                errors.push('This phone number registered')
-                  dispatch(ChangeActionLoading({'isLoading': false}))
-                  setFields({ ...fields, alert: errors })
-              }
-              else {
-                  if (!response.created) {
-                      Object.entries(response.errors).map((error) => {
-                          errors.push(`${error[0]} ${error[1]}`)
-                      })
-                      setFields({ ...fields, alert: errors })
-                  }
-                  else {
-                      setFields({ ...fields, alert: response.message })
-                  }
-              }
-          })
     }
 
     return (
@@ -126,7 +79,10 @@ const DriverSignup = (props) => {
                   false
                 }
                 
-                <button onClick={(e) => { onClickBtn(e) }}
+                <button onClick={(e) => {
+                    onClickBtn(e, fields, setFields, state, dispatch, history)
+                }
+                }
                         type="submit"
                         className="btn btn-outline-success mx-3 mb-3">Submit</button>
             </form>

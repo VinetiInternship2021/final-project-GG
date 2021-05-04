@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import Maps from '../../shared/Maps/Maps'
+import { DriverPageButtons } from '../../utils/configs'
 
 const DriverPage = () => {
   const history = useHistory()
@@ -26,22 +26,21 @@ const DriverPage = () => {
     }
     history.push(path)
   }
+  
+  const buttons = DriverPageButtons.map((button) => {
+    return(
+      <button key={button}
+              onClick={(event) => onSelect(event)}
+              className="btn btn-outline-success me-1"
+              type="submit">{button}</button>
+    )
+  })
+  
   return (
     <div className="card text-center position-absolute top-50 start-50 translate-middle" style={{ width: "300px", height: "466px" }}>
       <ul className="list-group list-group-flush">
-        <li onClick={(e) => { onSelect(e) }} className="list-group-item">New order</li>
-        <li onClick={(e) => { onSelect(e) }} className="list-group-item">My history</li>
-        <li onClick={(e) => { onSelect(e) }} className="list-group-item">Settings</li>
-        <li onClick={(e) => { onSelect(e) }} className="list-group-item">Profile</li>
+        {buttons}
       </ul>
-      {/*< Maps params = {{*/}
-      {/*  'mapsMode': 'view',*/}
-      {/*  'center': '40.185040, 44.514813',*/}
-      {/*  'zoom': '15',*/}
-      {/*  'origin': '',*/}
-      {/*  'destination': ''*/}
-      {/*}}*/}
-      {/*/>*/}
     </div>
   )
 }

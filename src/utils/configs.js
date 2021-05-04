@@ -63,6 +63,20 @@ export let signParams = {
     car_registration_number: ''
 }
 
+export const DriverPageButtons = [
+    'New order',
+    'My history',
+    'Settings',
+    'Profile'
+]
+
+export const ClientPageButtons = [
+    'New order',
+    'My history',
+    'Settings',
+    'Profile'
+]
+
 export const loggedInData = {
     'isLoading': true,
     'loggedIn': false,
