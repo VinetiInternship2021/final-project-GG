@@ -40,6 +40,7 @@ const DriverSignup = (props) => {
         }
         await signUp(params)
           .then(response => {
+              console.log('sign up then')
               dispatch(ChangeActionLoggedIn({
                   ...state,
                   'isLoading': false,
@@ -47,17 +48,18 @@ const DriverSignup = (props) => {
                   'userType': 'Driver',
                   'userId': response.data.user.id
               }))
-              history.push(`/${state.userType}/${state.userId}`)
+              history.push(`/${'Driver'}/${response.data.user.id}`)
           })
           .catch(response => {
               let errors = []
               if (response.status === 500) {
                 errors.push('This phone number registered')
                   dispatch(ChangeActionLoading({'isLoading': false}))
+                  setFields({ ...fields, alert: errors })
               }
               else {
                   if (!response.created) {
-                      console.log(response)
+                      console.log('catch ', response)
                       Object.entries(response.errors).map((error) => {
                           errors.push(`${error[0]} ${error[1]}`)
                       })
@@ -72,10 +74,10 @@ const DriverSignup = (props) => {
 
     return (
         <div>
-            <form className="w-25 border position-absolute top-50 start-50 translate-middle">
+            <form className="w-50 border position-absolute top-50 start-50 translate-middle">
                 
                 <div className="me-3 mx-3">
-                    <RegistrationForm onChange={onChange} data={[fields, setFields]}/>
+                    <RegistrationForm onChange={onChange} data={[fields, setFields]} >
                     <label htmlFor="car_manufacturer" className="form-label">Car manufacturer</label>
                     <input onChange={
                         (e) => onChange(e)
@@ -106,6 +108,7 @@ const DriverSignup = (props) => {
                            id="car_registration_number"
                            type="text"
                            className="form-control"/>
+                    </RegistrationForm>
                 </div>
     
                 {fields.alert ?

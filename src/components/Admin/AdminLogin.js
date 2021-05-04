@@ -22,14 +22,10 @@ const AdminLogin = (props) => {
         if (state.loggedIn) {
             history.push(`/${state.userType}/${state.userId}`)
         }
-        return (()=>{
-            dispatch(ChangeActionLoggedIn(state))
-        })
     }, [])
 
     const onClick = (event) => {
         event.preventDefault();
-        event.preventDefault()
         Login(event)
           .then()
     }
@@ -54,10 +50,7 @@ const AdminLogin = (props) => {
               history.push(`/${response.data.model_name}/${response.data.user.id}`)
           })
           .catch(response => {
-              dispatch(ChangeActionLoggedIn({
-                  ...state,
-                  'isLoading': false,
-              }))
+              dispatch(ChangeActionLoading(false))
               setFields({ ...fields, alert: response.message })
           })
     }

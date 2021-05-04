@@ -19,6 +19,7 @@ import {userIn} from "../utils/API";
 import Loading from "../utils/Loading";
 import {ChangeActionLoading,
         ChangeActionLoggedIn} from '../redux/actions'
+import '../styles/custom.css'
 
 const AppRoutes = (props) => {
   const location = useLocation();
@@ -63,22 +64,26 @@ const AppRoutes = (props) => {
     <div>
       {props.appState.isLoading ? <Loading/> :
         <div>
-          <Header/>
-          <Switch>
-            <Route path={appRoutes.signup} exact component={Signup}/>
-            <Route path={appRoutes.login} exact component={Login}/>
-            <Route path={appRoutes.signupClient} exact component={ClientSignup}/>
-            <Route path={appRoutes.signupDriver} exact component={DriverSignup}/>
-            <Route path={appRoutes.loginDriver} exact component={DriverLogin}/>
-            <Route path={appRoutes.loginClient} exact component={ClientLogin}/>
-            <Route path={appRoutes.loginAdmin} exact component={AdminLogin}/>
-            <Route path={appRoutes.client} exact component={ClientOrder}/>
-            <Route path={appRoutes.clientHistory} exact component={ClientHistory}/>
-            <Route path={appRoutes.clientSettings} exact component={ClientSettings}/>
-            <Route path={appRoutes.taxi} exact component={Taxi}/>
-            <Route path={appRoutes.driverPage} exact component={DriverPage}/>
-            <Route path={appRoutes.driverProfile} exact component={DriverProfile}/>
-          </Switch>
+          <div className="container-fluid">
+            <Header/>
+          </div>
+          <div className="container-md body">
+            <Switch>
+              <Route path={appRoutes.signup} exact component={Signup}/>
+              <Route path={appRoutes.login} exact component={Login}/>
+              <Route path={appRoutes.signupClient} exact component={ClientSignup}/>
+              <Route path={appRoutes.signupDriver} exact component={DriverSignup}/>
+              <Route path={appRoutes.loginDriver} exact component={DriverLogin}/>
+              <Route path={appRoutes.loginClient} exact component={ClientLogin}/>
+              <Route path={appRoutes.loginAdmin} exact component={AdminLogin}/>
+              <Route path={appRoutes.client} exact component={ClientOrder}/>
+              <Route path={appRoutes.clientHistory} exact component={ClientHistory}/>
+              <Route path={appRoutes.clientSettings} exact component={ClientSettings}/>
+              <Route path={appRoutes.taxi} exact component={Taxi}/>
+              <Route path={appRoutes.driverPage} exact component={DriverPage}/>
+              <Route path={appRoutes.driverProfile} exact component={DriverProfile}/>
+            </Switch>
+          </div>
         </div>
       }
     </div>

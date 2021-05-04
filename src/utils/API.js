@@ -67,6 +67,7 @@ export const signUp = (params) => {
           resolve(resp)
         })
         .catch(resp => {
+          console.log('sign up API ', resp)
           reject(resp.response.data)
         })
     }

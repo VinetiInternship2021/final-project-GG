@@ -1,0 +1,6 @@
+.body{
+    position: relative;
+}
+.translate-middle {
+    transform: translate(-50%,10%)!important;
+}

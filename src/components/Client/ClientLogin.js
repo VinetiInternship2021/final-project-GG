@@ -1,18 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import {userIn, login} from '../../utils/API';
-import {loginParams} from "../../utils/configs";
-import {ChangeActionLoading,
-        ChangeActionLoggedIn,
-        mapStateToProps} from '../../redux/actions'
-import {connect} from "react-redux";
+import { login } from '../../utils/API';
+import { loginParams } from "../../utils/configs";
+import { ChangeActionLoading,
+         ChangeActionLoggedIn,
+         mapStateToProps } from '../../redux/actions'
+import { connect } from "react-redux";
 import LoginForm from "../LoginForm";
 
 const ClientLogin = (props) => {
     const history = useHistory()
     const state = props.appState
     const dispatch = props.dispatch
-    
     const [fields, setFields] = useState({
         ...loginParams,
         model_name: 'Passenger'
@@ -22,9 +21,6 @@ const ClientLogin = (props) => {
         if (state.loggedIn) {
             history.push(`/${state.userType}/${state.userId}`)
         }
-        return (()=>{
-            dispatch(ChangeActionLoggedIn(state))
-        })
     }, [])
     
     const onClick = (event) => {
@@ -34,7 +30,7 @@ const ClientLogin = (props) => {
         }
 
     const Login = async (event) => {
-        dispatch(ChangeActionLoading({'isLoading': true}))
+        // dispatch(ChangeActionLoading({'isLoading': true}))
         const params = {
             session: {
                 ...fields,
@@ -53,10 +49,7 @@ const ClientLogin = (props) => {
               history.push(`/${response.data.model_name}/${response.data.user.id}`)
           })
           .catch(response => {
-              dispatch(ChangeActionLoggedIn({
-                  ...state,
-                  'isLoading': false,
-              }))
+              dispatch(ChangeActionLoading(false))
               setFields({ ...fields, alert: response.message })
           })
     }

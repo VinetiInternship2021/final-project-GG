@@ -53,7 +53,7 @@ const RegistrationForm = (props) => {
              id="password_confirmation"
              type="password"
              className="form-control" />
-
+      {props.children}
     </div>
   )
 }

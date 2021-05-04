@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { login } from '../../utils/API';
 import { loginParams } from "../../utils/configs";
-import {ChangeActionLoading,
-        ChangeActionLoggedIn,
-        ChangeActionAlert,
-        mapStateToProps} from '../../redux/actions';
-import {connect} from "react-redux";
+import { ChangeActionLoading,
+         ChangeActionLoggedIn,
+         mapStateToProps } from '../../redux/actions';
+import { connect } from "react-redux";
 import LoginForm from "../LoginForm";
 
 const DriverLogin = (props) => {
@@ -52,7 +51,6 @@ const DriverLogin = (props) => {
         })
         .catch(response => {
           dispatch(ChangeActionLoading(false))
-          dispatch(ChangeActionAlert(response.message))
           setFields({...fields, alert: response.message})
         })
     }
