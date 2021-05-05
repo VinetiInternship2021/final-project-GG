@@ -13,6 +13,11 @@ const DriverSignup = (props) => {
     const [fields, setFields] = useState({
         ...signParams
     })
+    const params = {
+        driver: {
+            ...fields
+        }
+    }
     
     const onChange = (event) => {
         const params = {
@@ -80,7 +85,7 @@ const DriverSignup = (props) => {
                 }
                 
                 <button onClick={(e) => {
-                    onClickBtn(e, fields, setFields, state, dispatch, history)
+                    onClickBtn(e, fields, setFields, state, dispatch, history, params)
                 }
                 }
                         type="submit"

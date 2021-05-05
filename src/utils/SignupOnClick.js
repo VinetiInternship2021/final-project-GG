@@ -2,28 +2,23 @@ import React from 'react'
 import {signUp} from "./API";
 import {ChangeActionLoading, ChangeActionLoggedIn} from "../redux/actions";
 
-const onClickBtn = (event, fields, setFields, state, dispatch, history) => {
+const onClickBtn = (event, fields, setFields, state, dispatch, history, params) => {
   event.preventDefault()
-  SignUp(fields, setFields, state, dispatch, history)
+  SignUp(fields, setFields, state, dispatch, history, params)
     .then()
 }
 
-const SignUp = async (fields, setFields, state, dispatch, history) => {
-  const params = {
-    driver: {
-      ...fields
-    }
-  }
+const SignUp = async (fields, setFields, state, dispatch, history, params) => {
   await signUp(params)
     .then(response => {
       dispatch(ChangeActionLoggedIn({
         ...state,
         'isLoading': false,
         'loggedIn': true,
-        'userType': 'Driver',
+        'userType': response.data.userType,
         'userId': response.data.user.id
       }))
-      history.push(`/Driver/${response.data.user.id}`)
+      history.push(`/${response.data.userType}/${response.data.user.id}`)
     })
     .catch(response => {
       let errors = []

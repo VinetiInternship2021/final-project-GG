@@ -13,6 +13,11 @@ const ClientSignup = (props) => {
     const [fields, setFields] = useState({
         ...signParams
     })
+    const params = {
+        passenger: {
+            ...fields
+        }
+    }
     
     const onChange = (event) => {
         const params = {
@@ -46,7 +51,7 @@ const ClientSignup = (props) => {
                   <RegistrationForm onChange={onChange} data={[fields, setFields]}/>
               </div>
               <button onClick={(e) => {
-                  onClickBtn(e, fields, setFields, state, dispatch, history)
+                  onClickBtn(e, fields, setFields, state, dispatch, history, params)
               }}
                       type="submit"
                       className="btn btn-outline-success mx-3 mb-3">Submit</button>
