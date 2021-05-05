@@ -24,6 +24,7 @@ const DriverLogin = (props) => {
     return (
         <>
           <LoginForm fields={fields}
+                     header={'Driver Login'}
                      setFields={setFields}
                      onClick={(event) => LoginOnClick(event, fields, setFields, state, dispatch, history)} />
         </>

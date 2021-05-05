@@ -1,0 +1,210 @@
+$UserPageButtonSize: 8em;
+$GridSize: 6.5em;
+@mixin duplicates () {
+    background: #000;
+    color: #575757;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2.5em;
+    border-bottom: 1px solid #060606;
+    position: relative;
+    text-decoration: none;
+    transition: all .25s linear;
+}
+
+.body{
+    position: relative;
+    justify-content: space-between;
+
+}
+.translate-middle {
+    transform: translate(-50%,10%)!important;
+}
+body {
+    position: relative;
+    background: #F8F8FF;
+}
+
+.ui-component {
+    padding-left: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    vertical-align: middle;
+    background-color: rgba(0, 0, 0, 0.4);
+    align-items:center;
+    justify-content:center;
+}
+
+.menu {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    &.header {
+        &.btn-outline-success {
+            color: #F8F8FF;
+            border-color: #F8F8FF;
+        }
+        &.btn-outline-success:hover {
+            color: #F8F8FF;
+            border-color: #198754;
+        }
+    }
+    &.user-page {
+        height: $UserPageButtonSize;
+        width: $UserPageButtonSize;
+    }
+}
+
+.home {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    height: 150px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: rgba(0, 0, 0, 0.9);
+    align-items:center;
+    display:flex;
+    justify-content:center;
+    h1 {
+        padding: 10px 10px 10px 10px;
+        margin: 10px 10px 10px 10px;
+        color: #F8F8FF;
+    }
+}
+ul {
+    position: relative;
+}
+
+.user-page {
+
+    &.grid {
+
+        @include duplicates ();
+        height: $GridSize;
+        width: $GridSize;
+        display: inline-grid;
+        box-shadow: 1em 0.5em 0 #e1e1e1;
+
+        &:hover {
+            transform: translate(-.9em, -.9em);
+
+            background: #198754;
+            color: #fffcfb;
+            transition: all .25s linear;
+            box-shadow: 1em 1em 0 #e1e1e1;
+
+            &:before,
+            &:after {
+                transition: all .25s linear;
+            }
+
+            &:before {
+                right: -1em;
+
+                background: #198754;
+                width: 1em;
+                top: .5em;
+            }
+
+            &:after {
+                background: #198754;
+                width: 1em;
+                bottom: -3.7em;
+                right: 2.3em;
+                height: $GridSize;
+            }
+        }
+
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            transition: all .25s linear;
+            width: 0.6em;
+        }
+
+        &:after {
+            height: $GridSize;
+            background: #181818;
+            bottom: -3.6em;
+            right: 2.7em;
+            transform: rotate(90deg) skew(0, -45deg);
+        }
+
+        &:before {
+            height: $GridSize;
+            background: #121212;
+            top: .3em;
+            right: -.5em;
+            transform: skewY(45deg);
+        }
+    }
+
+    &.column {
+        @include duplicates ();
+        height: 8em;
+        width: 8em;
+        display: block;
+        box-shadow: -2em 1.5em 0 #e1e1e1;
+
+        &:hover {
+            background: #198754;
+            color: #fffcfb;
+            transform: translate(.9em, -.9em);
+            transition: all .25s linear;
+            box-shadow: -2em 2em 0 #e1e1e1;
+
+            &:before,
+            &:after {
+                transition: all .25s linear;
+            }
+
+            &:before {
+                background: #198754;
+                width: 1em;
+                top: .5em;
+                left: -1em;
+            }
+
+            &:after {
+                background: #198754;
+                width: 1em;
+                bottom: -4.3em;
+                left: 3em;
+                height: 7.8em;
+            }
+        }
+
+        &:before,
+        &:after {
+            content: '';
+            position: absolute;
+            transition: all .25s linear;
+            width: .7em;
+        }
+
+        &:after {
+            height: 7.6em;
+            background: #181818;
+            bottom: -4.1em;
+            left: 3.3em;
+            transform: rotate(90deg) skew(0, 45deg);
+        }
+
+        &:before {
+            height: $UserPageButtonSize;
+            background: #121212;
+            top: .25em;
+            left: -.5em;
+            transform: skewY(-45deg);
+        }
+    }
+}
+
+

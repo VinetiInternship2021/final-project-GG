@@ -24,6 +24,7 @@ const ClientLogin = (props) => {
     return (
         <>
             <LoginForm fields={fields}
+                       header={'Passenger Login'}
                        setFields={setFields}
                        onClick={(event) => LoginOnClick(event, fields, setFields, state, dispatch, history)} />
         </>

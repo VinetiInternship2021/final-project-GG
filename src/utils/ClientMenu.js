@@ -1,5 +1,7 @@
 import {useHistory} from 'react-router-dom';
-import {appRoutes, clientPageItems} from './configs';
+import {appRoutes, clientPageItems, DriverPageButtons} from './configs';
+import {PageButton} from "../components/Buttons";
+import React from "react";
 
 export const ClientMenu = () => {
     const history = useHistory();
@@ -8,25 +10,27 @@ export const ClientMenu = () => {
         let path = '';
         switch (event.target.innerText) {
             case 'New order':
-                path = appRoutes.client
+                path = `${location.pathname}/${appRoutes.client}`
                 break;
             case 'My history':
-                path = appRoutes.clientHistory
+                path = `${location.pathname}/${appRoutes.clientHistory}`
                 break;
             case 'Settings':
-                path = appRoutes.clientSettings
+                path = `${location.pathname}/${appRoutes.clientSettings}`
                 break;
             default:
                 path = ''
         }
         history.push(path)
     }
-    return clientPageItems.map(item =>
-      <li key={item} onClick={
-          (e) => {
-          handleMenu(e)
-          }
-      }
-          className="list-group-item">{item}</li>
-    )
+    return clientPageItems.map((item) => {
+        return(
+          <PageButton button={item[0]}
+                      onSelect={handleMenu}
+                      buttonClassName={'column'}
+                      className={item[1]}/>
+        )
+    })
 }
+
+export default ClientMenu

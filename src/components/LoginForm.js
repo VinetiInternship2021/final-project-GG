@@ -5,12 +5,13 @@ const LoginForm = (props) => {
   const fields = props.fields
   const setFields = props.setFields
   const onClick = props.onClick
+  const header = props.header
   
   return (
     <form className="w-25 border position-absolute top-50 start-50 translate-middle">
       <div className="me-3 mx-3">
         <br />
-        <h5>Driver Login</h5>
+        <h5>{header}</h5>
         <label htmlFor="phone" className="form-label">Phone</label>
         <input onClick={() => {
           setFields({ ...fields, alert: '' })

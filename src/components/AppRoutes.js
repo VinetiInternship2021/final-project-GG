@@ -17,12 +17,12 @@ import ClientOrder from './Client/ClientOrder'
 import Taxi from './Client/Taxi'
 import {userIn} from "../utils/API";
 import Loading from "../utils/Loading";
+import Home from "./Home"
 import {ChangeActionLoading,
         ChangeActionLoggedIn} from '../redux/actions'
-import '../styles/custom.css'
+import '../styles/custom.scss'
 
 const AppRoutes = (props) => {
-  const location = useLocation();
 
   useEffect(() => {
     userInChecker()
@@ -53,7 +53,6 @@ const AppRoutes = (props) => {
   }
 
   const loginStatusChanger = (data) => {
-    console.log('loggedIn ', data)
     props.dispatch(ChangeActionLoggedIn(data))
   }
   const loadingDone = () => {
@@ -70,6 +69,7 @@ const AppRoutes = (props) => {
           </div>
           <div className="container-md body">
             <Switch>
+              <Route path={appRoutes.root} exact component={Home}/>
               <Route path={appRoutes.signup} exact component={Signup}/>
               <Route path={appRoutes.login} exact component={Login}/>
               <Route path={appRoutes.signupClient} exact component={ClientSignup}/>

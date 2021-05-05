@@ -1,5 +1,4 @@
-import React, {useContext} from 'react';
-import Context from "../components/context";
+import React from 'react';
 
 export const appRoutes = {
     root: '/',
@@ -10,7 +9,7 @@ export const appRoutes = {
     loginClient: '/login/passenger',
     loginDriver: '/login/driver',
     loginAdmin: '/login/admin',
-    client: '/client/:id',
+    client: '/passenger/:id',
     driver: '/driver/:id',
     admin: '/admin',
     taxi: '/taxi',
@@ -31,11 +30,21 @@ export const headerButtons = {
     loggedIn: [homeText, profileText, logoutText]
 }
 
-export const clientPageItems = ['New order', 'My history', 'Settings']
+export const clientPageItems = [
+    ['New order', 'fas fa-taxi'],
+    ['My history', 'fas fa-history'],
+    ['Settings', 'fas fa-cog']
+]
 
 export const buttons = ['Client', 'Driver'];
 
-export const orderTypes = ['Econom', 'Business', 'Child seat', '7 seater', 'Cargo van']
+export const orderTypes = [
+    ['Econom', 'fas fa-taxi'],
+    ['Business', 'fas fa-taxi'],
+    ['Child seat', 'fas fa-taxi'],
+    ['7 seater', 'fas fa-taxi'],
+    ['Cargo van', 'fas fa-taxi']
+]
 
 export const rating = [1, 2, 3, 4, 5]
 
@@ -64,10 +73,10 @@ export let signParams = {
 }
 
 export const DriverPageButtons = [
-    'New order',
-    'My history',
-    'Settings',
-    'Profile'
+    ['New order', 'fas fa-taxi'],
+    ['My history', 'fas fa-history'],
+    ['Settings', 'fas fa-cog'],
+    ['Profile', "fas fa-user-alt"]
 ]
 
 export const ClientPageButtons = [
