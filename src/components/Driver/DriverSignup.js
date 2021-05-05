@@ -30,7 +30,7 @@ const DriverSignup = (props) => {
 
     return (
         <div>
-            <form className="w-50 border position-absolute top-50 start-50 translate-middle">
+            <form className="text-center w-50 border position-absolute top-50 start-50 translate-middle">
                 
                 <div className="me-3 mx-3">
                     <RegistrationForm onChange={onChange} data={[fields, setFields]} >

@@ -30,7 +30,7 @@ const ClientSignup = (props) => {
     
     return (
       <>
-          <form className="w-25 border position-absolute top-50 start-50 translate-middle">
+          <form className="text-center w-25 border position-absolute top-50 start-50 translate-middle">
               {fields.alert ?
                 <div id="error_explanation">
                     <div className="alert alert-danger">

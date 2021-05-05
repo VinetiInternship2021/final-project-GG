@@ -22,12 +22,12 @@ const DriverLogin = (props) => {
   }, [])
   
     return (
-        <>
+        <div>
           <LoginForm fields={fields}
                      header={'Driver Login'}
                      setFields={setFields}
                      onClick={(event) => LoginOnClick(event, fields, setFields, state, dispatch, history)} />
-        </>
+        </div>
     )
 }
 

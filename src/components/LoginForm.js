@@ -8,7 +8,7 @@ const LoginForm = (props) => {
   const header = props.header
   
   return (
-    <form className="w-25 border position-absolute top-50 start-50 translate-middle">
+    <form className="text-center w-25 border position-absolute top-50 start-50 translate-middle">
       <div className="me-3 mx-3">
         <br />
         <h5>{header}</h5>
