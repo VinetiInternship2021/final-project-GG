@@ -1,14 +1,12 @@
-import React from 'react'
-import params from './particles.json'
+import React from 'react';
 import Particles from 'react-particles-js';
-import './style.css'
+import params from './particles.json';
+import './style.css';
 
-const ParticlesForm = () => {
-  return (
-    <div className="particles">
-      <Particles params={params}/>
-    </div>
-  )
-}
+const ParticlesForm = () => (
+  <div className="particles">
+    <Particles params={params} />
+  </div>
+);
 
-export default ParticlesForm
+export default ParticlesForm;

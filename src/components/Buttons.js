@@ -1,21 +1,60 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export const PageButton = (props) => {
+  const {
+    button, onSelect, buttonClassName, className,
+  } = props;
   return (
-    <button key={props.button}
-            onClick={(event) => props.onSelect(event)}
-            className={`btn btn-outline-success me-1 user-page ${props.buttonClassName}`}
-            type="submit"> <div>{props.className? <div><i key={props.button}
-                                               className={props.className}/></div>:''} {props.button}</div>
-            </button>
-  )
-}
+    <button
+      key={button}
+      onClick={(event) => onSelect(event)}
+      className={`btn btn-outline-success me-1 user-page ${buttonClassName}`}
+      type="submit"
+    >
+      {' '}
+      <div>
+        {className ? (
+          <div>
+            <i
+              key={button}
+              className={className}
+            />
+          </div>
+        ) : ''}
+        {' '}
+        {button}
+      </div>
+    </button>
+  );
+};
 
 export const HeaderButton = (props) => {
+  const {
+    key, onSelect, button, className,
+  } = props;
   return (
-    <button key={props.key}
-            onClick={(event) => props.onSelect(event, props.button)}
-            className={`btn btn-outline-success me-1 ${props.className}`}
-            type="submit">{props.button}</button>
-  )
-}
+    <button
+      key={key}
+      onClick={(event) => onSelect(event, button)}
+      className={`btn btn-outline-success me-1 ${className}`}
+      type="submit"
+    >
+      {button}
+    </button>
+  );
+};
+
+PageButton.propTypes = {
+  button: PropTypes.element.isRequired,
+  onSelect: PropTypes.element.isRequired,
+  buttonClassName: PropTypes.element.isRequired,
+  className: PropTypes.element.isRequired,
+};
+
+HeaderButton.propTypes = {
+  key: PropTypes.element.isRequired,
+  button: PropTypes.element.isRequired,
+  onSelect: PropTypes.element.isRequired,
+  className: PropTypes.element.isRequired,
+};
