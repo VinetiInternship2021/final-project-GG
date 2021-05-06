@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import { mapStateToProps } from '../../redux/actions';
-import { loginParams } from "../../utils/configs";
-import { useHistory } from 'react-router-dom';
-import { connect } from "react-redux";
+import {mapStateToProps} from '../../redux/actions';
+import {loginParams} from "../../utils/configs";
+import {useHistory} from 'react-router-dom';
+import {connect} from "react-redux";
 import LoginOnClick from "../../utils/LoginOnClick";
 import LoginForm from "../LoginForm";
 

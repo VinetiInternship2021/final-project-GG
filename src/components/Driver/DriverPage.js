@@ -1,8 +1,7 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
-import { DriverPageButtons } from '../../utils/configs'
-import { PageButton } from "../Buttons";
-import {ClientMenu} from "../../utils/ClientMenu";
+import {useHistory, useLocation} from 'react-router-dom';
+import {DriverPageButtons} from '../../utils/configs'
+import {PageButton} from "../Buttons";
 
 const DriverPage = () => {
   const history = useHistory()

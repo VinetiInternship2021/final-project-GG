@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { appRoutes } from '../../utils/configs';
-import { ClientMenu } from '../../utils/ClientMenu';
+import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
+import {appRoutes} from '../../utils/configs';
+import {ClientMenu} from '../../utils/ClientMenu';
 import axios from 'axios';
 
 const ClientSettings = () => {

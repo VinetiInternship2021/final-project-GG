@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import ProfileInfoTable from '../../utils/ProfileInfoTable'
-import Loading from '../../utils/Loading'
+import Loading from '../../shared/Animations/Loading'
 import {modelShow} from "../../utils/API";
 
 class DriverProfile extends Component {

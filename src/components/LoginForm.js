@@ -1,5 +1,4 @@
 import React from 'react'
-import {logout} from "../utils/API";
 
 const LoginForm = (props) => {
   const fields = props.fields

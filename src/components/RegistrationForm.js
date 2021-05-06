@@ -1,6 +1,4 @@
 import React from 'react';
-import {useState} from "react";
-import {signParams} from "../utils/configs";
 
 const RegistrationForm = (props) => {
   // const onChange = props.onChange()
@@ -13,7 +11,6 @@ const RegistrationForm = (props) => {
     }
     params[event.target.id] = event.target.value
     setFields(params)
-    console.log(fields)
   }
   return(
     <div>

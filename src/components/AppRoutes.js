@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
-import { Route, useLocation, Switch } from 'react-router-dom';
-import { appRoutes } from '../utils/configs'
+import {Route, Switch} from 'react-router-dom';
+import {appRoutes} from '../utils/configs'
 import Header from './Header'
 import Signup from './Signup'
 import Login from './Login'
@@ -16,7 +16,7 @@ import ClientSettings from './Client/ClientSettings'
 import ClientOrder from './Client/ClientOrder'
 import Taxi from './Client/Taxi'
 import {userIn} from "../utils/API";
-import Loading from "../utils/Loading";
+import Loading from "../shared/Animations/Loading";
 import Home from "./Home"
 import {ChangeActionLoading,
         ChangeActionLoggedIn} from '../redux/actions'

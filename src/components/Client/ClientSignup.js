@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {signParams} from "../../utils/configs";
 import RegistrationForm from "../RegistrationForm";
 import {mapStateToProps} from '../../redux/actions'
