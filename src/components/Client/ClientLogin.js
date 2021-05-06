@@ -4,17 +4,22 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '../../redux/actions';
 import { loginParams } from '../../utils/configs';
-import LoginOnClick from '../../utils/LoginOnClick';
 import LoginForm from '../LoginForm';
+import LoginHelper from '../../helpers/LoginHelper';
 
-const ClientLogin = (props) => {
+const ClientLogin = ({ appState, dispatch }) => {
   const history = useHistory();
-  const { appState, dispatch } = props;
   const state = appState;
   const [fields, setFields] = useState({
     ...loginParams,
     model_name: 'Passenger',
   });
+
+  const onClick = (event, Fields, SetFields, State, Dispatch, History) => {
+    event.preventDefault();
+    LoginHelper(Fields, SetFields, State, Dispatch, History)
+      .then();
+  };
 
   useEffect(() => {
     if (state.loggedIn) {
@@ -28,15 +33,15 @@ const ClientLogin = (props) => {
         fields={fields}
         header="Passenger Login"
         setFields={setFields}
-        onClick={(event) => LoginOnClick(event, fields, setFields, state, dispatch, history)}
+        onClick={(event) => onClick(event, fields, setFields, state, dispatch, history)}
       />
     </>
   );
 };
 
 ClientLogin.propTypes = {
-  appState: PropTypes.element.isRequired,
-  dispatch: PropTypes.element.isRequired,
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(ClientLogin);

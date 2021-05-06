@@ -24,7 +24,6 @@ import {
   ChangeActionLoggedIn,
 } from '../redux/actions';
 import '../styles/custom.scss';
-// import {PageButton} from "./Buttons";
 
 const AppRoutes = (props) => {
   const { dispatch } = props;
@@ -99,8 +98,8 @@ const AppRoutes = (props) => {
 };
 
 AppRoutes.propTypes = {
-  appState: PropTypes.element.isRequired,
-  dispatch: PropTypes.element.isRequired,
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default AppRoutes;

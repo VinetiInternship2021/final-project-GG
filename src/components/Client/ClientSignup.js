@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { signParams } from '../../utils/configs';
 import RegistrationForm from '../RegistrationForm';
 import { mapStateToProps } from '../../redux/actions';
-import onClickBtn from '../../utils/SignupOnClick';
+import SignUpHelper from '../../helpers/SignUpHelper';
 
 const ClientSignup = (props) => {
   const history = useHistory();
@@ -27,6 +27,12 @@ const ClientSignup = (props) => {
     };
     parameter[event.target.id] = event.target.value;
     setFields(parameter);
+  };
+
+  const onClick = (event, Fields, SetFields, State, Dispatch, History, Params) => {
+    event.preventDefault();
+    SignUpHelper(Fields, SetFields, State, Dispatch, History, Params)
+      .then();
   };
 
   return (
@@ -51,11 +57,11 @@ const ClientSignup = (props) => {
           )
           : false}
         <div className="me-3 mx-3">
-          <RegistrationForm onChange={onChange} data={[fields, setFields]} />
+          <RegistrationForm onChange={onChange} data={[fields, setFields]} header="Client registration" />
         </div>
         <button
           onClick={(e) => {
-            onClickBtn(e, fields, setFields, state, dispatch, history, params);
+            onClick(e, fields, setFields, state, dispatch, history, params);
           }}
           type="submit"
           className="btn btn-outline-success mx-3 mb-3"
@@ -68,8 +74,8 @@ const ClientSignup = (props) => {
 };
 
 ClientSignup.propTypes = {
-  appState: PropTypes.element.isRequired,
-  dispatch: PropTypes.element.isRequired,
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(ClientSignup);

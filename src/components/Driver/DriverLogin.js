@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '../../redux/actions';
 import { loginParams } from '../../utils/configs';
-import LoginOnClick from '../../utils/LoginOnClick';
+import LoginHelper from '../../helpers/LoginHelper';
 import LoginForm from '../LoginForm';
 
 const DriverLogin = (props) => {
@@ -15,6 +15,12 @@ const DriverLogin = (props) => {
     ...loginParams,
     model_name: 'Driver',
   });
+
+  const onClick = (event, Fields, SetFields, State, Dispatch, History) => {
+    event.preventDefault();
+    LoginHelper(Fields, SetFields, State, Dispatch, History)
+      .then();
+  };
 
   useEffect(() => {
     if (state.loggedIn) {
@@ -28,15 +34,15 @@ const DriverLogin = (props) => {
         fields={fields}
         header="Driver Login"
         setFields={setFields}
-        onClick={(event) => LoginOnClick(event, fields, setFields, state, dispatch, history)}
+        onClick={(event) => onClick(event, fields, setFields, state, dispatch, history)}
       />
     </div>
   );
 };
 
 DriverLogin.propTypes = {
-  appState: PropTypes.element.isRequired,
-  dispatch: PropTypes.element.isRequired,
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(DriverLogin);

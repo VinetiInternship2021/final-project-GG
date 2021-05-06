@@ -77,6 +77,13 @@ export const DriverPageButtons = [
   ['Profile', 'fas fa-user-alt'],
 ];
 
+// const buttons = {
+//   newOrder: {
+//     label: '',
+//     className: '',
+//   }
+// }
+
 export const ClientPageButtons = [
   'New order',
   'My history',

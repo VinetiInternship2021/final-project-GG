@@ -1,8 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const RegistrationForm = (props) => {
-  // eslint-disable-next-line react/prop-types
-  const { data } = props;
+const RegistrationForm = ({ data, header, children }) => {
   const [fields, setFields] = data;
 
   const onChange = (event) => {
@@ -16,7 +15,7 @@ const RegistrationForm = (props) => {
   return (
     <div>
       <br />
-      <h5>Driver registration</h5>
+      <h5>{header}</h5>
       <label htmlFor="phone_number" className="form-label">
         Phone
         <br />
@@ -78,9 +77,15 @@ const RegistrationForm = (props) => {
         />
       </label>
       {/* eslint-disable-next-line react/destructuring-assignment,react/prop-types */}
-      { props.children }
+      { children }
     </div>
   );
+};
+
+RegistrationForm.propTypes = {
+  data: PropTypes.objectOf(PropTypes.any).isRequired,
+  header: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export default RegistrationForm;

@@ -12,8 +12,7 @@ import {
 } from '../redux/actions';
 import { HeaderButton } from './Buttons';
 
-const Header = (props) => {
-  const { appState, dispatch } = props;
+const Header = ({ appState, dispatch }) => {
   const state = appState;
   const location = useLocation();
   const history = useHistory();
@@ -49,7 +48,7 @@ const Header = (props) => {
 
   const button = buttons.map((item) => (
     <HeaderButton
-      key={props.button}
+      key={item}
       button={item}
       onSelect={onSelect}
       className="header"
@@ -69,9 +68,8 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  appState: PropTypes.element.isRequired,
-  dispatch: PropTypes.element.isRequired,
-  button: PropTypes.element.isRequired,
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Header);

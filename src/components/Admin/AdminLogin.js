@@ -4,17 +4,22 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '../../redux/actions';
 import { loginParams } from '../../utils/configs';
-import LoginOnClick from '../../utils/LoginOnClick';
+import LoginHelper from '../../helpers/LoginHelper';
 import LoginForm from '../LoginForm';
 
-const AdminLogin = (props) => {
+const AdminLogin = ({ appState, dispatch }) => {
   const history = useHistory();
-  const { appState, dispatch } = props;
   const state = appState;
   const [fields, setFields] = useState({
     ...loginParams,
     model_name: 'SuperUser',
   });
+
+  const onClick = (event, Fields, SetFields, State, Dispatch, History) => {
+    event.preventDefault();
+    LoginHelper(Fields, SetFields, State, Dispatch, History)
+      .then();
+  };
 
   useEffect(() => {
     if (state.loggedIn) {
@@ -26,15 +31,16 @@ const AdminLogin = (props) => {
     <>
       <LoginForm
         fields={fields}
+        header="Admin login"
         setFields={setFields}
-        onClick={(event) => LoginOnClick(event, fields, setFields, state, dispatch, history)}
+        onClick={(event) => onClick(event, fields, setFields, state, dispatch, history)}
       />
     </>
   );
 };
 AdminLogin.propTypes = {
-  appState: PropTypes.element.isRequired,
-  dispatch: PropTypes.element.isRequired,
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(AdminLogin);
