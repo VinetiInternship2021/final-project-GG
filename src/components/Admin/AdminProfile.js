@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ProfileInfoTable from '../../utils/ProfileInfoTable';
 import Loading from '../../shared/Animations/Loading';
 import getUserData from '../../helpers/ProfilePageHelper';
 
-const DriverProfile = ({ match }) => {
+const AdminProfile = ({ match }) => {
   const [state, setState] = useState({
     userId: match.params.id,
     isActive: false,
-    userType: 'Driver',
+    userType: 'SuperUser',
     isLoading: true,
     apiUrl: '',
     user: {},
   });
 
   useEffect(() => {
-    const modelName = 'drivers';
+    const modelName = 'super_users';
     getUserData({ state, setState, modelName })
       .then();
-  }, []);
+  });
 
   return (
     <div>
@@ -31,8 +31,9 @@ const DriverProfile = ({ match }) => {
     </div>
   );
 };
-DriverProfile.propTypes = {
+
+AdminProfile.propTypes = {
   match: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default DriverProfile;
+export default AdminProfile;
