@@ -77,6 +77,13 @@ export const DriverPageButtons = [
   ['Profile', 'fas fa-user-alt'],
 ];
 
+export const AdminPageButtons = [
+  ['New order', 'fas fa-taxi'],
+  ['My history', 'fas fa-history'],
+  ['Settings', 'fas fa-cog'],
+  ['Profile', 'fas fa-user-alt'],
+];
+
 // const buttons = {
 //   newOrder: {
 //     label: '',

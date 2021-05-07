@@ -3,18 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="af14c4b5-ea0e-4dc1-8dec-c895dc6efb00" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AppRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Client/ClientSignup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Client/ClientSignup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Driver/DriverSignup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Driver/DriverSignup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layouts/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layouts/ErrorMessages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layouts/ErrorMessages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/LoginHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/LoginHelper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/custom.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/custom.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/configs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/configs.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +63,7 @@
       <workItem from="1620238262169" duration="1122000" />
       <workItem from="1620275817314" duration="12554000" />
       <workItem from="1620291932177" duration="8733000" />
-      <workItem from="1620363114649" duration="2749000" />
+      <workItem from="1620363114649" duration="5316000" />
     </task>
     <servers />
   </component>
