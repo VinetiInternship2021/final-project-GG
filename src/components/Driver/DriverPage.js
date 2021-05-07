@@ -9,7 +9,7 @@ const DriverPage = () => {
 
   const onSelect = (event) => {
     let path = '';
-    switch (event.target.innerText) {
+    switch (event.currentTarget.getAttribute('data-name')) {
       case 'New order':
         path = '/client/order';
         break;
@@ -31,6 +31,7 @@ const DriverPage = () => {
 
   const buttons = DriverPageButtons.map((button) => (
     <PageButton
+      key={button[0]}
       button={button[0]}
       onSelect={onSelect}
       buttonClassName="column"

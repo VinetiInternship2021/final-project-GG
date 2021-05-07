@@ -6,6 +6,7 @@ export const PageButton = ({
 }) => (
   <button
     key={button}
+    data-name={button}
     onClick={(event) => onSelect(event)}
     className={`btn btn-outline-success me-1 user-page ${buttonClassName}`}
     type="submit"
@@ -31,6 +32,7 @@ export const HeaderButton = ({
 }) => (
   <button
     key={button}
+    data-name={button}
     onClick={(event) => onSelect(event, button)}
     className={`btn btn-outline-success me-1 ${className}`}
     type="submit"

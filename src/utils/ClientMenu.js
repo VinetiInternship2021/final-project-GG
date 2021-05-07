@@ -9,7 +9,7 @@ export const ClientMenu = () => {
 
   const handleMenu = (event) => {
     let path = '';
-    switch (event.target.innerText) {
+    switch (event.currentTarget.getAttribute('data-name')) {
       case 'New order':
         path = `${location.pathname}/${appRoutes.client}`;
         break;
