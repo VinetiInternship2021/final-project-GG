@@ -9,7 +9,8 @@ export const appRoutes = {
   loginAdmin: '/login/admin',
   client: '/passenger/:id',
   driver: '/driver/:id',
-  admin: '/admin',
+  adminPage: '/SuperUser/:id',
+  adminProfile: '/SuperUser/:id/profile',
   taxi: '/taxi',
   clientHistory: '/passenger/history',
   clientSettings: '/passenger/settings',
@@ -78,8 +79,9 @@ export const DriverPageButtons = [
 ];
 
 export const AdminPageButtons = [
-  ['New order', 'fas fa-taxi'],
-  ['My history', 'fas fa-history'],
+  ['Clients', 'fas fa-users'],
+  ['Drivers', 'fas fa-taxi'],
+  ['Drivers history', 'fas fa-history'],
   ['Settings', 'fas fa-cog'],
   ['Profile', 'fas fa-user-alt'],
 ];

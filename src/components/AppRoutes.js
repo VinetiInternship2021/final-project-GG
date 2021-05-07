@@ -12,6 +12,8 @@ import DriverPage from './Driver/DriverPage';
 import DriverProfile from './Driver/DriverProfile';
 import ClientLogin from './Client/ClientLogin';
 import AdminLogin from './Admin/AdminLogin';
+import AdminPage from './Admin/AdminPage';
+import AdminProfile from './Admin/AdminProfile';
 import ClientHistory from './Client/ClientHistory';
 import ClientSettings from './Client/ClientSettings';
 import ClientOrder from './Client/ClientOrder';
@@ -80,6 +82,8 @@ const AppRoutes = ({ appState, dispatch }) => {
                 <Route path={appRoutes.loginDriver} exact component={DriverLogin} />
                 <Route path={appRoutes.loginClient} exact component={ClientLogin} />
                 <Route path={appRoutes.loginAdmin} exact component={AdminLogin} />
+                <Route path={appRoutes.adminPage} exact component={AdminPage} />
+                <Route path={appRoutes.adminProfile} exact component={AdminProfile} />
                 <Route path={appRoutes.client} exact component={ClientOrder} />
                 <Route path={appRoutes.clientHistory} exact component={ClientHistory} />
                 <Route path={appRoutes.clientSettings} exact component={ClientSettings} />
