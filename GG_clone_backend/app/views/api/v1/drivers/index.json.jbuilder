@@ -1,4 +1,4 @@
-if current_user?(@user, 'SuperUser')
+if current_user && current_user[1] == 'SuperUser'
   json.array! @users do |user|
     json.driver do
       json.id user.id
