@@ -21,7 +21,7 @@ const LoginHelper = async (fields, setFields, state, dispatch, history) => {
     })
     .catch((response) => {
       dispatch(ChangeActionLoading(false));
-      setFields({ ...fields, alert: response.message });
+      setFields({ ...fields, alert: [response.message] });
     });
 };
 

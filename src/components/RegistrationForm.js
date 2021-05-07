@@ -76,7 +76,6 @@ const RegistrationForm = ({ data, header, children }) => {
           className="form-control"
         />
       </label>
-      {/* eslint-disable-next-line react/destructuring-assignment,react/prop-types */}
       { children }
     </div>
   );

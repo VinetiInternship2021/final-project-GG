@@ -54,7 +54,7 @@ export const loginParams = {
   password: '',
   model_name: '',
   remember_me: false,
-  alert: '',
+  alert: [],
 };
 export const signParams = {
   phone_number: '',

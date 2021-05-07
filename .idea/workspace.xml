@@ -2,29 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="af14c4b5-ea0e-4dc1-8dec-c895dc6efb00" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/node_modules/.cache/babel-loader/9d2cc3eb86298b7003d681c9c1aa53ed.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/.cache/babel-loader/bbbb785b63fdd2a3556ae2ed32431410.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/.cache/babel-loader/c82e1c4fce5a7d0d159975e4dc732661.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/node_modules/.cache/babel-loader/dbfd1214d90cc35663bdde19e8aed616.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/helpers/LoginHelper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/helpers/SignUpHelper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/controllers/api/v1/drivers_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/controllers/api/v1/drivers_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/super_users/create.json.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/super_users/create.json.jbuilder" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/tmp/cache/bootsnap/load-path-cache" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/tmp/cache/bootsnap/load-path-cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/node_modules/.cache/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.cache/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Admin/AdminLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/AdminLogin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/AppRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Buttons.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Buttons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Client/ClientLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Client/ClientLogin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Client/ClientSignup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Client/ClientSignup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Driver/DriverLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Driver/DriverLogin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Driver/DriverSignup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Driver/DriverSignup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layouts/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/LoginOnClick.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/SignupOnClick.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layouts/ErrorMessages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layouts/ErrorMessages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/LoginHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/LoginHelper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/custom.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/custom.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/configs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/configs.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,6 +55,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\VinetiWorkSpace\final-project-GG\src\components\layouts" />
       <recent name="D:\VinetiWorkSpace\final-project-GG\src\helpers" />
       <recent name="D:\VinetiWorkSpace\final-project-GG\src\shared\Animations" />
     </key>
@@ -83,7 +74,8 @@
       <workItem from="1620192386938" duration="33848000" />
       <workItem from="1620238262169" duration="1122000" />
       <workItem from="1620275817314" duration="12554000" />
-      <workItem from="1620291932177" duration="7657000" />
+      <workItem from="1620291932177" duration="8733000" />
+      <workItem from="1620363114649" duration="2749000" />
     </task>
     <servers />
   </component>

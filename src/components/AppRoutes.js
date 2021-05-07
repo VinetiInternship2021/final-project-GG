@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { appRoutes } from '../utils/configs';
-import Header from './Header';
+import Header from './layouts/Header';
 import Signup from './Signup';
 import Login from './Login';
 import ClientSignup from './Client/ClientSignup';
@@ -25,9 +25,7 @@ import {
 } from '../redux/actions';
 import '../styles/custom.scss';
 
-const AppRoutes = (props) => {
-  const { dispatch } = props;
-
+const AppRoutes = ({ appState, dispatch }) => {
   const loginStatusChanger = (data) => {
     dispatch(ChangeActionLoggedIn(data));
   };
@@ -66,8 +64,7 @@ const AppRoutes = (props) => {
   return (
 
     <div>
-      {/* eslint-disable-next-line react/destructuring-assignment */}
-      {props.appState.isLoading ? <Loading />
+      {appState.isLoading ? <Loading />
         : (
           <div>
             <div className="container-fluid">

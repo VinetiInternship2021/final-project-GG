@@ -6,6 +6,7 @@ import { signParams } from '../../utils/configs';
 import RegistrationForm from '../RegistrationForm';
 import { mapStateToProps } from '../../redux/actions';
 import SignUpHelper from '../../helpers/SignUpHelper';
+import ErrorMessages from '../layouts/ErrorMessages';
 
 const ClientSignup = (props) => {
   const history = useHistory();
@@ -40,20 +41,7 @@ const ClientSignup = (props) => {
       <form className="text-center w-25 border position-absolute top-50 start-50 translate-middle">
         {fields.alert
           ? (
-            <div id="error_explanation">
-              <div className="alert alert-danger">
-                In form found
-                {' '}
-                {fields.alert.length}
-                {' '}
-                errors
-              </div>
-              {fields.alert.map((error) => (
-                <ul key={error}>
-                  {error}
-                </ul>
-              ))}
-            </div>
+            <ErrorMessages fields={fields} />
           )
           : false}
         <div className="me-3 mx-3">

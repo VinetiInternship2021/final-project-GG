@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Switch from '../utils/headerButtonSwitch';
-import { headerButtons } from '../utils/configs';
-import { logout } from '../utils/API';
+import Switch from '../../utils/headerButtonSwitch';
+import { headerButtons } from '../../utils/configs';
+import { logout } from '../../utils/API';
 import {
   ChangeActionLoggedIn,
   ChangeActionLoading,
   mapStateToProps,
-} from '../redux/actions';
-import { HeaderButton } from './Buttons';
+} from '../../redux/actions';
+import { HeaderButton } from '../Buttons';
 
 const Header = ({ appState, dispatch }) => {
   const state = appState;

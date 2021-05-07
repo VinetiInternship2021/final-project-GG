@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ErrorMessages from './layouts/ErrorMessages';
 
 const LoginForm = ({
   fields, setFields, onClick, header,
@@ -13,7 +14,7 @@ const LoginForm = ({
         <br />
         <input
           onClick={() => {
-            setFields({ ...fields, alert: '' });
+            setFields({ ...fields, alert: [] });
           }}
           onChange={(e) => {
             setFields({ ...fields, phone_number: e.target.value });
@@ -29,7 +30,7 @@ const LoginForm = ({
         <br />
         <input
           onClick={() => {
-            setFields({ ...fields, alert: '' });
+            setFields({ ...fields, alert: [] });
           }}
           onChange={(e) => {
             setFields({ ...fields, password: e.target.value });
@@ -53,7 +54,7 @@ const LoginForm = ({
         />
         Remember
       </label>
-      <p>{fields.alert}</p>
+      <ErrorMessages fields={fields} />
     </div>
     <button
       onClick={(e) => onClick(e)}

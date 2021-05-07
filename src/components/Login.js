@@ -35,7 +35,7 @@ const Login = () => {
   return (
     <div
       className="text-center border position-absolute top-50 start-50 translate-middle"
-      style={{ width: '200px', height: '180px' }}
+      style={{ width: '200px', height: '200px' }}
     >
       <h5 className="mt-2">Login</h5>
       <p>Select user type</p>
