@@ -20,7 +20,7 @@ export const ClientMenu = () => {
         path = `${location.pathname}/${appRoutes.clientSettings}`;
         break;
       default:
-        path = '';
+        path = '#';
     }
     history.push(path);
   };

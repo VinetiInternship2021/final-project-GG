@@ -39,21 +39,30 @@ const ClientField = ({ usersList, client }) => {
         fields = usersList.users.map(({ driver }) => {
           const {
             // eslint-disable-next-line camelcase
-            id, phone_number, first_name, last_name,
+            id, phone_number, first_name, last_name, is_active, is_verified_by_admin,
           } = driver;
           return (
-            <div key={id} className="list-group-item list-group-item-action ">
-              <div className="d-flex w-100 justify-content-between">
+            <div key={id} className="list-group-item list-group-item-action">
+              <div className="d-flex w-100 justify-content-between align-items-center">
                 <h5 className="mb-1">
                   {/* eslint-disable-next-line camelcase */}
                   { `${first_name} ${last_name}` }
                 </h5>
-                <small> </small>
+                <span className="badge bg-primary ">
+                  Verified?
+                  {/* eslint-disable-next-line camelcase */}
+                  {` ${is_verified_by_admin}` }
+                </span>
               </div>
               <p className="mb-1">
                 {/* eslint-disable-next-line camelcase */}
                 { `Phone number ${phone_number}`}
               </p>
+              <small>
+                Is active?
+                {/* eslint-disable-next-line camelcase */}
+                { ` ${is_active}` }
+              </small>
             </div>
           );
         });

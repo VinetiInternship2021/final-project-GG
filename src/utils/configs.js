@@ -14,8 +14,8 @@ export const appRoutes = {
   adminProfile: '/SuperUser/:id/profile',
   adminClients: '/SuperUser/:id/:client',
   taxi: '/taxi',
-  clientHistory: '/passenger/history',
-  clientSettings: '/passenger/settings',
+  clientHistory: '#',
+  clientSettings: '#',
   driverPage: '/driver/:id',
   driverProfile: '/driver/:id/profile',
 };

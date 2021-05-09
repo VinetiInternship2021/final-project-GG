@@ -2,120 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2358555-ad0a-494a-8116-9c2386d72a41" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.json" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CODEOWNERS" beforeDir="false" afterPath="$PROJECT_DIR$/CODEOWNERS" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/.gitattributes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/.ruby-version" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/.ruby-version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/Gemfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/Gemfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/Rakefile" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/Rakefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/channels/application_cable/channel.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/channels/application_cable/channel.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/channels/application_cable/connection.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/channels/application_cable/connection.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/controllers/api/v1/drivers_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/controllers/api/v1/drivers_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/controllers/api/v1/passengers_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/controllers/api/v1/passengers_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/controllers/api/v1/sessions_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/controllers/api/v1/sessions_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/controllers/api/v1/super_users_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/controllers/api/v1/super_users_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/controllers/application_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/controllers/application_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/helpers/sessions_helper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/helpers/sessions_helper.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/jobs/application_job.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/jobs/application_job.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/mailers/application_mailer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/mailers/application_mailer.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/models/application_record.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/models/application_record.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/models/driver.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/models/driver.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/models/passenger.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/models/passenger.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/models/super_user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/models/super_user.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/drivers/create.json.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/drivers/create.json.jbuilder" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/drivers/index.json.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/drivers/index.json.jbuilder" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/drivers/show.json.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/drivers/show.json.jbuilder" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/passengers/create.json.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/passengers/create.json.jbuilder" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/passengers/index.json.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/passengers/index.json.jbuilder" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/passengers/show.json.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/passengers/show.json.jbuilder" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/sessions/create.json.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/sessions/create.json.jbuilder" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/sessions/user_in.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/sessions/user_in.jbuilder" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/super_users/create.json.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/super_users/create.json.jbuilder" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/super_users/index.json.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/super_users/index.json.jbuilder" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/super_users/show.json.jbuilder" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/api/v1/super_users/show.json.jbuilder" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/layouts/mailer.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/layouts/mailer.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/views/layouts/mailer.text.erb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/views/layouts/mailer.text.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/bin/bundle" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/bin/bundle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/bin/bundle.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/bin/bundle.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/bin/rails" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/bin/rails" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/bin/rake" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/bin/rake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/bin/setup" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/bin/setup" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config.ru" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config.ru" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/application.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/application.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/boot.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/boot.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/cable.yml" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/cable.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/database.yml" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/database.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/environment.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/environment.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/environments/development.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/environments/development.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/environments/production.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/environments/production.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/environments/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/environments/test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/initializers/application_controller_renderer.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/initializers/application_controller_renderer.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/initializers/backtrace_silencers.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/initializers/backtrace_silencers.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/initializers/cors.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/initializers/cors.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/initializers/filter_parameter_logging.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/initializers/filter_parameter_logging.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/initializers/inflections.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/initializers/inflections.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/initializers/mime_types.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/initializers/mime_types.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/initializers/wrap_parameters.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/initializers/wrap_parameters.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/locales/en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/locales/en.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/puma.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/puma.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/routes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/routes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/config/storage.yml" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/config/storage.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210423050125_create_super_users.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210423050125_create_super_users.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210423061023_add_index_to_superusers_phone.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210423061023_add_index_to_superusers_phone.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210423080756_add_remember_digest.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210423080756_add_remember_digest.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210425090335_create_drivers.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210425090335_create_drivers.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210425090849_create_passengers.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210425090849_create_passengers.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210425090944_add_password_and_remember_digests_driver.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210425090944_add_password_and_remember_digests_driver.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210425091149_add_remember_digest_passenger.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210425091149_add_remember_digest_passenger.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210425091320_add_index_to_drivers_and_passengers.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210425091320_add_index_to_drivers_and_passengers.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210426050830_add_default_value_driver.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/db/migrate/20210426050830_add_default_value_driver.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/db/schema.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/db/seeds.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/db/seeds.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/public/robots.txt" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/public/robots.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/test/channels/application_cable/connection_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/test/channels/application_cable/connection_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/test/controllers/drivers_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/test/controllers/drivers_controller_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/test/controllers/passengers_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/test/controllers/passengers_controller_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/test/controllers/sessions_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/test/controllers/sessions_controller_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/test/controllers/super_users_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/test/controllers/super_users_controller_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/test/controllers/users_controller_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/test/controllers/users_controller_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/test/fixtures/drivers.yml" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/test/fixtures/drivers.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/test/fixtures/passengers.yml" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/test/fixtures/passengers.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/test/fixtures/super_users.yml" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/test/fixtures/super_users.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/test/models/driver_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/test/models/driver_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/test/models/passenger_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/test/models/passenger_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/test/models/super_user_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/test/models/super_user_test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/test/test_helper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/test/test_helper.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/tmp/cache/bootsnap/compile-cache/c7/08ecb142d06154" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/tmp/cache/bootsnap/compile-cache/c7/08ecb142d06154" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/tmp/cache/bootsnap/compile-cache/eb/5111d850693ee6" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/tmp/cache/bootsnap/compile-cache/eb/5111d850693ee6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/tmp/cache/bootsnap/compile-cache/fd/c0f5b5332a2402" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/tmp/cache/bootsnap/compile-cache/fd/c0f5b5332a2402" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GG_clone_backend/tmp/cache/bootsnap/load-path-cache" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/tmp/cache/bootsnap/load-path-cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/robots.txt" beforeDir="false" afterPath="$PROJECT_DIR$/public/robots.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Admin/AdminPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/AdminPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Admin/AdminProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/AdminProfile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Admin/ClientField.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/ClientField.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Admin/ClientList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/ClientList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AppRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/GetUsersListHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/GetUsersListHelper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helpers/MenuHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/MenuHelper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actionTypes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/store.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/Animations/particles.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/Animations/particles.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shared/Animations/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/Animations/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/custom.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/custom.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/loading.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/loading.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/API.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/API.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/ClientMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ClientMenu.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/configs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/configs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
@@ -149,7 +41,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -170,8 +62,24 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
+    <expand>
+      <path>
+        <item name="final-project-GG" type="b2602c69:ProjectViewProjectNode" />
+        <item name="final-project-GG" type="462c0819:PsiDirectoryNode" />
+      </path>
+    </expand>
     <select />
   </component>
 </project>
