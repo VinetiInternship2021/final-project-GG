@@ -1,4 +1,3 @@
-// import React from 'react';
 import axios from 'axios';
 import { baseUrl } from './configs';
 
@@ -53,5 +52,20 @@ export const signUp = (params) => new Promise((resolve, reject) => {
     })
     .catch((resp) => {
       reject(resp.response.data);
+    });
+});
+
+export const getUser = (client) => new Promise((resolve, reject) => {
+  axios.defaults.headers.get.Accept = '*/*';
+  axios.get(`${baseUrl}/${client}`,
+    {
+      'Accept-Encoding': 'gzip, deflate, br',
+      withCredentials: true,
+    })
+    .then((resp) => {
+      resolve(resp);
+    })
+    .catch((resp) => {
+      reject(resp);
     });
 });

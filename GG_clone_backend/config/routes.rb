@@ -13,9 +13,6 @@ Rails.application.routes.draw do
       post 'login' => 'sessions#create'
       delete 'logout' => 'sessions#destroy'
       get 'user_in' => 'sessions#user_in'
-      post 'super_users/signup' => 'super_users#create'
-      post 'drivers/signup' => 'super_users#create'
-      post 'passengers/signup' => 'passengers#create'
     end
   end
 end

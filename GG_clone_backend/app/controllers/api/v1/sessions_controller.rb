@@ -1,4 +1,5 @@
 class Api::V1::SessionsController < ApplicationController
+
   include ActionController::Cookies
   include ActionController::RequestForgeryProtection
 

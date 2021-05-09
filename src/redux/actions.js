@@ -2,6 +2,9 @@ import {
   ACTION_CHANGE_LOADING,
   ACTION_CHANGE_LOGGED_IN,
   ACTION_CHANGE_ALERT,
+  ACTION_ADD_USERS_LIST,
+  ACTION_CLEAR_USERS_LIST,
+  ACTION_ADD_UNVERIFIED_USERS_LIST,
 } from './actionTypes';
 
 export const ChangeActionLoading = (isLoading) => ({
@@ -19,9 +22,25 @@ export const ChangeActionAlert = (alert) => ({
   payload: alert,
 });
 
+export const ActionAddUsersList = (usersList) => ({
+  type: ACTION_ADD_USERS_LIST,
+  payload: usersList,
+});
+
+export const ActionClearUsersList = () => ({
+  type: ACTION_CLEAR_USERS_LIST,
+});
+
+export const ActionAddUnverifiedUsersList = (usersList) => ({
+  type: ACTION_ADD_UNVERIFIED_USERS_LIST,
+  payload: usersList,
+});
+
 export const mapStateToProps = (state) => {
-  const appState = state;
+  const { rootReducer, usersList } = state;
+  const appState = rootReducer;
   return {
     appState,
+    usersList,
   };
 };
