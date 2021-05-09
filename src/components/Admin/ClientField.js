@@ -7,50 +7,60 @@ const ClientField = ({ usersList, client }) => {
   let fields;
   switch (client) {
     case 'passengers':
-      fields = usersList.users.map(({ passenger }) => {
-        const {
-          // eslint-disable-next-line camelcase
-          id, phone_number, first_name, last_name,
-        } = passenger;
-        return (
-          <div key={id} className="list-group-item list-group-item-action ">
-            <div className="d-flex w-100 justify-content-between">
-              <h5 className="mb-1">
+      try {
+        fields = usersList.users.map(({ passenger }) => {
+          const {
+            // eslint-disable-next-line camelcase
+            id, phone_number, first_name, last_name,
+          } = passenger;
+          return (
+            <div key={id} className="list-group-item list-group-item-action ">
+              <div className="d-flex w-100 justify-content-between">
+                <h5 className="mb-1">
+                  {/* eslint-disable-next-line camelcase */}
+                  { `${first_name} ${last_name}` }
+                </h5>
+                <small> </small>
+              </div>
+              <p className="mb-1">
                 {/* eslint-disable-next-line camelcase */}
-                { `${first_name} ${last_name}` }
-              </h5>
-              <small> </small>
+                { `Phone number ${phone_number}`}
+              </p>
             </div>
-            <p className="mb-1">
-              {/* eslint-disable-next-line camelcase */}
-              { `Phone number ${phone_number}`}
-            </p>
-          </div>
-        );
-      });
+          );
+        });
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
       break;
     case 'drivers':
-      fields = usersList.users.map(({ driver }) => {
-        const {
-          // eslint-disable-next-line camelcase
-          id, phone_number, first_name, last_name,
-        } = driver;
-        return (
-          <div key={id} className="list-group-item list-group-item-action ">
-            <div className="d-flex w-100 justify-content-between">
-              <h5 className="mb-1">
+      try {
+        fields = usersList.users.map(({ driver }) => {
+          const {
+            // eslint-disable-next-line camelcase
+            id, phone_number, first_name, last_name,
+          } = driver;
+          return (
+            <div key={id} className="list-group-item list-group-item-action ">
+              <div className="d-flex w-100 justify-content-between">
+                <h5 className="mb-1">
+                  {/* eslint-disable-next-line camelcase */}
+                  { `${first_name} ${last_name}` }
+                </h5>
+                <small> </small>
+              </div>
+              <p className="mb-1">
                 {/* eslint-disable-next-line camelcase */}
-                { `${first_name} ${last_name}` }
-              </h5>
-              <small> </small>
+                { `Phone number ${phone_number}`}
+              </p>
             </div>
-            <p className="mb-1">
-              {/* eslint-disable-next-line camelcase */}
-              { `Phone number ${phone_number}`}
-            </p>
-          </div>
-        );
-      });
+          );
+        });
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err);
+      }
       break;
     default:
       fields = [false].map(() => (

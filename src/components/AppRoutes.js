@@ -88,7 +88,6 @@ const AppRoutes = ({ appState, dispatch }) => {
                 <Route path={appRoutes.adminProfile} component={AdminProfile} />
                 <Route
                   path={appRoutes.clientsList}
-                  exact
                   component={ClientList}
                 />
 

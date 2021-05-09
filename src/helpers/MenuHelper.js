@@ -18,7 +18,7 @@ const MenuHelper = ({ event, userId }) => {
       path = `${path.replace(':client', 'drivers')}`;
       break;
     default:
-      path = '';
+      path = '#';
   }
   return path;
 };

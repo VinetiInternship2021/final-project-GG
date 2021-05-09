@@ -23,7 +23,7 @@ const ClientList = ({ appState, dispatch, match }) => {
   useEffect(() => {
     GetUsers({ client, dispatch })
       .then();
-  }, []);
+  }, [client]);
 
   const buttons = AdminPageButtons.map((button) => (
     <PageButton
