@@ -8,12 +8,12 @@ import { appRoutes, DriverPageButtons } from '../../utils/configs';
 import MenuHelper from '../../helpers/MenuHelper';
 import { PageButton } from '../Buttons';
 
-const ClientSettings = ({ appState }) => {
+const DriverSettings = ({ match }) => {
   const history = useHistory();
-  const { userId } = appState;
 
   const onSelect = (event) => {
-    const user = appRoutes.client;
+    const user = appRoutes.driver;
+    const userId = match.params.id;
     const path = MenuHelper({ event, userId, user });
     history.push(path);
   };
@@ -44,9 +44,9 @@ const ClientSettings = ({ appState }) => {
   );
 };
 
-ClientSettings.propTypes = {
-  // match: PropTypes.objectOf(PropTypes.any).isRequired,
-  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+DriverSettings.propTypes = {
+  match: PropTypes.objectOf(PropTypes.any).isRequired,
+  // appState: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default connect(mapStateToProps)(ClientSettings);
+export default connect(mapStateToProps)(DriverSettings);
