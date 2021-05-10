@@ -8,10 +8,10 @@ const Login = () => {
     let path = '';
     switch (button) {
       case 'Client':
-        path = appRoutes.loginClient;
+        path = appRoutes.client.login;
         break;
       case 'Driver':
-        path = appRoutes.loginDriver;
+        path = appRoutes.driver.login;
         break;
       default:
         path = '';

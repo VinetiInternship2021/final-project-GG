@@ -2,14 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2358555-ad0a-494a-8116-9c2386d72a41" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Admin/ClientField.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/ClientField.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GG_clone_backend/app/controllers/api/v1/super_users_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/app/controllers/api/v1/super_users_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GG_clone_backend/tmp/cache/bootsnap/load-path-cache" beforeDir="false" afterPath="$PROJECT_DIR$/GG_clone_backend/tmp/cache/bootsnap/load-path-cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/AdminPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/AdminPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/AdminProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/AdminProfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Admin/ClientList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Admin/ClientList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AppRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AppRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Client/ClientOrder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Client/ClientOrder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Client/ClientSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Client/ClientSettings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Driver/DriverPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Driver/DriverPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Driver/DriverProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Driver/DriverProfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/MenuHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/MenuHelper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/ProfilePageHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/ProfilePageHelper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/API.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/API.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/ClientMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/ClientMenu.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/configs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/configs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

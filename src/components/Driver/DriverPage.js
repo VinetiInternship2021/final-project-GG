@@ -1,31 +1,19 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
-import { DriverPageButtons } from '../../utils/configs';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+import { appRoutes, DriverPageButtons } from '../../utils/configs';
 import { PageButton } from '../Buttons';
+import MenuHelper from '../../helpers/MenuHelper';
+import { mapStateToProps } from '../../redux/actions';
 
-const DriverPage = () => {
+const DriverPage = ({ appState }) => {
   const history = useHistory();
-  const location = useLocation();
+  const { userId } = appState;
 
   const onSelect = (event) => {
-    let path = '';
-    switch (event.currentTarget.getAttribute('data-name')) {
-      case 'New order':
-        path = '/client/order';
-        break;
-      case 'My history':
-        path = `${location.pathname}/history`;
-        break;
-      case 'Settings':
-        path = `${location.pathname}/settings`;
-        break;
-      case 'Profile':
-        path = `${location.pathname}/profile`;
-        break;
-      default:
-        path = '';
-    }
-
+    const user = appRoutes.driver;
+    const path = MenuHelper({ event, userId, user });
     history.push(path);
   };
 
@@ -54,4 +42,9 @@ const DriverPage = () => {
   );
 };
 
-export default DriverPage;
+DriverPage.propTypes = {
+  // match: PropTypes.objectOf(PropTypes.any).isRequired,
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+export default connect(mapStateToProps)(DriverPage);

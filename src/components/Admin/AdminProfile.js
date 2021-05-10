@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import ProfileInfoTable from '../../utils/ProfileInfoTable';
 import Loading from '../../shared/Animations/Loading';
 import getUserData from '../../helpers/ProfilePageHelper';
-import { AdminPageButtons } from '../../utils/configs';
+import { AdminPageButtons, appRoutes } from '../../utils/configs';
 import { PageButton } from '../Buttons';
 import MenuHelper from '../../helpers/MenuHelper';
 import { mapStateToProps } from '../../redux/actions';
@@ -15,10 +15,7 @@ const AdminProfile = ({ match, appState }) => {
   const { userId } = appState;
   const [state, setState] = useState({
     userId: match.params.id,
-    isActive: false,
-    userType: 'SuperUser',
     isLoading: true,
-    apiUrl: '',
     user: {},
   });
 
@@ -29,7 +26,8 @@ const AdminProfile = ({ match, appState }) => {
   }, []);
 
   const onSelect = (event) => {
-    const path = MenuHelper({ event, userId });
+    const user = appRoutes.admin;
+    const path = MenuHelper({ event, userId, user });
     history.push(path);
   };
 

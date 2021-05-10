@@ -14,7 +14,7 @@ const setUserData = ({
           user: {
             phone_number: data.user.phone_number,
             first_name: data.user.first_name,
-            last_name: data.user.first_name,
+            last_name: data.user.last_name,
             email: data.user.email,
             car_manufacturer: data.user.car_manufacturer,
             car_model: data.user.car_model,
@@ -34,7 +34,7 @@ const setUserData = ({
         user: {
           phone_number: data.user.phone_number,
           first_name: data.user.first_name,
-          last_name: data.user.first_name,
+          last_name: data.user.last_name,
           email: data.user.email,
         },
       });

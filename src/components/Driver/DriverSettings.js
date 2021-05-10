@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { mapStateToProps } from '../../redux/actions';
 import SettingsHelper from '../../helpers/SettingsHelper';
-import { appRoutes, clientPageItems } from '../../utils/configs';
+import { appRoutes, DriverPageButtons } from '../../utils/configs';
 import MenuHelper from '../../helpers/MenuHelper';
 import { PageButton } from '../Buttons';
 
@@ -18,7 +18,7 @@ const ClientSettings = ({ appState }) => {
     history.push(path);
   };
 
-  const buttons = clientPageItems.map((item) => (
+  const buttons = DriverPageButtons.map((item) => (
     <PageButton
       key={item[0]}
       button={item[0]}
@@ -35,11 +35,9 @@ const ClientSettings = ({ appState }) => {
           {buttons}
         </ul>
       </div>
-      {/* eslint-disable-next-line max-len */}
-      {/* Block with className="ui-component container-md" intended for inserting users functionality (f.e. Maps) */}
       <div className="ui-component container-md">
         <div className="card text-center position-absolute top-50 start-50 translate-middle">
-          <SettingsHelper modelName="passengers" reqKey="passenger" />
+          <SettingsHelper modelName="drivers" reqKey="driver" />
         </div>
       </div>
     </div>

@@ -8,10 +8,10 @@ const Signup = () => {
   const onSignup = (button) => {
     switch (button) {
       case 'Client':
-        path = appRoutes.signupClient;
+        path = appRoutes.client.signup;
         break;
       case 'Driver':
-        path = appRoutes.signupDriver;
+        path = appRoutes.driver.signup;
         break;
       default:
         path = '';

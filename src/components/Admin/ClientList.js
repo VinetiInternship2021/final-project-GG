@@ -6,7 +6,7 @@ import Loading from '../../shared/Animations/Loading';
 import GetUsers from '../../helpers/GetUsersListHelper';
 import { mapStateToProps } from '../../redux/actions';
 import ClientField from './ClientField';
-import { AdminPageButtons } from '../../utils/configs';
+import { AdminPageButtons, appRoutes } from '../../utils/configs';
 import { PageButton } from '../Buttons';
 import MenuHelper from '../../helpers/MenuHelper';
 
@@ -16,7 +16,8 @@ const ClientList = ({ appState, dispatch, match }) => {
   const { userId } = appState;
 
   const onSelect = (event) => {
-    const path = MenuHelper({ event, userId });
+    const user = appRoutes.admin;
+    const path = MenuHelper({ event, userId, user });
     history.push(path);
   };
 

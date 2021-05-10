@@ -1,12 +1,16 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { appRoutes, orderTypes } from '../../utils/configs';
-import { ClientMenu } from '../../utils/ClientMenu';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { appRoutes, clientPageItems, orderTypes } from '../../utils/configs';
 import { PageButton } from '../Buttons';
+import MenuHelper from '../../helpers/MenuHelper';
+import { mapStateToProps } from '../../redux/actions';
 
-const ClientPage = () => {
+const ClientPage = ({ appState }) => {
   const history = useHistory();
+  const { userId } = appState;
 
   const handleOrders = (order) => {
     axios.post('/client/order', {
@@ -17,8 +21,15 @@ const ClientPage = () => {
     history.push(appRoutes.taxi);
   };
 
+  const onSelect = (event) => {
+    const user = appRoutes.client;
+    const path = MenuHelper({ event, userId, user });
+    history.push(path);
+  };
+
   const orderButton = orderTypes.map((order) => (
     <PageButton
+      key={order[0]}
       button={order[0]}
       onSelect={handleOrders}
       buttonClassName="grid"
@@ -26,23 +37,23 @@ const ClientPage = () => {
     />
   ));
 
+  const buttons = clientPageItems.map((item) => (
+    <PageButton
+      key={item[0]}
+      button={item[0]}
+      onSelect={onSelect}
+      buttonClassName="column"
+      className={item[1]}
+    />
+  ));
+
   return (
-  // <div className="position-relative">
-    // eslint-disable-next-line max-len
-  //     <div className="card text-center position-absolute top-0 start-0 ms-4 mt-3" style={{ width: "150px", height: "125px" }}>
-  // {/*    <ul className="list-group list-group-flush">*/}
-  // {/*        {menuItems}*/}
-  // {/*    </ul>*/}
-  // {/*</div>*/}
-    // eslint-disable-next-line max-len
-  // <div className="card text-center border position-fixed top-50 start-50 translate-middle" style={{ width: "300px", height: "280px" }}>
     <div>
       <div className="menu">
         <ul>
-          <ClientMenu />
+          {buttons}
         </ul>
       </div>
-
       {/* eslint-disable-next-line max-len */}
       {/* Block with className="ui-component container-md" intended for inserting users functionality (f.e. Maps) */}
       <div className="ui-component container-md">
@@ -53,4 +64,9 @@ const ClientPage = () => {
   );
 };
 
-export default ClientPage;
+ClientPage.propTypes = {
+  // match: PropTypes.objectOf(PropTypes.any).isRequired,
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+export default connect(mapStateToProps)(ClientPage);

@@ -26,6 +26,7 @@ const RegistrationForm = ({ data, header, children }) => {
           id="phone_number"
           type="number"
           className="form-control"
+          defaultValue={fields.phone_number}
         />
       </label>
       <label htmlFor="first_name" className="form-label">
@@ -38,6 +39,7 @@ const RegistrationForm = ({ data, header, children }) => {
           id="first_name"
           type="text"
           className="form-control"
+          defaultValue={fields.first_name}
         />
       </label>
       <label htmlFor="last_name" className="form-label">
@@ -50,6 +52,7 @@ const RegistrationForm = ({ data, header, children }) => {
           id="last_name"
           type="text"
           className="form-control"
+          defaultValue={fields.last_name}
         />
       </label>
       <label htmlFor="password" className="form-label">
@@ -80,11 +83,14 @@ const RegistrationForm = ({ data, header, children }) => {
     </div>
   );
 };
+RegistrationForm.defaultProps = {
+  children: <div />,
+};
 
 RegistrationForm.propTypes = {
-  data: PropTypes.objectOf(PropTypes.any).isRequired,
+  data: PropTypes.arrayOf(PropTypes.any).isRequired,
   header: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.element,
 };
 
 export default RegistrationForm;

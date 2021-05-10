@@ -11,13 +11,13 @@ export const ClientMenu = () => {
     let path = '';
     switch (event.currentTarget.getAttribute('data-name')) {
       case 'New order':
-        path = `${location.pathname}/${appRoutes.client}`;
+        path = `${location.pathname}/${appRoutes.client.client}`;
         break;
       case 'My history':
-        path = `${location.pathname}/${appRoutes.clientHistory}`;
+        path = `${location.pathname}/${appRoutes.client.history}`;
         break;
       case 'Settings':
-        path = `${location.pathname}/${appRoutes.clientSettings}`;
+        path = `${location.pathname}/${appRoutes.client.settings}`;
         break;
       default:
         path = '#';
