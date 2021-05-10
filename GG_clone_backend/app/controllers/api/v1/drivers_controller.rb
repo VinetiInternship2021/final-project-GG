@@ -38,6 +38,18 @@ class Api::V1::DriversController < ApplicationController
     end
   end
 
+  def createCoordinates
+    driver = Driver.find(params[:id])
+    driver.latitude= params[:coordinates][:latitude]
+    driver.longitude= params[:coordinates][:longitude]
+    if driver.save
+      render json: { message: 'driver coordinates has been saved'}
+    else
+      #   render status: :unprocessable_entity
+      render json: { message: 'error! driver coordinates has not been saved'}
+    end
+  end  
+
   private def user_params
     params.require(:driver).permit(:first_name, :last_name, :phone_number,
                                    :email, :car_manufacturer, :car_model,

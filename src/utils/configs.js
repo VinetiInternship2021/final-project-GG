@@ -10,14 +10,16 @@ export const appRoutes = {
     loginClient: '/login/passenger',
     loginDriver: '/login/driver',
     loginAdmin: '/login/admin',
-    client: '/client/:id',
+    client: '/passenger/:id',
     driver: '/driver/:id',
     admin: '/admin',
     taxi: '/taxi',
     clientHistory: '/passenger/history',
     clientSettings: '/passenger/settings',
     driverPage: `/driver/:id`,
-    driverProfile: '/driver/:id/profile'
+    driverProfile: '/driver/:id/profile',
+    driverSettings: '/driver/:id/settings',
+    driverHistory: '/driver/:id/history',
 }
 
 const loginText = 'Login'
@@ -33,9 +35,11 @@ export const headerButtons = {
 
 export const clientPageItems = ['New order', 'My history', 'Settings']
 
+export const driverPageItems = ['New Order', 'My history', 'Settings', 'Profile']
+
 export const buttons = ['Client', 'Driver'];
 
-export const orderTypes = ['Econom', 'Business', 'Child seat', '7 seater', 'Cargo van']
+export const orderTypes = ['Econom', 'Business', 'First class', 'Cargo van']
 
 export const rating = [1, 2, 3, 4, 5]
 

@@ -2,7 +2,7 @@ import React from 'react'
 import {createStore} from "redux";
 import {
   ACTION_CHANGE_ALERT, ACTION_CHANGE_LOADING,
-  ACTION_CHANGE_LOGGED_IN
+  ACTION_CHANGE_LOGGED_IN, CREATE_CAR_TYPE
 } from './actionTypes'
 
 const initState = {
@@ -10,7 +10,8 @@ const initState = {
   'loggedIn': false,
   'userType': '',
   'userId': '',
-  'alert': ''
+  'alert': '',
+  'carType':''
 }
 
 const rootReducer = (state = initState, action) => {
@@ -33,6 +34,11 @@ const rootReducer = (state = initState, action) => {
       return {
         ...state,
         'alert': action.payload.alert
+      }
+      case CREATE_CAR_TYPE:
+      return {
+        ...state,
+        'carType': action.payload.type
       }
     default:
       return state

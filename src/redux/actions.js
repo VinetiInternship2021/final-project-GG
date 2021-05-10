@@ -2,7 +2,8 @@ import React from 'react'
 
 import { ACTION_CHANGE_LOADING ,
          ACTION_CHANGE_LOGGED_IN,
-         ACTION_CHANGE_ALERT} from './actionTypes'
+         ACTION_CHANGE_ALERT,
+        CREATE_CAR_TYPE} from './actionTypes'
 
 export const ChangeActionLoading = (isLoading) => {
   return {
@@ -23,6 +24,13 @@ export const ChangeActionAlert = (alert) => {
     type: ACTION_CHANGE_ALERT,
     payload: alert
   }
+}
+
+export const createCarType = (type) => {
+  return {
+      type: CREATE_CAR_TYPE,
+      payload: type
+    }
 }
 
 export const mapStateToProps = (state) => {

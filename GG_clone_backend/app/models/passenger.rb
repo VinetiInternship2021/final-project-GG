@@ -2,6 +2,9 @@ class Passenger < ApplicationRecord
   attr_accessor :remember_token
   has_secure_password
 
+  has_many :reservations
+  has_many :drivers, through: :reservations
+
   validates :first_name, presence: true, length: {maximum: 100}
   validates :last_name, presence: true, length: {maximum: 100}
   validates :password, length: {minimum: 8}, allow_blank: true
