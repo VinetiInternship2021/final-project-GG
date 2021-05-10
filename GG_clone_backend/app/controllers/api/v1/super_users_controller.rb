@@ -26,7 +26,7 @@ class Api::V1::SuperUsersController < ApplicationController
     @user = SuperUser.find(params[:id])
     if current_user?(@user, 'SuperUser')
       if @user.update(user_params)
-        render json: 'saved', status: :accepted, location: api_v1_super_users_path(@user)
+        render json: { 'updated': true, 'userType': 'SuperUser' }, status: :accepted, location: api_v1_super_users_path(@user)
       else
         render json: @user.errors, status: :unprocessable_entity
       end

@@ -25,7 +25,7 @@ class Api::V1::PassengersController < ApplicationController
     if current_user?(@user, 'Driver')
       @user = Passenger.find(params[:id])
       if @user.update(user_params)
-        render status: :updated, location: api_v1_super_users_path(@user)
+        render json: { 'updated': true, 'userType': 'SuperUser' }, status: :updated, location: api_v1_super_users_path(@user)
       else
         render json: @user.errors, status: :unprocessable_entity
       end

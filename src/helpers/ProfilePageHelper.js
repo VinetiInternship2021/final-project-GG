@@ -44,6 +44,7 @@ const setUserData = ({
       {
         ...state,
         exist: false,
+        isLoading: false,
       },
     );
   }

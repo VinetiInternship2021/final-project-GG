@@ -6,7 +6,7 @@ import Loading from '../shared/Animations/Loading';
 import getUserData from './ProfilePageHelper';
 import { mapStateToProps } from '../redux/actions';
 import { signParams } from '../utils/configs';
-import UpdateHelper from './SignUpHelper';
+import UpdateHelper from './UpdateHelper';
 import ErrorMessages from '../components/layouts/ErrorMessages';
 import RegistrationForm from '../components/RegistrationForm';
 
@@ -28,7 +28,9 @@ const SettingsHelper = ({
   params[reqKey] = { ...fields };
 
   useEffect(() => {
-    getUserData({ state, setState, modelName })
+    getUserData({
+      state, setState, modelName, dispatch,
+    })
       .then(() => {
         setFields(state.user);
       });
@@ -44,7 +46,6 @@ const SettingsHelper = ({
   };
 
   const onClick = (event, Fields, SetFields, State, Dispatch, History, Params) => {
-    event.preventDefault();
     const newParams = {};
     Object.keys(Params).forEach((prop) => {
       if (Params[prop]) { newParams[prop] = Params[prop]; }
@@ -64,7 +65,11 @@ const SettingsHelper = ({
         <div className="me-3 mx-3">
           {state.isLoading ? <Loading /> : false}
           Settings
-          <RegistrationForm onChange={onChange} data={[fields, setFields]} header="Client registration" />
+          <RegistrationForm
+            onChange={onChange}
+            data={[fields, setFields]}
+            header={`${fields.first_name} information updating`}
+          />
         </div>
         <button
           onClick={(e) => {
