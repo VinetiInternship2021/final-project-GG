@@ -16,6 +16,12 @@ Rails.application.routes.draw do
       post 'super_users/signup' => 'super_users#create'
       post 'drivers/signup' => 'super_users#create'
       post 'passengers/signup' => 'passengers#create'
+      post 'drivers/coordinates' => 'drivers#createCoordinates'
+      get 'coordinates/drivers' => 'coordinates#getCoordinateDrivers'
+      post 'coordinates/trip_nearestdriver' => 'coordinates#trip_nearestdriver'
+      post '/coordinates/trip' => 'coordinates#trip'
+      post '/coordinates/confirm' => 'coordinates#confirm'
+      post '/coordinates/driverAssigned' => 'coordinates#driverAssigned'
     end
   end
 end

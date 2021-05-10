@@ -2,22 +2,21 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { appRoutes, orderTypes } from '../../utils/configs';
 import { ClientMenu } from '../../utils/ClientMenu';
-import axios from 'axios';
+import { connect } from "react-redux";
+import { mapStateToProps } from '../../redux/actions';
+import { createCarType } from "../../redux/actions";
 
-const ClientPage = () => {
+const ClientPage = (props) => {
+    const state = props.appState
+    const dispatch = props.dispatch
     const history = useHistory();
     const menuItems = ClientMenu();
 
     const handleOrders = (order) => {
-        axios.post('/client/order', {
-            order: order
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        dispatch(createCarType({
+            ...state,
+            'type': order
+        }))
         history.push(appRoutes.taxi)
     }
 
@@ -46,4 +45,5 @@ const ClientPage = () => {
     )
 }
 
-export default ClientPage;
+export default connect(mapStateToProps)(ClientPage);
+
