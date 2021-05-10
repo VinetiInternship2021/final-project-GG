@@ -1,19 +1,31 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const ErrorMessages = (props) => {
-  const Errors = props.Errors
-  return (
-            <div>
-              {Errors ? <div id="error_explanation">
-                  <div className="alert alert-danger"> Found {Errors.length} errors </div>
-                    <ul>
-                      {Errors.map((error) => {
-                        <li>{error}</li>
-                      })}
-                    </ul>
-                </div>
-                : ''}
-            </div>
-  )
-}
-export default ErrorMessages
+const ErrorMessages = ({ fields }) => (
+  <div>
+    { fields.alert.length
+      ? (
+        <div id="error_explanation">
+          <div className="alert alert-danger">
+            In form founds
+            {' '}
+            {fields.alert.length}
+            {' '}
+            errors
+          </div>
+          {fields.alert.map((error) => (
+            <ul key={error}>
+              {error}
+            </ul>
+          ))}
+        </div>
+      )
+      : false}
+  </div>
+);
+
+ErrorMessages.propTypes = {
+  fields: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+export default ErrorMessages;

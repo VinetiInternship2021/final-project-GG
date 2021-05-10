@@ -1,33 +1,48 @@
-import React, {useEffect, useState} from 'react';
-import { mapStateToProps } from '../../redux/actions';
-import { loginParams } from "../../utils/configs";
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { connect } from "react-redux";
-import LoginOnClick from "../../utils/LoginOnClick";
-import LoginForm from "../LoginForm";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { mapStateToProps } from '../../redux/actions';
+import { loginParams } from '../../utils/configs';
+import LoginHelper from '../../helpers/LoginHelper';
+import LoginForm from '../LoginForm';
 
 const DriverLogin = (props) => {
-  const history = useHistory()
-  const dispatch = props.dispatch
-  const state = props.appState
+  const history = useHistory();
+  const { appState, dispatch } = props;
+  const state = appState;
   const [fields, setFields] = useState({
-      ...loginParams,
-      model_name: 'Driver'
-  })
-  
+    ...loginParams,
+    model_name: 'Driver',
+  });
+
+  const onClick = (event, Fields, SetFields, State, Dispatch, History) => {
+    event.preventDefault();
+    LoginHelper(Fields, SetFields, State, Dispatch, History)
+      .then();
+  };
+
   useEffect(() => {
     if (state.loggedIn) {
-      history.push(`/${state.userType}/${state.userId}`)
+      history.push(`/${state.userType}/${state.userId}`);
     }
-  }, [])
-  
-    return (
-        <>
-          <LoginForm fields={fields}
-                     setFields={setFields}
-                     onClick={(event) => LoginOnClick(event, fields, setFields, state, dispatch, history)} />
-        </>
-    )
-}
+  }, []);
 
-export default connect(mapStateToProps)(DriverLogin)
+  return (
+    <div>
+      <LoginForm
+        fields={fields}
+        header="Driver Login"
+        setFields={setFields}
+        onClick={(event) => onClick(event, fields, setFields, state, dispatch, history)}
+      />
+    </div>
+  );
+};
+
+DriverLogin.propTypes = {
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps)(DriverLogin);

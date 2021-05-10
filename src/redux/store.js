@@ -1,5 +1,4 @@
-import React from 'react'
-import {createStore} from "redux";
+import { createStore } from 'redux';
 import {
   ACTION_CHANGE_ALERT, ACTION_CHANGE_LOADING,
   ACTION_CHANGE_LOGGED_IN, CREATE_CAR_TYPE
@@ -19,17 +18,17 @@ const rootReducer = (state = initState, action) => {
     case ACTION_CHANGE_LOGGED_IN:
       return {
         ...state,
-        'isLoading': action.payload.isLoading,
-        'loggedIn': action.payload.loggedIn,
-        'userType': action.payload.userType,
-        'userId': action.payload.userId,
-        'alert': ''
-      }
+        isLoading: action.payload.isLoading,
+        loggedIn: action.payload.loggedIn,
+        userType: action.payload.userType,
+        userId: action.payload.userId,
+        alert: '',
+      };
     case ACTION_CHANGE_LOADING:
       return {
         ...state,
-        'isLoading': action.payload.isLoading
-      }
+        isLoading: action.payload.isLoading,
+      };
     case ACTION_CHANGE_ALERT:
       return {
         ...state,
@@ -41,10 +40,7 @@ const rootReducer = (state = initState, action) => {
         'carType': action.payload.type
       }
     default:
-      return state
+      return state;
   }
-}
-export default createStore(rootReducer)
-
-
-
+};
+export default createStore(rootReducer);

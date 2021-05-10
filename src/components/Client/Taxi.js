@@ -5,7 +5,7 @@ import { Loader } from "@googlemaps/js-api-loader"
 import { baseUrl } from "../../utils/configs";
 import { mapStateToProps } from '../../redux/actions'
 import { connect } from "react-redux";
-import usePassengerCoordinates from '../../hooks/usePassengerCoordinates'
+// import usePassengerCoordinates from '../../hooks/usePassengerCoordinates'
 
 let toggle = true;
 let count = 0
@@ -229,14 +229,12 @@ const Taxi = (props) => {
         setMessage('Thank you for using our services.')
     }
 
-    const rateButton = rating.map((rate) => {
-        return (
-            <div key={rate} className="form-check form-check-inline">
-                <input onChange={(event) => onSelect(event)} className="form-check-input" type="radio" name="inlineRadioOptions" id={rate} />
-                <label className="form-check-label" htmlFor={rate}>{rate}</label>
-            </div>
-        )
-    });
+  const rateButton = rating.map((rate) => (
+    <div key={rate} className="form-check form-check-inline">
+      <input onChange={(event) => onSelect(event)} className="form-check-input" type="radio" name="inlineRadioOptions" id={rate} />
+      <label className="form-check-label" htmlFor={rate}>{rate}</label>
+    </div>
+  ));
 
     return (
         <div className="text-center border position-absolute top-50 start-50 translate-middle" style={{ width: "700px", height: "670px" }}>

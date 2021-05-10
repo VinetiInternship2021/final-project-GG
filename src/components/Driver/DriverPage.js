@@ -131,7 +131,7 @@ const DriverPage = (props) => {
       <div ref={handleMap} className="text-center border position-absolute top-50 start-50 translate-middle mb-6" style={{ width: "660px", height: "500px" }} ></div>
       {showConfirm ? <button onClick={confirmation} className="btn btn-outline-success position-absolute top-50 start-50 translate-middle">Confirm</button> : null}
     </div>
-  )
-}
+  );
+};
 
 export default connect(mapStateToProps)(DriverPage)

@@ -28,22 +28,34 @@ const ClientPage = (props) => {
             </div>
         )
     })
+      .then((response) => response)
+      .catch((error) => error);
+    history.push(appRoutes.taxi);
+  // };
 
-    return (
-        <div className="position-relative">
-            <div className="card text-center position-absolute top-0 start-0 ms-4 mt-3" style={{ width: "150px", height: "125px" }}>
-                <ul className="list-group list-group-flush">
-                    {menuItems}
-                </ul>
-            </div>
+  // const orderButton = orderTypes.map((order) => (
+  //   <PageButton
+  //     button={order[0]}
+  //     onSelect={handleOrders}
+  //     buttonClassName="grid"
+  //     className={order[1]}
+  //   />
+  // ));
 
-            <div className="card text-center border position-fixed top-50 start-50 translate-middle" style={{ width: "300px", height: "280px" }}>
-                <h5 className="mt-3 mb-3">Choose Vehicle Type</h5>
-                {orderButton}
-            </div>
-        </div>
-    )
-}
+  return (
+    <div>
+      <div className="menu">
+        <ul>
+          <ClientMenu />
+        </ul>
+      </div>
+      <div className="ui-component container-md">
+        <h5 className="mt-3 mb-3">Choose Vehicle Type</h5>
+        {orderButton}
+      </div>
+    </div>
+  );
+};
 
 export default connect(mapStateToProps)(ClientPage);
 
