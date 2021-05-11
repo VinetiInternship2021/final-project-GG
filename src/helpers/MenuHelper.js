@@ -1,5 +1,5 @@
 const MenuHelper = ({ event, userId, user }) => {
-  let path = '';
+  let path;
   switch (event.currentTarget.getAttribute('data-name')) {
     case 'Settings':
       path = `${user.settings.replace(':id', userId)}`;
