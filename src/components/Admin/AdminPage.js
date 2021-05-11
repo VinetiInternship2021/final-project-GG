@@ -1,40 +1,24 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { AdminPageButtons, appRoutes } from '../../utils/configs';
-import { PageButton } from '../Buttons';
-import MenuHelper from '../../helpers/MenuHelper';
+import UserMenu from '../layouts/UserMenu';
 import { mapStateToProps } from '../../redux/actions';
 
 const AdminPage = ({ appState }) => {
-  const history = useHistory();
   const { userId } = appState;
-
-  const onSelect = (event) => {
-    const user = appRoutes.admin;
-    const path = MenuHelper({ event, userId, user });
-    history.push(path);
-  };
-
-  const buttons = AdminPageButtons.map((button) => (
-    <PageButton
-      key={button[0]}
-      button={button[0]}
-      onSelect={onSelect}
-      buttonClassName="column"
-      className={button[1]}
-    />
-  ));
 
   return (
 
     <div>
-      <div className="menu">
-        <ul>
-          {buttons}
-        </ul>
-      </div>
+      {userId
+        ? (
+          <UserMenu
+            routes={appRoutes.admin}
+            userId={userId}
+            menuButtons={AdminPageButtons}
+          />
+        ) : false}
       <div className="ui-component container-md">
         <h1>User functionality container</h1>
       </div>

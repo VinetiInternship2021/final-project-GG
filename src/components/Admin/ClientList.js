@@ -1,48 +1,32 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
 import Loading from '../../shared/Animations/Loading';
 import GetUsers from '../../helpers/GetUsersListHelper';
 import { mapStateToProps } from '../../redux/actions';
 import ClientField from './ClientField';
 import { AdminPageButtons, appRoutes } from '../../utils/configs';
-import { PageButton } from '../Buttons';
-import MenuHelper from '../../helpers/MenuHelper';
+import UserMenu from '../layouts/UserMenu';
 
 const ClientList = ({ appState, dispatch, match }) => {
   const { client } = match.params;
-  const history = useHistory();
   const { userId } = appState;
-
-  const onSelect = (event) => {
-    const user = appRoutes.admin;
-    const path = MenuHelper({ event, userId, user });
-    history.push(path);
-  };
 
   useEffect(() => {
     GetUsers({ client, dispatch })
       .then();
   }, [client]);
 
-  const buttons = AdminPageButtons.map((button) => (
-    <PageButton
-      key={button[0]}
-      button={button[0]}
-      onSelect={onSelect}
-      buttonClassName="column"
-      className={button[1]}
-    />
-  ));
-
   return (
     <div>
-      <div className="menu">
-        <ul>
-          {buttons}
-        </ul>
-      </div>
+      {userId
+        ? (
+          <UserMenu
+            routes={appRoutes.admin}
+            userId={userId}
+            menuButtons={AdminPageButtons}
+          />
+        ) : false}
       <div className="ui-component container-md">
         <div className="card text-center position-absolute top-50 start-50 translate-middle">
           {appState.isLoading ? <Loading /> : false}
