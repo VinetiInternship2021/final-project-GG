@@ -41,6 +41,12 @@ const ClientField = ({ usersList, client }) => {
             // eslint-disable-next-line camelcase
             id, phone_number, first_name, last_name, is_active, is_verified_by_admin,
           } = driver;
+          let verified;
+          let active;
+          // eslint-disable-next-line camelcase,no-unused-expressions
+          is_verified_by_admin ? verified = 'bg-success' : verified = 'bg-danger';
+          // eslint-disable-next-line camelcase,no-unused-expressions
+          is_active ? active = 'bg-success' : active = 'bg-danger';
           return (
             <div key={id} className="list-group-item list-group-item-action">
               <div className="d-flex w-100 justify-content-between align-items-center">
@@ -48,20 +54,18 @@ const ClientField = ({ usersList, client }) => {
                   {/* eslint-disable-next-line camelcase */}
                   { `${first_name} ${last_name}` }
                 </h5>
-                <span className="badge bg-primary ">
-                  Verified?
+                <span className={`badge ${verified}`}>
                   {/* eslint-disable-next-line camelcase */}
-                  {` ${is_verified_by_admin}` }
+                  {is_verified_by_admin ? 'Confirmed' : 'Unconfirmed'}
                 </span>
               </div>
               <p className="mb-1">
                 {/* eslint-disable-next-line camelcase */}
                 { `Phone number ${phone_number}`}
               </p>
-              <small>
-                Is active?
+              <small className={`badge ${active}`}>
                 {/* eslint-disable-next-line camelcase */}
-                { ` ${is_active}` }
+                {is_active ? 'Active' : 'Inactive'}
               </small>
             </div>
           );
