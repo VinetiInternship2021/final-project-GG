@@ -11,7 +11,7 @@ import ErrorMessages from '../components/layouts/ErrorMessages';
 import RegistrationForm from '../components/RegistrationForm';
 
 const SettingsHelper = ({
-  appState, dispatch, modelName, reqKey,
+  appState, dispatch, modelName, reqKey, driver,
 }) => {
   const { userId } = appState;
   const history = useHistory();
@@ -66,10 +66,56 @@ const SettingsHelper = ({
           {state.isLoading ? <Loading /> : false}
           Settings
           <RegistrationForm
+            settings
             onChange={onChange}
             data={[fields, setFields]}
             header={`${fields.first_name} information updating`}
-          />
+          >
+            {driver
+              ? (
+                <div>
+                  <label htmlFor="car_manufacturer" className="form-label">
+                    Car manufacturer
+                    <br />
+                    <input
+                      onChange={
+                      (e) => onChange(e)
+                    }
+                      id="car_manufacturer"
+                      type="text"
+                      className="form-control"
+                      defaultValue={fields.car_manufacturer}
+                    />
+                  </label>
+                  <label htmlFor="car_model" className="form-label">
+                    Car model
+                    <br />
+                    <input
+                      onChange={
+                      (e) => onChange(e)
+                    }
+                      id="car_model"
+                      type="text"
+                      className="form-control"
+                      defaultValue={fields.car_model}
+                    />
+                  </label>
+                  <label htmlFor="car_registration_number" className="form-label">
+                    Car registration number
+                    <br />
+                    <input
+                      onChange={
+                      (e) => onChange(e)
+                    }
+                      id="car_registration_number"
+                      type="text"
+                      className="form-control"
+                      defaultValue={fields.car_registration_number}
+                    />
+                  </label>
+                </div>
+              ) : <></>}
+          </RegistrationForm>
         </div>
         <button
           onClick={(e) => {
@@ -85,12 +131,17 @@ const SettingsHelper = ({
   );
 };
 
+SettingsHelper.defaultProps = {
+  driver: false,
+};
+
 SettingsHelper.propTypes = {
   // match: PropTypes.objectOf(PropTypes.any).isRequired,
   appState: PropTypes.objectOf(PropTypes.any).isRequired,
   reqKey: PropTypes.string.isRequired,
   modelName: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
+  driver: PropTypes.bool,
 };
 
 export default connect(mapStateToProps)(SettingsHelper);

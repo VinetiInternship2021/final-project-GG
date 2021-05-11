@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RegistrationForm = ({ data, header, children }) => {
+const RegistrationForm = ({
+  data, header, children, settings,
+}) => {
   const [fields, setFields] = data;
 
   const onChange = (event) => {
@@ -55,42 +57,63 @@ const RegistrationForm = ({ data, header, children }) => {
           defaultValue={fields.last_name}
         />
       </label>
-      <label htmlFor="password" className="form-label">
-        Password
+      <label htmlFor="email" className="form-label">
+        Email
         <br />
         <input
           onChange={
             (e) => onChange(e)
           }
-          id="password"
-          type="password"
+          id="email"
+          type="text"
           className="form-control"
+          defaultValue={fields.email}
         />
       </label>
-      <label htmlFor="password_confirmation" className="form-label">
-        Confirm Password
-        <br />
-        <input
-          onChange={
-            (e) => onChange(e)
-          }
-          id="password_confirmation"
-          type="password"
-          className="form-control"
-        />
-      </label>
+      { !settings
+        ? (
+          <div>
+            <label htmlFor="password" className="form-label">
+              Password
+              <br />
+              <input
+                onChange={
+              (e) => onChange(e)
+            }
+                id="password"
+                type="password"
+                className="form-control"
+              />
+            </label>
+            <label htmlFor="password_confirmation" className="form-label">
+              Confirm Password
+              <br />
+              <input
+                onChange={
+              (e) => onChange(e)
+            }
+                id="password_confirmation"
+                type="password"
+                className="form-control"
+              />
+            </label>
+          </div>
+        )
+        : <></>}
       { children }
     </div>
   );
 };
 RegistrationForm.defaultProps = {
-  children: <div />,
+  children: <></>,
+  settings: false,
 };
 
 RegistrationForm.propTypes = {
   data: PropTypes.arrayOf(PropTypes.any).isRequired,
   header: PropTypes.string.isRequired,
   children: PropTypes.element,
+  settings: PropTypes.bool,
 };
 
 export default RegistrationForm;
