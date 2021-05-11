@@ -25,11 +25,11 @@ $GridSize: 6.5em;
 body {
     position: relative;
     background: #F8F8FF;
-    //background: #212529;
+    min-width: 400px;
 }
 
 .ui-component {
-    padding-left: 150px;
+    padding-left: 160px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
