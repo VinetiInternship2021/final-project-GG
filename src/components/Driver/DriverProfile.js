@@ -10,14 +10,20 @@ const DriverProfile = ({ match }) => {
   const [state, setState] = useState({
     userId: match.params.id,
     isLoading: true,
+    verified: 'bg-danger',
     user: {},
   });
   const { userId } = state;
 
   useEffect(() => {
     const modelName = 'drivers';
-    getUserData({ state, setState, modelName })
-      .then();
+    getUserData({ state, setState, modelName });
+    if (state.user.is_verified_by_admin) {
+      setState({
+        ...state,
+        verified: 'bg-success',
+      });
+    }
   }, []);
 
   return (
@@ -32,8 +38,16 @@ const DriverProfile = ({ match }) => {
         ) : false}
       <div className="ui-component container-md">
         <div className="card text-center position-absolute top-50 start-50 translate-middle">
-          {state.isLoading ? <Loading /> : false}
-          <ProfileInfoTable fieldsData={state.user} />
+          {state.isLoading ? <Loading />
+            : (
+              <>
+                <span className={`badge ${state.verified}`}>
+                  {/* eslint-disable-next-line camelcase */}
+                  {state.user.is_verified_by_admin ? 'Confirmed' : 'Unconfirmed'}
+                </span>
+                <ProfileInfoTable fieldsData={state.user} />
+              </>
+            )}
         </div>
       </div>
     </div>
