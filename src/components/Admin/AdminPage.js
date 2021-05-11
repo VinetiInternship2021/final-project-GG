@@ -9,7 +9,6 @@ const AdminPage = ({ appState }) => {
   const { userId } = appState;
 
   return (
-
     <div>
       {userId
         ? (

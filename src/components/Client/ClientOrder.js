@@ -41,8 +41,6 @@ const ClientPage = ({ appState }) => {
             menuButtons={clientPageItems}
           />
         ) : false}
-      {/* eslint-disable-next-line max-len */}
-      {/* Block with className="ui-component container-md" intended for inserting users functionality (f.e. Maps) */}
       <div className="ui-component container-md">
         <h5 className="mt-3 mb-3">Choose Vehicle Type</h5>
         {orderButton}

@@ -19,8 +19,6 @@ const ClientSettings = ({ appState }) => {
             menuButtons={clientPageItems}
           />
         ) : false}
-      {/* eslint-disable-next-line max-len */}
-      {/* Block with className="ui-component container-md" intended for inserting users functionality (f.e. Maps) */}
       <div className="ui-component container-md">
         <div className="card text-center position-absolute top-50 start-50 translate-middle">
           <SettingsHelper modelName="passengers" reqKey="passenger" />

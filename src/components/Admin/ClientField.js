@@ -82,6 +82,7 @@ const ClientField = ({ usersList, client }) => {
         </div>
       ));
   }
+
   return (
     <div className="list-group">
       {fields}

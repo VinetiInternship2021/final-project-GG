@@ -46,7 +46,7 @@ export const clientPageItems = [
   ['Settings', 'fas fa-cog'],
 ];
 
-export const buttons = ['Client', 'Driver'];
+export const buttonTexts = ['Client', 'Driver'];
 
 export const orderTypes = [
   ['Econom', 'fas fa-taxi'],

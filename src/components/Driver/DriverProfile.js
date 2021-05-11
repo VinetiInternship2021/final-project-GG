@@ -39,6 +39,7 @@ const DriverProfile = ({ match }) => {
     </div>
   );
 };
+
 DriverProfile.propTypes = {
   match: PropTypes.objectOf(PropTypes.any).isRequired,
 };

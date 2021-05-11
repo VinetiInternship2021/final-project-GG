@@ -3,6 +3,7 @@ import { ChangeActionLoading, ChangeActionLoggedIn } from '../redux/actions';
 
 const UpdateHelper = async (fields, setFields, state, dispatch, history, params) => {
   const { userId } = state;
+
   await updateUser({ params, userId })
     .then((response) => {
       dispatch(ChangeActionLoggedIn({

@@ -77,9 +77,7 @@ const SettingsHelper = ({
                     Car manufacturer
                     <br />
                     <input
-                      onChange={
-                      (e) => onChange(e)
-                    }
+                      onChange={(e) => onChange(e)}
                       id="car_manufacturer"
                       type="text"
                       className="form-control"
@@ -90,9 +88,7 @@ const SettingsHelper = ({
                     Car model
                     <br />
                     <input
-                      onChange={
-                      (e) => onChange(e)
-                    }
+                      onChange={(e) => onChange(e)}
                       id="car_model"
                       type="text"
                       className="form-control"
@@ -103,9 +99,7 @@ const SettingsHelper = ({
                     Car registration number
                     <br />
                     <input
-                      onChange={
-                      (e) => onChange(e)
-                    }
+                      onChange={(e) => onChange(e)}
                       id="car_registration_number"
                       type="text"
                       className="form-control"

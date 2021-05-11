@@ -20,7 +20,7 @@ export const PageButton = ({
             className={className}
           />
         </div>
-      ) : ''}
+      ) : <></>}
       {' '}
       {button}
     </div>

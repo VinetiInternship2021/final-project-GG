@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { buttons, appRoutes } from '../utils/configs';
+import { buttonTexts, appRoutes } from '../utils/configs';
 
 const Login = () => {
   const history = useHistory();
@@ -19,7 +19,7 @@ const Login = () => {
     history.push(path);
   };
 
-  const button = buttons.map((item) => (
+  const button = buttonTexts.map((item) => (
     <div key={item}>
       <button
         onClick={() => onLogin(item)}
@@ -33,10 +33,7 @@ const Login = () => {
   ));
 
   return (
-    <div
-      className="text-center border position-absolute top-50 start-50 translate-middle"
-      style={{ width: '200px', height: '200px' }}
-    >
+    <div className="text-center border position-absolute top-50 start-50 translate-middle login">
       <h5 className="mt-2">Login</h5>
       <p>Select user type</p>
       {button}

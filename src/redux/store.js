@@ -68,6 +68,7 @@ const usersList = (state = initUsersList, action) => {
       return state;
   }
 };
+
 export default createStore(combineReducers(
   {
     rootReducer,

@@ -14,6 +14,7 @@ const RegistrationForm = ({
     params[event.target.id] = event.target.value;
     setFields(params);
   };
+
   return (
     <div>
       <br />
@@ -22,9 +23,7 @@ const RegistrationForm = ({
         Phone
         <br />
         <input
-          onChange={
-            (e) => onChange(e)
-          }
+          onChange={(e) => onChange(e)}
           id="phone_number"
           type="number"
           className="form-control"
@@ -35,9 +34,7 @@ const RegistrationForm = ({
         First name
         <br />
         <input
-          onChange={
-            (e) => onChange(e)
-          }
+          onChange={(e) => onChange(e)}
           id="first_name"
           type="text"
           className="form-control"
@@ -48,9 +45,7 @@ const RegistrationForm = ({
         Last name
         <br />
         <input
-          onChange={
-            (e) => onChange(e)
-          }
+          onChange={(e) => onChange(e)}
           id="last_name"
           type="text"
           className="form-control"
@@ -61,9 +56,7 @@ const RegistrationForm = ({
         Email
         <br />
         <input
-          onChange={
-            (e) => onChange(e)
-          }
+          onChange={(e) => onChange(e)}
           id="email"
           type="text"
           className="form-control"
@@ -77,9 +70,7 @@ const RegistrationForm = ({
               Password
               <br />
               <input
-                onChange={
-              (e) => onChange(e)
-            }
+                onChange={(e) => onChange(e)}
                 id="password"
                 type="password"
                 className="form-control"
@@ -89,9 +80,7 @@ const RegistrationForm = ({
               Confirm Password
               <br />
               <input
-                onChange={
-              (e) => onChange(e)
-            }
+                onChange={(e) => onChange(e)}
                 id="password_confirmation"
                 type="password"
                 className="form-control"

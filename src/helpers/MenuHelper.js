@@ -26,4 +26,5 @@ const MenuHelper = ({ event, userId, user }) => {
   }
   return path;
 };
+
 export default MenuHelper;
