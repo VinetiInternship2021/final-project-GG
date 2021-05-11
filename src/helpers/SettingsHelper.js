@@ -50,8 +50,7 @@ const SettingsHelper = ({
     Object.keys(Params).forEach((prop) => {
       if (Params[prop]) { newParams[prop] = Params[prop]; }
     });
-    UpdateHelper(Fields, SetFields, State, Dispatch, History, newParams)
-      .then();
+    UpdateHelper(Fields, SetFields, State, Dispatch, History, newParams);
   };
 
   return (

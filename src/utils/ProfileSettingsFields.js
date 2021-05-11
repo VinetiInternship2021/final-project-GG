@@ -2,7 +2,6 @@ import React from 'react';
 
 const ProfileSettingsFields = ({ fieldsData }) => {
   const fields = Object.entries(fieldsData).map((key) => (
-
     <table key={key[0]} className="table table-borderless">
       <thead>
         <tr>
@@ -14,4 +13,5 @@ const ProfileSettingsFields = ({ fieldsData }) => {
   ));
   return fields;
 };
+
 export default ProfileSettingsFields;
