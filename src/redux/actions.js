@@ -1,7 +1,10 @@
-import { ACTION_CHANGE_LOADING ,
-         ACTION_CHANGE_LOGGED_IN,
-         ACTION_CHANGE_ALERT,
-        CREATE_CAR_TYPE} from './actionTypes'
+import {
+  ACTION_CHANGE_LOADING,
+  ACTION_CHANGE_LOGGED_IN,
+  ACTION_CHANGE_ALERT,
+  CREATE_CAR_TYPE,
+} from './actionTypes';
+
 export const ChangeActionLoading = (isLoading) => ({
   type: ACTION_CHANGE_LOADING,
   payload: isLoading,
@@ -17,12 +20,10 @@ export const ChangeActionAlert = (alert) => ({
   payload: alert,
 });
 
-export const createCarType = (type) => {
-  return {
-      type: CREATE_CAR_TYPE,
-      payload: type
-    }
-}
+export const createCarType = (type) => ({
+  type: CREATE_CAR_TYPE,
+  payload: type,
+});
 
 export const mapStateToProps = (state) => {
   const appState = state;

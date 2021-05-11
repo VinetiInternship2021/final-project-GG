@@ -1,25 +1,25 @@
 export const appRoutes = {
-    root: '/',
-    signup: '/signup',
-    login: '/login',
-    signupClient: '/signup/passenger',
-    signupDriver: '/signup/driver',
-    loginClient: '/login/passenger',
-    loginDriver: '/login/driver',
-    loginAdmin: '/login/admin',
-    client: '/passenger/:id',
-    driver: '/driver/:id',
-    admin: '/admin',
-    taxi: '/taxi',
-    adminPage: '/SuperUser/:id',
+  root: '/',
+  signup: '/signup',
+  login: '/login',
+  signupClient: '/signup/passenger',
+  signupDriver: '/signup/driver',
+  loginClient: '/login/passenger',
+  loginDriver: '/login/driver',
+  loginAdmin: '/login/admin',
+  client: '/passenger/:id',
+  driver: '/driver/:id',
+  admin: '/admin',
+  taxi: '/taxi',
+  adminPage: '/SuperUser/:id',
   adminProfile: '/SuperUser/:id/profile',
-    clientHistory: '/passenger/history',
-    clientSettings: '/passenger/settings',
-    driverPage: `/driver/:id`,
-    driverProfile: '/driver/:id/profile',
-    driverSettings: '/driver/:id/settings',
-    driverHistory: '/driver/:id/history',
-}
+  clientHistory: '/passenger/history',
+  clientSettings: '/passenger/settings',
+  driverPage: '/driver/:id',
+  driverProfile: '/driver/:id/profile',
+  driverSettings: '/driver/:id/settings',
+  driverHistory: '/driver/:id/history',
+};
 
 const loginText = 'Login';
 const signupText = 'Sign up';
@@ -38,11 +38,11 @@ export const clientPageItems = [
   ['Settings', 'fas fa-cog'],
 ];
 
-export const driverPageItems = ['New Order', 'My history', 'Settings', 'Profile']
+export const driverPageItems = ['New Order', 'My history', 'Settings', 'Profile'];
 
 export const buttons = ['Client', 'Driver'];
 
-export const orderTypes = ['Econom', 'Business', 'First class', 'Cargo van']
+export const orderTypes = ['Econom', 'Business', 'First class', 'Cargo van'];
 // export const orderTypes = [
 //   ['Econom', 'fas fa-taxi'],
 //   ['Business', 'fas fa-taxi'],

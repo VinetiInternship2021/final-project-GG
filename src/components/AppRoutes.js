@@ -36,6 +36,14 @@ const AppRoutes = ({ appState, dispatch }) => {
   //   dispatch(ChangeActionLoading(false));
   // };
 
+  const loginStatusChanger = (data) => {
+    // console.log('loggedIn ', data)
+    dispatch(ChangeActionLoggedIn(data));
+  };
+  const loadingDone = () => {
+    dispatch(ChangeActionLoading(false));
+  };
+
   const userInChecker = async () => {
     await userIn()
       .then((response) => {
@@ -58,13 +66,6 @@ const AppRoutes = ({ appState, dispatch }) => {
       });
   };
 
-  const loginStatusChanger = (data) => {
-    // console.log('loggedIn ', data)
-    props.dispatch(ChangeActionLoggedIn(data))
-  }
-  const loadingDone = () => {
-    props.dispatch(ChangeActionLoading(false))
-  }
   useEffect(() => {
     userInChecker()
       .then();

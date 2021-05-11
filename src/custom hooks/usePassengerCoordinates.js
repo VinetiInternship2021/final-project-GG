@@ -1,47 +1,48 @@
 import { useEffect } from 'react';
 import axios from 'axios';
-import { baseUrl } from "../utils/configs";
+import { baseUrl } from '../utils/configs';
 
-const usePassengerCoordinates = (pickUpLocation, dropOffLocation, drivers,nearestDriverIndex, price, state, setMessage) => {
-    useEffect(() => {
-        let source = axios.CancelToken.source();
-        let config = { cancelToken: source.token }
-        if (drivers && pickUpLocation && dropOffLocation && nearestDriverIndex !== undefined && price) {
-            axios.post(`${baseUrl}/coordinates/trip_nearestdriver`, {
-                pickUpLocation,
-                dropOffLocation,
-                driverId: drivers[nearestDriverIndex].id,
-                passengerId: state.userId,
-                price: price
-            }, config)
+const usePassengerCoordinates = (
+  pickUpLocation, dropOffLocation, drivers, nearestDriverIndex, price, state, setMessage, log,
+) => {
+  useEffect(() => {
+    const source = axios.CancelToken.source();
+    const config = { cancelToken: source.token };
+    if (drivers && pickUpLocation && dropOffLocation && nearestDriverIndex !== undefined && price) {
+      axios.post(`${baseUrl}/coordinates/trip_nearestdriver`, {
+        pickUpLocation,
+        dropOffLocation,
+        driverId: drivers[nearestDriverIndex].id,
+        passengerId: state.userId,
+        price,
+      }, config)
+        .then(() => {
+          clearInterval(log);
+          // eslint-disable-next-line no-param-reassign
+          log = setInterval(
+            () => {
+              axios.post(`${baseUrl}/coordinates/driverAssigned`, {
+                id: state.userId,
+              })
                 .then((response) => {
-                    clearInterval(log)
-                    log = setInterval(
-                        () => {
-                            axios.post(`${baseUrl}/coordinates/driverAssigned`, {
-                                id: state.userId
-                            })
-                                .then((response) => {
-                                    console.log('interval')
-                                    if (response.data.message !== 'error') {
-                                        setMessage('your driver is on the way')
-                                        clearInterval(log);
-                                    }
-                                })
-                                .catch((error) => {
-                                    console.log(error);
-                                })
-                        }, 3000);
-    
+                  if (response.data.message !== 'error') {
+                    setMessage('your driver is on the way');
+                    clearInterval(log);
+                  }
                 })
-                .catch((error) => {
+                .catch(() => {
+                //   console.log(error);
                 });
-        }
-        return () => {
-            source.cancel()
-        }
-    }, [pickUpLocation, dropOffLocation, drivers, nearestDriverIndex, price])
-}
+            }, 3000,
+          );
+        })
+        .catch(() => {
+        });
+    }
+    return () => {
+      source.cancel();
+    };
+  }, [pickUpLocation, dropOffLocation, drivers, nearestDriverIndex, price]);
+};
 
-export default usePassengerCoordinates
-
+export default usePassengerCoordinates;
