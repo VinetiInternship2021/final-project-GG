@@ -1,5 +1,4 @@
 class Api::V1::DriversController < ApplicationController
-
   def index
     @users = Driver.all
   end
@@ -23,19 +22,15 @@ class Api::V1::DriversController < ApplicationController
   end
 
   def update
+    @user = Driver.find(params[:id])
     if current_user?(@user, 'Driver')
-      @user = Driver.find(params[:id])
       if @user.update(user_params)
-        render status: :updated, location: api_v1_super_users_path(@user)
-      else
-        render json: @user.errors, status: :unprocessable_entity
+        render json: { 'status': 'saved' }, status: :accepted
+      else render json: @user.errors, status: :unprocessable_entity
       end
-    else
-      if @user.errors.empty?
-        render json: { 'errors': 'dont have access' }, status: :unprocessable_entity
-      else
-        render json: @user.errors, status: :unprocessable_entity
-      end
+    elsif @user.errors.empty?
+      render json: { 'errors': 'dont have access' }, status: :unprocessable_entity
+    else render json: @user.errors, status: :unprocessable_entity
     end
   end
 
@@ -43,21 +38,22 @@ class Api::V1::DriversController < ApplicationController
     puts 'LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL'
     puts params
     driver = Driver.find(params[:id])
-    driver.latitude= params[:coordinates][:latitude]
-    driver.longitude= params[:coordinates][:longitude]
+    driver.latitude = params[:coordinates][:latitude]
+    driver.longitude = params[:coordinates][:longitude]
     if driver.save
-      render json: { message: 'driver coordinates has been saved'}
+      render json: { message: 'driver coordinates has been saved' }
     else
       #   render status: :unprocessable_entity
-      render json: { message: 'error! driver coordinates has not been saved'}
+      render json: { message: 'error! driver coordinates has not been saved' }
     end
-  end  
+  end
 
-  private def user_params
+  private
+
+  def user_params
     params.require(:driver).permit(:first_name, :last_name, :phone_number,
                                    :email, :car_manufacturer, :car_model,
                                    :car_registration_number, :car_level,
                                    :password, :password_confirmation)
   end
-
 end

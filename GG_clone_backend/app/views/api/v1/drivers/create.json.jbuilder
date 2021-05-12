@@ -1,6 +1,6 @@
 if @user.save
   json.created true
-  json.model_name  'Driver'
+  json.model_name 'Driver'
   json.user do
     json.id @user.id
     json.phone_number @user.phone_number
