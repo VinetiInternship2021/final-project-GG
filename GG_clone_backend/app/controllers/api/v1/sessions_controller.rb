@@ -34,10 +34,21 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def log_out
+    user = current_user
+    
+    if user[0].model_name=='Driver'
+      if user[0].latitude
+        user[0].latitude=nil
+        user[0].longitude=nil
+        user[0].save
+      end  
+    end
+  
     user,_ = current_user
     forget(user)
     session.delete(:user_id)
     @current_user = nil
+    
   end
 
   def destroy

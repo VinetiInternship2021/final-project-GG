@@ -1,94 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import {userIn,
-        login} from '../../utils/API';
-import {loginParams} from "../../utils/configs";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { mapStateToProps } from '../../redux/actions';
+import { loginParams } from '../../utils/configs';
+import LoginHelper from '../../helpers/LoginHelper';
+import LoginForm from '../LoginForm';
 
-const DriverLogin = () => {
-    const history = useHistory()
-    const [authData, setAuthData] = useState(
-      {
-          'loggedIn': false, 'userType': 'None', 'userId': 'None'
-      })
-    const [fields, setFields] = useState({
-        ...loginParams,
-        model_name: 'Driver'
-    })
-    
-    useEffect(() => {
-        const loginStatusChanger = (data) => {
-            setAuthData({  'loggedIn': data.loggedIn,
-                'userType': data.userType,
-                'userId': data.userId})
-        }
-        const userInChecker = async () => {
-          await userIn()
-              .then(response => {
-                  if (response.data.user_in) {
-                      loginStatusChanger({'loggedIn': response.data.user_in,
-                          'userType': response.data.model_name,
-                          'userId': response.data.user.id} )
-                  }
-              })
-        }
-        userInChecker()
-        return () => {
-            if (authData.loggedIn) {
-                history.push(`/${authData.userType}/${authData.userId}`)
-            }
-        }
-    })
+const DriverLogin = (props) => {
+  const history = useHistory();
+  const { appState, dispatch } = props;
+  const state = appState;
+  const [fields, setFields] = useState({
+    ...loginParams,
+    model_name: 'Driver',
+  });
 
-    const onClick = (event) => {
-        event.preventDefault();
-        if (fields.password.length < 6) {
-            setFields({ ...fields, alert: 'password length should be at least 6 characters, try again!', password: '' })
-        } else if (!fields.phone_number) {
-            setFields({ ...fields, alert: 'phone is required!' })
-        } else {
-          Login()
-        }
+  const onClick = (event, Fields, SetFields, State, Dispatch, History) => {
+    event.preventDefault();
+    LoginHelper(Fields, SetFields, State, Dispatch, History)
+      .then();
+  };
+
+  useEffect(() => {
+    if (state.loggedIn) {
+      history.push(`/${state.userType}/${state.userId}`);
     }
-    
-    const Login = () => {
-      const params = {
-        session: {
-          ...fields,
-          remember_me: fields.remember_me === true ? '1': '0'
-        }
-      }
-      login(params).then(response => console.log(response))
-    }
+  }, []);
 
-    return (
-        <>
-            <form className="w-25 border position-absolute top-50 start-50 translate-middle">
-                <div className="me-3 mx-3">
-                    <br />
-                    <h5>Driver Login</h5>
-                    <label htmlFor="phone" className="form-label">Phone</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, phone_number: e.target.value }) }} id="phone" type="number" className="form-control" value={fields.phone} />
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, password: e.target.value }) }} id="password" type="password" className="form-control" value={fields.password} />
-                    <label htmlFor="rememberMe" className="form-label">
-                    <input
-                      className="form-check-input"
-                      name="rememberMe"
-                      type="checkbox"
-                      checked={fields.remember_me}
-                      onChange={ (event) =>  setFields({
-                          ...fields,
-                          remember_me: event.target.checked
-                      })
-                      } />
-                        Remember
-                    </label>
-                    <p>{fields.alert}</p>
-                </div>
-                <button onClick={(e) => { onClick(e) }} type="submit" className="btn btn-outline-success mx-3 mb-3">Submit</button>
-            </form>
-        </>
-    )
-}
+  return (
+    <div>
+      <LoginForm
+        fields={fields}
+        header="Driver Login"
+        setFields={setFields}
+        onClick={(event) => onClick(event, fields, setFields, state, dispatch, history)}
+      />
+    </div>
+  );
+};
 
-export default DriverLogin;
+DriverLogin.propTypes = {
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps)(DriverLogin);
