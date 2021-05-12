@@ -1,60 +1,69 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { signParams } from '../../utils/configs';
+import RegistrationForm from '../RegistrationForm';
+import { mapStateToProps } from '../../redux/actions';
+import SignUpHelper from '../../helpers/SignUpHelper';
+import ErrorMessages from '../layouts/ErrorMessages';
 
-const ClientSignup = () => {
-    const [fields, setFields] = useState({
-        phone: '',
-        password: '',
-        cPassword: '',
-        name: '',
-        alert: ''
-    })
+const ClientSignup = (props) => {
+  const history = useHistory();
+  const { appState, dispatch } = props;
+  const state = appState;
+  const [fields, setFields] = useState({
+    ...signParams,
+  });
+  const params = {
+    passenger: {
+      ...fields,
+    },
+  };
 
-    const onClick = (event) => {
-        event.preventDefault();
-        if (fields.password !== fields.cPassword) {
-            setFields({ ...fields, alert: 'incorrect password, try again!', password: '', cPassword: '' })
-        } else if (fields.password.length < 6) {
-            setFields({ ...fields, alert: 'password length should be at least 6 characters, try again!', password: '', cPassword: '' })
-        } else if (!fields.name) {
-            setFields({ ...fields, alert: 'username is required!' })
-        } else if (!fields.phone) {
-            setFields({ ...fields, alert: 'phone is required!' })
-        } else {
-            axios.post('/signup/client', {
-                phone: fields.phone,
-                name: fields.name,
-                password: fields.password
-            })
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
-    }
+  const onChange = (event) => {
+    const parameter = {
+      ...fields,
+      alert: '',
+    };
+    parameter[event.target.id] = event.target.value;
+    setFields(parameter);
+  };
 
-    return (
-        <>
-            <form className="w-25 border position-absolute top-50 start-50 translate-middle">
-                <div className="me-3 mx-3">
-                    <br />
-                    <h5>Client registration</h5>
-                    <label htmlFor="phone" className="form-label">Phone</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, phone: e.target.value }) }} id="phone" type="number" className="form-control" value={fields.phone} />
-                    <label htmlFor="name" className="form-label">Username</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, name: e.target.value }) }} id="name" type="text" className="form-control" value={fields.name} />
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, password: e.target.value, alert: '' }) }} id="password" type="password" className="form-control" value={fields.password} />
-                    <label htmlFor="cPassword" className="form-label">Confirm Password</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, cPassword: e.target.value, alert: '' }) }} id="cPassword" type="password" className="form-control" value={fields.cPassword} />
-                    <p>{fields.alert}</p>
-                </div>
-                <button onClick={(e) => { onClick(e) }} type="submit" className="btn btn-outline-success mx-3 mb-3">Submit</button>
-            </form>
-        </>
-    )
-}
+  const onClick = (event, Fields, SetFields, State, Dispatch, History, Params) => {
+    event.preventDefault();
+    SignUpHelper(Fields, SetFields, State, Dispatch, History, Params)
+      .then();
+  };
 
-export default ClientSignup;
+  return (
+    <>
+      <form className="text-center w-25 border position-absolute top-50 start-50 translate-middle">
+        {fields.alert
+          ? (
+            <ErrorMessages fields={fields} />
+          )
+          : false}
+        <div className="me-3 mx-3">
+          <RegistrationForm onChange={onChange} data={[fields, setFields]} header="Client registration" />
+        </div>
+        <button
+          onClick={(e) => {
+            onClick(e, fields, setFields, state, dispatch, history, params);
+          }}
+          type="submit"
+          className="btn btn-outline-success mx-3 mb-3"
+        >
+          Submit
+        </button>
+      </form>
+    </>
+  );
+};
+
+ClientSignup.propTypes = {
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps)(ClientSignup);

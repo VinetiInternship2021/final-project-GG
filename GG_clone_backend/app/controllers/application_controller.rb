@@ -23,7 +23,6 @@ class ApplicationController < ActionController::API
     if session[:user_id]
       if (model_name = session[:model_name])
         _, model = choose_model(model_name)
-
         return [@current_user ||= model.find_by(id: session[:user_id]),
                 model_name]
       end

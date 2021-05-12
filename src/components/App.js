@@ -1,13 +1,18 @@
-import React from 'react'
+import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from './AppRoutes'
+import { connect, Provider } from 'react-redux';
+import AppRoutes from './AppRoutes';
+import { mapStateToProps } from '../redux/actions';
+import store from '../redux/store';
 
-const App = () => {
-    return (
-        <BrowserRouter>
-            <AppRoutes />
-        </BrowserRouter>
-    )
-}
+const WrappedApp = connect(mapStateToProps)(AppRoutes);
 
-export default App
+const App = () => (
+  <Provider store={store}>
+    <BrowserRouter>
+      <WrappedApp />
+    </BrowserRouter>
+  </Provider>
+);
+
+export default App;

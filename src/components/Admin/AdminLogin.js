@@ -1,53 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-import { appRoutes } from '../../utils/configs'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { mapStateToProps } from '../../redux/actions';
+import { loginParams } from '../../utils/configs';
+import LoginHelper from '../../helpers/LoginHelper';
+import LoginForm from '../LoginForm';
 
-const AdminLogin = () => {
-    const history = useHistory();
-    const [fields, setFields] = useState({
-        phone: '',
-        password: '',
-        alert: ''
-    })
+const AdminLogin = ({ appState, dispatch }) => {
+  const history = useHistory();
+  const state = appState;
+  const [fields, setFields] = useState({
+    ...loginParams,
+    model_name: 'SuperUser',
+  });
 
-    const onClick = (event) => {
-        event.preventDefault();
-        if (fields.password.length < 6) {
-            setFields({ ...fields, alert: 'password length should be at least 6 characters, try again!', password: '' })
-        } else if (!fields.phone) {
-            setFields({ ...fields, alert: 'phone is required!' })
-        } else {
-            axios.post('/login/admin', {
-                phone: fields.phone,
-                password: fields.password
-            })
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            history.push(appRoutes.admin)
-        }
+  const onClick = (event, Fields, SetFields, State, Dispatch, History) => {
+    event.preventDefault();
+    LoginHelper(Fields, SetFields, State, Dispatch, History)
+      .then();
+  };
+
+  useEffect(() => {
+    if (state.loggedIn) {
+      history.push(`/${state.userType}/${state.userId}`);
     }
+  }, []);
 
-    return (
-        <>
-            <form className="w-25 border position-absolute top-50 start-50 translate-middle">
-                <div className="me-3 mx-3">
-                    <br />
-                    <h5>Admin Login</h5>
-                    <label htmlFor="phone" className="form-label">Phone</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, phone: e.target.value }) }} id="phone" type="number" className="form-control" value={fields.phone} />
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input onClick={() => { setFields({ ...fields, alert: '' }) }} onChange={(e) => { setFields({ ...fields, password: e.target.value }) }} id="password" type="password" className="form-control" value={fields.password} />
-                    <p>{fields.alert}</p>
-                </div>
-                <button onClick={(e) => { onClick(e) }} type="submit" className="btn btn-outline-success mx-3 mb-3">Submit</button>
-            </form>
-        </>
-    )
-}
+  return (
+    <>
+      <LoginForm
+        fields={fields}
+        header="Admin login"
+        setFields={setFields}
+        onClick={(event) => onClick(event, fields, setFields, state, dispatch, history)}
+      />
+    </>
+  );
+};
+AdminLogin.propTypes = {
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
 
-export default AdminLogin;
+export default connect(mapStateToProps)(AdminLogin);
