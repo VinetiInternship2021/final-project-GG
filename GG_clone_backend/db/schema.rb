@@ -31,8 +31,17 @@ ActiveRecord::Schema.define(version: 2021_04_26_050830) do
     t.index ["phone_number"], name: "index_drivers_on_phone_number", unique: true
   end
 
-# Could not dump table "passengers" because of following StandardError
-#   Unknown type 'sting' for column 'remember_digest'
+  create_table "passengers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "remember_digest"
+    t.index ["phone_number"], name: "index_passengers_on_phone_number", unique: true
+  end
 
   create_table "super_users", force: :cascade do |t|
     t.string "phone_number"
