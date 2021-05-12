@@ -80,13 +80,11 @@ const AppRoutes = ({ appState, dispatch }) => {
                 <Route path={appRoutes.root} exact component={Home} />
                 <Route path={appRoutes.signup} exact component={Signup} />
                 <Route path={appRoutes.login} exact component={Login} />
-
                 <Route path={appRoutes.driver.signup} exact component={DriverSignup} />
                 <Route path={appRoutes.driver.login} exact component={DriverLogin} />
                 <Route path={appRoutes.driver.page} exact component={DriverPage} />
                 <Route path={appRoutes.driver.profile} exact component={DriverProfile} />
                 <Route path={appRoutes.driver.settings} exact component={DriverSettings} />
-
                 <Route path={appRoutes.admin.login} exact component={AdminLogin} />
                 <Route exact path={appRoutes.admin.page} component={AdminPage} />
                 <Route path={appRoutes.admin.profile} component={AdminProfile} />
