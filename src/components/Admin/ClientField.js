@@ -11,20 +11,20 @@ const ClientField = ({ usersList, client }) => {
         fields = usersList.users.map(({ passenger }) => {
           const {
             // eslint-disable-next-line camelcase
-            id, phone_number, first_name, last_name,
+            id, phoneNumber, firstName, lastName,
           } = passenger;
           return (
             <div key={id} className="list-group-item list-group-item-action ">
               <div className="d-flex w-100 justify-content-between">
                 <h5 className="mb-1">
                   {/* eslint-disable-next-line camelcase */}
-                  { `${first_name} ${last_name}` }
+                  { `${firstName} ${lastName}` }
                 </h5>
                 <small> </small>
               </div>
               <p className="mb-1">
                 {/* eslint-disable-next-line camelcase */}
-                { `Phone number ${phone_number}`}
+                { `Phone number ${phoneNumber}`}
               </p>
             </div>
           );

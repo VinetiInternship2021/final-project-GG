@@ -26,7 +26,6 @@ const UpdateHelper = async (fields, setFields, state, dispatch, history, params)
           });
           setFields({ ...fields, alert: errors });
         } catch {
-          // eslint-disable-next-line no-console
           console.log(response);
         }
       } else {
