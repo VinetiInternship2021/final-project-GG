@@ -20,10 +20,10 @@ const Taxi = ({ appState }) => {
   let log;
 
   const [message, setMessage] = useState('');
-  const [pickUpLocation, SetPickUpLocation] = useState();
-  const [dropOffLocation, SetDropOffLocation] = useState();
+  const [pickUpLocation, setPickUpLocation] = useState();
+  const [dropOffLocation, setDropOffLocation] = useState();
   const [driversPosition, SetDriversPosition] = useState();
-  const [drivers, SetDrivers] = useState();
+  const [drivers, setDrivers] = useState();
   //   const [distanceMatrix, SetDistanceMatrix] = useState();
   const [nearestDriverIndex, setNearestDriverIndex] = useState();
   const [price, setPrice] = useState();
@@ -36,7 +36,7 @@ const Taxi = ({ appState }) => {
     axios.get(`${baseUrl}/coordinates/drivers`, config)
       .then((response) => {
         // console.log('response.data.drivers: ', response.data.drivers);
-        SetDrivers(response.data.drivers);
+        setDrivers(response.data.drivers);
         const coordinates = response.data.drivers.map((driver) => ({
           lat: parseFloat(driver.latitude),
           lng: parseFloat(driver.longitude),
@@ -200,7 +200,7 @@ const Taxi = ({ appState }) => {
               title: 'Departure!',
             });
             count += 1;
-            SetPickUpLocation(mapsMouseEvent.latLng);
+            setPickUpLocation(mapsMouseEvent.latLng);
             toggle = false;
           } else {
             // eslint-disable-next-line no-unused-vars
@@ -210,7 +210,7 @@ const Taxi = ({ appState }) => {
               title: 'Destination',
             });
             count += 1;
-            SetDropOffLocation(mapsMouseEvent.latLng);
+            setDropOffLocation(mapsMouseEvent.latLng);
             toggle = true;
           }
         }

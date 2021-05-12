@@ -17,11 +17,11 @@ Rails.application.routes.draw do
       post 'drivers/signup' => 'super_users#create'
       post 'passengers/signup' => 'passengers#create'
       post 'drivers/coordinates' => 'drivers#createCoordinates'
-      get 'coordinates/drivers' => 'coordinates#getCoordinateDrivers'
-      post 'coordinates/trip_nearestdriver' => 'coordinates#trip_nearestdriver'
-      post '/coordinates/trip' => 'coordinates#trip'
-      post '/coordinates/confirm' => 'coordinates#confirm'
-      post '/coordinates/driverAssigned' => 'coordinates#driverAssigned'
+      get 'coordinates/drivers' => 'coordinates#getActiveDrivers' #
+      post 'coordinates/trip_nearestdriver' => 'coordinates#createReservation' #
+      post '/coordinates/trip' => 'coordinates#getReservation' #
+      post '/coordinates/confirm' => 'coordinates#confirmReservation' #
+      post '/coordinates/driverAssigned' => 'coordinates#assignedReservation' #
     end
   end
 end

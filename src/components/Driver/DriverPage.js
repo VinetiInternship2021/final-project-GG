@@ -45,6 +45,7 @@ const DriverPage = ({ appState }) => {
               lng: position.coords.longitude,
             };
             // console.log('watchPosition :', pos)
+            console.log(state.userId);
             axios.post(`${baseUrl}/drivers/coordinates`, {
               coordinates: {
                 latitude: position.coords.latitude,

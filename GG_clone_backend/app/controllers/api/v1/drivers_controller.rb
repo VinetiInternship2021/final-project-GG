@@ -40,6 +40,8 @@ class Api::V1::DriversController < ApplicationController
   end
 
   def createCoordinates
+    puts 'LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL'
+    puts params
     driver = Driver.find(params[:id])
     driver.latitude= params[:coordinates][:latitude]
     driver.longitude= params[:coordinates][:longitude]
