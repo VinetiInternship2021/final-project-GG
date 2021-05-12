@@ -28,16 +28,7 @@ import {
 import '../styles/custom.scss';
 
 const AppRoutes = ({ appState, dispatch }) => {
-  // const loginStatusChanger = (data) => {
-  //   dispatch(ChangeActionLoggedIn(data));
-  // };
-
-  // const loadingDone = () => {
-  //   dispatch(ChangeActionLoading(false));
-  // };
-
   const loginStatusChanger = (data) => {
-    // console.log('loggedIn ', data)
     dispatch(ChangeActionLoggedIn(data));
   };
   const loadingDone = () => {

@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Loader } from '@googlemaps/js-api-loader';
 import { connect } from 'react-redux';
@@ -12,7 +13,6 @@ const loader = new Loader({
 });
 const myLatlng = { lat: 40.18, lng: 44.53 };
 
-// eslint-disable-next-line react/prop-types
 const DriverPage = ({ appState }) => {
   const state = appState;
   const menuItems = DriverMenu();
@@ -25,7 +25,7 @@ const DriverPage = ({ appState }) => {
   const handleMap = useCallback((mapElement) => {
     if (mapElement == null) return;
 
-    // ------------------ map loading, binding the direction api to this map ------------------
+    // map loading, binding the direction api to this map
     loader.load().then(() => {
       map = new window.google.maps.Map(mapElement, {
         center: myLatlng,
@@ -35,7 +35,7 @@ const DriverPage = ({ appState }) => {
       directionsRenderer = new window.google.maps.DirectionsRenderer();
       directionsRenderer.setMap(map);
 
-      // ----------------------Gets and sends the driver location to sever ---------------------
+      // Gets and sends the driver location to sever
       const infoWindow = new window.google.maps.InfoWindow();
       if (navigator.geolocation) {
         const identifier = navigator.geolocation.watchPosition(
@@ -44,8 +44,6 @@ const DriverPage = ({ appState }) => {
               lat: position.coords.latitude,
               lng: position.coords.longitude,
             };
-            // console.log('watchPosition :', pos)
-            console.log(state.userId);
             axios.post(`${baseUrl}/drivers/coordinates`, {
               coordinates: {
                 latitude: position.coords.latitude,
@@ -53,27 +51,22 @@ const DriverPage = ({ appState }) => {
               },
               id: state.userId,
             })
-              // eslint-disable-next-line no-unused-vars
-              .then((response) => {
-                // console.log('drivers location response:', response);
+              .then(() => {
                 clearInterval(log);
 
-                // ----------------------------------- waits for new order -------------------------
+                // waits for new order
                 log = setInterval(
                   () => {
                     axios.post(`${baseUrl}/coordinates/trip`, {
                       id: state.userId,
                     })
-                      // eslint-disable-next-line no-shadow
                       .then((response) => {
-                        // console.log('interval');
                         if (response.data.data) {
                           navigator.geolocation.clearWatch(identifier);
                           setShowConfirm(true);
-                          // console.log('response from client: ', response)
                           clearInterval(log);
 
-                          // ----------- renders the new order route on the map --------------------
+                          // renders the new order route on the map
                           const request = {
                             origin: {
                               lat: parseFloat(response.data.data.pickupLat),
@@ -87,22 +80,17 @@ const DriverPage = ({ appState }) => {
                           };
                           directionsService.route(request, (result, status) => {
                             if (status === 'OK') {
-                              // console.log(result);
                               directionsRenderer.setDirections(result);
                             }
                           });
                         }
                       })
-                      // eslint-disable-next-line no-unused-vars
-                      .catch((error) => {
-                        // console.log(error);
+                      .catch(() => {
                       });
                   }, 3000,
                 );
               })
-              // eslint-disable-next-line no-unused-vars
-              .catch((error) => {
-                // console.log('drivers location response error:', error);
+              .catch(() => {
               });
 
             infoWindow.setPosition(pos);
@@ -111,14 +99,8 @@ const DriverPage = ({ appState }) => {
             map.setCenter(pos);
           },
           () => {
-            // eslint-disable-next-line no-undef
-            handleLocationError(true, infoWindow, map.getCenter());
           },
         );
-      } else {
-        // Browser doesn't support Geolocation
-        // eslint-disable-next-line no-undef
-        handleLocationError(false, infoWindow, map.getCenter());
       }
     });
   }, []);
@@ -127,12 +109,9 @@ const DriverPage = ({ appState }) => {
     axios.post(`${baseUrl}/coordinates/confirm`, {
       id: state.userId,
     })
-      // eslint-disable-next-line no-unused-vars
-      .then((response) => {
-        // console.log('confirmation response: ', response);
+      .then(() => {
       })
-      // eslint-disable-next-line no-unused-vars
-      .catch((error) => {
+      .catch(() => {
       });
   };
 
@@ -147,6 +126,10 @@ const DriverPage = ({ appState }) => {
       {showConfirm ? <button type="button" onClick={confirmation} className="btn btn-outline-success position-absolute top-50 start-50 translate-middle">Confirm</button> : null}
     </div>
   );
+};
+
+DriverPage.propTypes = {
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default connect(mapStateToProps)(DriverPage);
