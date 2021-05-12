@@ -1,5 +1,6 @@
 if @user.save
   json.created true
+  json.model_name 'SuperUser'
   json.user do
     json.id @user.id
     json.phone_number @user.phone_number
