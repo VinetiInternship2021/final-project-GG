@@ -2,12 +2,12 @@ if current_user && current_user[1] == 'SuperUser'
   json.array! @users do |user|
     json.driver do
       json.id user.id
-      json.phone_number user.phone_number
-      json.first_name user.first_name
-      json.last_name user.last_name
-      json.is_active user.is_active
-      json.is_verified_by_admin user.is_verified_by_admin
-      json.car_level user.car_level
+      json.phoneNumber user.phone_number
+      json.firstName user.first_name
+      json.lastName user.last_name
+      json.isActive user.is_active
+      json.isVerifiedByAdmin user.is_verified_by_admin
+      json.carLevel user.car_level
     end
   end
 else

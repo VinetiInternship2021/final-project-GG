@@ -10,27 +10,23 @@ const ClientField = ({ usersList, client }) => {
       try {
         fields = usersList.users.map(({ passenger }) => {
           const {
-            // eslint-disable-next-line camelcase
             id, phoneNumber, firstName, lastName,
           } = passenger;
           return (
             <div key={id} className="list-group-item list-group-item-action ">
               <div className="d-flex w-100 justify-content-between">
                 <h5 className="mb-1">
-                  {/* eslint-disable-next-line camelcase */}
                   { `${firstName} ${lastName}` }
                 </h5>
                 <small> </small>
               </div>
               <p className="mb-1">
-                {/* eslint-disable-next-line camelcase */}
                 { `Phone number ${phoneNumber}`}
               </p>
             </div>
           );
         });
       } catch (err) {
-        // eslint-disable-next-line no-console
         console.log(err);
       }
       break;
@@ -38,40 +34,36 @@ const ClientField = ({ usersList, client }) => {
       try {
         fields = usersList.users.map(({ driver }) => {
           const {
-            // eslint-disable-next-line camelcase
-            id, phone_number, first_name, last_name, is_active, is_verified_by_admin,
+            id, phoneNumber, firstName, lastName, isActive, isVerifiedByAdmin,
           } = driver;
-          let verified;
-          let active;
-          // eslint-disable-next-line camelcase,no-unused-expressions
-          is_verified_by_admin ? verified = 'bg-success' : verified = 'bg-danger';
-          // eslint-disable-next-line camelcase,no-unused-expressions
-          is_active ? active = 'bg-success' : active = 'bg-danger';
+          let verified = 'bg-danger';
+          let active = 'bg-danger';
+          if (isVerifiedByAdmin) {
+            verified = 'bg-success';
+            if (isActive) {
+              active = 'bg-success';
+            }
+          }
           return (
             <div key={id} className="list-group-item list-group-item-action">
               <div className="d-flex w-100 justify-content-between align-items-center">
                 <h5 className="mb-1">
-                  {/* eslint-disable-next-line camelcase */}
-                  { `${first_name} ${last_name}` }
+                  { `${firstName} ${lastName}` }
                 </h5>
                 <span className={`badge ${verified}`}>
-                  {/* eslint-disable-next-line camelcase */}
-                  {is_verified_by_admin ? 'Confirmed' : 'Unconfirmed'}
+                  {isVerifiedByAdmin ? 'Confirmed' : 'Unconfirmed'}
                 </span>
               </div>
               <p className="mb-1">
-                {/* eslint-disable-next-line camelcase */}
-                { `Phone number ${phone_number}`}
+                { `Phone number ${phoneNumber}`}
               </p>
               <small className={`badge ${active}`}>
-                {/* eslint-disable-next-line camelcase */}
-                {is_active ? 'Active' : 'Inactive'}
+                {isActive ? 'Active' : 'Inactive'}
               </small>
             </div>
           );
         });
       } catch (err) {
-        // eslint-disable-next-line no-console
         console.log(err);
       }
       break;
