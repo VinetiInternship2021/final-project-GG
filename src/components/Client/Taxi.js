@@ -1,10 +1,16 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Loader } from '@googlemaps/js-api-loader';
 import { connect } from 'react-redux';
-import { rating, baseUrl } from '../../utils/configs';
+import { rating } from '../../utils/configs';
 import { mapStateToProps } from '../../redux/actions';
+import useDriverCoordinates from '../../custom hooks/useDriversCoordinates';
+import useDistanceMatrix from '../../custom hooks/useDistanceMatrix';
+import useNearestDriver from '../../custom hooks/useNearestDriver';
+import findNDI from '../../callbacks/findNDI';
+import findReservationPrice from '../../callbacks/findReservationPrice';
+import '../../styles/map.css';
 
 let toggle = true;
 let count = 0;
@@ -15,139 +21,37 @@ const loader = new Loader({
 
 const Taxi = ({ appState }) => {
   const state = appState;
-  let log;
+  let map;
 
   const [message, setMessage] = useState('');
   const [pickUpLocation, setPickUpLocation] = useState();
   const [dropOffLocation, setDropOffLocation] = useState();
-  const [driversPosition, setDriversPosition] = useState();
-  const [drivers, setDrivers] = useState();
   const [nearestDriverIndex, setNearestDriverIndex] = useState();
   const [price, setPrice] = useState();
 
   // Gets and sets the available drivers coordinates
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-    const config = { cancelToken: source.token };
-
-    axios.get(`${baseUrl}/coordinates/drivers`, config)
-      .then((response) => {
-        setDrivers(response.data.drivers);
-        const coordinates = response.data.drivers.map((driver) => ({
-          lat: parseFloat(driver.latitude),
-          lng: parseFloat(driver.longitude),
-        }));
-        setDriversPosition(coordinates);
-      })
-      .catch(() => {
-      });
-    return () => {
-      source.cancel();
-    };
-  }, []);
+  const { driversPosition, drivers } = useDriverCoordinates();
 
   // DistanceMatrix: finds the nearest driver to the passenger
-  let map;
-  function callback1(response) {
-    const distanceMatrixArray = response.rows[0].elements;
-    const distanceValues = distanceMatrixArray.map((value) => value.distance.value);
-    distanceValues.sort((a, b) => a - b);
-    const ndriverIndex = distanceMatrixArray.findIndex(
-      (elem) => elem.distance.value === distanceValues[0],
-    );
-    setNearestDriverIndex(ndriverIndex);
-  }
-  if (driversPosition && pickUpLocation) {
-    const service = new window.google.maps.DistanceMatrixService();
-    service.getDistanceMatrix(
-      {
-        origins: [pickUpLocation],
-        destinations: driversPosition,
-        travelMode: 'DRIVING',
-      }, callback1,
-    );
-  }
+  const findDriverIndex = (response) => {
+    setNearestDriverIndex(findNDI(response));
+  };
+  useDistanceMatrix(driversPosition, pickUpLocation, findDriverIndex, window.google);
 
   // DistanceMatrix: finds the trip distance and calculate price based on vehicle type
-  function callback2(response) {
-    const distanceMatrixArrayClient = response.rows[0].elements;
-    const distanceValue = distanceMatrixArrayClient.map((value) => value.distance.value);
-    distanceValue.sort((a, b) => a - b);
-    let tripPrice = 0;
-    switch (state.carType) {
-      case 'Econom':
-        tripPrice = (distanceValue[0] / 1000) * 100;
-        break;
-      case 'Business':
-        tripPrice = (distanceValue[0] / 1000) * 150;
-        break;
-      case 'First class':
-        tripPrice = (distanceValue[0] / 1000) * 200;
-        break;
-      case 'Cargo van':
-        tripPrice = (distanceValue[0] / 1000) * 250;
-        break;
-      default:
-        tripPrice = 0;
-    }
-    tripPrice = Math.round(tripPrice / 100) * 100;
-    setPrice(Math.round(tripPrice / 100) * 100);
+  const findPrice = (response) => {
+    let tripPrice = findReservationPrice(response, state);
     if (tripPrice < 500) {
       tripPrice = 500;
-      setPrice(500);
     }
+    setPrice(tripPrice);
     setMessage(`The price of your trip will be ${tripPrice} AMD`);
-  }
-  useEffect(() => {
-    if (dropOffLocation && pickUpLocation) {
-      const service = new window.google.maps.DistanceMatrixService();
-      service.getDistanceMatrix(
-        {
-          origins: [pickUpLocation],
-          destinations: [dropOffLocation],
-          travelMode: 'DRIVING',
-        }, callback2,
-      );
-    }
-  }, [pickUpLocation, dropOffLocation]);
+  };
+  useDistanceMatrix(dropOffLocation, pickUpLocation, findPrice, window.google);
 
   // sends all gathered info to server for new resrevation, waits for confirmation from driver
-  useEffect(() => {
-    const source = axios.CancelToken.source();
-    const config = { cancelToken: source.token };
-    if (drivers && pickUpLocation && dropOffLocation && nearestDriverIndex !== undefined && price) {
-      axios.post(`${baseUrl}/coordinates/trip_nearestdriver`, {
-        pickUpLocation,
-        dropOffLocation,
-        driverId: drivers[nearestDriverIndex].id,
-        passengerId: state.userId,
-        price,
-      }, config)
-        .then(() => {
-          clearInterval(log);
-          log = setInterval(
-            () => {
-              axios.post(`${baseUrl}/coordinates/driverAssigned`, {
-                id: state.userId,
-              })
-                .then((response) => {
-                  if (response.data.message !== 'error') {
-                    setMessage('your driver is on the way');
-                    clearInterval(log);
-                  }
-                })
-                .catch(() => {
-                });
-            }, 3000,
-          );
-        })
-        .catch(() => {
-        });
-    }
-    return () => {
-      source.cancel();
-    };
-  }, [pickUpLocation, dropOffLocation, drivers, nearestDriverIndex, price]);
+  const conformationMessage = useNearestDriver(drivers, pickUpLocation, dropOffLocation,
+    nearestDriverIndex, price, state);
 
   // loads the map, sets the pickup and dropoff locations via clicking
   const myLatlng = { lat: 40.18, lng: 44.53 };
@@ -206,13 +110,14 @@ const Taxi = ({ appState }) => {
   ));
 
   return (
-    <div className="text-center border position-absolute top-50 start-50 translate-middle" style={{ width: '700px', height: '670px' }}>
+    <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
       <p>Taxi/map</p>
-      <div ref={handleMap} className="text-center border position-absolute top-0 start-50 translate-middle mb-6" style={{ width: '660px', height: '500px' }} />
-      <div className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-4" style={{ width: '350px', height: '60px' }}>
+      <div ref={handleMap} className="text-center border position-absolute top-0 start-50 translate-middle mb-6" id="mapWindow" />
+      <div className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-4" id="rateButton">
         <p className="mb-1">Rate the driver</p>
         {rateButton}
       </div>
+      <h6 className="text-center position-absolute start-50 translate-middle-x mb-2">{conformationMessage}</h6>
       <h6 className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-2">{message}</h6>
     </div>
   );

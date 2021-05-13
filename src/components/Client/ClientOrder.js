@@ -28,14 +28,14 @@ const ClientPage = ({ appState, dispatch }) => {
 
   return (
     <div className="position-relative">
-      <div className="card text-center position-absolute top-0 start-0 ms-4 mt-3" style={{ width: '150px', height: '125px' }}>
+      <div>
         <ul className="list-group list-group-flush">
           {menuItems}
         </ul>
       </div>
 
-      <div className="card text-center border position-fixed top-50 start-50 translate-middle" style={{ width: '300px', height: '280px' }}>
-        <h5 className="mt-3 mb-3">Choose Vehicle Type</h5>
+      <div className="card text-center border position-fixed top-50 start-50 translate-middle" id="vehicleTypeContainer">
+        <h5 className="mt-1 mb-3">Choose Vehicle Type</h5>
         {orderButton}
       </div>
     </div>

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import DriverMenu from '../../utils/DriverMenu';
 import { baseUrl } from '../../utils/configs';
 import { mapStateToProps } from '../../redux/actions';
+import '../../styles/map.css';
 
 const loader = new Loader({
   apiKey: 'AIzaSyCDKUKfCo0eUyGRgdvlTwGnHXnWBtjyal4',
@@ -117,13 +118,16 @@ const DriverPage = ({ appState }) => {
 
   return (
     <div className="position-relative">
-      <div className="card text-center position-absolute top-0 start-0 ms-4 mt-3" style={{ width: '150px', height: '166px' }}>
+      <div className="card text-center position-absolute top-0 start-0 ms-4 mt-3" id="menuContainer">
         <ul className="list-group list-group-flush">
           {menuItems}
         </ul>
       </div>
-      <div ref={handleMap} className="text-center border position-absolute top-50 start-50 translate-middle mb-6" style={{ width: '660px', height: '500px' }} />
-      {showConfirm ? <button type="button" onClick={confirmation} className="btn btn-outline-success position-absolute top-50 start-50 translate-middle">Confirm</button> : null}
+      <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
+        <div ref={handleMap} className="text-center border position-absolute start-50 translate-middle mt-3" id="mapWindow" />
+        {showConfirm ? <button type="button" onClick={confirmation} className="btn btn-outline-success position-absolute top-0 start-50 translate-middle">Confirm</button> : null}
+      </div>
+
     </div>
   );
 };
