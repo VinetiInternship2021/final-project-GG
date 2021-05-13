@@ -4,11 +4,14 @@ AllCops:
   TargetRubyVersion: 2.5
 Layout/LineLength:
   Max: 120
+Style/EndOfLine:
+  EnforcedStyle: crlf
 Metrics/BlockLength:
   Exclude:
     - '**/*.gemspec'
     - '**/routes.rb'
     - '**/spec/**/*'
+    - '**db/schema.rb'
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
 Style/SymbolArray:
@@ -29,3 +32,5 @@ RSpec/MessageSpies:
   EnforcedStyle: have_received
 Metrics/ParameterLists:
   CountKeywordArgs: false
+Metrics/MethodLength:
+  Max: 20
