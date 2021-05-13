@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Loader } from '@googlemaps/js-api-loader';
@@ -10,11 +10,8 @@ import useDistanceMatrix from '../../custom hooks/useDistanceMatrix';
 import useNearestDriver from '../../custom hooks/useNearestDriver';
 import findNearestDriverIndex from '../../callbacks/findNearestDriverIndex';
 import findReservationPrice from '../../callbacks/findReservationPrice';
+import useMapLoader from '../../custom hooks/useMapLoader';
 import '../../styles/map.css';
-
-let toggle = true;
-
-let count = 0;
 
 const loader = new Loader({
 
@@ -25,8 +22,6 @@ const loader = new Loader({
 
 const Taxi = ({ appState }) => {
   const state = appState;
-
-  let map;
 
   const [message, setMessage] = useState('');
 
@@ -46,18 +41,7 @@ const Taxi = ({ appState }) => {
     setNearestDriverIndex(findNearestDriverIndex(response));
   };
 
-  // useDistanceMatrix({
-  //   origins: driversPosition,
-  //   destinatins: pickUpLocation,
-  //   callback: findDriverIndex,
-  //   google: window.google,
-  // });
-  useDistanceMatrix(
-    driversPosition,
-    pickUpLocation,
-    findDriverIndex,
-    window.google,
-  );
+  useDistanceMatrix(driversPosition, pickUpLocation, findDriverIndex, window.google);
 
   // DistanceMatrix: finds the trip distance and calculate price based on vehicle type
   const findPrice = (response) => {
@@ -80,56 +64,7 @@ const Taxi = ({ appState }) => {
     nearestDriverIndex, price, state);
 
   // loads the map, sets the pickup and dropoff locations via clicking
-  const myLatlng = { lat: 40.18, lng: 44.53 };
-
-  const handleMap = useCallback((mapElement) => {
-    if (!mapElement) return;
-
-    loader.load().then(() => {
-      map = new window.google.maps.Map(mapElement, {
-
-        center: myLatlng,
-        zoom: 13,
-
-      });
-
-      map.addListener('click', (mapsMouseEvent) => {
-        if (count < 2) {
-          if (toggle) {
-            // eslint-disable-next-line no-unused-vars
-            const marker1 = new window.google.maps.Marker({
-
-              position: mapsMouseEvent.latLng,
-              map,
-              title: 'Departure!',
-
-            });
-
-            count += 1;
-
-            setPickUpLocation(mapsMouseEvent.latLng);
-
-            toggle = false;
-          } else {
-            // eslint-disable-next-line no-unused-vars
-            const marker2 = new window.google.maps.Marker({
-
-              position: mapsMouseEvent.latLng,
-              map,
-              title: 'Destination',
-
-            });
-
-            count += 1;
-
-            setDropOffLocation(mapsMouseEvent.latLng);
-
-            toggle = true;
-          }
-        }
-      });
-    });
-  }, []);
+  const handleMap = useMapLoader(loader, setPickUpLocation, setDropOffLocation);
 
   // rate the driver: not included yet
   const onSelect = (event) => {

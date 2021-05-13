@@ -78,11 +78,4 @@ class Api::V1::CoordinatesController < ApplicationController
     reservation.dropoffLng = params[:dropOffLocation][:lng]
     reservation
   end
-
-  # private def user_params
-  #   params.require(:driver).permit(:first_name, :last_name, :phone_number,
-  #                                  :email, :car_manufacturer, :car_model,
-  #                                  :car_registration_number, :car_level,
-  #                                  :password, :password_confirmation)
-  # end
 end

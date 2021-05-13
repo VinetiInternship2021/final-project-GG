@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       post 'login' => 'sessions#create'
       delete 'logout' => 'sessions#destroy'
       get 'user_in' => 'sessions#user_in'
-      post 'drivers/coordinates' => 'drivers#create_coordinates'
+      post 'drivers/coordinates' => 'coordinates#update_driver_coordinates'
       get 'coordinates/drivers' => 'coordinates#active_drivers'
       post 'coordinates/trip_nearestdriver' => 'coordinates#create_reservation'
       post '/coordinates/trip' => 'coordinates#reservation'
