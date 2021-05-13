@@ -9,12 +9,12 @@ Rails.application.routes.draw do
       post 'login' => 'sessions#create'
       delete 'logout' => 'sessions#destroy'
       get 'user_in' => 'sessions#user_in'
-      post 'drivers/coordinates' => 'drivers#createCoordinates'
-      get 'coordinates/drivers' => 'coordinates#getActiveDrivers'
-      post 'coordinates/trip_nearestdriver' => 'coordinates#createReservation'
-      post '/coordinates/trip' => 'coordinates#getReservation'
-      post '/coordinates/confirm' => 'coordinates#confirmReservation'
-      post '/coordinates/driverAssigned' => 'coordinates#assignedReservation'
+      post 'drivers/coordinates' => 'drivers#create_coordinates'
+      get 'coordinates/drivers' => 'coordinates#active_drivers'
+      post 'coordinates/trip_nearestdriver' => 'coordinates#create_reservation'
+      post '/coordinates/trip' => 'coordinates#reservation'
+      post '/coordinates/confirm' => 'coordinates#confirm_reservation'
+      post '/coordinates/driverAssigned' => 'coordinates#assigned_reservation'
     end
   end
 end

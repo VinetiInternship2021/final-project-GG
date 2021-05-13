@@ -1,6 +1,5 @@
 class Api::V1::CoordinatesController < ApplicationController
-  # def createCoordinateDriver
-  def updateDriverCoordinates
+  def update_driver_coordinates
     driver = Driver.find(params[:id])
     driver.latitude = params[:coordinates][:latitude]
     driver.longitude = params[:coordinates][:longitude]
@@ -12,8 +11,7 @@ class Api::V1::CoordinatesController < ApplicationController
     end
   end
 
-  # def getCoordinateDrivers
-  def getActiveDrivers
+  def active_drivers
     drivers = Driver.where('LENGTH(latitude) > 0')
     array = []
     drivers.each do |driver|
@@ -28,18 +26,14 @@ class Api::V1::CoordinatesController < ApplicationController
     end
   end
 
-  # def trip_nearestdriver
-  def createReservation
+  def create_reservation
     reservation = Reservation.find_by(driver_id: params[:id], status: 'unassigned')
     return if reservation
 
     passenger = Passenger.find(params[:passengerId])
     reservation = passenger.reservations.create(driver_id: params[:driverId])
-    reservation.pickupLat = params[:pickUpLocation][:lat]
-    reservation.pickupLng = params[:pickUpLocation][:lng]
-    reservation.dropoffLat = params[:dropOffLocation][:lat]
-    reservation.dropoffLng = params[:dropOffLocation][:lng]
     reservation.status = 'unassigned'
+    reservation = fetch_params reservation
     if reservation.save
       render json: { message: 'reservation has been saved' }, status: :ok
     else
@@ -47,8 +41,7 @@ class Api::V1::CoordinatesController < ApplicationController
     end
   end
 
-  # def trip
-  def getReservation
+  def reservation
     reservation = Reservation.find_by(driver_id: params[:id], status: 'unassigned')
     if reservation
       render json: { data: reservation }
@@ -57,8 +50,7 @@ class Api::V1::CoordinatesController < ApplicationController
     end
   end
 
-  # def confirm
-  def confirmReservation
+  def confirm_reservation
     reservation = Reservation.find_by(driver_id: params[:id], status: 'unassigned')
     return unless reservation
 
@@ -70,14 +62,21 @@ class Api::V1::CoordinatesController < ApplicationController
     end
   end
 
-  # def driverAssigned
-  def assignedReservation
+  def assigned_reservation
     reservation = Reservation.find_by(passenger_id: params[:id], status: 'assigned')
     if reservation
       render json: { message: 'driver confirmed the trip and is on the way' }
     else
       render json: { message: 'error' }
     end
+  end
+
+  def fetch_params(reservation)
+    reservation.pickupLat = params[:pickUpLocation][:lat]
+    reservation.pickupLng = params[:pickUpLocation][:lng]
+    reservation.dropoffLat = params[:dropOffLocation][:lat]
+    reservation.dropoffLng = params[:dropOffLocation][:lng]
+    reservation
   end
 
   # private def user_params
