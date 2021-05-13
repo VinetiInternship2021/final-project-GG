@@ -4,14 +4,16 @@ AllCops:
   TargetRubyVersion: 2.5
 Layout/LineLength:
   Max: 120
+  Exclude:
+    - '**/bin/bundle'
 Style/EndOfLine:
-  EnforcedStyle: crlf
+  Enabled: false
 Metrics/BlockLength:
   Exclude:
     - '**/*.gemspec'
     - '**/routes.rb'
     - '**/spec/**/*'
-    - '**db/schema.rb'
+    - '**/db/schema.rb'
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
 Style/SymbolArray:
@@ -34,3 +36,9 @@ Metrics/ParameterLists:
   CountKeywordArgs: false
 Metrics/MethodLength:
   Max: 20
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - '**/bin/bundle'
+Metrics/PerceivedComplexity:
+  Exclude:
+    - '**/bin/bundle'
