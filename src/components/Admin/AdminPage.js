@@ -1,24 +1,27 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { AdminPageButtons } from '../../utils/configs';
 import { PageButton } from '../Buttons';
 import MenuHelper from '../../helpers/MenuHelper';
+import { mapStateToProps } from '../../redux/actions';
 
-const DriverPage = () => {
+const AdminPage = ({ appState: { userId } }) => {
   const history = useHistory();
-  const location = useLocation();
 
   const onSelect = (event) => {
-    const path = MenuHelper({ event, location });
+    const path = MenuHelper({ event, userId });
     history.push(path);
   };
 
-  const buttons = AdminPageButtons.map((button) => (
+  const buttons = Object.keys(AdminPageButtons).map((buttonKey) => (
     <PageButton
-      button={button[0]}
+      key={buttonKey.text}
+      button={buttonKey.text}
       onSelect={onSelect}
       buttonClassName="column"
-      className={button[1]}
+      className={buttonKey.icon}
     />
   ));
 
@@ -37,4 +40,8 @@ const DriverPage = () => {
   );
 };
 
-export default DriverPage;
+AdminPage.propTypes = {
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
+export default connect(mapStateToProps)(AdminPage);

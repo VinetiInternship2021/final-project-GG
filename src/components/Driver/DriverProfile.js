@@ -17,7 +17,6 @@ const DriverProfile = ({ match }) => {
   useEffect(() => {
     const modelName = 'drivers';
     getUserData({ state, setState, modelName })
-      .then();
   }, []);
 
   return (
