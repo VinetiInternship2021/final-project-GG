@@ -13,6 +13,10 @@ $GridSize: 6.5em;
     transition: all .25s linear;
 }
 
+.list-group-item {
+    position: relative;
+}
+
 .body {
     margin-top: 10px;
     position: relative;
@@ -20,7 +24,7 @@ $GridSize: 6.5em;
 }
 
 .translate-middle {
-    transform: translate(-50%,10%)!important;
+    transform: translate(-50%,50px)!important;
 }
 body {
     position: relative;
@@ -43,6 +47,7 @@ body {
     position: absolute;
     display: flex;
     justify-content: space-between;
+    transform: scale(0.9);
 }
 
 .btn {
