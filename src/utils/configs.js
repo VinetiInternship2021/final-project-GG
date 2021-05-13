@@ -10,14 +10,17 @@ export const appRoutes = {
   client: '/passenger/:id',
   clientsList: '/SuperUser/:id/:client',
   driver: '/driver/:id',
+  admin: '/admin',
   adminPage: '/SuperUser/:id',
   adminProfile: '/SuperUser/:id/profile',
   adminClients: '/SuperUser/:id/:client',
   taxi: '/taxi',
-  clientHistory: '#',
-  clientSettings: '#',
+  clientHistory: '/passenger/history',
+  clientSettings: '/passenger/settings',
   driverPage: '/driver/:id',
   driverProfile: '/driver/:id/profile',
+  driverSettings: '/driver/:id/settings',
+  driverHistory: '/driver/:id/history',
 };
 
 const loginText = 'Login';
@@ -37,15 +40,18 @@ export const clientPageItems = [
   ['Settings', 'fas fa-cog'],
 ];
 
+export const driverPageItems = ['New Order', 'My history', 'Settings', 'Profile'];
+
 export const buttons = ['Client', 'Driver'];
 
-export const orderTypes = [
-  ['Econom', 'fas fa-taxi'],
-  ['Business', 'fas fa-taxi'],
-  ['Child seat', 'fas fa-taxi'],
-  ['7 seater', 'fas fa-taxi'],
-  ['Cargo van', 'fas fa-taxi'],
-];
+export const orderTypes = ['Econom', 'Business', 'First class', 'Cargo van'];
+// export const orderTypes = [
+//   ['Econom', 'fas fa-taxi'],
+//   ['Business', 'fas fa-taxi'],
+//   ['Child seat', 'fas fa-taxi'],
+//   ['7 seater', 'fas fa-taxi'],
+//   ['Cargo van', 'fas fa-taxi'],
+// ];
 
 export const rating = [1, 2, 3, 4, 5];
 

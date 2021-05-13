@@ -1,0 +1,44 @@
+require:
+  - rubocop-rspec
+AllCops:
+  TargetRubyVersion: 2.5
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - '**/bin/bundle'
+Style/EndOfLine:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - '**/*.gemspec'
+    - '**/routes.rb'
+    - '**/spec/**/*'
+    - '**/db/schema.rb'
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+Style/SymbolArray:
+  EnforcedStyle: brackets
+Style/WordArray:
+  EnforcedStyle: brackets
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+Style/Documentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+RSpec/MessageSpies:
+  EnforcedStyle: have_received
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+Metrics/MethodLength:
+  Max: 20
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - '**/bin/bundle'
+Metrics/PerceivedComplexity:
+  Exclude:
+    - '**/bin/bundle'

@@ -5,14 +5,16 @@ Rails.application.routes.draw do
       resources :drivers
       resources :super_users
       resources :passengers
-      get 'super_users/new'
-      get 'super_users/show'
-      get 'drivers/show'
-      get 'passengers/show'
       get 'login' => 'sessions#new'
       post 'login' => 'sessions#create'
       delete 'logout' => 'sessions#destroy'
       get 'user_in' => 'sessions#user_in'
+      post 'drivers/coordinates' => 'drivers#create_coordinates'
+      get 'coordinates/drivers' => 'coordinates#active_drivers'
+      post 'coordinates/trip_nearestdriver' => 'coordinates#create_reservation'
+      post '/coordinates/trip' => 'coordinates#reservation'
+      post '/coordinates/confirm' => 'coordinates#confirm_reservation'
+      post '/coordinates/driverAssigned' => 'coordinates#assigned_reservation'
     end
   end
 end

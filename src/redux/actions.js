@@ -5,6 +5,7 @@ import {
   ACTION_ADD_USERS_LIST,
   ACTION_CLEAR_USERS_LIST,
   ACTION_ADD_UNVERIFIED_USERS_LIST,
+  CREATE_CAR_TYPE,
 } from './actionTypes';
 
 export const ChangeActionLoading = (isLoading) => ({
@@ -34,6 +35,11 @@ export const ActionClearUsersList = () => ({
 export const ActionAddUnverifiedUsersList = (usersList) => ({
   type: ACTION_ADD_UNVERIFIED_USERS_LIST,
   payload: usersList,
+});
+
+export const createCarType = (type) => ({
+  type: CREATE_CAR_TYPE,
+  payload: type,
 });
 
 export const mapStateToProps = (state) => {

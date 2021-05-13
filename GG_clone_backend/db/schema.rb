@@ -10,48 +10,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_26_050830) do
-
-  create_table "drivers", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "phone_number"
-    t.string "email"
-    t.string "car_manufacturer"
-    t.string "car_model"
-    t.string "car_registration_number"
-    t.string "driver_license_image_id"
-    t.boolean "is_active", default: false
-    t.boolean "is_verified_by_admin", default: false
-    t.string "car_level"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest"
-    t.string "remember_digest"
-    t.index ["phone_number"], name: "index_drivers_on_phone_number", unique: true
+ActiveRecord::Schema.define(version: 20_210_507_170_956) do
+  create_table 'drivers', force: :cascade do |t|
+    t.string 'first_name'
+    t.string 'last_name'
+    t.string 'phone_number'
+    t.string 'email'
+    t.string 'car_manufacturer'
+    t.string 'car_model'
+    t.string 'car_registration_number'
+    t.string 'driver_license_image_id'
+    t.boolean 'is_active', default: false
+    t.boolean 'is_verified_by_admin', default: false
+    t.string 'car_level'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'password_digest'
+    t.string 'remember_digest'
+    t.decimal 'latitude'
+    t.decimal 'longitude'
+    t.index ['phone_number'], name: 'index_drivers_on_phone_number', unique: true
   end
 
-  create_table "passengers", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "phone_number"
-    t.string "email"
-    t.string "password_digest"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "remember_digest"
-    t.index ["phone_number"], name: "index_passengers_on_phone_number", unique: true
+  create_table 'passengers', force: :cascade do |t|
+    t.string 'first_name'
+    t.string 'last_name'
+    t.string 'phone_number'
+    t.string 'email'
+    t.string 'password_digest'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'remember_digest'
+    t.index ['phone_number'], name: 'index_passengers_on_phone_number', unique: true
   end
 
-  create_table "super_users", force: :cascade do |t|
-    t.string "phone_number"
-    t.string "first_name"
-    t.string "last_name"
-    t.string "password_digest"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "remember_digest"
-    t.index ["phone_number"], name: "index_super_users_on_phone_number", unique: true
+  create_table 'reservations', force: :cascade do |t|
+    t.integer 'driver_id'
+    t.integer 'passenger_id'
+    t.decimal 'pickupLat'
+    t.decimal 'pickupLng'
+    t.decimal 'dropoffLat'
+    t.decimal 'dropoffLng'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'status'
+    t.integer 'rating'
   end
 
+  create_table 'super_users', force: :cascade do |t|
+    t.string 'phone_number'
+    t.string 'first_name'
+    t.string 'last_name'
+    t.string 'password_digest'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'remember_digest'
+    t.index ['phone_number'], name: 'index_super_users_on_phone_number', unique: true
+  end
 end

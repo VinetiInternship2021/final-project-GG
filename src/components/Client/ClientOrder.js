@@ -1,51 +1,40 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import { appRoutes, orderTypes } from '../../utils/configs';
 import { ClientMenu } from '../../utils/ClientMenu';
-import { PageButton } from '../Buttons';
+import { mapStateToProps, createCarType } from '../../redux/actions';
 
-const ClientPage = () => {
+const ClientPage = ({ appState, dispatch }) => {
+  const state = appState;
   const history = useHistory();
+  const menuItems = ClientMenu();
 
   const handleOrders = (order) => {
-    axios.post('/client/order', {
-      order,
-    })
-      .then((response) => response)
-      .catch((error) => error);
+    dispatch(createCarType({
+      ...state,
+      type: order,
+    }));
     history.push(appRoutes.taxi);
   };
 
   const orderButton = orderTypes.map((order) => (
-    <PageButton
-      button={order[0]}
-      onSelect={handleOrders}
-      buttonClassName="grid"
-      className={order[1]}
-    />
+    <div key={order}>
+      <button onClick={() => handleOrders(order)} className="btn btn-outline-success mb-1 w-50" type="submit">{order}</button>
+      <br />
+    </div>
   ));
 
   return (
-  // <div className="position-relative">
-    // eslint-disable-next-line max-len
-  //     <div className="card text-center position-absolute top-0 start-0 ms-4 mt-3" style={{ width: "150px", height: "125px" }}>
-  // {/*    <ul className="list-group list-group-flush">*/}
-  // {/*        {menuItems}*/}
-  // {/*    </ul>*/}
-  // {/*</div>*/}
-    // eslint-disable-next-line max-len
-  // <div className="card text-center border position-fixed top-50 start-50 translate-middle" style={{ width: "300px", height: "280px" }}>
-    <div>
-      <div className="menu">
-        <ul>
-          <ClientMenu />
+    <div className="position-relative">
+      <div className="card text-center position-absolute top-0 start-0 ms-4 mt-3" style={{ width: '150px', height: '125px' }}>
+        <ul className="list-group list-group-flush">
+          {menuItems}
         </ul>
       </div>
 
-      {/* eslint-disable-next-line max-len */}
-      {/* Block with className="ui-component container-md" intended for inserting users functionality (f.e. Maps) */}
-      <div className="ui-component container-md">
+      <div className="card text-center border position-fixed top-50 start-50 translate-middle" style={{ width: '300px', height: '280px' }}>
         <h5 className="mt-3 mb-3">Choose Vehicle Type</h5>
         {orderButton}
       </div>
@@ -53,4 +42,9 @@ const ClientPage = () => {
   );
 };
 
-export default ClientPage;
+ClientPage.propTypes = {
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps)(ClientPage);
