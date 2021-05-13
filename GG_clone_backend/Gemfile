@@ -13,7 +13,8 @@ gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 gem 'jwt'
-
+gem 'rubocop', '~> 1.14', require: false
+gem 'rubocop-rspec', require: false
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -27,7 +28,7 @@ gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]# Use sqlite3 as the database for Active Record
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw] # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.4'
 end
 

@@ -16,7 +16,7 @@ if current_user?(@user, 'Driver')
       json.is_active @user.is_active
       json.is_verified_by_admin @user.is_verified_by_admin
       json.car_registration_number @user.car_registration_number
-      end
+    end
   end
 else
   json.errors 'dont have access'

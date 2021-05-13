@@ -1,5 +1,4 @@
 class Api::V1::PassengersController < ApplicationController
-
   def index
     @users = Passenger.all
   end
@@ -22,26 +21,23 @@ class Api::V1::PassengersController < ApplicationController
   end
 
   def update
+    @user = Passenger.find(params[:id])
     if current_user?(@user, 'Driver')
-      @user = Passenger.find(params[:id])
       if @user.update(user_params)
-        render status: :updated, location: api_v1_super_users_path(@user)
-      else
-        render json: @user.errors, status: :unprocessable_entity
+        render json: { 'status': 'saved' }, status: :accepted
+      else render json: @user.errors, status: :unprocessable_entity
       end
-    else
-      if @user.errors.empty?
-        render json: { 'errors': 'dont have access' }, status: :unprocessable_entity
-      else
-        render json: @user.errors, status: :unprocessable_entity
-      end
+    elsif @user.errors.empty?
+      render json: { 'errors': 'dont have access' }, status: :unprocessable_entity
+    else render json: @user.errors, status: :unprocessable_entity
     end
   end
 
-  private def user_params
-    params.require(:passenger).permit(:first_name, :last_name, :phone_number,
-                                     :email,
-                                     :password, :password_confirmation)
-  end
+  private
 
+  def user_params
+    params.require(:passenger).permit(:first_name, :last_name, :phone_number,
+                                      :email,
+                                      :password, :password_confirmation)
+  end
 end
