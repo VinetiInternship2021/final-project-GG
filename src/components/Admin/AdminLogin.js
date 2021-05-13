@@ -17,8 +17,7 @@ const AdminLogin = ({ appState, dispatch }) => {
 
   const onClick = (event, Fields, SetFields, State, Dispatch, History) => {
     event.preventDefault();
-    LoginHelper(Fields, SetFields, State, Dispatch, History)
-      .then();
+    LoginHelper(Fields, SetFields, State, Dispatch, History);
   };
 
   useEffect(() => {

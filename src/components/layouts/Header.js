@@ -40,8 +40,7 @@ const Header = ({ appState, dispatch }) => {
           loggedIn: false,
           userType: '',
           userId: '',
-        })))
-        .then();
+        })));
     }
     history.push(Switch(button, location, state));
   };

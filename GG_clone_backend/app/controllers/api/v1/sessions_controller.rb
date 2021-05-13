@@ -1,16 +1,20 @@
 class Api::V1::SessionsController < ApplicationController
+
   include ActionController::Cookies
   include ActionController::RequestForgeryProtection
+  before_action :fetch_model_user, only: [:create]
 
-  def new
+  def new; end
+
+  def fetch_model_user
+    @model_name, @model = choose_model(params[:session][:model_name])
+    @user = @model.find_by(phone_number: params[:session][:phone_number])
   end
 
   def create
-    @model_name, @model = choose_model(params[:session][:model_name])
-    @user = @model.find_by(phone_number: params[:session][:phone_number])
     user = @user
     model_name = @model_name
-    if user && user.authenticate(params[:session][:password])
+    if user&.authenticate(params[:session][:password])
       log_in user, model_name
       params[:session][:remember_me] == '1' ? remember(user, model_name) : forget(user)
       render status: :ok
@@ -35,25 +39,21 @@ class Api::V1::SessionsController < ApplicationController
 
   def log_out
     user = current_user
-    
-    if user[0].model_name=='Driver'
-      if user[0].latitude
-        user[0].latitude=nil
-        user[0].longitude=nil
-        user[0].save
-      end  
+
+    if user[0].model_name == 'Driver' && user[0].latitude
+      user[0].latitude = nil
+      user[0].longitude = nil
+      user[0].save
     end
-  
-    user,_ = current_user
+
+    user, = current_user
     forget(user)
     session.delete(:user_id)
     @current_user = nil
-    
   end
 
   def destroy
     log_out if logged_in?
     render json: nil, status: :ok
   end
-
 end

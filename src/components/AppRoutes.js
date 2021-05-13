@@ -17,6 +17,7 @@ import AdminProfile from './Admin/AdminProfile';
 import ClientHistory from './Client/ClientHistory';
 import ClientSettings from './Client/ClientSettings';
 import ClientOrder from './Client/ClientOrder';
+import ClientList from './Admin/ClientList';
 import Taxi from './Client/Taxi';
 import { userIn } from '../utils/API';
 import Loading from '../shared/Animations/Loading';
@@ -58,8 +59,7 @@ const AppRoutes = ({ appState, dispatch }) => {
   };
 
   useEffect(() => {
-    userInChecker()
-      .then();
+    userInChecker();
   }, []);
 
   return (
@@ -81,8 +81,14 @@ const AppRoutes = ({ appState, dispatch }) => {
                 <Route path={appRoutes.loginDriver} exact component={DriverLogin} />
                 <Route path={appRoutes.loginClient} exact component={ClientLogin} />
                 <Route path={appRoutes.loginAdmin} exact component={AdminLogin} />
-                <Route path={appRoutes.adminPage} exact component={AdminPage} />
-                <Route path={appRoutes.adminProfile} exact component={AdminProfile} />
+
+                <Route exact path={appRoutes.adminPage} component={AdminPage} />
+                <Route path={appRoutes.adminProfile} component={AdminProfile} />
+                <Route
+                  path={appRoutes.clientsList}
+                  component={ClientList}
+                />
+
                 <Route path={appRoutes.client} exact component={ClientOrder} />
                 <Route path={appRoutes.clientHistory} exact component={ClientHistory} />
                 <Route path={appRoutes.clientSettings} exact component={ClientSettings} />
