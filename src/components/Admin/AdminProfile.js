@@ -25,7 +25,6 @@ const AdminProfile = ({ match, appState }) => {
   useEffect(() => {
     const modelName = 'super_users';
     getUserData({ state, setState, modelName })
-      .then();
   }, []);
 
   const onSelect = (event) => {
@@ -33,13 +32,13 @@ const AdminProfile = ({ match, appState }) => {
     history.push(path);
   };
 
-  const buttons = AdminPageButtons.map((button) => (
+  const buttons = Object.keys(AdminPageButtons).map((buttonKey) => (
     <PageButton
-      key={button[0]}
-      button={button[0]}
+      key={buttonKey.text}
+      button={buttonKey.text}
       onSelect={onSelect}
       buttonClassName="column"
-      className={button[1]}
+      className={buttonKey.icon}
     />
   ));
 

@@ -79,20 +79,47 @@ export const signParams = {
   car_registration_number: '',
 };
 
-export const DriverPageButtons = [
-  ['New order', 'fas fa-taxi'],
-  ['My history', 'fas fa-history'],
-  ['Settings', 'fas fa-cog'],
-  ['Profile', 'fas fa-user-alt'],
-];
+export const DriverPageButtons = {
+  New: {
+    text: 'New order',
+    icon: 'fas fa-taxi',
+  },
+  History: {
+    text: 'My history',
+    icon: 'fas fa-history',
+  },
+  Settings: {
+    text: 'Settings',
+    icon: 'fas fa-cog',
+  },
+  Profile: {
+    text: 'Profile',
+    icon: 'fas fa-user-alt',
+  },
+};
 
-export const AdminPageButtons = [
-  ['Clients', 'fas fa-users'],
-  ['Drivers', 'fas fa-taxi'],
-  ['Drivers history', 'fas fa-history'],
-  ['Settings', 'fas fa-cog'],
-  ['Profile', 'fas fa-user-alt'],
-];
+export const AdminPageButtons = {
+  Clients: {
+    text: 'Clients',
+    icon: 'fas fa-users',
+  },
+  Drivers: {
+    text: 'Drivers',
+    icon: 'fas fa-taxi',
+  },
+  History: {
+    text: 'Drivers history',
+    icon: 'fas fa-history',
+  },
+  Settings: {
+    text: 'Settings',
+    icon: 'fas fa-cog',
+  },
+  Profile: {
+    text: 'Profile',
+    icon: 'fas fa-user-alt',
+  },
+};
 
 // const buttons = {
 //   newOrder: {

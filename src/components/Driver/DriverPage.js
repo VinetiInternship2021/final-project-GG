@@ -108,11 +108,7 @@ const DriverPage = ({ appState }) => {
   const confirmation = () => {
     axios.post(`${baseUrl}/coordinates/confirm`, {
       id: state.userId,
-    })
-      .then(() => {
-      })
-      .catch(() => {
-      });
+    });
   };
 
   return (

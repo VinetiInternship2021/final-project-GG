@@ -33,7 +33,6 @@ const ClientSignup = (props) => {
   const onClick = (event, Fields, SetFields, State, Dispatch, History, Params) => {
     event.preventDefault();
     SignUpHelper(Fields, SetFields, State, Dispatch, History, Params)
-      .then();
   };
 
   return (

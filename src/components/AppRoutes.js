@@ -60,7 +60,6 @@ const AppRoutes = ({ appState, dispatch }) => {
 
   useEffect(() => {
     userInChecker()
-      .then();
   }, []);
 
   return (

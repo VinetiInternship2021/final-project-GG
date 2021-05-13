@@ -7,22 +7,21 @@ import { PageButton } from '../Buttons';
 import MenuHelper from '../../helpers/MenuHelper';
 import { mapStateToProps } from '../../redux/actions';
 
-const AdminPage = ({ appState }) => {
+const AdminPage = ({ appState: { userId } }) => {
   const history = useHistory();
-  const { userId } = appState;
 
   const onSelect = (event) => {
     const path = MenuHelper({ event, userId });
     history.push(path);
   };
 
-  const buttons = AdminPageButtons.map((button) => (
+  const buttons = Object.keys(AdminPageButtons).map((buttonKey) => (
     <PageButton
-      key={button[0]}
-      button={button[0]}
+      key={buttonKey.text}
+      button={buttonKey.text}
       onSelect={onSelect}
       buttonClassName="column"
-      className={button[1]}
+      className={buttonKey.icon}
     />
   ));
 

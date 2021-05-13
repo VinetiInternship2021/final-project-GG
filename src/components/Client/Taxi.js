@@ -190,11 +190,7 @@ const Taxi = ({ appState }) => {
   const onSelect = (event) => {
     axios.post('/taxi/rate', {
       rate: event.target.id,
-    })
-      .then(() => {
-      })
-      .catch(() => {
-      });
+    });
     setMessage('Thank you for using our services.');
   };
 

@@ -22,16 +22,15 @@ const ClientList = ({ appState, dispatch, match }) => {
 
   useEffect(() => {
     GetUsers({ client, dispatch })
-      .then();
   }, [client]);
 
-  const buttons = AdminPageButtons.map((button) => (
+  const buttons = Object.keys(AdminPageButtons).map((buttonKey) => (
     <PageButton
-      key={button[0]}
-      button={button[0]}
+      key={buttonKey.text}
+      button={buttonKey.text}
       onSelect={onSelect}
       buttonClassName="column"
-      className={button[1]}
+      className={buttonKey.icon}
     />
   ));
 
