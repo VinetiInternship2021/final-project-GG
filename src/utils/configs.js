@@ -1,5 +1,8 @@
 export const appRoutes = {
   root: '/',
+  signup: '/signup',
+  login: '/login',
+  taxi: '/taxi',
   admin: {
     login: '/login/admin',
     page: '/SuperUser/:id',
@@ -23,10 +26,6 @@ export const appRoutes = {
     history: '#',
     settings: '/driver/:id/settings',
   },
-  signup: '/signup',
-  login: '/login',
-  clientsList: '/SuperUser/:id/:client',
-  taxi: '/taxi',
 };
 
 const loginText = 'Login';
@@ -47,6 +46,7 @@ export const clientPageItems = [
 ];
 
 export const buttonTexts = ['Client', 'Driver'];
+export const driverPageItems = ['New Order', 'My history', 'Settings', 'Profile'];
 
 export const orderTypes = [
   ['Econom', 'fas fa-taxi'],

@@ -26,6 +26,7 @@ export const ClientMenu = () => {
   };
   return clientPageItems.map((item) => (
     <PageButton
+      key={item}
       button={item[0]}
       onSelect={handleMenu}
       buttonClassName="column"

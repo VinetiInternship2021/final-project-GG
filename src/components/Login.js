@@ -5,7 +5,7 @@ import { buttonTexts, appRoutes } from '../utils/configs';
 const Login = () => {
   const history = useHistory();
   const onLogin = (button) => {
-    let path = '';
+    let path;
     switch (button) {
       case 'Client':
         path = appRoutes.client.login;

@@ -34,7 +34,6 @@ const AppRoutes = ({ appState, dispatch }) => {
   const loginStatusChanger = (data) => {
     dispatch(ChangeActionLoggedIn(data));
   };
-
   const loadingDone = () => {
     dispatch(ChangeActionLoading(false));
   };
@@ -89,7 +88,7 @@ const AppRoutes = ({ appState, dispatch }) => {
                 <Route exact path={appRoutes.admin.page} component={AdminPage} />
                 <Route path={appRoutes.admin.profile} component={AdminProfile} />
                 <Route path={appRoutes.admin.settings} component={AdminSettings} />
-                <Route path={appRoutes.clientsList} component={ClientList} />
+                <Route path={appRoutes.admin.clients} component={ClientList} />
                 <Route path={appRoutes.client.signup} exact component={ClientSignup} />
                 <Route path={appRoutes.client.login} exact component={ClientLogin} />
                 <Route path={appRoutes.client.client} exact component={ClientOrder} />
