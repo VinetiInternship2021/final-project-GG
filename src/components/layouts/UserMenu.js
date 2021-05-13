@@ -16,13 +16,13 @@ const UserMenu = ({
     history.push(path);
   };
 
-  const buttons = menuButtons.map((button) => (
+  const buttons = Object.keys(menuButtons).map((buttonKey) => (
     <PageButton
-      key={button[0]}
-      button={button[0]}
+      key={menuButtons[buttonKey].text}
+      button={menuButtons[buttonKey].text}
       onSelect={onSelect}
       buttonClassName="column"
-      className={button[1]}
+      className={menuButtons[buttonKey].icon}
     />
   ));
 

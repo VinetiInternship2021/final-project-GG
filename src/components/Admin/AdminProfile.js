@@ -18,8 +18,7 @@ const AdminProfile = ({ match, appState }) => {
 
   useEffect(() => {
     const modelName = 'super_users';
-    getUserData({ state, setState, modelName })
-      .then();
+    getUserData({ state, setState, modelName });
   }, []);
 
   return (

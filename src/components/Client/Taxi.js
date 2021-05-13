@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Loader } from '@googlemaps/js-api-loader';
 import { connect } from 'react-redux';
-import { rating, baseUrl } from '../../utils/configs';
+import {
+  rating, baseUrl, appRoutes, clientPageButtons,
+} from '../../utils/configs';
 import { mapStateToProps } from '../../redux/actions';
+import UserMenu from '../layouts/UserMenu';
 
 let toggle = true;
 let count = 0;
@@ -15,6 +18,7 @@ const loader = new Loader({
 
 const Taxi = ({ appState }) => {
   const state = appState;
+  const { userId } = appState;
   let log;
 
   const [message, setMessage] = useState('');
@@ -190,11 +194,7 @@ const Taxi = ({ appState }) => {
   const onSelect = (event) => {
     axios.post('/taxi/rate', {
       rate: event.target.id,
-    })
-      .then(() => {
-      })
-      .catch(() => {
-      });
+    });
     setMessage('Thank you for using our services.');
   };
 
@@ -206,14 +206,30 @@ const Taxi = ({ appState }) => {
   ));
 
   return (
-    <div className="text-center border position-absolute top-50 start-50 translate-middle" style={{ width: '700px', height: '670px' }}>
-      <p>Taxi/map</p>
-      <div ref={handleMap} className="text-center border position-absolute top-0 start-50 translate-middle mb-6" style={{ width: '660px', height: '500px' }} />
-      <div className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-4" style={{ width: '350px', height: '60px' }}>
-        <p className="mb-1">Rate the driver</p>
-        {rateButton}
+    <div>
+      {userId
+        ? (
+          <UserMenu
+            routes={appRoutes.client}
+            userId={userId}
+            menuButtons={clientPageButtons}
+          />
+        ) : false}
+      <div className="ui-component">
+        <div className="text-center border top-50 start-50 position-absolute translate-middle" style={{ width: '700px', height: '670px' }}>
+          <p>Taxi/map</p>
+          <div
+            ref={handleMap}
+            className="text-center border top-0 start-50 translate-middle mb-6 position-absolute"
+            style={{ width: '660px', height: '500px' }}
+          />
+          <div className="text-center bottom-0 start-50 position-absolute translate-middle-x mb-4" style={{ width: '350px', height: '60px' }}>
+            <p className="mb-1">Rate the driver</p>
+            {rateButton}
+          </div>
+          <h6 className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-2">{message}</h6>
+        </div>
       </div>
-      <h6 className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-2">{message}</h6>
     </div>
   );
 };

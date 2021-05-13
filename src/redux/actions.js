@@ -1,39 +1,39 @@
 import {
-  ACTION_CHANGE_LOADING,
-  ACTION_CHANGE_LOGGED_IN,
-  ACTION_CHANGE_ALERT,
-  ACTION_ADD_USERS_LIST,
-  ACTION_CLEAR_USERS_LIST,
-  ACTION_ADD_UNVERIFIED_USERS_LIST,
+  CHANGE_LOADING,
+  CHANGE_LOGGED_IN,
+  CHANGE_ALERT,
+  ADD_USERS,
+  CLEAR_USERS,
+  ADD_UNVERIFIED_USERS,
   CREATE_CAR_TYPE,
 } from './actionTypes';
 
 export const ChangeActionLoading = (isLoading) => ({
-  type: ACTION_CHANGE_LOADING,
+  type: CHANGE_LOADING,
   payload: isLoading,
 });
 
 export const ChangeActionLoggedIn = (data) => ({
-  type: ACTION_CHANGE_LOGGED_IN,
+  type: CHANGE_LOGGED_IN,
   payload: data,
 });
 
 export const ChangeActionAlert = (alert) => ({
-  type: ACTION_CHANGE_ALERT,
+  type: CHANGE_ALERT,
   payload: alert,
 });
 
 export const ActionAddUsersList = (usersList) => ({
-  type: ACTION_ADD_USERS_LIST,
+  type: ADD_USERS,
   payload: usersList,
 });
 
 export const ActionClearUsersList = () => ({
-  type: ACTION_CLEAR_USERS_LIST,
+  type: CLEAR_USERS,
 });
 
 export const ActionAddUnverifiedUsersList = (usersList) => ({
-  type: ACTION_ADD_UNVERIFIED_USERS_LIST,
+  type: ADD_UNVERIFIED_USERS,
   payload: usersList,
 });
 

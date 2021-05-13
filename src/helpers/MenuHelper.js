@@ -16,7 +16,7 @@ const MenuHelper = ({ event, userId, user }) => {
       path = `${path.replace(':client', 'drivers')}`;
       break;
     case 'New order':
-      path = '#';
+      path = '/taxi';
       break;
     case 'My history':
       path = '#';

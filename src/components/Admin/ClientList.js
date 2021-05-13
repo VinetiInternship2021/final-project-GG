@@ -13,8 +13,7 @@ const ClientList = ({ appState, dispatch, match }) => {
   const { userId } = appState;
 
   useEffect(() => {
-    GetUsers({ client, dispatch })
-      .then();
+    GetUsers({ client, dispatch });
   }, [client]);
 
   return (

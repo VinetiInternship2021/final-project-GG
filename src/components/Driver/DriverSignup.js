@@ -31,8 +31,7 @@ const DriverSignup = ({ appState, dispatch }) => {
 
   const onClick = (event, Fields, SetFields, State, Dispatch, History, Params) => {
     event.preventDefault();
-    SignUpHelper(Fields, SetFields, State, Dispatch, History, Params)
-      .then();
+    SignUpHelper(Fields, SetFields, State, Dispatch, History, Params);
   };
 
   return (

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '../../redux/actions';
 import SettingsHelper from '../../helpers/SettingsHelper';
-import { appRoutes, clientPageItems } from '../../utils/configs';
 import UserMenu from '../layouts/UserMenu';
+import { appRoutes, clientPageButtons } from '../../utils/configs';
 
 const ClientSettings = ({ appState }) => {
   const { userId } = appState;
@@ -16,7 +16,7 @@ const ClientSettings = ({ appState }) => {
           <UserMenu
             routes={appRoutes.client}
             userId={userId}
-            menuButtons={clientPageItems}
+            menuButtons={clientPageButtons}
           />
         ) : false}
       <div className="ui-component container-md">

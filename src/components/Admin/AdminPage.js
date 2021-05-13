@@ -5,25 +5,21 @@ import { AdminPageButtons, appRoutes } from '../../utils/configs';
 import UserMenu from '../layouts/UserMenu';
 import { mapStateToProps } from '../../redux/actions';
 
-const AdminPage = ({ appState }) => {
-  const { userId } = appState;
-
-  return (
-    <div>
-      {userId
-        ? (
-          <UserMenu
-            routes={appRoutes.admin}
-            userId={userId}
-            menuButtons={AdminPageButtons}
-          />
-        ) : false}
-      <div className="ui-component container-md">
-        <h1>User functionality container</h1>
-      </div>
+const AdminPage = ({ appState: { userId } }) => (
+  <div>
+    {userId
+      ? (
+        <UserMenu
+          routes={appRoutes.admin}
+          userId={userId}
+          menuButtons={AdminPageButtons}
+        />
+      ) : false}
+    <div className="ui-component container-md">
+      <h1>User functionality container</h1>
     </div>
-  );
-};
+  </div>
+);
 
 AdminPage.propTypes = {
   appState: PropTypes.objectOf(PropTypes.any).isRequired,
