@@ -1,7 +1,12 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import {
-  ACTION_CHANGE_ALERT, ACTION_CHANGE_LOADING,
-  ACTION_CHANGE_LOGGED_IN, CREATE_CAR_TYPE,
+  CHANGE_ALERT,
+  CHANGE_LOADING,
+  CHANGE_LOGGED_IN,
+  ADD_USERS,
+  CLEAR_USERS,
+  ADD_UNVERIFIED_USERS,
+  CREATE_CAR_TYPE,
 } from './actionTypes';
 
 const initState = {
@@ -13,9 +18,14 @@ const initState = {
   carType: '',
 };
 
+const initUsersList = {
+  users: [],
+  unverifiedUsers: [],
+};
+
 const rootReducer = (state = initState, action) => {
   switch (action.type) {
-    case ACTION_CHANGE_LOGGED_IN:
+    case CHANGE_LOGGED_IN:
       return {
         ...state,
         isLoading: action.payload.isLoading,
@@ -24,12 +34,12 @@ const rootReducer = (state = initState, action) => {
         userId: action.payload.userId,
         alert: '',
       };
-    case ACTION_CHANGE_LOADING:
+    case CHANGE_LOADING:
       return {
         ...state,
         isLoading: action.payload.isLoading,
       };
-    case ACTION_CHANGE_ALERT:
+    case CHANGE_ALERT:
       return {
         ...state,
         alert: action.payload.alert,
@@ -43,4 +53,33 @@ const rootReducer = (state = initState, action) => {
       return state;
   }
 };
-export default createStore(rootReducer);
+
+const usersList = (state = initUsersList, action) => {
+  switch (action.type) {
+    case ADD_USERS:
+      return {
+        ...state,
+        users: action.payload.usersList,
+      };
+    case CLEAR_USERS:
+      return {
+        ...state,
+        users: [],
+        unverifiedUsers: [],
+      };
+    case ADD_UNVERIFIED_USERS:
+      return {
+        ...state,
+        unverifiedUsers: action.payload.usersList,
+      };
+    default:
+      return state;
+  }
+};
+
+export default createStore(combineReducers(
+  {
+    rootReducer,
+    usersList,
+  },
+));
