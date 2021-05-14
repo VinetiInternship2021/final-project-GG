@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Loader } from '@googlemaps/js-api-loader';
-import { connect } from 'react-redux';
-import DriverMenu from '../../utils/DriverMenu';
-import { baseUrl } from '../../utils/configs';
+import { appRoutes, DriverPageButtons, baseUrl } from '../../utils/configs';
 import { mapStateToProps } from '../../redux/actions';
+import UserMenu from '../layouts/UserMenu';
 
 const loader = new Loader({
   apiKey: 'AIzaSyCDKUKfCo0eUyGRgdvlTwGnHXnWBtjyal4',
@@ -14,8 +14,8 @@ const loader = new Loader({
 const myLatlng = { lat: 40.18, lng: 44.53 };
 
 const DriverPage = ({ appState }) => {
+  const { userId } = appState;
   const state = appState;
-  const menuItems = DriverMenu();
   const [showConfirm, setShowConfirm] = useState(false);
   let map;
   let directionsService;
@@ -112,19 +112,38 @@ const DriverPage = ({ appState }) => {
   };
 
   return (
-    <div className="position-relative">
-      <div className="card text-center position-absolute top-0 start-0 ms-4 mt-3" style={{ width: '150px', height: '166px' }}>
-        <ul className="list-group list-group-flush">
-          {menuItems}
-        </ul>
+    <div>
+      {userId
+        && (
+          <UserMenu
+            routes={appRoutes.driver}
+            userId={userId}
+            menuButtons={DriverPageButtons}
+          />
+        )}
+      <div className="ui-component container-md">
+        <h1>User functionality container</h1>
+        <div
+          ref={handleMap}
+          className="text-center border top-50 start-50 translate-middle mb-6 maps"
+        />
+        {showConfirm
+          && (
+            <button
+              type="button"
+              onClick={confirmation}
+              className="btn btn-outline-success top-50 start-50 translate-middle"
+            >
+              Confirm
+            </button>
+          )}
       </div>
-      <div ref={handleMap} className="text-center border position-absolute top-50 start-50 translate-middle mb-6" style={{ width: '660px', height: '500px' }} />
-      {showConfirm ? <button type="button" onClick={confirmation} className="btn btn-outline-success position-absolute top-50 start-50 translate-middle">Confirm</button> : null}
     </div>
   );
 };
 
 DriverPage.propTypes = {
+  // match: PropTypes.objectOf(PropTypes.any).isRequired,
   appState: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 

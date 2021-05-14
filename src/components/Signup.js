@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { buttons, appRoutes } from '../utils/configs';
+import { buttonTexts, appRoutes } from '../utils/configs';
 
 const Signup = () => {
   const history = useHistory();
@@ -8,10 +8,10 @@ const Signup = () => {
   const onSignup = (button) => {
     switch (button) {
       case 'Client':
-        path = appRoutes.signupClient;
+        path = appRoutes.client.signup;
         break;
       case 'Driver':
-        path = appRoutes.signupDriver;
+        path = appRoutes.driver.signup;
         break;
       default:
         path = '';
@@ -19,7 +19,7 @@ const Signup = () => {
     history.push(path);
   };
 
-  const button = buttons.map((item) => (
+  const button = buttonTexts.map((item) => (
     <div key={item}>
       <button onClick={() => onSignup(item)} className="btn btn-outline-success mb-1 w-50" type="submit">{item}</button>
       <br />

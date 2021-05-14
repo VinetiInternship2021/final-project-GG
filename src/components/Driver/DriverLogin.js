@@ -18,7 +18,7 @@ const DriverLogin = (props) => {
 
   const onClick = (event, Fields, SetFields, State, Dispatch, History) => {
     event.preventDefault();
-    LoginHelper(Fields, SetFields, State, Dispatch, History)
+    LoginHelper(Fields, SetFields, State, Dispatch, History);
   };
 
   useEffect(() => {

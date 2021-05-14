@@ -32,17 +32,16 @@ const ClientSignup = (props) => {
 
   const onClick = (event, Fields, SetFields, State, Dispatch, History, Params) => {
     event.preventDefault();
-    SignUpHelper(Fields, SetFields, State, Dispatch, History, Params)
+    SignUpHelper(Fields, SetFields, State, Dispatch, History, Params);
   };
 
   return (
     <>
       <form className="text-center w-25 border position-absolute top-50 start-50 translate-middle">
         {fields.alert
-          ? (
+          && (
             <ErrorMessages fields={fields} />
-          )
-          : false}
+          )}
         <div className="me-3 mx-3">
           <RegistrationForm onChange={onChange} data={[fields, setFields]} header="Client registration" />
         </div>

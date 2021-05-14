@@ -1,57 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ProfileInfoTable from '../../utils/ProfileInfoTable';
 import Loading from '../../shared/Animations/Loading';
 import getUserData from '../../helpers/ProfilePageHelper';
-import { AdminPageButtons } from '../../utils/configs';
-import { PageButton } from '../Buttons';
-import MenuHelper from '../../helpers/MenuHelper';
+import { AdminPageButtons, appRoutes } from '../../utils/configs';
+import UserMenu from '../layouts/UserMenu';
 import { mapStateToProps } from '../../redux/actions';
 
 const AdminProfile = ({ match, appState }) => {
-  const history = useHistory();
   const { userId } = appState;
   const [state, setState] = useState({
     userId: match.params.id,
-    isActive: false,
-    userType: 'SuperUser',
     isLoading: true,
-    apiUrl: '',
     user: {},
   });
 
   useEffect(() => {
     const modelName = 'super_users';
-    getUserData({ state, setState, modelName })
+    getUserData({ state, setState, modelName });
   }, []);
-
-  const onSelect = (event) => {
-    const path = MenuHelper({ event, userId });
-    history.push(path);
-  };
-
-  const buttons = Object.keys(AdminPageButtons).map((buttonKey) => (
-    <PageButton
-      key={buttonKey.text}
-      button={buttonKey.text}
-      onSelect={onSelect}
-      buttonClassName="column"
-      className={buttonKey.icon}
-    />
-  ));
 
   return (
     <div>
-      <div className="menu">
-        <ul>
-          {buttons}
-        </ul>
-      </div>
+      {userId
+        && (
+          <UserMenu
+            routes={appRoutes.admin}
+            userId={userId}
+            menuButtons={AdminPageButtons}
+          />
+        )}
       <div className="ui-component container-md">
         <div className="card text-center position-absolute top-50 start-50 translate-middle">
-          {state.isLoading ? <Loading /> : false}
+          {state.isLoading && <Loading />}
           <ProfileInfoTable fieldsData={state.user} />
         </div>
       </div>

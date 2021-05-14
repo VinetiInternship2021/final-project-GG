@@ -69,3 +69,17 @@ export const getUser = (client) => new Promise((resolve, reject) => {
       reject(resp);
     });
 });
+
+export const updateUser = ({ params, userId }) => new Promise((resolve, reject) => {
+  axios.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded';
+  axios.defaults.headers.put.Accept = '*/*';
+  axios.put(`${baseUrl}/${Object.keys(params)[0]}s/${userId}`,
+    params,
+    { withCredentials: true })
+    .then((resp) => {
+      resolve(resp);
+    })
+    .catch((resp) => {
+      reject(resp.response.data);
+    });
+});
