@@ -15,6 +15,11 @@ Rails.application.routes.draw do
       post '/coordinates/trip' => 'coordinates#reservation'
       post '/coordinates/confirm' => 'coordinates#confirm_reservation'
       post '/coordinates/driverAssigned' => 'coordinates#assigned_reservation'
+
+      #verification
+
+      get '/admin/unverified_drivers' => 'unverified_drivers#index'
+      post '/admin/unverified_drivers' => 'unverified_drivers#verify'
     end
   end
 end

@@ -7,6 +7,7 @@ import getUserData from '../../helpers/ProfilePageHelper';
 import { AdminPageButtons, appRoutes } from '../../utils/configs';
 import UserMenu from '../layouts/UserMenu';
 import { mapStateToProps } from '../../redux/actions';
+import UnverifiedDriverList from './verification/UnverifiedDriverList';
 
 const AdminProfile = ({ match, appState }) => {
   const { userId } = appState;
@@ -35,6 +36,10 @@ const AdminProfile = ({ match, appState }) => {
         <div className="card text-center position-absolute top-50 start-50 translate-middle">
           {state.isLoading && <Loading />}
           <ProfileInfoTable fieldsData={state.user} />
+          <hr />
+          <h1>Unverified Drivers</h1>
+          <hr />
+          <UnverifiedDriverList />
         </div>
       </div>
     </div>
