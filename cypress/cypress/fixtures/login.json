@@ -1,0 +1,10 @@
+{
+    "passenger":{
+        "phoneNumber":"+37444556699",
+        "password": "Passenger1"
+    },
+    "driver":{
+        "phoneNumber":"+37455896532",
+        "password": "Driver3"
+    }
+}

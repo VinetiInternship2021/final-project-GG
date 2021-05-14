@@ -1,25 +1,16 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+import login from '../actions/login';
+
+Cypress.Commands.add('loginAsPassenger', (phoneNumber, password, rememberMe = false) => {
+  login(phoneNumber, password, 'Client', rememberMe);
+});
+Cypress.Commands.add('loginAsDriver', (phoneNumber, password, rememberMe = false) => {
+  login(phoneNumber, password, 'Client', rememberMe);
+});
+Cypress.Commands.add('loginSucceed', () => {
+  cy.get('nav form button').should('contain', 'Profile');
+  cy.wait('@loginRequest').its('response.statusCode').should('be.oneOf', [200, 304]);
+});
+
+Cypress.Commands.add('loginFailed', () => {
+  cy.wait('@loginRequest').its('response.statusCode').should('be.equal', 422);
+});
