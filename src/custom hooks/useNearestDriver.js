@@ -3,14 +3,12 @@ import axios from 'axios';
 import { baseUrl } from '../utils/configs';
 
 const useNearestDriver = (
-
   drivers,
   pickUpLocation,
   dropOffLocation,
   nearestDriverIndex,
   price,
   state,
-
 ) => {
   const [message, setMessage] = useState();
 
@@ -18,31 +16,25 @@ const useNearestDriver = (
 
   useEffect(() => {
     const source = axios.CancelToken.source();
-
     const config = { cancelToken: source.token };
 
     if (drivers && pickUpLocation && dropOffLocation
       && nearestDriverIndex !== undefined && price) {
       axios.post(`${baseUrl}/coordinates/trip_nearestdriver`, {
-
         pickUpLocation,
         dropOffLocation,
         driverId: drivers[nearestDriverIndex].id,
         passengerId: state.userId,
         price,
-
       }, config)
 
         .then(() => {
           clearInterval(log);
 
           log = setInterval(
-
             () => {
               axios.post(`${baseUrl}/coordinates/driverAssigned`, {
-
                 id: state.userId,
-
               })
 
                 .then((response) => {
@@ -52,12 +44,10 @@ const useNearestDriver = (
                     clearInterval(log);
                   }
                 })
-
                 .catch((error) => {
                   console.log(error);
                 });
             }, 3000,
-
           );
         })
 

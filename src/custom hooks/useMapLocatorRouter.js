@@ -21,9 +21,7 @@ const useMapLocatorRouter = (loader, state, setShowConfirm) => {
       });
 
       directionsService = new window.google.maps.DirectionsService();
-
       directionsRenderer = new window.google.maps.DirectionsRenderer();
-
       directionsRenderer.setMap(map);
 
       // Gets and sends the driver location to sever
@@ -34,39 +32,26 @@ const useMapLocatorRouter = (loader, state, setShowConfirm) => {
 
           (position) => {
             const pos = {
-
               lat: position.coords.latitude,
-
               lng: position.coords.longitude,
-
             };
+
             axios.post(`${baseUrl}/drivers/coordinates`, {
-
               coordinates: {
-
                 latitude: position.coords.latitude,
-
                 longitude: position.coords.longitude,
-
               },
-
               id: state.userId,
-
             })
-
               .then(() => {
                 clearInterval(log);
 
                 // waits for new order
                 log = setInterval(
-
                   () => {
                     axios.post(`${baseUrl}/coordinates/trip`, {
-
                       id: state.userId,
-
                     })
-
                       .then((response) => {
                         if (response.data.data) {
                           navigator.geolocation.clearWatch(identifier);
@@ -87,25 +72,17 @@ const useMapLocatorRouter = (loader, state, setShowConfirm) => {
                           useRoute(directionsService, directionsRenderer, origin, destination);
                         }
                       })
-
                       .catch(() => {
-
                       });
                   }, 3000,
-
                 );
               })
-
               .catch(() => {
-
               });
 
             infoWindow.setPosition(pos);
-
             infoWindow.setContent('Driver location.');
-
             infoWindow.open(map);
-
             map.setCenter(pos);
           },
           () => {

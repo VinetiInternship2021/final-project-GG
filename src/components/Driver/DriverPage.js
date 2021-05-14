@@ -13,15 +13,12 @@ const loader = new Loader({
   apiKey: 'AIzaSyCDKUKfCo0eUyGRgdvlTwGnHXnWBtjyal4',
   version: 'weekly',
 });
-// const myLatlng = { lat: 40.18, lng: 44.53 };
 
 const DriverPage = ({ appState }) => {
   const state = appState;
 
   const menuItems = DriverMenu();
-
   const [showConfirm, setShowConfirm] = useState(false);
-
   const handleMap = useMapLocatorRouter(loader, state, setShowConfirm);
 
   const confirmation = () => {

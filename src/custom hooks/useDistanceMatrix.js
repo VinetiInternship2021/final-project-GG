@@ -23,14 +23,11 @@ const useDistanceMatrix = (
 
       service.getDistanceMatrix(
         {
-
           origins: org,
           destinations: dest,
           travelMode: 'DRIVING',
         },
-
         callback,
-
       );
     }
   }, [origins, destinations]);

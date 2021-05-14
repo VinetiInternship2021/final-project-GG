@@ -4,23 +4,18 @@ import { baseUrl } from '../utils/configs';
 
 const useDriversCoordinates = () => {
   const [driversPosition, setDriversPosition] = useState();
-
   const [drivers, setDrivers] = useState();
 
   useEffect(() => {
     const source = axios.CancelToken.source();
-
     const config = { cancelToken: source.token };
 
     axios.get(`${baseUrl}/coordinates/drivers`, config)
-
       .then((response) => {
         setDrivers(response.data.drivers);
 
         const coordinates = response.data.drivers.map((driver) => ({
-
           lat: parseFloat(driver.latitude),
-
           lng: parseFloat(driver.longitude),
         }));
 

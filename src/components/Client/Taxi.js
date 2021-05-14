@@ -14,23 +14,17 @@ import useMapLoader from '../../custom hooks/useMapLoader';
 import '../../styles/map.css';
 
 const loader = new Loader({
-
   apiKey: 'AIzaSyCDKUKfCo0eUyGRgdvlTwGnHXnWBtjyal4',
   version: 'weekly',
-
 });
 
 const Taxi = ({ appState }) => {
   const state = appState;
 
   const [message, setMessage] = useState('');
-
   const [pickUpLocation, setPickUpLocation] = useState();
-
   const [dropOffLocation, setDropOffLocation] = useState();
-
   const [nearestDriverIndex, setNearestDriverIndex] = useState();
-
   const [price, setPrice] = useState();
 
   // Gets and sets the available drivers coordinates
@@ -52,7 +46,6 @@ const Taxi = ({ appState }) => {
     }
 
     setPrice(tripPrice);
-
     setMessage(`The price of your trip will be ${tripPrice} AMD`);
   };
 
@@ -60,7 +53,6 @@ const Taxi = ({ appState }) => {
 
   // sends all gathered info to server for new resrevation, waits for confirmation from driver
   const conformationMessage = useNearestDriver(drivers, pickUpLocation, dropOffLocation,
-
     nearestDriverIndex, price, state);
 
   // loads the map, sets the pickup and dropoff locations via clicking
@@ -71,13 +63,10 @@ const Taxi = ({ appState }) => {
     axios.post('/taxi/rate', {
       rate: event.target.id,
     })
-
       .then(() => {
       })
-
       .catch(() => {
       });
-
     setMessage('Thank you for using our services.');
   };
 
