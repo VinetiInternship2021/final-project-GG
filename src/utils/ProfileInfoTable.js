@@ -11,6 +11,8 @@ const ProfileInfoTable = ({ fieldsData }) => {
       </thead>
     </table>
   ));
+
   return fields;
 };
+
 export default ProfileInfoTable;

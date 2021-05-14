@@ -31,23 +31,19 @@ const DriverSignup = ({ appState, dispatch }) => {
 
   const onClick = (event, Fields, SetFields, State, Dispatch, History, Params) => {
     event.preventDefault();
-    SignUpHelper(Fields, SetFields, State, Dispatch, History, Params)
-      .then();
+    SignUpHelper(Fields, SetFields, State, Dispatch, History, Params);
   };
 
   return (
     <div>
       <form className="text-center w-50 border position-absolute top-50 start-50 translate-middle">
-
         <div className="me-3 mx-3">
           <RegistrationForm onChange={onChange} data={[fields, setFields]} header="Client registration">
             <label htmlFor="car_manufacturer" className="form-label">
               Car manufacturer
               <br />
               <input
-                onChange={
-                  (e) => onChange(e)
-                }
+                onChange={(e) => onChange(e)}
                 id="car_manufacturer"
                 type="text"
                 className="form-control"
@@ -57,9 +53,7 @@ const DriverSignup = ({ appState, dispatch }) => {
               Car model
               <br />
               <input
-                onChange={
-                  (e) => onChange(e)
-                }
+                onChange={(e) => onChange(e)}
                 id="car_model"
                 type="text"
                 className="form-control"
@@ -69,9 +63,7 @@ const DriverSignup = ({ appState, dispatch }) => {
               Email
               <br />
               <input
-                onChange={
-                  (e) => onChange(e)
-                }
+                onChange={(e) => onChange(e)}
                 id="email"
                 type="text"
                 className="form-control"
@@ -81,9 +73,7 @@ const DriverSignup = ({ appState, dispatch }) => {
               Car registration number
               <br />
               <input
-                onChange={
-                  (e) => onChange(e)
-                }
+                onChange={(e) => onChange(e)}
                 id="car_registration_number"
                 type="text"
                 className="form-control"
@@ -91,13 +81,10 @@ const DriverSignup = ({ appState, dispatch }) => {
             </label>
           </RegistrationForm>
         </div>
-
         {fields.alert
-          ? (
+          && (
             <ErrorMessages fields={fields} />
-          )
-          : false}
-
+          )}
         <button
           onClick={(e) => {
             onClick(e, fields, setFields, state, dispatch, history, params);

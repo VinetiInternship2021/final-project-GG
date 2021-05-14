@@ -16,7 +16,7 @@ const Header = ({ appState, dispatch }) => {
   const state = appState;
   const location = useLocation();
   const history = useHistory();
-  const [buttons, setButtons] = useState(headerButtons.loggedOut);
+  const [buttonTexts, setButtons] = useState(headerButtons.loggedOut);
 
   useEffect(() => {
     if (state.isLoading === false) {
@@ -40,13 +40,12 @@ const Header = ({ appState, dispatch }) => {
           loggedIn: false,
           userType: '',
           userId: '',
-        })))
-        .then();
+        })));
     }
     history.push(Switch(button, location, state));
   };
 
-  const button = buttons.map((item) => (
+  const button = buttonTexts.map((item) => (
     <HeaderButton
       key={item}
       button={item}

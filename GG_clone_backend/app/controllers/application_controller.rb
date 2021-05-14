@@ -11,37 +11,41 @@ class ApplicationController < ActionController::API
       model = Driver
     when 'Passenger'
       model = Passenger
-    else
-      return nil
+    else return nil
     end
-
     [model_name, model]
   end
 
+  def if_session
+    return unless (model_name = session[:model_name])
+
+    _, model = choose_model(model_name)
+    [@current_user ||= model.find_by(id: session[:user_id]),
+     model_name]
+  end
+
+  def if_cookies(user_id)
+    return unless (model_name = cookies[:model_name])
+
+    _, model = choose_model(model_name)
+    user = model.find_by(id: user_id)
+    return unless user&.authenticated?(cookies[:remember_token])
+
+    log_in(user, model_name)
+    [@current_user = user, model_name]
+  end
 
   def current_user
     if session[:user_id]
-      if (model_name = session[:model_name])
-        _, model = choose_model(model_name)
-        return [@current_user ||= model.find_by(id: session[:user_id]),
-                model_name]
-      end
+      if_session
     elsif (user_id = cookies.signed[:user_id])
-      if (model_name = cookies[:model_name])
-        _, model = choose_model(model_name)
-        user = model.find_by(id: user_id)
-        if user && user.authenticated?(cookies[:remember_token])
-          log_in(user, model_name)
-          return [@current_user = user, model_name]
-        end
-      end
+      if_cookies user_id
     end
   end
 
   def log_in(user, model_name)
     session[:user_id] = user.id
     session[:model_name] = model_name
-
   end
 
   def remember(user, model_name)
@@ -61,10 +65,9 @@ class ApplicationController < ActionController::API
   def current_user?(user, model_name)
     person = current_user
     if person.nil?
-      return false
+      false
     else
       user == current_user[0] && model_name == current_user[1]
     end
   end
-
 end

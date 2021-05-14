@@ -1,40 +1,28 @@
 import React from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
-import { AdminPageButtons } from '../../utils/configs';
-import { PageButton } from '../Buttons';
-import MenuHelper from '../../helpers/MenuHelper';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { AdminPageButtons, appRoutes } from '../../utils/configs';
+import UserMenu from '../layouts/UserMenu';
+import { mapStateToProps } from '../../redux/actions';
 
-const DriverPage = () => {
-  const history = useHistory();
-  const location = useLocation();
-
-  const onSelect = (event) => {
-    const path = MenuHelper({ event, location });
-    history.push(path);
-  };
-
-  const buttons = AdminPageButtons.map((button) => (
-    <PageButton
-      button={button[0]}
-      onSelect={onSelect}
-      buttonClassName="column"
-      className={button[1]}
-    />
-  ));
-
-  return (
-
-    <div>
-      <div className="menu">
-        <ul>
-          {buttons}
-        </ul>
-      </div>
-      <div className="ui-component container-md">
-        <h1>User functionality container</h1>
-      </div>
+const AdminPage = ({ appState: { userId } }) => (
+  <div>
+    {userId
+      && (
+        <UserMenu
+          routes={appRoutes.admin}
+          userId={userId}
+          menuButtons={AdminPageButtons}
+        />
+      )}
+    <div className="ui-component container-md">
+      <h1>User functionality container</h1>
     </div>
-  );
+  </div>
+);
+
+AdminPage.propTypes = {
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
-export default DriverPage;
+export default connect(mapStateToProps)(AdminPage);
