@@ -13,7 +13,6 @@ class LoginPage {
   }
 
   submit() {
-    cy.intercept('GET', '**/login').as('loginRequest');
     cy.get('form[class="text-center w-25 border position-absolute top-50 start-50 translate-middle"] button[type="submit"]');
   }
 

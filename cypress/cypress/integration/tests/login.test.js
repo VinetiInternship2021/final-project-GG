@@ -2,9 +2,11 @@ import LoginPage from '../pom/LoginPage';
 import { passenger, driver } from '../../fixtures/login.json';
 
 describe('Passenger Login', () => {
+  const loginPage = new LoginPage();
+
   beforeEach(() => {
-    const loginPage = new LoginPage();
     loginPage.visit();
+    cy.intercept('GET', '**/login').as('loginRequest');
   });
 
   it('Logins as passenger without remember me', () => {
