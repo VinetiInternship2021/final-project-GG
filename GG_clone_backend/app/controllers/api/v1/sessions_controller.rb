@@ -1,5 +1,4 @@
 class Api::V1::SessionsController < ApplicationController
-
   include ActionController::Cookies
   include ActionController::RequestForgeryProtection
   before_action :fetch_model_user, only: [:create]

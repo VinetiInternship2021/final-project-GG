@@ -8,6 +8,7 @@ const LoginHelper = async (fields, setFields, state, dispatch, history) => {
       remember_me: fields.remember_me === true ? '1' : '0',
     },
   };
+
   await login(params)
     .then((response) => {
       dispatch(ChangeActionLoggedIn({

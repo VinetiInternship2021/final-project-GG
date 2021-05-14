@@ -10,10 +10,12 @@ import DriverSignup from './Driver/DriverSignup';
 import DriverLogin from './Driver/DriverLogin';
 import DriverPage from './Driver/DriverPage';
 import DriverProfile from './Driver/DriverProfile';
+import DriverSettings from './Driver/DriverSettings';
 import ClientLogin from './Client/ClientLogin';
 import AdminLogin from './Admin/AdminLogin';
 import AdminPage from './Admin/AdminPage';
 import AdminProfile from './Admin/AdminProfile';
+import AdminSettings from './Admin/AdminSettings';
 import ClientHistory from './Client/ClientHistory';
 import ClientSettings from './Client/ClientSettings';
 import ClientOrder from './Client/ClientOrder';
@@ -76,25 +78,22 @@ const AppRoutes = ({ appState, dispatch }) => {
                 <Route path={appRoutes.root} exact component={Home} />
                 <Route path={appRoutes.signup} exact component={Signup} />
                 <Route path={appRoutes.login} exact component={Login} />
-                <Route path={appRoutes.signupClient} exact component={ClientSignup} />
-                <Route path={appRoutes.signupDriver} exact component={DriverSignup} />
-                <Route path={appRoutes.loginDriver} exact component={DriverLogin} />
-                <Route path={appRoutes.loginClient} exact component={ClientLogin} />
-                <Route path={appRoutes.loginAdmin} exact component={AdminLogin} />
-
-                <Route exact path={appRoutes.adminPage} component={AdminPage} />
-                <Route path={appRoutes.adminProfile} component={AdminProfile} />
-                <Route
-                  path={appRoutes.clientsList}
-                  component={ClientList}
-                />
-
-                <Route path={appRoutes.client} exact component={ClientOrder} />
-                <Route path={appRoutes.clientHistory} exact component={ClientHistory} />
-                <Route path={appRoutes.clientSettings} exact component={ClientSettings} />
+                <Route path={appRoutes.driver.signup} exact component={DriverSignup} />
+                <Route path={appRoutes.driver.login} exact component={DriverLogin} />
+                <Route path={appRoutes.driver.page} exact component={DriverPage} />
+                <Route path={appRoutes.driver.profile} exact component={DriverProfile} />
+                <Route path={appRoutes.driver.settings} exact component={DriverSettings} />
+                <Route path={appRoutes.admin.login} exact component={AdminLogin} />
+                <Route exact path={appRoutes.admin.page} component={AdminPage} />
+                <Route path={appRoutes.admin.profile} component={AdminProfile} />
+                <Route path={appRoutes.admin.settings} component={AdminSettings} />
+                <Route path={appRoutes.admin.clients} component={ClientList} />
+                <Route path={appRoutes.client.signup} exact component={ClientSignup} />
+                <Route path={appRoutes.client.login} exact component={ClientLogin} />
+                <Route path={appRoutes.client.client} exact component={ClientOrder} />
+                <Route path={appRoutes.client.history} exact component={ClientHistory} />
+                <Route path={appRoutes.client.settings} exact component={ClientSettings} />
                 <Route path={appRoutes.taxi} exact component={Taxi} />
-                <Route path={appRoutes.driverPage} exact component={DriverPage} />
-                <Route path={appRoutes.driverProfile} exact component={DriverProfile} />
               </Switch>
             </div>
           </div>

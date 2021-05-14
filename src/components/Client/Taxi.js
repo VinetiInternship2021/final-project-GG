@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Loader } from '@googlemaps/js-api-loader';
 import { connect } from 'react-redux';
-import { rating } from '../../utils/configs';
+import { rating, appRoutes, clientPageButtons } from '../../utils/configs';
 import { mapStateToProps } from '../../redux/actions';
 import useDriverCoordinates from '../../custom hooks/useDriversCoordinates';
 import useDistanceMatrix from '../../custom hooks/useDistanceMatrix';
@@ -13,6 +13,8 @@ import findReservationPrice from '../../callbacks/findReservationPrice';
 import useMapLoader from '../../custom hooks/useMapLoader';
 import '../../styles/map.css';
 
+import UserMenu from '../layouts/UserMenu';
+
 const loader = new Loader({
   apiKey: 'AIzaSyCDKUKfCo0eUyGRgdvlTwGnHXnWBtjyal4',
   version: 'weekly',
@@ -20,6 +22,7 @@ const loader = new Loader({
 
 const Taxi = ({ appState }) => {
   const state = appState;
+  const { userId } = appState;
 
   const [message, setMessage] = useState('');
   const [pickUpLocation, setPickUpLocation] = useState();
@@ -78,15 +81,27 @@ const Taxi = ({ appState }) => {
   ));
 
   return (
-    <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
-      <p>Taxi/map</p>
-      <div ref={handleMap} className="text-center border position-absolute top-0 start-50 translate-middle mb-6" id="mapWindow" />
-      <div className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-4" id="rateButton">
-        <p className="mb-1">Rate the driver</p>
-        {rateButton}
+    <div>
+      {userId
+  && (
+    <UserMenu
+      routes={appRoutes.client}
+      userId={userId}
+      menuButtons={clientPageButtons}
+    />
+  )}
+      <div className="ui-component">
+        <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
+          <p>Taxi/map</p>
+          <div ref={handleMap} className="text-center border position-absolute top-0 start-50 translate-middle mb-6" id="mapWindow" />
+          <div className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-4" id="rateButton">
+            <p className="mb-1">Rate the driver</p>
+            {rateButton}
+          </div>
+          <h6 className="text-center position-absolute start-50 translate-middle-x mb-2">{conformationMessage}</h6>
+          <h6 className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-2">{message}</h6>
+        </div>
       </div>
-      <h6 className="text-center position-absolute start-50 translate-middle-x mb-2">{conformationMessage}</h6>
-      <h6 className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-2">{message}</h6>
     </div>
   );
 };

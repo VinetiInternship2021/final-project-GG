@@ -13,34 +13,24 @@ const LoginForm = ({
         Phone
         <br />
         <input
-          onClick={() => {
-            setFields({ ...fields, alert: [] });
-          }}
-          onChange={(e) => {
-            setFields({ ...fields, phone_number: e.target.value });
-          }}
+          onClick={() => setFields({ ...fields, alert: [] })}
+          onChange={(e) => setFields({ ...fields, phone_number: e.target.value })}
           id="phone"
           type="number"
           className="form-control"
         />
       </label>
-
       <label htmlFor="password" className="form-label">
         Password
         <br />
         <input
-          onClick={() => {
-            setFields({ ...fields, alert: [] });
-          }}
-          onChange={(e) => {
-            setFields({ ...fields, password: e.target.value });
-          }}
+          onClick={() => setFields({ ...fields, alert: [] })}
+          onChange={(e) => setFields({ ...fields, password: e.target.value })}
           id="password"
           type="password"
           className="form-control"
         />
       </label>
-
       <label htmlFor="rememberMe" className="form-label">
         <input
           className="form-check-input"

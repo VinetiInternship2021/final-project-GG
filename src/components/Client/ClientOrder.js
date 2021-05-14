@@ -2,14 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { appRoutes, orderTypes } from '../../utils/configs';
-import { ClientMenu } from '../../utils/ClientMenu';
+import { appRoutes, clientPageButtons } from '../../utils/configs';
 import { mapStateToProps, createCarType } from '../../redux/actions';
+import UserMenu from '../layouts/UserMenu';
+import ClientMenu from '../layouts/ClientMenu';
 
 const ClientPage = ({ appState, dispatch }) => {
-  const state = appState;
   const history = useHistory();
-  const menuItems = ClientMenu();
+  const { userId } = appState;
+  const state = appState;
 
   const handleOrders = (order) => {
     dispatch(createCarType({
@@ -19,24 +20,21 @@ const ClientPage = ({ appState, dispatch }) => {
     history.push(appRoutes.taxi);
   };
 
-  const orderButton = orderTypes.map((order) => (
-    <div key={order}>
-      <button onClick={() => handleOrders(order)} className="btn btn-outline-success mb-1 w-50" type="submit">{order}</button>
-      <br />
-    </div>
-  ));
-
   return (
-    <div className="position-relative">
-      <div>
-        <ul className="list-group list-group-flush">
-          {menuItems}
-        </ul>
-      </div>
-
-      <div className="card text-center border position-fixed top-50 start-50 translate-middle" id="vehicleTypeContainer">
-        <h5 className="mt-1 mb-3">Choose Vehicle Type</h5>
-        {orderButton}
+    <div>
+      {userId
+        && (
+          <UserMenu
+            routes={appRoutes.client}
+            userId={userId}
+            menuButtons={clientPageButtons}
+          />
+        )}
+      <div className="ui-component container-md">
+        <div className="position-relative">
+          <h5 className="mt-3 mb-3">Choose Vehicle Type</h5>
+          <ClientMenu handleOrders={handleOrders} />
+        </div>
       </div>
     </div>
   );

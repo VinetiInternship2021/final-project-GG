@@ -1,25 +1,30 @@
-import { appRoutes } from '../utils/configs';
-
-const MenuHelper = ({ event, userId }) => {
-  let path = '';
+const MenuHelper = ({ event, userId, user }) => {
+  let path;
   switch (event.currentTarget.getAttribute('data-name')) {
     case 'Settings':
-      path = '#';
+      path = `${user.settings.replace(':id', userId)}`;
       break;
     case 'Profile':
-      path = `${appRoutes.adminProfile.replace(':id', userId)}`;
+      path = `${user.profile.replace(':id', userId)}`;
       break;
     case 'Clients':
-      path = `${appRoutes.adminClients.replace(':id', userId)}`;
+      path = `${user.clients.replace(':id', userId)}`;
       path = `${path.replace(':client', 'passengers')}`;
       break;
     case 'Drivers':
-      path = `${appRoutes.adminClients.replace(':id', userId)}`;
+      path = `${user.clients.replace(':id', userId)}`;
       path = `${path.replace(':client', 'drivers')}`;
+      break;
+    case 'New order':
+      path = '/taxi';
+      break;
+    case 'My history':
+      path = '#';
       break;
     default:
       path = '#';
   }
   return path;
 };
+
 export default MenuHelper;

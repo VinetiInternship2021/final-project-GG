@@ -13,6 +13,16 @@ $GridSize: 6.5em;
     transition: all .25s linear;
 }
 
+.list-group-item {
+    position: relative;
+}
+
+.maps {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+
 .body {
     margin-top: 10px;
     position: relative;
@@ -20,16 +30,16 @@ $GridSize: 6.5em;
 }
 
 .translate-middle {
-    transform: translate(-50%,10%)!important;
+    transform: translate(-50%,50px)!important;
 }
 body {
     position: relative;
     background: #F8F8FF;
-    //background: #212529;
+    min-width: 400px;
 }
 
 .ui-component {
-    padding-left: 150px;
+    padding-left: 160px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -43,6 +53,7 @@ body {
     position: absolute;
     display: flex;
     justify-content: space-between;
+    transform: scale(0.9);
 }
 
 .btn {
@@ -90,9 +101,8 @@ input {
 .home {
     position: absolute;
     //left: 50%;
-    margin: auto;
     top: 0; left: 0; bottom: 0; right: 0;
-    margin-top: 15%;
+    margin: 15% auto auto;
     height: 150px;
     text-align: center;
     vertical-align: middle;
@@ -110,6 +120,16 @@ ul {
     position: relative;
     padding-bottom: 0.2em;
     padding-top: 0.2em;
+}
+
+.sign-up {
+    width: 200px;
+    height: 200px;
+}
+
+.login {
+    width: 200px;
+    height: 200px;
 }
 
 .user-page {

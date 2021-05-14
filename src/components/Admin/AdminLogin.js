@@ -37,6 +37,7 @@ const AdminLogin = ({ appState, dispatch }) => {
     </>
   );
 };
+
 AdminLogin.propTypes = {
   appState: PropTypes.objectOf(PropTypes.any).isRequired,
   dispatch: PropTypes.func.isRequired,
