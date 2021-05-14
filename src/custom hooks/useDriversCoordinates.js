@@ -21,7 +21,6 @@ const useDriversCoordinates = () => {
 
         setDriversPosition(coordinates);
       })
-
       .catch((error) => {
         console.log(error);
       });
