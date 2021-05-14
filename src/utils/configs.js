@@ -51,12 +51,8 @@ export const orderTypes = {
     text: 'Business',
     icon: 'fas fa-taxi',
   },
-  Child: {
-    text: 'Child seat',
-    icon: 'fas fa-taxi',
-  },
-  Big: {
-    text: '7 seater',
+  FirstClass: {
+    text: 'First class',
     icon: 'fas fa-taxi',
   },
   Cargo: {

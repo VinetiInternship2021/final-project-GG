@@ -92,7 +92,7 @@ const Taxi = ({ appState }) => {
   )}
       <div className="ui-component">
         <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
-          <p>Taxi/map</p>
+          <p>Passenger Map</p>
           <div ref={handleMap} className="text-center border position-absolute top-0 start-50 translate-middle mb-6" id="mapWindow" />
           <div className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-4" id="rateButton">
             <p className="mb-1">Rate the driver</p>

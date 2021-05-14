@@ -37,18 +37,18 @@ const DriverPage = ({ appState }) => {
             menuButtons={DriverPageButtons}
           />
         )}
-      <div className="ui-component container-md">
-        <h1>User functionality container</h1>
+      <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
+        <p>Driver Map</p>
         <div
           ref={handleMap}
-          className="text-center border top-50 start-50 translate-middle mb-6 maps"
+          className="text-center border position-absolute top-0 start-50 translate-middle maps"
         />
         {showConfirm
           && (
             <button
               type="button"
               onClick={confirmation}
-              className="btn btn-outline-success top-50 start-50 translate-middle"
+              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
             >
               Confirm
             </button>
