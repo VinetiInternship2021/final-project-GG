@@ -11,6 +11,7 @@ const ProfileSettingsFields = ({ fieldsData }) => {
       </thead>
     </table>
   ));
+
   return fields;
 };
 

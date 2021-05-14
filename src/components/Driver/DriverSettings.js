@@ -6,8 +6,8 @@ import SettingsHelper from '../../helpers/SettingsHelper';
 import { appRoutes, DriverPageButtons } from '../../utils/configs';
 import UserMenu from '../layouts/UserMenu';
 
-const DriverSettings = ({ match }) => {
-  const userId = match.params.id;
+const DriverSettings = ({ match: { params: { id } } }) => {
+  const userId = id;
 
   return (
     <div>

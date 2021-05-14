@@ -24,16 +24,16 @@ const AdminProfile = ({ match, appState }) => {
   return (
     <div>
       {userId
-        ? (
+        && (
           <UserMenu
             routes={appRoutes.admin}
             userId={userId}
             menuButtons={AdminPageButtons}
           />
-        ) : false}
+        )}
       <div className="ui-component container-md">
         <div className="card text-center position-absolute top-50 start-50 translate-middle">
-          {state.isLoading ? <Loading /> : false}
+          {state.isLoading && <Loading />}
           <ProfileInfoTable fieldsData={state.user} />
         </div>
       </div>

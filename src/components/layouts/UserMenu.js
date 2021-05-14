@@ -38,7 +38,7 @@ const UserMenu = ({
 UserMenu.propTypes = {
   routes: PropTypes.objectOf(PropTypes.any).isRequired,
   userId: PropTypes.number.isRequired,
-  menuButtons: PropTypes.arrayOf(PropTypes.any).isRequired,
+  menuButtons: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default UserMenu;

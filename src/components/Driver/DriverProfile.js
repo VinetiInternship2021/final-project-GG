@@ -6,9 +6,9 @@ import getUserData from '../../helpers/ProfilePageHelper';
 import { DriverPageButtons, appRoutes } from '../../utils/configs';
 import UserMenu from '../layouts/UserMenu';
 
-const DriverProfile = ({ match }) => {
+const DriverProfile = ({ match: { params: { id } } }) => {
   const [state, setState] = useState({
-    userId: match.params.id,
+    userId: id,
     isLoading: true,
     verified: 'bg-danger',
     user: {},
@@ -29,13 +29,13 @@ const DriverProfile = ({ match }) => {
   return (
     <div>
       {userId
-        ? (
+        && (
           <UserMenu
             routes={appRoutes.driver}
             userId={userId}
             menuButtons={DriverPageButtons}
           />
-        ) : false}
+        )}
       <div className="ui-component container-md">
         <div className="card text-center position-absolute top-50 start-50 translate-middle">
           {state.isLoading ? <Loading />

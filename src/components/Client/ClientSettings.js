@@ -12,13 +12,13 @@ const ClientSettings = ({ appState }) => {
   return (
     <div>
       {userId
-        ? (
+        && (
           <UserMenu
             routes={appRoutes.client}
             userId={userId}
             menuButtons={clientPageButtons}
           />
-        ) : false}
+        )}
       <div className="ui-component container-md">
         <div className="card text-center top-50 start-50 translate-middle">
           <SettingsHelper modelName="passengers" reqKey="passenger" />

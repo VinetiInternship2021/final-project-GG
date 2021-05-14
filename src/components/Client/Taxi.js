@@ -208,13 +208,13 @@ const Taxi = ({ appState }) => {
   return (
     <div>
       {userId
-        ? (
+        && (
           <UserMenu
             routes={appRoutes.client}
             userId={userId}
             menuButtons={clientPageButtons}
           />
-        ) : false}
+        )}
       <div className="ui-component">
         <div className="text-center border top-50 start-50 position-absolute translate-middle" style={{ width: '700px', height: '670px' }}>
           <p>Taxi/map</p>

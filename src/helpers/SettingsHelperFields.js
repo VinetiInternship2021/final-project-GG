@@ -7,7 +7,7 @@ const SettingsHelperFields = ({
   fields, driver, setFields, onChange, state,
 }) => (
   <div className="me-3 mx-3">
-    {state.isLoading ? <Loading /> : false}
+    {state.isLoading && <Loading />}
     Settings
     <RegistrationForm
       key={fields.phone_number}
@@ -17,7 +17,7 @@ const SettingsHelperFields = ({
       header={`${fields.first_name} information updating`}
     >
       {driver
-        ? (
+        && (
           <div>
             <label htmlFor="car_manufacturer" className="form-label">
               Car manufacturer
@@ -53,7 +53,7 @@ const SettingsHelperFields = ({
               />
             </label>
           </div>
-        ) : <></>}
+        )}
     </RegistrationForm>
   </div>
 );

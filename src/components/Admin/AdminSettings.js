@@ -12,13 +12,13 @@ const AdminSettings = ({ appState }) => {
   return (
     <div>
       {userId
-        ? (
+        && (
           <UserMenu
             routes={appRoutes.admin}
             userId={userId}
             menuButtons={AdminPageButtons}
           />
-        ) : false}
+        )}
       <div className="ui-component container-md">
         <div className="card text-center top-50 start-50 translate-middle">
           <SettingsHelper modelName="super_users" reqKey="super_user" />

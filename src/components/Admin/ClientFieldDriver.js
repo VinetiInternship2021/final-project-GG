@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ClientFieldDriver = ({ driver }) => {
-  const {
+const ClientFieldDriver = ({
+  driver: {
     id, phoneNumber, firstName, lastName, isActive, isVerifiedByAdmin,
-  } = driver;
+  },
+}) => {
   let verified = 'bg-danger';
   let active = 'bg-danger';
   if (isVerifiedByAdmin) {

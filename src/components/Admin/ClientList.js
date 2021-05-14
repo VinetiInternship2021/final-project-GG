@@ -19,13 +19,13 @@ const ClientList = ({ appState, dispatch, match }) => {
   return (
     <div>
       {userId
-        ? (
+        && (
           <UserMenu
             routes={appRoutes.admin}
             userId={userId}
             menuButtons={AdminPageButtons}
           />
-        ) : false}
+        )}
       <div className="ui-component container-md">
         <div className="card text-center top-50 start-50 translate-middle">
           {appState.isLoading ? <Loading /> : false}

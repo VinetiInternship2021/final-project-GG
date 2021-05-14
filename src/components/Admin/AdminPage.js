@@ -8,13 +8,13 @@ import { mapStateToProps } from '../../redux/actions';
 const AdminPage = ({ appState: { userId } }) => (
   <div>
     {userId
-      ? (
+      && (
         <UserMenu
           routes={appRoutes.admin}
           userId={userId}
           menuButtons={AdminPageButtons}
         />
-      ) : false}
+      )}
     <div className="ui-component container-md">
       <h1>User functionality container</h1>
     </div>

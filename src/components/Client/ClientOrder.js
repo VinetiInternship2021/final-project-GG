@@ -23,13 +23,13 @@ const ClientPage = ({ appState, dispatch }) => {
   return (
     <div>
       {userId
-        ? (
+        && (
           <UserMenu
             routes={appRoutes.client}
             userId={userId}
             menuButtons={clientPageButtons}
           />
-        ) : false}
+        )}
       <div className="ui-component container-md">
         <div className="position-relative">
           <h5 className="mt-3 mb-3">Choose Vehicle Type</h5>

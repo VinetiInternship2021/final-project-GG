@@ -13,14 +13,14 @@ export const PageButton = ({
   >
     {' '}
     <div>
-      {className ? (
+      {className && (
         <div>
           <i
             key={button}
             className={className}
           />
         </div>
-      ) : <></>}
+      )}
       {' '}
       {button}
     </div>

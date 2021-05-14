@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const ErrorMessages = ({ fields }) => (
   <div>
     { fields.alert.length
-      ? (
+      && (
         <div id="error_explanation">
           <div className="alert alert-danger">
             In form founds
@@ -19,8 +19,7 @@ const ErrorMessages = ({ fields }) => (
             </ul>
           ))}
         </div>
-      )
-      : false}
+      )}
   </div>
 );
 

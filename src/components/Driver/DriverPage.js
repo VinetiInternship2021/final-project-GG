@@ -114,13 +114,13 @@ const DriverPage = ({ appState }) => {
   return (
     <div>
       {userId
-        ? (
+        && (
           <UserMenu
             routes={appRoutes.driver}
             userId={userId}
             menuButtons={DriverPageButtons}
           />
-        ) : false}
+        )}
       <div className="ui-component container-md">
         <h1>User functionality container</h1>
         <div
@@ -128,7 +128,7 @@ const DriverPage = ({ appState }) => {
           className="text-center border top-50 start-50 translate-middle mb-6 maps"
         />
         {showConfirm
-          ? (
+          && (
             <button
               type="button"
               onClick={confirmation}
@@ -136,7 +136,7 @@ const DriverPage = ({ appState }) => {
             >
               Confirm
             </button>
-          ) : null}
+          )}
       </div>
     </div>
   );

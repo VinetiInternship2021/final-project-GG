@@ -82,10 +82,9 @@ const DriverSignup = ({ appState, dispatch }) => {
           </RegistrationForm>
         </div>
         {fields.alert
-          ? (
+          && (
             <ErrorMessages fields={fields} />
-          )
-          : false}
+          )}
         <button
           onClick={(e) => {
             onClick(e, fields, setFields, state, dispatch, history, params);

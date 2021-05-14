@@ -39,10 +39,9 @@ const ClientSignup = (props) => {
     <>
       <form className="text-center w-25 border position-absolute top-50 start-50 translate-middle">
         {fields.alert
-          ? (
+          && (
             <ErrorMessages fields={fields} />
-          )
-          : false}
+          )}
         <div className="me-3 mx-3">
           <RegistrationForm onChange={onChange} data={[fields, setFields]} header="Client registration" />
         </div>

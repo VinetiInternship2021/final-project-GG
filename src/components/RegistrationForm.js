@@ -64,7 +64,7 @@ const RegistrationForm = ({
         />
       </label>
       { !settings
-        ? (
+        && (
           <div>
             <label htmlFor="password" className="form-label">
               Password
@@ -87,12 +87,12 @@ const RegistrationForm = ({
               />
             </label>
           </div>
-        )
-        : <></>}
+        )}
       { children }
     </div>
   );
 };
+
 RegistrationForm.defaultProps = {
   children: <></>,
   settings: false,
