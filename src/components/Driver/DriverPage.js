@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Loader } from '@googlemaps/js-api-loader';
 import { appRoutes, DriverPageButtons, baseUrl } from '../../utils/configs';
 import { mapStateToProps } from '../../redux/actions';
-import useMapLocatorRouter from '../../custom hooks/useMapLocatorRouter';
+import useMapLocatorRouter from '../../hooks/useMapLocatorRouter';
 import '../../styles/map.css';
 import UserMenu from '../layouts/UserMenu';
 

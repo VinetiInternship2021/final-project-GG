@@ -5,12 +5,12 @@ import { Loader } from '@googlemaps/js-api-loader';
 import { connect } from 'react-redux';
 import { rating, appRoutes, clientPageButtons } from '../../utils/configs';
 import { mapStateToProps } from '../../redux/actions';
-import useDriverCoordinates from '../../custom hooks/useDriversCoordinates';
-import useDistanceMatrix from '../../custom hooks/useDistanceMatrix';
-import useNearestDriver from '../../custom hooks/useNearestDriver';
+import useDriverCoordinates from '../../hooks/useDriversCoordinates';
+import useDistanceMatrix from '../../hooks/useDistanceMatrix';
+import useNearestDriver from '../../hooks/useNearestDriver';
 import findNearestDriverIndex from '../../callbacks/findNearestDriverIndex';
 import findReservationPrice from '../../callbacks/findReservationPrice';
-import useMapLoader from '../../custom hooks/useMapLoader';
+import useMapLoader from '../../hooks/useMapLoader';
 import '../../styles/map.css';
 
 import UserMenu from '../layouts/UserMenu';
