@@ -25,8 +25,18 @@ const DriverSignup = ({ appState, dispatch }) => {
       ...fields,
       alert: '',
     };
-    parameter[event.target.id] = event.target.value;
-    setFields(parameter);
+    if (event.target.files && event.target.files[0]) {
+      const img = event.target.files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        parameter[event.target.id] = reader.result;
+        setFields(parameter);
+      };
+      reader.readAsDataURL(img);
+    } else {
+      parameter[event.target.id] = event.target.value;
+      setFields(parameter);
+    }
   };
 
   const onClick = (event, Fields, SetFields, State, Dispatch, History, Params) => {
@@ -59,16 +69,6 @@ const DriverSignup = ({ appState, dispatch }) => {
                 className="form-control"
               />
             </label>
-            <label htmlFor="email" className="form-label">
-              Email
-              <br />
-              <input
-                onChange={(e) => onChange(e)}
-                id="email"
-                type="text"
-                className="form-control"
-              />
-            </label>
             <label htmlFor="car_registration_number" className="form-label">
               Car registration number
               <br />
@@ -77,6 +77,17 @@ const DriverSignup = ({ appState, dispatch }) => {
                 id="car_registration_number"
                 type="text"
                 className="form-control"
+              />
+            </label>
+            <label htmlFor="driver_license_image_id" className="form-label">
+              Car license image
+              <br />
+              <input
+                onChange={(e) => onChange(e)}
+                id="driver_license_image_id"
+                type="file"
+                className="form-control"
+                accept="image/*"
               />
             </label>
           </RegistrationForm>

@@ -2,6 +2,8 @@ import React from 'react';
 
 const ProfileInfoTable = ({ fieldsData }) => {
   const fields = Object.entries(fieldsData).map((key) => (
+    key[0] !== 'driver_license_image_id'
+    && (
     <table key={key[0]} className="table table-borderless">
       <thead>
         <tr>
@@ -10,6 +12,7 @@ const ProfileInfoTable = ({ fieldsData }) => {
         </tr>
       </thead>
     </table>
+    )
   ));
 
   return fields;
