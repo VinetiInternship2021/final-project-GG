@@ -8,6 +8,7 @@ if current_user && current_user[1] == 'SuperUser'
       json.isActive user.is_active
       json.isVerifiedByAdmin user.is_verified_by_admin
       json.carLevel user.car_level
+      json.driverLicenseImageId user.driver_license_image_id
     end
   end
 else

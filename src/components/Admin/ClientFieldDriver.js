@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ClientFieldDriver = ({
   driver: {
-    id, phoneNumber, firstName, lastName, isActive, isVerifiedByAdmin,
+    id, phoneNumber, firstName, lastName, isActive, isVerifiedByAdmin, driverLicenseImageId,
   },
 }) => {
   let verified = 'bg-danger';
@@ -30,6 +30,7 @@ const ClientFieldDriver = ({
       <small className={`badge ${active}`}>
         {isActive ? 'Active' : 'Inactive'}
       </small>
+      {driverLicenseImageId && <img className="drivers-list-licence" alt="licence" src={driverLicenseImageId} />}
     </div>
   );
 };
