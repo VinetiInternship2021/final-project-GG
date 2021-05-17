@@ -1,7 +1,13 @@
 import { useCallback } from 'react';
 import useRoute from './useRoute';
 
-const useMapLoader = (loader, setPickUpLocation, setDropOffLocation) => {
+const useMapLoader = (
+  loader,
+  setPickUpLocation,
+  setDropOffLocation,
+  setShowConfirmOrder,
+  setshowCancelOrder,
+) => {
   const myLatlng = { lat: 40.18, lng: 44.53 };
   let map;
   let toggle = true;
@@ -60,6 +66,8 @@ const useMapLoader = (loader, setPickUpLocation, setDropOffLocation) => {
 
           // draw the trip route
           if (origin && destination) {
+            setShowConfirmOrder(true);
+            setshowCancelOrder(true);
             marker1.setMap(null);
             marker2.setMap(null);
             useRoute(directionsService, directionsRenderer, origin, destination);

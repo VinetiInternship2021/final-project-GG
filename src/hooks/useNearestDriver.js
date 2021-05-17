@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../utils/configs';
 
@@ -8,10 +9,12 @@ const useNearestDriver = (
   dropOffLocation,
   nearestDriverIndex,
   price,
-  state,
+  userId,
+  count,
+  setConformationMessage,
+  setStatus,
+  setReservationId,
 ) => {
-  const [message, setMessage] = useState();
-
   let log;
 
   useEffect(() => {
@@ -19,27 +22,30 @@ const useNearestDriver = (
     const config = { cancelToken: source.token };
 
     if (drivers && pickUpLocation && dropOffLocation
-      && nearestDriverIndex !== undefined && price) {
+      && nearestDriverIndex !== undefined && price && count) {
       axios.post(`${baseUrl}/coordinates/trip_nearestdriver`, {
         pickUpLocation,
         dropOffLocation,
         driverId: drivers[nearestDriverIndex].id,
-        passengerId: state.userId,
+        passengerId: userId,
         price,
       }, config)
 
-        .then(() => {
+        .then((res) => {
+          console.log('response data id: ', res.data.id);
           clearInterval(log);
+          setStatus('reservation created');
+          setReservationId(res.data.id);
 
           log = setInterval(
             () => {
               axios.post(`${baseUrl}/coordinates/driverAssigned`, {
-                id: state.userId,
+                id: userId,
               })
 
                 .then((response) => {
                   if (response.data.message !== 'error') {
-                    setMessage('your driver is on the way');
+                    setConformationMessage('your driver is on the way');
 
                     clearInterval(log);
                   }
@@ -59,9 +65,7 @@ const useNearestDriver = (
     return () => {
       source.cancel();
     };
-  }, [pickUpLocation, dropOffLocation, drivers, nearestDriverIndex, price]);
-
-  return message;
+  }, [pickUpLocation, dropOffLocation, drivers, nearestDriverIndex, price, count]);
 };
 
 export default useNearestDriver;

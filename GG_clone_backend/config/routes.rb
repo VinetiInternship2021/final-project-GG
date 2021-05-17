@@ -15,6 +15,8 @@ Rails.application.routes.draw do
       post '/coordinates/trip' => 'coordinates#reservation'
       post '/coordinates/confirm' => 'coordinates#confirm_reservation'
       post '/coordinates/driverAssigned' => 'coordinates#assigned_reservation'
+      delete '/coordinates/reservation' => 'coordinates#delete_reservation'
+      # post '/coordinates/cancel' => 'coordinates#cancel_reservation'
     end
   end
 end

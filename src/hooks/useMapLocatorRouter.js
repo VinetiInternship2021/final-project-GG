@@ -3,13 +3,18 @@ import axios from 'axios';
 import { baseUrl } from '../utils/configs';
 import useRoute from './useRoute';
 
-const useMapLocatorRouter = (loader, state, setShowConfirm) => {
+const useMapLocatorRouter = (
+  loader,
+  state,
+  setShowConfirm,
+  setIdentifier,
+  identifier,
+) => {
   const myLatlng = { lat: 40.18, lng: 44.53 };
   let directionsService;
   let directionsRenderer;
   let map;
   let log;
-
   const handleMap = useCallback((mapElement) => {
     if (!mapElement) return;
 
@@ -28,7 +33,7 @@ const useMapLocatorRouter = (loader, state, setShowConfirm) => {
       const infoWindow = new window.google.maps.InfoWindow();
 
       if (navigator.geolocation) {
-        const identifier = navigator.geolocation.watchPosition(
+        setIdentifier(navigator.geolocation.watchPosition(
 
           (position) => {
             const pos = {
@@ -55,7 +60,6 @@ const useMapLocatorRouter = (loader, state, setShowConfirm) => {
                       .then((response) => {
                         if (response.data.data) {
                           navigator.geolocation.clearWatch(identifier);
-
                           setShowConfirm(true);
 
                           clearInterval(log);
@@ -87,9 +91,10 @@ const useMapLocatorRouter = (loader, state, setShowConfirm) => {
           },
           () => {
           },
-        );
+        ));
       }
     });
+  // }, [cancelOrder]);
   }, []);
 
   return handleMap;

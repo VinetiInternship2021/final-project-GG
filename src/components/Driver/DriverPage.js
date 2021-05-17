@@ -19,7 +19,14 @@ const DriverPage = ({ appState }) => {
   const state = appState;
 
   const [showConfirm, setShowConfirm] = useState(false);
-  const handleMap = useMapLocatorRouter(loader, state, setShowConfirm);
+  const [identifier, setIdentifier] = useState();
+  const handleMap = useMapLocatorRouter(
+    loader,
+    state,
+    setShowConfirm,
+    setIdentifier,
+    identifier,
+  );
 
   const confirmation = () => {
     axios.post(`${baseUrl}/coordinates/confirm`, {

@@ -13,6 +13,7 @@ class Api::V1::DriversController < ApplicationController
 
   def create
     @user = Driver.new(user_params)
+    # @user.avtive_reservation = false;
     if @user.save
       log_in @user, 'Driver'
       render status: :created, location: api_v1_super_users_path(@user)

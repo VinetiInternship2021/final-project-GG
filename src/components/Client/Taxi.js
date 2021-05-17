@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Loader } from '@googlemaps/js-api-loader';
 import { connect } from 'react-redux';
-import { rating, appRoutes, clientPageButtons } from '../../utils/configs';
+import {
+  rating, appRoutes, clientPageButtons, baseUrl,
+} from '../../utils/configs';
 import { mapStateToProps } from '../../redux/actions';
 import useDriverCoordinates from '../../hooks/useDriversCoordinates';
 import useDistanceMatrix from '../../hooks/useDistanceMatrix';
@@ -21,17 +23,41 @@ const loader = new Loader({
 });
 
 const Taxi = ({ appState }) => {
-  const state = appState;
-  const { userId } = appState;
+  const { userId, carType } = appState;
 
   const [message, setMessage] = useState('');
   const [pickUpLocation, setPickUpLocation] = useState();
   const [dropOffLocation, setDropOffLocation] = useState();
   const [nearestDriverIndex, setNearestDriverIndex] = useState();
   const [price, setPrice] = useState();
+  const [showConfirmOrder, setShowConfirmOrder] = useState(false);
+  const [showCancelOrder, setshowCancelOrder] = useState(false);
+  const [count, setCount] = useState(false);
+  const [conformationMessage, setConformationMessage] = useState('');
+  const [status, setStatus] = useState('');
+  const [reservationId, setReservationId] = useState('');
 
   // Gets and sets the available drivers coordinates
   const { driversPosition, drivers } = useDriverCoordinates();
+
+  useEffect(() => {
+    console.log('status: ', status);
+    window.onbeforeunload = (e) => {
+      if (status === 'reservation created') {
+        console.log('reservationId: ', reservationId);
+        axios.delete(`${baseUrl}/coordinates/reservation`, {
+          data: {
+            reservationId,
+          },
+        })
+          .then((response) => { console.log('delete reservation response :', response); });
+      }
+      console.log(e);
+    };
+    return () => {
+      window.onbeforeunload = null;
+    };
+  }, [status, reservationId]);
 
   // DistanceMatrix: finds the nearest driver to the passenger
   const findDriverIndex = (response) => {
@@ -42,7 +68,7 @@ const Taxi = ({ appState }) => {
 
   // DistanceMatrix: finds the trip distance and calculate price based on vehicle type
   const findPrice = (response) => {
-    let tripPrice = findReservationPrice(response, state);
+    let tripPrice = findReservationPrice(response, carType);
 
     if (tripPrice < 500) {
       tripPrice = 500;
@@ -55,11 +81,17 @@ const Taxi = ({ appState }) => {
   useDistanceMatrix(dropOffLocation, pickUpLocation, findPrice, window.google);
 
   // sends all gathered info to server for new resrevation, waits for confirmation from driver
-  const conformationMessage = useNearestDriver(drivers, pickUpLocation, dropOffLocation,
-    nearestDriverIndex, price, state);
+  useNearestDriver(drivers, pickUpLocation, dropOffLocation,
+    nearestDriverIndex, price, userId, count, setConformationMessage, setStatus, setReservationId);
 
   // loads the map, sets the pickup and dropoff locations via clicking
-  const handleMap = useMapLoader(loader, setPickUpLocation, setDropOffLocation);
+  const handleMap = useMapLoader(
+    loader,
+    setPickUpLocation,
+    setDropOffLocation,
+    setShowConfirmOrder,
+    setshowCancelOrder,
+  );
 
   // rate the driver: not included yet
   const onSelect = (event) => {
@@ -90,7 +122,7 @@ const Taxi = ({ appState }) => {
       menuButtons={clientPageButtons}
     />
   )}
-      <div className="ui-component">
+      <div className="ui-component position-relative">
         <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
           <p>Passenger Map</p>
           <div ref={handleMap} className="text-center border position-absolute top-0 start-50 translate-middle mb-6" id="mapWindow" />
@@ -100,6 +132,28 @@ const Taxi = ({ appState }) => {
           </div>
           <h6 className="text-center position-absolute start-50 translate-middle-x mb-2">{conformationMessage}</h6>
           <h6 className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-2">{message}</h6>
+        </div>
+        <div className="position-absolute start-100 translate-middle" id="passengerMapButtonsContainer">
+          {showConfirmOrder
+          && (
+            <button
+              type="button"
+              onClick={() => { setCount(true); setConformationMessage('waiting for confirmation from a driver'); }}
+              className="btn btn-outline-success "
+            >
+              Confirm Order
+            </button>
+          )}
+          {showCancelOrder
+          && (
+            <button
+              type="button"
+              // onClick={confirmation}
+              className="btn btn-outline-success "
+            >
+              Cancel Order
+            </button>
+          )}
         </div>
       </div>
     </div>

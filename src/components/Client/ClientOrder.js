@@ -13,7 +13,6 @@ const ClientPage = ({ appState, dispatch }) => {
   const state = appState;
 
   const handleOrders = (order) => {
-    console.log('order: ', order);
     dispatch(createCarType({
       ...state,
       type: order.target.outerText,
