@@ -15,10 +15,10 @@ import ClientField from '../src/components/Admin/ClientField';
 
 describe('Admin testing sets (loggedOut)', () => {
   configure({ adapter: new Adapter() });
-  const wrappedComponent = (component) => (
+  const wrappedComponent = ({ children }) => (
     <Provider store={store}>
       <BrowserRouter>
-        {component}
+        {children}
       </BrowserRouter>
     </Provider>
   );
@@ -119,11 +119,9 @@ describe('Admin testing sets (loggedOut)', () => {
       }],
     };
 
-    const wrapComponent = wrappedComponent(
-      <ClientField client={client} usersList={usersList} />,
-    );
-    const component = mount(wrapComponent);
-    const fields = component.find('list-fields');
+    const component = <ClientField client={client} usersList={usersList} />;
+    const mountedComponent = mount(component, { wrappingComponent: wrappedComponent });
+    const fields = mountedComponent.find('list-fields');
     expect(fields).toHaveLength(2);
   });
 });

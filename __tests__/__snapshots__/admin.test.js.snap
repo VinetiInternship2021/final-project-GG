@@ -30,35 +30,7 @@ exports[`Admin testing sets (loggedOut) Render ClientField correctly 1`] = `
     }
   }
 >
-  <BrowserRouter>
-    <Connect(ClientField)
-      client="Driver"
-      usersList={
-        Object {
-          "users": Array [
-            Object {
-              "carLevel": "econom",
-              "firstName": "Artyom",
-              "id": "1",
-              "isActive": false,
-              "isVerifiedByAdmin": false,
-              "lastName": "Kosakyan",
-              "phoneNumber": "094808489",
-            },
-            Object {
-              "carLevel": "econom",
-              "firstName": "Artyom",
-              "id": "2",
-              "isActive": false,
-              "isVerifiedByAdmin": false,
-              "lastName": "Kosakyan",
-              "phoneNumber": "094808489",
-            },
-          ],
-        }
-      }
-    />
-  </BrowserRouter>
+  <BrowserRouter />
 </ContextProvider>
 `;
 
