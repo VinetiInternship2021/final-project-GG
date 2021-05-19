@@ -94,7 +94,7 @@ const RegistrationForm = ({
 };
 
 RegistrationForm.defaultProps = {
-  children: [<></>],
+  children: [null],
   settings: false,
 };
 

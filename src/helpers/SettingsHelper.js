@@ -8,6 +8,7 @@ import { signParams } from '../utils/configs';
 import UpdateHelper from './UpdateHelper';
 import ErrorMessages from '../components/layouts/ErrorMessages';
 import SettingsHelperFields from './SettingsHelperFields';
+import imgUploadHelper from "./imgUploadHelper";
 
 const SettingsHelper = ({
   appState, dispatch, modelName, reqKey, driver,
@@ -36,22 +37,7 @@ const SettingsHelper = ({
   }, [state.isLoading]);
 
   const onChange = (event) => {
-    const parameter = {
-      ...fields,
-      alert: '',
-    };
-    if (event.target.files && event.target.files[0]) {
-      const img = event.target.files[0];
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        parameter[event.target.id] = reader.result;
-        setFields(parameter);
-      };
-      reader.readAsDataURL(img);
-    } else {
-      parameter[event.target.id] = event.target.value;
-      setFields(parameter);
-    }
+    imgUploadHelper({ event, fields, setFields });
   };
 
   const onClick = (event, Fields, SetFields, State, Dispatch, History, Params) => {
