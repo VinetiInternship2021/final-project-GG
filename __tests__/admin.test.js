@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { configure, shallow, render } from 'enzyme';
+import {
+  configure, shallow, render, mount,
+} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { shallowToJson } from 'enzyme-to-json';
 import Login from '../src/components/Login';
@@ -60,12 +62,6 @@ describe('Admin testing sets (loggedOut)', () => {
   });
 
   it('Render ClientField correctly', () => {
-    // const appState = {
-    //   isLoading: true,
-    //   loggedIn: true,
-    //   userType: 'SuperUser',
-    //   userId: '1',
-    // };
     const match = {
       params: {
         client: 'Driver',
@@ -94,5 +90,40 @@ describe('Admin testing sets (loggedOut)', () => {
     const component = <ClientField client={match.params.client} usersList={usersList} />;
     const WrapComponent = shallow(wrappedComponent(component));
     expect(shallowToJson(WrapComponent)).toMatchSnapshot();
+  });
+
+  it('Render ClientField Drivers list correctly', () => {
+    const client = 'drivers';
+    const usersList = {
+      users: [{
+        driver: {
+          id: '1',
+          phoneNumber: '094808489',
+          firstName: 'Artyom',
+          lastName: 'Kosakyan',
+          isActive: false,
+          isVerifiedByAdmin: false,
+          carLevel: 'econom',
+        },
+      },
+      {
+        driver: {
+          id: '2',
+          phoneNumber: '077808489',
+          firstName: 'Artyom',
+          lastName: 'Kosakyan',
+          isActive: false,
+          isVerifiedByAdmin: false,
+          carLevel: 'business',
+        },
+      }],
+    };
+
+    const wrapComponent = wrappedComponent(
+      <ClientField client={client} usersList={usersList} />,
+    );
+    const component = mount(wrapComponent);
+    const fields = component.find('list-fields');
+    expect(fields).toHaveLength(2);
   });
 });

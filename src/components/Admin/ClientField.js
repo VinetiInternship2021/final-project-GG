@@ -12,7 +12,9 @@ const ClientField = ({ usersList, client }) => {
     case 'passengers':
       try {
         fields = usersList.users.map(({ passenger }) => (
-          <ClientFieldPassenger key={passenger.id} passenger={passenger} />
+          <div className="list-fields">
+            <ClientFieldPassenger key={passenger.id} passenger={passenger} />
+          </div>
         ));
       } catch (err) {
         console.log(err);
@@ -21,10 +23,12 @@ const ClientField = ({ usersList, client }) => {
     case 'drivers':
       try {
         fields = usersList.users.map(({ driver }) => (
-          <ClientFieldDriver
-            key={driver.id}
-            driver={driver}
-          />
+          <div className="list-fields">
+            <ClientFieldDriver
+              key={driver.id}
+              driver={driver}
+            />
+          </div>
         ));
       } catch (err) {
         console.log(err);
@@ -35,7 +39,10 @@ const ClientField = ({ usersList, client }) => {
   }
 
   return (
-    <div className="list-group">
+    <div
+      key="12"
+      className="list-group"
+    >
       {fields}
     </div>
   );
