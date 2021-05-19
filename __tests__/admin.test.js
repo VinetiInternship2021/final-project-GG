@@ -1,13 +1,26 @@
 import React from 'react';
-import { configure, render } from 'enzyme';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { configure, shallow, render } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { shallowToJson } from 'enzyme-to-json';
 import Login from '../src/components/Login';
 import ClientFieldDriver from '../src/components/Admin/ClientFieldDriver';
 import ClientFieldPassenger from '../src/components/Admin/ClientFieldPassenger';
+import ClientFieldDefault from '../src/components/Admin/ClientFieldDefault';
+import store from '../src/redux/store';
+import ClientField from '../src/components/Admin/ClientField';
 
 describe('Admin testing sets (loggedOut)', () => {
   configure({ adapter: new Adapter() });
+  const wrappedComponent = (component) => (
+    <Provider store={store}>
+      <BrowserRouter>
+        {component}
+      </BrowserRouter>
+    </Provider>
+  );
+
   it('Render correctly Login', () => {
     const component = render(<Login />);
 
@@ -38,5 +51,48 @@ describe('Admin testing sets (loggedOut)', () => {
     const component = render(<ClientFieldPassenger passenger={passenger} />);
 
     expect(shallowToJson(component)).toMatchSnapshot();
+  });
+
+  it('Render ClientFieldDefault correctly', () => {
+    const component = render(<ClientFieldDefault />);
+
+    expect(shallowToJson(component)).toMatchSnapshot();
+  });
+
+  it('Render ClientField correctly', () => {
+    // const appState = {
+    //   isLoading: true,
+    //   loggedIn: true,
+    //   userType: 'SuperUser',
+    //   userId: '1',
+    // };
+    const match = {
+      params: {
+        client: 'Driver',
+      },
+    };
+    const usersList = {
+      users: [{
+        id: '1',
+        phoneNumber: '094808489',
+        firstName: 'Artyom',
+        lastName: 'Kosakyan',
+        isActive: false,
+        isVerifiedByAdmin: false,
+        carLevel: 'econom',
+      },
+      {
+        id: '2',
+        phoneNumber: '094808489',
+        firstName: 'Artyom',
+        lastName: 'Kosakyan',
+        isActive: false,
+        isVerifiedByAdmin: false,
+        carLevel: 'econom',
+      }],
+    };
+    const component = <ClientField client={match.params.client} usersList={usersList} />;
+    const WrapComponent = shallow(wrappedComponent(component));
+    expect(shallowToJson(WrapComponent)).toMatchSnapshot();
   });
 });
