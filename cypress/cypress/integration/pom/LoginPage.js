@@ -13,7 +13,7 @@ class LoginPage {
   }
 
   submit() {
-    cy.get('form[class="text-center w-25 border position-absolute top-50 start-50 translate-middle"] button[type="submit"]');
+    cy.get('form button[type="submit"]');
   }
 
   selectUserType(type) {
