@@ -16,7 +16,7 @@ const LoginForm = ({
           onClick={() => setFields({ ...fields, alert: [] })}
           onChange={(e) => setFields({ ...fields, phone_number: e.target.value })}
           id="phone"
-          type="number"
+          type="text"
           className="form-control"
         />
       </label>

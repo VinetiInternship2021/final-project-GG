@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/react-redux": "^7.1.16",
     "axios": "^0.21.1",
+    "camelcase": "^6.2.0",
     "chokidar": "^3.5.1",
     "node-sass": "^5.0.0",
     "prop-types": "^15.7.2",

@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import VerifyButton from './verification/VerifyButton';
 
 const ClientFieldDriver = ({
   driver: {
     id, phoneNumber, firstName, lastName, isActive, isVerifiedByAdmin,
   },
+  onClick,
 }) => {
   let verified = 'bg-danger';
   let active = 'bg-danger';
@@ -14,6 +16,7 @@ const ClientFieldDriver = ({
       active = 'bg-success';
     }
   }
+
   return (
     <div key={id} className="list-group-item list-group-item-action">
       <div className="d-flex w-100 justify-content-between">
@@ -30,6 +33,12 @@ const ClientFieldDriver = ({
       <small className={`badge ${active}`}>
         {isActive ? 'Active' : 'Inactive'}
       </small>
+      {isVerifiedByAdmin ? '' : (
+        <VerifyButton
+          onClick={onClick}
+          text="Verify"
+        />
+      )}
     </div>
   );
 };
