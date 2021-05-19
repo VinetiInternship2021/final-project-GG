@@ -8,7 +8,7 @@ import { signParams } from '../utils/configs';
 import UpdateHelper from './UpdateHelper';
 import ErrorMessages from '../components/layouts/ErrorMessages';
 import SettingsHelperFields from './SettingsHelperFields';
-import imgUploadHelper from "./imgUploadHelper";
+import imgUploadHelper from './imgUploadHelper';
 
 const SettingsHelper = ({
   appState, dispatch, modelName, reqKey, driver,
@@ -19,6 +19,7 @@ const SettingsHelper = ({
     userId,
     isLoading: true,
     user: {},
+    changePassword: false,
   });
   const [fields, setFields] = useState({
     ...signParams,
@@ -34,11 +35,7 @@ const SettingsHelper = ({
       .then(() => {
         setFields(state.user);
       });
-  }, [state.isLoading]);
-
-  const onChange = (event) => {
-    imgUploadHelper({ event, fields, setFields });
-  };
+  }, [state.isLoading, state.changePassword]);
 
   const onClick = (event, Fields, SetFields, State, Dispatch, History, Params) => {
     const newParams = {};
@@ -62,8 +59,38 @@ const SettingsHelper = ({
           state={state}
           driver={driver}
           setFields={setFields}
-          onChange={onChange}
+          onChange={(event) => {
+            imgUploadHelper({ event, fields, setFields });
+          }}
         />
+        { state.changePassword && (
+          <div>
+            <label htmlFor="password" className="form-label">
+              Password
+              <br />
+              <input
+                onChange={(event) => {
+                  imgUploadHelper({ event, fields, setFields });
+                }}
+                id="password"
+                type="text"
+                className="form-control"
+              />
+            </label>
+            <label htmlFor="password confirmation" className="form-label">
+              Password confirmation
+              <br />
+              <input
+                onChange={(event) => {
+                  imgUploadHelper({ event, fields, setFields });
+                }}
+                id="password_confirmation"
+                type="text"
+                className="form-control"
+              />
+            </label>
+          </div>
+        ) }
         <button
           onClick={(e) => {
             onClick(e, fields, setFields, state, dispatch, history, params);
@@ -72,6 +99,18 @@ const SettingsHelper = ({
           className="btn btn-outline-success mx-3 mb-3"
         >
           Submit
+        </button>
+        <button
+          onClick={() => {
+            setState({
+              ...state,
+              changePassword: !state.changePassword,
+            });
+          }}
+          type="button"
+          className="btn btn-outline-success mx-3 mb-3"
+        >
+          Change password
         </button>
       </form>
     </>
