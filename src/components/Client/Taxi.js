@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Loader } from '@googlemaps/js-api-loader';
 import { connect } from 'react-redux';
-import {
-  rating, appRoutes, clientPageButtons, baseUrl,
-} from '../../utils/configs';
+import { rating, appRoutes, clientPageButtons } from '../../utils/configs';
 import { mapStateToProps } from '../../redux/actions';
-import useDriverCoordinates from '../../hooks/useDriversCoordinates';
+import useDriversCoordinates from '../../hooks/useDriversCoordinates';
 import useDistanceMatrix from '../../hooks/useDistanceMatrix';
 import useNearestDriver from '../../hooks/useNearestDriver';
 import findNearestDriverIndex from '../../callbacks/findNearestDriverIndex';
 import findReservationPrice from '../../callbacks/findReservationPrice';
 import useMapLoader from '../../hooks/useMapLoader';
+import useOnBeforeUnload from '../../hooks/useOnBeforeUnload';
 import '../../styles/map.css';
-
 import UserMenu from '../layouts/UserMenu';
 
 const loader = new Loader({
@@ -38,26 +36,10 @@ const Taxi = ({ appState }) => {
   const [reservationId, setReservationId] = useState('');
 
   // Gets and sets the available drivers coordinates
-  const { driversPosition, drivers } = useDriverCoordinates();
+  const { driversPosition, drivers } = useDriversCoordinates(carType);
 
-  useEffect(() => {
-    console.log('status: ', status);
-    window.onbeforeunload = (e) => {
-      if (status === 'reservation created') {
-        console.log('reservationId: ', reservationId);
-        axios.delete(`${baseUrl}/coordinates/reservation`, {
-          data: {
-            reservationId,
-          },
-        })
-          .then((response) => { console.log('delete reservation response :', response); });
-      }
-      console.log(e);
-    };
-    return () => {
-      window.onbeforeunload = null;
-    };
-  }, [status, reservationId]);
+  // delete reservation on page refresh or close
+  useOnBeforeUnload(status, reservationId);
 
   // DistanceMatrix: finds the nearest driver to the passenger
   const findDriverIndex = (response) => {

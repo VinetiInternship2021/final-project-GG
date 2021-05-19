@@ -1,20 +1,27 @@
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../utils/configs';
 import useRoute from './useRoute';
 
 const useMapLocatorRouter = (
   loader,
-  state,
+  userId,
   setShowConfirm,
-  setIdentifier,
-  identifier,
+
 ) => {
+  const [identifier, setIdentifier] = useState();
+  const [log, setLog] = useState();
   const myLatlng = { lat: 40.18, lng: 44.53 };
   let directionsService;
   let directionsRenderer;
   let map;
-  let log;
+
+  // unsubscribing from geolocation and interval
+  useEffect(() => () => {
+    navigator.geolocation.clearWatch(identifier);
+    clearInterval(log);
+  }, [identifier, log]);
+
   const handleMap = useCallback((mapElement) => {
     if (!mapElement) return;
 
@@ -33,8 +40,7 @@ const useMapLocatorRouter = (
       const infoWindow = new window.google.maps.InfoWindow();
 
       if (navigator.geolocation) {
-        setIdentifier(navigator.geolocation.watchPosition(
-
+        const id = navigator.geolocation.watchPosition(
           (position) => {
             const pos = {
               lat: position.coords.latitude,
@@ -46,16 +52,16 @@ const useMapLocatorRouter = (
                 latitude: position.coords.latitude,
                 longitude: position.coords.longitude,
               },
-              id: state.userId,
+              id: userId,
             })
               .then(() => {
                 clearInterval(log);
 
                 // waits for new order
-                log = setInterval(
+                const intLog = setInterval(
                   () => {
                     axios.post(`${baseUrl}/coordinates/trip`, {
-                      id: state.userId,
+                      id: userId,
                     })
                       .then((response) => {
                         if (response.data.data) {
@@ -80,6 +86,7 @@ const useMapLocatorRouter = (
                       });
                   }, 3000,
                 );
+                setLog(intLog);
               })
               .catch(() => {
               });
@@ -91,10 +98,10 @@ const useMapLocatorRouter = (
           },
           () => {
           },
-        ));
+        );
+        setIdentifier(id);
       }
     });
-  // }, [cancelOrder]);
   }, []);
 
   return handleMap;

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { Loader } from '@googlemaps/js-api-loader';
 import { appRoutes, DriverPageButtons, baseUrl } from '../../utils/configs';
-import { mapStateToProps } from '../../redux/actions';
 import useMapLocatorRouter from '../../hooks/useMapLocatorRouter';
 import '../../styles/map.css';
 import UserMenu from '../layouts/UserMenu';
@@ -14,23 +12,22 @@ const loader = new Loader({
   version: 'weekly',
 });
 
-const DriverPage = ({ appState }) => {
-  const { userId } = appState;
-  const state = appState;
+const DriverPage = () => {
+  const loggedIn = useSelector((state) => state.rootReducer.loggedIn);
+  const userId = useSelector((state) => state.rootReducer.userId);
 
   const [showConfirm, setShowConfirm] = useState(false);
-  const [identifier, setIdentifier] = useState();
+
   const handleMap = useMapLocatorRouter(
     loader,
-    state,
+    userId,
     setShowConfirm,
-    setIdentifier,
-    identifier,
+    loggedIn,
   );
 
   const confirmation = () => {
     axios.post(`${baseUrl}/coordinates/confirm`, {
-      id: state.userId,
+      id: userId,
     });
   };
 
@@ -65,8 +62,4 @@ const DriverPage = ({ appState }) => {
   );
 };
 
-DriverPage.propTypes = {
-  appState: PropTypes.objectOf(PropTypes.any).isRequired,
-};
-
-export default connect(mapStateToProps)(DriverPage);
+export default DriverPage;

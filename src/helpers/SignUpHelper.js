@@ -3,6 +3,7 @@ import { ChangeActionLoading, ChangeActionLoggedIn } from '../redux/actions';
 
 const SignUpHelper = async (fields, setFields, state, dispatch, history, params) => {
   await signUp(params)
+
     .then((response) => {
       dispatch(ChangeActionLoggedIn({
         ...state,
@@ -11,10 +12,13 @@ const SignUpHelper = async (fields, setFields, state, dispatch, history, params)
         userType: response.data.userType,
         userId: response.data.user.id,
       }));
+
       history.push(`/${response.data.userType}/${response.data.user.id}`);
     })
+
     .catch((response) => {
       const errors = [];
+
       if (response.status === 500) {
         errors.push('This phone number registered');
         dispatch(ChangeActionLoading({ isLoading: false }));
@@ -24,6 +28,7 @@ const SignUpHelper = async (fields, setFields, state, dispatch, history, params)
           errors.push(`${error[0]} ${error[1]}`);
           return errors;
         });
+
         setFields({ ...fields, alert: errors });
       } else {
         setFields({ ...fields, alert: response.message });

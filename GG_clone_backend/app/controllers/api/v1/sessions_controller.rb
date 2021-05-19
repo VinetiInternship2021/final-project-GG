@@ -37,12 +37,11 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def log_out
-    user = current_user
-
-    if user[0].model_name == 'Driver' && user[0].latitude
-      user[0].latitude = nil
-      user[0].longitude = nil
-      user[0].save
+    user = current_user.first
+    if user.model_name == 'Driver'
+      user[:latitude] = nil
+      user[:longitude] = nil
+      user.save
     end
 
     user, = current_user

@@ -15,7 +15,7 @@ const ClientPage = ({ appState, dispatch }) => {
   const handleOrders = (order) => {
     dispatch(createCarType({
       ...state,
-      type: order.target.outerText,
+      type: order.target.innerText,
     }));
     history.push(appRoutes.taxi);
   };

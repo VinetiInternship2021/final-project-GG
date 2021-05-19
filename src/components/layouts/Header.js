@@ -34,6 +34,7 @@ const Header = ({ appState, dispatch }) => {
     }
     if (button === 'Logout') {
       dispatch(ChangeActionLoading({ isLoading: true }));
+
       await logout()
         .then(() => dispatch(ChangeActionLoggedIn({
           isLoading: false,
@@ -42,6 +43,7 @@ const Header = ({ appState, dispatch }) => {
           userId: '',
         })));
     }
+
     history.push(Switch(button, location, state));
   };
 

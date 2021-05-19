@@ -79,6 +79,16 @@ const DriverSignup = ({ appState, dispatch }) => {
                 className="form-control"
               />
             </label>
+            <label htmlFor="car_level" className="form-label">
+              Car Level
+              <br />
+              <input
+                onChange={(e) => onChange(e)}
+                id="car_level"
+                type="text"
+                className="form-control"
+              />
+            </label>
           </RegistrationForm>
         </div>
         {fields.alert

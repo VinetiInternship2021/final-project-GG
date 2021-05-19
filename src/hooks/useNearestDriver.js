@@ -1,5 +1,4 @@
-// import { useEffect, useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../utils/configs';
 
@@ -15,7 +14,7 @@ const useNearestDriver = (
   setStatus,
   setReservationId,
 ) => {
-  let log;
+  const [log, setlog] = useState();
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -32,12 +31,10 @@ const useNearestDriver = (
       }, config)
 
         .then((res) => {
-          console.log('response data id: ', res.data.id);
-          clearInterval(log);
           setStatus('reservation created');
           setReservationId(res.data.id);
 
-          log = setInterval(
+          const IntervalLog = setInterval(
             () => {
               axios.post(`${baseUrl}/coordinates/driverAssigned`, {
                 id: userId,
@@ -50,11 +47,14 @@ const useNearestDriver = (
                     clearInterval(log);
                   }
                 })
+
                 .catch((error) => {
                   console.log(error);
                 });
             }, 3000,
           );
+
+          setlog(IntervalLog);
         })
 
         .catch((error) => {
@@ -64,6 +64,7 @@ const useNearestDriver = (
 
     return () => {
       source.cancel();
+      clearInterval(log);
     };
   }, [pickUpLocation, dropOffLocation, drivers, nearestDriverIndex, price, count]);
 };

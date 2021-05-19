@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_17_095828) do
+ActiveRecord::Schema.define(version: 2021_05_18_162040) do
 
   create_table "drivers", force: :cascade do |t|
     t.string "first_name"
@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 2021_05_17_095828) do
     t.string "remember_digest"
     t.decimal "latitude"
     t.decimal "longitude"
-    t.boolean "active_reservation"
     t.index ["phone_number"], name: "index_drivers_on_phone_number", unique: true
   end
 

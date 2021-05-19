@@ -12,7 +12,7 @@ class Api::V1::CoordinatesController < ApplicationController
   end
 
   def active_drivers
-    drivers = Driver.where('LENGTH(latitude) > 0')
+    drivers = Driver.where("latitude > ? AND car_level = ?", 0, params[:carType])
     array = []
     drivers.each do |driver|
       elem = { id: driver.id, latitude: driver.latitude, longitude: driver.longitude }
@@ -35,9 +35,6 @@ class Api::V1::CoordinatesController < ApplicationController
     reservation.status = 'unassigned'
     reservation = fetch_params reservation
     if reservation.save
-      # driver = Driver.find(params[:driverId])
-      # driver.active_reservation = true
-      # driver.save
       render json: { message: 'reservation has been saved', id: reservation.id }, status: :ok
     else
       render json: { message: 'error! reservation has not been saved' }, status: :unprocessable_entity
@@ -83,25 +80,6 @@ class Api::V1::CoordinatesController < ApplicationController
       render json: { message: "error: reservation number #{params[:reservationId]} has not been deleted" }
     end
   end
-
-  # def cancel_reservation
-  #   # puts params
-  #   # puts 'cancel_reservationnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn'
-  #   driver = Driver.find(params[:id])
-  #   reservation = Reservation.find_by(driver_id: params[:id], status: 'unassigned')
-  #   puts 'reservation:'
-  #   puts reservation
-  #   puts 'driver.active_reservation: '
-  #   puts driver.active_reservation
-
-  #   if !reservation && !driver.active_reservation
-  #     render json: { message: "no reservation yet" }
-  #   elsif !reservation && driver.active_reservation
-  #     render json: { message: "reservation has been deleted" }
-  #     driver.active_reservation = false
-  #     driver.save
-  #   end
-  # end
 
   def fetch_params(reservation)
     reservation.pickupLat = params[:pickUpLocation][:lat]
