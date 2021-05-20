@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import {
-  configure, shallow, render, mount,
+  configure, shallow, render,
 } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { shallowToJson } from 'enzyme-to-json';
@@ -22,6 +22,32 @@ describe('Admin testing sets (loggedOut)', () => {
       </BrowserRouter>
     </Provider>
   );
+
+  const client = 'drivers';
+  const usersList = {
+    users: [{
+      driver: {
+        id: '1',
+        phoneNumber: '094808489',
+        firstName: 'Artyom',
+        lastName: 'Kosakyan',
+        isActive: false,
+        isVerifiedByAdmin: false,
+        carLevel: 'econom',
+      },
+    },
+    {
+      driver: {
+        id: '2',
+        phoneNumber: '077808489',
+        firstName: 'Artyom',
+        lastName: 'Kosakyan',
+        isActive: false,
+        isVerifiedByAdmin: false,
+        carLevel: 'business',
+      },
+    }],
+  };
 
   it('Render correctly Login', () => {
     const component = render(<Login />);
@@ -67,61 +93,26 @@ describe('Admin testing sets (loggedOut)', () => {
         client: 'Driver',
       },
     };
-    const usersList = {
-      users: [{
-        id: '1',
-        phoneNumber: '094808489',
-        firstName: 'Artyom',
-        lastName: 'Kosakyan',
-        isActive: false,
-        isVerifiedByAdmin: false,
-        carLevel: 'econom',
-      },
-      {
-        id: '2',
-        phoneNumber: '094808489',
-        firstName: 'Artyom',
-        lastName: 'Kosakyan',
-        isActive: false,
-        isVerifiedByAdmin: false,
-        carLevel: 'econom',
-      }],
-    };
     const component = <ClientField client={match.params.client} usersList={usersList} />;
     const WrapComponent = shallow(wrappedComponent(component));
     expect(shallowToJson(WrapComponent)).toMatchSnapshot();
   });
 
   it('Render ClientField Drivers list correctly', () => {
-    const client = 'drivers';
-    const usersList = {
-      users: [{
-        driver: {
-          id: '1',
-          phoneNumber: '094808489',
-          firstName: 'Artyom',
-          lastName: 'Kosakyan',
-          isActive: false,
-          isVerifiedByAdmin: false,
-          carLevel: 'econom',
-        },
-      },
-      {
-        driver: {
-          id: '2',
-          phoneNumber: '077808489',
-          firstName: 'Artyom',
-          lastName: 'Kosakyan',
-          isActive: false,
-          isVerifiedByAdmin: false,
-          carLevel: 'business',
-        },
-      }],
-    };
+    const mountedComponent = render(
+      wrappedComponent({
+        children: <ClientField client={client} usersList={usersList} />,
+      }),
+    );
+    expect(mountedComponent.hasClass('list-group')).toEqual(true);
+  });
 
-    const component = <ClientField client={client} usersList={usersList} />;
-    const mountedComponent = mount(component, { wrappingComponent: wrappedComponent });
-    const fields = mountedComponent.find('list-fields');
-    expect(fields).toHaveLength(2);
+  it('Render ClientFieldDriver unverified driver field correctly', () => {
+    const mountedComponent = render(
+      wrappedComponent({
+        children: <ClientFieldDriver driver={usersList.users[0]} />,
+      }),
+    );
+    expect(mountedComponent.hasClass('list-group-item')).toEqual(true);
   });
 });

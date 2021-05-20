@@ -7,7 +7,7 @@ import ClientFieldPassenger from './ClientFieldPassenger';
 import ClientFieldDefault from './ClientFieldDefault';
 
 const ClientField = ({ usersList, client }) => {
-  let fields;
+  let fields = [null];
   switch (client) {
     case 'passengers':
       try {
