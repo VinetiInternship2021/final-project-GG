@@ -52,6 +52,17 @@ const SettingsHelperFields = ({
                 defaultValue={fields.car_registration_number}
               />
             </label>
+            <label htmlFor="driver_license_image_id" className="form-label">
+              Car license image
+              <br />
+              <input
+                onChange={(e) => onChange(e)}
+                id="driver_license_image_id"
+                type="file"
+                className="form-control"
+                accept="image/*"
+              />
+            </label>
           </div>
         )}
     </RegistrationForm>

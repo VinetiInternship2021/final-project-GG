@@ -7,6 +7,7 @@ import RegistrationForm from '../RegistrationForm';
 import { mapStateToProps } from '../../redux/actions';
 import SignUpHelper from '../../helpers/SignUpHelper';
 import ErrorMessages from '../layouts/ErrorMessages';
+import imgUploadHelper from '../../helpers/imgUploadHelper';
 
 const DriverSignup = ({ appState, dispatch }) => {
   const history = useHistory();
@@ -21,12 +22,7 @@ const DriverSignup = ({ appState, dispatch }) => {
   };
 
   const onChange = (event) => {
-    const parameter = {
-      ...fields,
-      alert: '',
-    };
-    parameter[event.target.id] = event.target.value;
-    setFields(parameter);
+    imgUploadHelper({ event, fields, setFields });
   };
 
   const onClick = (event, Fields, SetFields, State, Dispatch, History, Params) => {
@@ -59,16 +55,6 @@ const DriverSignup = ({ appState, dispatch }) => {
                 className="form-control"
               />
             </label>
-            <label htmlFor="email" className="form-label">
-              Email
-              <br />
-              <input
-                onChange={(e) => onChange(e)}
-                id="email"
-                type="text"
-                className="form-control"
-              />
-            </label>
             <label htmlFor="car_registration_number" className="form-label">
               Car registration number
               <br />
@@ -77,6 +63,17 @@ const DriverSignup = ({ appState, dispatch }) => {
                 id="car_registration_number"
                 type="text"
                 className="form-control"
+              />
+            </label>
+            <label htmlFor="driver_license_image_id" className="form-label">
+              Car license image
+              <br />
+              <input
+                onChange={(e) => onChange(e)}
+                id="driver_license_image_id"
+                type="file"
+                className="form-control"
+                accept="image/*"
               />
             </label>
             <label htmlFor="car_level" className="form-label">

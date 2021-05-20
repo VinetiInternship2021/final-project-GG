@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2021_05_20_171357) do
     t.string "car_manufacturer"
     t.string "car_model"
     t.string "car_registration_number"
-    t.string "driver_license_image_id"
+    t.text "driver_license_image_id"
     t.boolean "is_active", default: false
     t.boolean "is_verified_by_admin", default: false
     t.string "car_level"
