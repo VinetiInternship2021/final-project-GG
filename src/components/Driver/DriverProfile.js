@@ -37,7 +37,7 @@ const DriverProfile = ({ match: { params: { id } } }) => {
           />
         )}
       <div className="ui-component container-md">
-        <div className="card text-center position-absolute top-50 start-50 translate-middle">
+        <div className="card text-center top-50 start-50 translate-middle">
           {state.isLoading ? <Loading />
             : (
               <>
@@ -46,6 +46,13 @@ const DriverProfile = ({ match: { params: { id } } }) => {
                   {state.user.is_verified_by_admin ? 'Confirmed' : 'Unconfirmed'}
                 </span>
                 <ProfileInfoTable fieldsData={state.user} />
+                {state.user.driver_license_image_id
+                && (
+                <img
+                  alt="Driver license"
+                  src={state.user.driver_license_image_id}
+                />
+                )}
               </>
             )}
         </div>

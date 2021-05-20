@@ -94,14 +94,14 @@ const RegistrationForm = ({
 };
 
 RegistrationForm.defaultProps = {
-  children: <></>,
+  children: [null],
   settings: false,
 };
 
 RegistrationForm.propTypes = {
   data: PropTypes.arrayOf(PropTypes.any).isRequired,
   header: PropTypes.string.isRequired,
-  children: PropTypes.element,
+  children: PropTypes.arrayOf(PropTypes.element),
   settings: PropTypes.bool,
 };
 

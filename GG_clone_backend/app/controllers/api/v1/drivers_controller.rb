@@ -40,6 +40,6 @@ class Api::V1::DriversController < ApplicationController
     params.require(:driver).permit(:first_name, :last_name, :phone_number,
                                    :email, :car_manufacturer, :car_model,
                                    :car_registration_number, :car_level,
-                                   :password, :password_confirmation)
+                                   :password, :password_confirmation, :driver_license_image_id)
   end
 end
