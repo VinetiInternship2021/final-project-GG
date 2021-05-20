@@ -13,22 +13,62 @@ const loader = new Loader({
 });
 
 const DriverPage = () => {
-  const loggedIn = useSelector((state) => state.rootReducer.loggedIn);
   const userId = useSelector((state) => state.rootReducer.userId);
 
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showArrived, setShowArrived] = useState(false);
+  const [showPickup, setShowPickup] = useState(false);
+  const [showComplete, setShowComplete] = useState(false);
+  const [message, setMessage] = useState('');
 
   const handleMap = useMapLocatorRouter(
     loader,
     userId,
     setShowConfirm,
-    loggedIn,
+    setMessage,
   );
 
   const confirmation = () => {
     axios.post(`${baseUrl}/coordinates/confirm`, {
       id: userId,
-    });
+    })
+      .then(() => {
+        setMessage('Approach to the pickup location, then click arrived button. The passenger will be notified.');
+        setShowConfirm(false);
+        setShowArrived(true);
+      });
+  };
+
+  const arrived = () => {
+    axios.post(`${baseUrl}/coordinates/arrived`, {
+      id: userId,
+    })
+      .then(() => {
+        setMessage('Pickup the passenger, then click pickup button.');
+        setShowArrived(false);
+        setShowPickup(true);
+      });
+  };
+
+  const pickup = () => {
+    axios.post(`${baseUrl}/coordinates/pickup`, {
+      id: userId,
+    })
+      .then(() => {
+        setMessage('Ride started. Complete the order, then click on complete button.');
+        setShowPickup(false);
+        setShowComplete(true);
+      });
+  };
+
+  const complete = () => {
+    axios.post(`${baseUrl}/coordinates/complete`, {
+      id: userId,
+    })
+      .then(() => {
+        setMessage('Ride completed.');
+        setShowComplete(false);
+      });
   };
 
   return (
@@ -43,6 +83,7 @@ const DriverPage = () => {
         )}
       <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
         <p>Driver Map</p>
+        <h6>{message}</h6>
         <div
           ref={handleMap}
           className="text-center border position-absolute top-0 start-50 translate-middle maps"
@@ -55,6 +96,36 @@ const DriverPage = () => {
               className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
             >
               Confirm
+            </button>
+          )}
+        {showArrived
+          && (
+            <button
+              type="button"
+              onClick={arrived}
+              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+            >
+              Arrived
+            </button>
+          )}
+        {showPickup
+          && (
+            <button
+              type="button"
+              onClick={pickup}
+              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+            >
+              Pickup
+            </button>
+          )}
+        {showComplete
+          && (
+            <button
+              type="button"
+              onClick={complete}
+              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+            >
+              Complete
             </button>
           )}
       </div>

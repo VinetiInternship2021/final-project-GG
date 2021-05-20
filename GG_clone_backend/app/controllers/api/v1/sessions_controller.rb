@@ -38,9 +38,20 @@ class Api::V1::SessionsController < ApplicationController
 
   def log_out
     user = current_user.first
+    if user.model_name == 'Passenger'
+      reservation = Reservation.find_by(passenger_id: user.id, status: 'unassigned')
+      if !reservation
+      reservation = Reservation.find_by(passenger_id: user.id, status: 'assigned')
+      end 
+      if reservation
+        reservation.destroy
+      end  
+    end   
+
     if user.model_name == 'Driver'
       user[:latitude] = nil
       user[:longitude] = nil
+      user[:is_active] = false
       user.save
     end
 

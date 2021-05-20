@@ -11,7 +11,6 @@ const useOnBeforeUnload = (status, reservationId) => {
             reservationId,
           },
         })
-
           .then((response) => { console.log('delete reservation response :', response); });
       }
     };

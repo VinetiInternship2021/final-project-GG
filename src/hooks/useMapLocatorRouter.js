@@ -7,7 +7,7 @@ const useMapLocatorRouter = (
   loader,
   userId,
   setShowConfirm,
-
+  setMessage,
 ) => {
   const [identifier, setIdentifier] = useState();
   const [log, setLog] = useState();
@@ -65,10 +65,12 @@ const useMapLocatorRouter = (
                     })
                       .then((response) => {
                         if (response.data.data) {
+                          setMessage('You have a new order, click confirm button to confirm.');
+
                           navigator.geolocation.clearWatch(identifier);
                           setShowConfirm(true);
 
-                          clearInterval(log);
+                          clearInterval(intLog);
 
                           // renders the new order route on the map
                           const origin = {
@@ -92,7 +94,7 @@ const useMapLocatorRouter = (
               });
 
             infoWindow.setPosition(pos);
-            infoWindow.setContent('Driver location.');
+            infoWindow.setContent('Your location.');
             infoWindow.open(map);
             map.setCenter(pos);
           },

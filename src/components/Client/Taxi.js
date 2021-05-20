@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { Loader } from '@googlemaps/js-api-loader';
 import { connect } from 'react-redux';
 import { rating, appRoutes, clientPageButtons } from '../../utils/configs';
@@ -8,10 +7,12 @@ import { mapStateToProps } from '../../redux/actions';
 import useDriversCoordinates from '../../hooks/useDriversCoordinates';
 import useDistanceMatrix from '../../hooks/useDistanceMatrix';
 import useNearestDriver from '../../hooks/useNearestDriver';
+import useDriverArrival from '../../hooks/useDriverArrival';
 import findNearestDriverIndex from '../../callbacks/findNearestDriverIndex';
 import findReservationPrice from '../../callbacks/findReservationPrice';
 import useMapLoader from '../../hooks/useMapLoader';
 import useOnBeforeUnload from '../../hooks/useOnBeforeUnload';
+import useRating from '../../hooks/useRating';
 import '../../styles/map.css';
 import UserMenu from '../layouts/UserMenu';
 
@@ -29,11 +30,12 @@ const Taxi = ({ appState }) => {
   const [nearestDriverIndex, setNearestDriverIndex] = useState();
   const [price, setPrice] = useState();
   const [showConfirmOrder, setShowConfirmOrder] = useState(false);
-  const [showCancelOrder, setshowCancelOrder] = useState(false);
+  const [showRate, setShowRate] = useState(false);
   const [count, setCount] = useState(false);
-  const [conformationMessage, setConformationMessage] = useState('');
+  const [confirmationMessage, setConfirmationMessage] = useState('');
   const [status, setStatus] = useState('');
   const [reservationId, setReservationId] = useState('');
+  const [rateValue, setRateValue] = useState();
 
   // Gets and sets the available drivers coordinates
   const { driversPosition, drivers } = useDriversCoordinates(carType);
@@ -63,8 +65,20 @@ const Taxi = ({ appState }) => {
   useDistanceMatrix(dropOffLocation, pickUpLocation, findPrice, window.google);
 
   // sends all gathered info to server for new resrevation, waits for confirmation from driver
-  useNearestDriver(drivers, pickUpLocation, dropOffLocation,
-    nearestDriverIndex, price, userId, count, setConformationMessage, setStatus, setReservationId);
+  useNearestDriver(
+    drivers,
+    pickUpLocation,
+    dropOffLocation,
+    nearestDriverIndex,
+    price,
+    userId,
+    count,
+    setConfirmationMessage,
+    setStatus,
+    setReservationId,
+  );
+
+  useDriverArrival(userId, setConfirmationMessage, confirmationMessage, setShowRate);
 
   // loads the map, sets the pickup and dropoff locations via clicking
   const handleMap = useMapLoader(
@@ -72,24 +86,20 @@ const Taxi = ({ appState }) => {
     setPickUpLocation,
     setDropOffLocation,
     setShowConfirmOrder,
-    setshowCancelOrder,
   );
 
+  // gets and sets the driver rating
+  useRating(rateValue, userId);
+
   // rate the driver: not included yet
-  const onSelect = (event) => {
-    axios.post('/taxi/rate', {
-      rate: event.target.id,
-    })
-      .then(() => {
-      })
-      .catch(() => {
-      });
+  const onSelect = (rate) => {
+    setRateValue(rate);
     setMessage('Thank you for using our services.');
   };
 
   const rateButton = rating.map((rate) => (
     <div key={rate} className="form-check form-check-inline">
-      <input onChange={(event) => onSelect(event)} className="form-check-input" type="radio" name="inlineRadioOptions" id={rate} />
+      <input onChange={() => onSelect(rate)} className="form-check-input" type="radio" name="inlineRadioOptions" id={rate} />
       <label className="form-check-label" htmlFor={rate}>{rate}</label>
     </div>
   ));
@@ -108,11 +118,14 @@ const Taxi = ({ appState }) => {
         <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
           <p>Passenger Map</p>
           <div ref={handleMap} className="text-center border position-absolute top-0 start-50 translate-middle mb-6" id="mapWindow" />
+          { showRate
+          && (
           <div className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-4" id="rateButton">
             <p className="mb-1">Rate the driver</p>
             {rateButton}
           </div>
-          <h6 className="text-center position-absolute start-50 translate-middle-x mb-2">{conformationMessage}</h6>
+          )}
+          <h6 className="text-center position-absolute start-50 translate-middle-x mb-2">{confirmationMessage}</h6>
           <h6 className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-2">{message}</h6>
         </div>
         <div className="position-absolute start-100 translate-middle" id="passengerMapButtonsContainer">
@@ -120,20 +133,10 @@ const Taxi = ({ appState }) => {
           && (
             <button
               type="button"
-              onClick={() => { setCount(true); setConformationMessage('waiting for confirmation from a driver'); }}
+              onClick={() => { setShowConfirmOrder(false); setCount(true); setConfirmationMessage('waiting for confirmation from a driver'); }}
               className="btn btn-outline-success "
             >
               Confirm Order
-            </button>
-          )}
-          {showCancelOrder
-          && (
-            <button
-              type="button"
-              // onClick={confirmation}
-              className="btn btn-outline-success "
-            >
-              Cancel Order
             </button>
           )}
         </div>

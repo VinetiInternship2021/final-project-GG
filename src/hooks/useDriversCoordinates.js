@@ -11,11 +11,10 @@ const useDriversCoordinates = (carType) => {
     const config = { cancelToken: source.token };
 
     axios.post(`${baseUrl}/coordinates/drivers`,
-      {
-        carType,
-      },
+      { carType },
       config)
       .then((response) => {
+        console.log('active drivers: ', response.data.drivers);
         setDrivers(response.data.drivers);
 
         const coordinates = response.data.drivers.map((driver) => ({

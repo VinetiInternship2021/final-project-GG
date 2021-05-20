@@ -10,11 +10,16 @@ const useNearestDriver = (
   price,
   userId,
   count,
-  setConformationMessage,
+  setConfirmationMessage,
   setStatus,
   setReservationId,
 ) => {
   const [log, setlog] = useState();
+
+  // unsubscribing from interval
+  useEffect(() => () => {
+    clearInterval(log);
+  }, [log]);
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -22,7 +27,7 @@ const useNearestDriver = (
 
     if (drivers && pickUpLocation && dropOffLocation
       && nearestDriverIndex !== undefined && price && count) {
-      axios.post(`${baseUrl}/coordinates/trip_nearestdriver`, {
+      axios.post(`${baseUrl}/coordinates/reservation`, {
         pickUpLocation,
         dropOffLocation,
         driverId: drivers[nearestDriverIndex].id,
@@ -42,9 +47,9 @@ const useNearestDriver = (
 
                 .then((response) => {
                   if (response.data.message !== 'error') {
-                    setConformationMessage('your driver is on the way');
+                    setConfirmationMessage('your driver is on the way');
 
-                    clearInterval(log);
+                    clearInterval(IntervalLog);
                   }
                 })
 

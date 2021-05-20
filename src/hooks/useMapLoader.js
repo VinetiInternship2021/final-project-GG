@@ -6,7 +6,6 @@ const useMapLoader = (
   setPickUpLocation,
   setDropOffLocation,
   setShowConfirmOrder,
-  setshowCancelOrder,
 ) => {
   const myLatlng = { lat: 40.18, lng: 44.53 };
   let map;
@@ -67,7 +66,6 @@ const useMapLoader = (
           // draw the trip route
           if (origin && destination) {
             setShowConfirmOrder(true);
-            setshowCancelOrder(true);
             marker1.setMap(null);
             marker2.setMap(null);
             useRoute(directionsService, directionsRenderer, origin, destination);
