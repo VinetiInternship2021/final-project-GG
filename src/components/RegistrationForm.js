@@ -1,4 +1,6 @@
 import React from 'react';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import PropTypes from 'prop-types';
 
 const RegistrationForm = ({
@@ -22,12 +24,21 @@ const RegistrationForm = ({
       <label htmlFor="phone_number" className="form-label">
         Phone
         <br />
-        <input
-          onChange={(e) => onChange(e)}
+        {/* <input */}
+        <PhoneInput
+          country="am"
           id="phone_number"
-          type="number"
-          className="form-control"
+          value={fields.phone_number}
           defaultValue={fields.phone_number}
+          onChange={(e) => {
+            const params = {
+              ...fields,
+              alert: '',
+            };
+            params.phone_number = e;
+            setFields(params);
+          }}
+          className="form-control"
         />
       </label>
       <label htmlFor="first_name" className="form-label">

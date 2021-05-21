@@ -34,7 +34,7 @@ const DriverSignup = ({ appState, dispatch }) => {
     <div>
       <form className="text-center w-50 border position-absolute top-50 start-50 translate-middle">
         <div className="me-3 mx-3">
-          <RegistrationForm onChange={onChange} data={[fields, setFields]} header="Client registration">
+          <RegistrationForm onChange={onChange} data={[fields, setFields]} header="Driver registration">
             <label htmlFor="car_manufacturer" className="form-label">
               Car manufacturer
               <br />

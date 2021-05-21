@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ErrorMessages = ({ fields }) => (
   <div>
-    { fields.alert.length
+    { (fields.alert.length > 0)
       && (
         <div id="error_explanation">
           <div className="alert alert-danger">
