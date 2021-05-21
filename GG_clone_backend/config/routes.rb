@@ -10,11 +10,17 @@ Rails.application.routes.draw do
       delete 'logout' => 'sessions#destroy'
       get 'user_in' => 'sessions#user_in'
       post 'drivers/coordinates' => 'coordinates#update_driver_coordinates'
-      get 'coordinates/drivers' => 'coordinates#active_drivers'
-      post 'coordinates/trip_nearestdriver' => 'coordinates#create_reservation'
+      post 'coordinates/drivers' => 'coordinates#active_drivers'
+      post 'coordinates/reservation' => 'coordinates#create_reservation'
       post '/coordinates/trip' => 'coordinates#reservation'
       post '/coordinates/confirm' => 'coordinates#confirm_reservation'
       post '/coordinates/driverAssigned' => 'coordinates#assigned_reservation'
+      delete '/coordinates/reservation' => 'coordinates#delete_reservation'
+      post '/coordinates/arrived' => 'coordinates#arrived'
+      post '/coordinates/pickup' => 'coordinates#pickup'
+      post '/coordinates/complete' => 'coordinates#complete'
+      post '/coordinates/driverArrived' => 'coordinates#driver_arrived_message'
+      post '/coordinates/rateDriver' => 'coordinates#rate_driver'
     end
   end
 end

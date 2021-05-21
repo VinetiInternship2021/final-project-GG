@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../utils/configs';
 
-const useDriversCoordinates = () => {
+const useDriversCoordinates = (carType) => {
   const [driversPosition, setDriversPosition] = useState();
   const [drivers, setDrivers] = useState();
 
@@ -10,8 +10,11 @@ const useDriversCoordinates = () => {
     const source = axios.CancelToken.source();
     const config = { cancelToken: source.token };
 
-    axios.get(`${baseUrl}/coordinates/drivers`, config)
+    axios.post(`${baseUrl}/coordinates/drivers`,
+      { carType },
+      config)
       .then((response) => {
+        console.log('active drivers: ', response.data.drivers);
         setDrivers(response.data.drivers);
 
         const coordinates = response.data.drivers.map((driver) => ({

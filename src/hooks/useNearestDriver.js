@@ -8,47 +8,58 @@ const useNearestDriver = (
   dropOffLocation,
   nearestDriverIndex,
   price,
-  state,
+  userId,
+  count,
+  setConfirmationMessage,
+  setStatus,
+  setReservationId,
 ) => {
-  const [message, setMessage] = useState();
+  const [log, setlog] = useState();
 
-  let log;
+  // unsubscribing from interval
+  useEffect(() => () => {
+    clearInterval(log);
+  }, [log]);
 
   useEffect(() => {
     const source = axios.CancelToken.source();
     const config = { cancelToken: source.token };
 
     if (drivers && pickUpLocation && dropOffLocation
-      && nearestDriverIndex !== undefined && price) {
-      axios.post(`${baseUrl}/coordinates/trip_nearestdriver`, {
+      && nearestDriverIndex !== undefined && price && count) {
+      axios.post(`${baseUrl}/coordinates/reservation`, {
         pickUpLocation,
         dropOffLocation,
         driverId: drivers[nearestDriverIndex].id,
-        passengerId: state.userId,
+        passengerId: userId,
         price,
       }, config)
 
-        .then(() => {
-          clearInterval(log);
+        .then((res) => {
+          setStatus('reservation created');
+          setReservationId(res.data.id);
 
-          log = setInterval(
+          const IntervalLog = setInterval(
             () => {
               axios.post(`${baseUrl}/coordinates/driverAssigned`, {
-                id: state.userId,
+                id: userId,
               })
 
                 .then((response) => {
                   if (response.data.message !== 'error') {
-                    setMessage('your driver is on the way');
+                    setConfirmationMessage('your driver is on the way');
 
-                    clearInterval(log);
+                    clearInterval(IntervalLog);
                   }
                 })
+
                 .catch((error) => {
                   console.log(error);
                 });
             }, 3000,
           );
+
+          setlog(IntervalLog);
         })
 
         .catch((error) => {
@@ -58,10 +69,9 @@ const useNearestDriver = (
 
     return () => {
       source.cancel();
+      clearInterval(log);
     };
-  }, [pickUpLocation, dropOffLocation, drivers, nearestDriverIndex, price]);
-
-  return message;
+  }, [pickUpLocation, dropOffLocation, drivers, nearestDriverIndex, price, count]);
 };
 
 export default useNearestDriver;

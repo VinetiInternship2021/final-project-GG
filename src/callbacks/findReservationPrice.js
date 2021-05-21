@@ -1,4 +1,4 @@
-function findReservationPrice(response, state) {
+function findReservationPrice(response, carType) {
   const distanceMatrixArrayClient = response.rows[0].elements;
   const distanceValue = distanceMatrixArrayClient.map((value) => value.distance.value);
 
@@ -6,7 +6,7 @@ function findReservationPrice(response, state) {
 
   let tripPrice = 0;
 
-  switch (state.carType) {
+  switch (carType) {
     case 'Econom':
       tripPrice = (distanceValue[0] / 1000) * 100;
       break;
