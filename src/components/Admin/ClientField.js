@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable */
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '../../redux/actions';
@@ -8,7 +9,7 @@ import ClientFieldDefault from './ClientFieldDefault';
 import Filter from './verification/Filter';
 import UnverifiedDriverList from './verification/UnverifiedDriverList';
 
-const ClientField = ({ usersList, client, dispatch }) => {
+const ClientField = ({ usersList, client }) => {
   const [filter, setFilter] = useState({
     unverified: false,
   });
@@ -28,6 +29,7 @@ const ClientField = ({ usersList, client, dispatch }) => {
       try {
         fields = usersList.users.map(({ driver }) => (
           <ClientFieldDriver
+            filter={filter.unverified}
             key={driver.id}
             driver={driver}
           />

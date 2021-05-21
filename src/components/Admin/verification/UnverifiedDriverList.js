@@ -17,8 +17,8 @@ export default function UnverifiedDriverList() {
         'Accept-Encoding': 'gzip, deflate, br',
         withCredentials: true,
       })
-      .then((res) => {
-        setUnverifiedDrivers(res.data);
+      .then(({ data: drivers }) => {
+        setUnverifiedDrivers(drivers);
       });
   }, []);
 
