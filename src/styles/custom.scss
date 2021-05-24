@@ -15,12 +15,28 @@ $GridSize: 6.5em;
 
 .list-group-item {
     position: relative;
+    &:hover {
+        .drivers-list-licence {
+            opacity: 1;
+        }
+    }
+    .drivers-list-licence {
+        width: 300px;
+        position: absolute;
+        opacity: 0;
+        left: 0;
+        bottom: -10em;
+    }
+}
+
+.react-tel-input .form-control {
+    width: 100%;
 }
 
 .maps {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 660px;
+    height: 500px;
 }
 
 .body {
@@ -44,7 +60,7 @@ body {
     margin-right: auto;
     text-align: center;
     vertical-align: middle;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(255, 253, 253, 0.4);
     align-items:center;
     justify-content:center;
 }
@@ -96,6 +112,12 @@ label {
 }
 input {
     padding-top: .5em;
+    margin-top: .5em;
+}
+
+.license {
+    align-items:center;
+    width: 300px;
 }
 
 .home {

@@ -6,31 +6,33 @@ import SettingsHelper from '../../helpers/SettingsHelper';
 import { appRoutes, DriverPageButtons } from '../../utils/configs';
 import UserMenu from '../layouts/UserMenu';
 
-const DriverSettings = ({ match: { params: { id } } }) => {
-  const userId = id;
+const DriverSettings = ({ appState }) => {
+  const { userId } = appState;
 
   return (
     <div>
-      {userId
-        ? (
-          <UserMenu
-            routes={appRoutes.driver}
-            userId={userId}
-            menuButtons={DriverPageButtons}
-          />
-        ) : false}
-      <div className="ui-component container-md">
-        <div className="card text-center top-50 start-50 translate-middle">
-          <SettingsHelper modelName="drivers" reqKey="driver" driver />
-        </div>
-      </div>
+      {typeof userId === 'number'
+        && (
+          <>
+            <UserMenu
+              routes={appRoutes.driver}
+              userId={userId}
+              menuButtons={DriverPageButtons}
+            />
+            <div className="ui-component container-md">
+              <div className="card text-center top-50 start-50 translate-middle">
+                <SettingsHelper modelName="drivers" reqKey="driver" driver />
+              </div>
+            </div>
+          </>
+        )}
     </div>
   );
 };
 
 DriverSettings.propTypes = {
-  match: PropTypes.objectOf(PropTypes.any).isRequired,
-  // appState: PropTypes.objectOf(PropTypes.any).isRequired,
+  // match: PropTypes.objectOf(PropTypes.any).isRequired,
+  appState: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default connect(mapStateToProps)(DriverSettings);

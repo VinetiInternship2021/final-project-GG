@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import DriverReservChart from '../../shared/reservationCharts/DriverReservChart';
 
 const ClientFieldDriver = ({
   driver: {
-    id, phoneNumber, firstName, lastName, isActive, isVerifiedByAdmin,
+    id, phoneNumber, firstName,
+    lastName, isActive, isVerifiedByAdmin,
+    driverLicenseImageId, reservations,
   },
 }) => {
   let verified = 'bg-danger';
@@ -31,6 +34,8 @@ const ClientFieldDriver = ({
       <small className={`badge ${active}`}>
         {isActive ? 'Active' : 'Inactive'}
       </small>
+      {driverLicenseImageId && <img className="drivers-list-licence" alt="licence" src={driverLicenseImageId} />}
+      {reservations.length > 0 && <DriverReservChart reservations={reservations} />}
     </div>
   );
 };

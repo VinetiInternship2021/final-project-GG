@@ -8,13 +8,16 @@ const SignUpHelper = async (fields, setFields, state, dispatch, history, params)
         ...state,
         isLoading: false,
         loggedIn: true,
-        userType: response.data.userType,
+        userType: response.data.model_name,
         userId: response.data.user.id,
       }));
-      history.push(`/${response.data.userType}/${response.data.user.id}`);
+
+      history.push(`/${response.data.model_name}/${response.data.user.id}`);
     })
+
     .catch((response) => {
       const errors = [];
+
       if (response.status === 500) {
         errors.push('This phone number registered');
         dispatch(ChangeActionLoading({ isLoading: false }));
@@ -24,6 +27,7 @@ const SignUpHelper = async (fields, setFields, state, dispatch, history, params)
           errors.push(`${error[0]} ${error[1]}`);
           return errors;
         });
+
         setFields({ ...fields, alert: errors });
       } else {
         setFields({ ...fields, alert: response.message });

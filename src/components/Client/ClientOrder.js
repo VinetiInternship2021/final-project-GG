@@ -15,7 +15,7 @@ const ClientPage = ({ appState, dispatch }) => {
   const handleOrders = (order) => {
     dispatch(createCarType({
       ...state,
-      type: order,
+      type: order.target.innerText,
     }));
     history.push(appRoutes.taxi);
   };
@@ -41,7 +41,6 @@ const ClientPage = ({ appState, dispatch }) => {
 };
 
 ClientPage.propTypes = {
-  // match: PropTypes.objectOf(PropTypes.any).isRequired,
   appState: PropTypes.objectOf(PropTypes.any).isRequired,
   dispatch: PropTypes.func.isRequired,
 };

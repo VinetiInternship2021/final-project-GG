@@ -9,14 +9,16 @@ const SettingsHelperFields = ({
   <div className="me-3 mx-3">
     {state.isLoading && <Loading />}
     Settings
-    <RegistrationForm
-      key={fields.phone_number}
-      settings
-      onChange={onChange}
-      data={[fields, setFields]}
-      header={`${fields.first_name} information updating`}
-    >
-      {driver
+    {state.userId
+      && (
+      <RegistrationForm
+        key={fields.phone_number}
+        settings
+        onChange={onChange}
+        data={[fields, setFields]}
+        header={`${fields.first_name} information updating`}
+      >
+        {driver
         && (
           <div>
             <label htmlFor="car_manufacturer" className="form-label">
@@ -52,9 +54,21 @@ const SettingsHelperFields = ({
                 defaultValue={fields.car_registration_number}
               />
             </label>
+            <label htmlFor="driver_license_image_id" className="form-label">
+              Car license image
+              <br />
+              <input
+                onChange={(e) => onChange(e)}
+                id="driver_license_image_id"
+                type="file"
+                className="form-control"
+                accept="image/*"
+              />
+            </label>
           </div>
         )}
-    </RegistrationForm>
+      </RegistrationForm>
+      )}
   </div>
 );
 
