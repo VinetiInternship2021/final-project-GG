@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.11.4",
+    "@testing-library/dom": "^7.31.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -11,6 +12,9 @@
     "axios": "^0.21.1",
     "chart.js": "^3.2.1",
     "chokidar": "^3.5.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "node-sass": "^5.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
@@ -45,12 +49,17 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.14.2",
+    "@babel/preset-react": "^7.13.13",
+    
+    "babel-jest": "^26.6.3",
     "eslint": "^7.25.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-cypress": "^2.11.3",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.23.2",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "react-test-renderer": "^17.0.2"
   }
 }
