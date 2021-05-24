@@ -7,13 +7,11 @@ class Api::V1::CoordinatesController < ApplicationController
     if driver.save
       render json: { message: 'driver coordinates has been saved' }
     else
-      #   render status: :unprocessable_entity
       render json: { message: 'error! driver coordinates has not been saved' }
     end
   end
 
   def active_drivers
-    # drivers = Driver.where("latitude > ? AND car_level = ?", 0, params[:carType])
     drivers = Driver.where("is_active = ? AND car_level = ?", true, params[:carType])
     array = []
     drivers.each do |driver|
@@ -23,7 +21,6 @@ class Api::V1::CoordinatesController < ApplicationController
     if array.length.positive?
       render json: { drivers: array }
     else
-      #   render status: :unprocessable_entity
       render json: { message: 'error!, no driver' }
     end
   end
