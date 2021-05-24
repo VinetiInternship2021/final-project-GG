@@ -19,7 +19,10 @@ const LoginForm = ({
           country="am"
           id="phone"
           value={fields.phone_number}
-          onChange={(e) => setFields({ ...fields, phone_number: e })}
+          onChange={(e) => {
+            setFields({ ...fields, phone_number: e });
+            console.log(e);
+          }}
           className="form-control"
         />
       </label>
