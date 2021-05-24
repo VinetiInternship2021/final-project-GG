@@ -9,14 +9,16 @@ const SettingsHelperFields = ({
   <div className="me-3 mx-3">
     {state.isLoading && <Loading />}
     Settings
-    <RegistrationForm
-      key={fields.phone_number}
-      settings
-      onChange={onChange}
-      data={[fields, setFields]}
-      header={`${fields.first_name} information updating`}
-    >
-      {driver
+    {state.userId
+      && (
+      <RegistrationForm
+        key={fields.phone_number}
+        settings
+        onChange={onChange}
+        data={[fields, setFields]}
+        header={`${fields.first_name} information updating`}
+      >
+        {driver
         && (
           <div>
             <label htmlFor="car_manufacturer" className="form-label">
@@ -65,7 +67,8 @@ const SettingsHelperFields = ({
             </label>
           </div>
         )}
-    </RegistrationForm>
+      </RegistrationForm>
+      )}
   </div>
 );
 

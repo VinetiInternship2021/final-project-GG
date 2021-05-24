@@ -11,19 +11,21 @@ const AdminSettings = ({ appState }) => {
 
   return (
     <div>
-      {userId
+      {typeof userId === 'number'
         && (
-          <UserMenu
-            routes={appRoutes.admin}
-            userId={userId}
-            menuButtons={AdminPageButtons}
-          />
+          <>
+            <UserMenu
+              routes={appRoutes.admin}
+              userId={userId}
+              menuButtons={AdminPageButtons}
+            />
+            <div className="ui-component container-md">
+              <div className="card text-center top-50 start-50 translate-middle">
+                <SettingsHelper modelName="super_users" reqKey="super_user" />
+              </div>
+            </div>
+          </>
         )}
-      <div className="ui-component container-md">
-        <div className="card text-center top-50 start-50 translate-middle">
-          <SettingsHelper modelName="super_users" reqKey="super_user" />
-        </div>
-      </div>
     </div>
   );
 };
