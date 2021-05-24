@@ -33,6 +33,11 @@ class Api::V1::DriversController < ApplicationController
     else render json: @user.errors, status: :unprocessable_entity
     end
   end
+
+  def active_drivers
+    drivers = Driver.where(is_active: true)
+    render json: drivers
+  end
   
   private
 

@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   get 'drivers/new'
   namespace :api do
     namespace :v1 do
+      # get all active drivers
+      get '/drivers/active' => 'drivers#active_drivers'
+
       resources :drivers
       resources :super_users
       resources :passengers
@@ -23,4 +26,6 @@ Rails.application.routes.draw do
       post '/coordinates/rateDriver' => 'coordinates#rate_driver'
     end
   end
+
+  mount ActionCable.server => '/cable'
 end

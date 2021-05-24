@@ -15,6 +15,8 @@ class Api::V1::SessionsController < ApplicationController
     model_name = @model_name
     if user&.authenticate(params[:session][:password])
       log_in user, model_name
+      @user.is_active = true
+      ActionCable.server.broadcast 'active_drivers', {type: 'login', user: @user}
       params[:session][:remember_me] == '1' ? remember(user, model_name) : forget(user)
       render status: :ok
     else
@@ -49,6 +51,7 @@ class Api::V1::SessionsController < ApplicationController
     end   
 
     if user.model_name == 'Driver'
+      ActionCable.server.broadcast 'active_drivers', {type: 'logout', user: user}
       user[:latitude] = nil
       user[:longitude] = nil
       user[:is_active] = false

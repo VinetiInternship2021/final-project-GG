@@ -6,6 +6,7 @@ import { appRoutes, clientPageButtons } from '../../utils/configs';
 import { mapStateToProps, createCarType } from '../../redux/actions';
 import UserMenu from '../layouts/UserMenu';
 import ClientMenu from '../layouts/ClientMenu';
+import ActiveDrivers from './ActiveDrivers';
 
 const ClientPage = ({ appState, dispatch }) => {
   const history = useHistory();
@@ -34,6 +35,7 @@ const ClientPage = ({ appState, dispatch }) => {
         <div className="position-relative">
           <h5 className="mt-3 mb-3">Choose Vehicle Type</h5>
           <ClientMenu handleOrders={handleOrders} />
+          <ActiveDrivers />
         </div>
       </div>
     </div>
