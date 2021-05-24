@@ -32,7 +32,8 @@ const DriverPage = () => {
     axios.post(`${baseUrl}/coordinates/confirm`, {
       id: userId,
     })
-      .then(() => {
+      .then((response) => {
+        console.log('driver confirmation: ', response);
         setMessage('Approach to the pickup location, then click arrived button. The passenger will be notified.');
         setShowConfirm(false);
         setShowArrived(true);
@@ -82,7 +83,7 @@ const DriverPage = () => {
           />
         )}
       <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
-        <p>Driver Map</p>
+        <p data-testid="title">Driver Map</p>
         <h6>{message}</h6>
         <div
           ref={handleMap}
@@ -91,6 +92,7 @@ const DriverPage = () => {
         {showConfirm
           && (
             <button
+              data-testid="confirmation-button"
               type="button"
               onClick={confirmation}
               className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
