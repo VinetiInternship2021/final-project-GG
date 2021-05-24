@@ -11,19 +11,24 @@ const ClientSettings = ({ appState }) => {
 
   return (
     <div>
-      {userId
+      {typeof userId === 'number'
         && (
-          <UserMenu
-            routes={appRoutes.client}
-            userId={userId}
-            menuButtons={clientPageButtons}
-          />
+          <>
+            <UserMenu
+              routes={appRoutes.client}
+              userId={userId}
+              menuButtons={clientPageButtons}
+            />
+            <div className="ui-component container-md">
+              <div className="card text-center top-50 start-50 translate-middle">
+                <SettingsHelper
+                  modelName="passengers"
+                  reqKey="passenger"
+                />
+              </div>
+            </div>
+          </>
         )}
-      <div className="ui-component container-md">
-        <div className="card text-center top-50 start-50 translate-middle">
-          <SettingsHelper modelName="passengers" reqKey="passenger" />
-        </div>
-      </div>
     </div>
   );
 };

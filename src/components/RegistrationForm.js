@@ -112,7 +112,7 @@ RegistrationForm.defaultProps = {
 RegistrationForm.propTypes = {
   data: PropTypes.arrayOf(PropTypes.any).isRequired,
   header: PropTypes.string.isRequired,
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.bool]),
   settings: PropTypes.bool,
 };
 

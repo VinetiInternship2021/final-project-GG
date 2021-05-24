@@ -19,11 +19,8 @@ const LoginForm = ({
           country="am"
           id="phone"
           value={fields.phone_number}
-          onChange={(e) => {
-            setFields({ ...fields, phone_number: e });
-            console.log(e);
-          }}
-          className="form-control"
+          onChange={(e) => setFields({ ...fields, phone_number: e })}
+          inputClass=".form-control"
         />
       </label>
       <label htmlFor="password" className="form-label">
