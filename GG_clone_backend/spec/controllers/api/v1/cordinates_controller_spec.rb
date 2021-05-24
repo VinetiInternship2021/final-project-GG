@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe Api::V1::CoordinatesController, type: :controller do
   describe "#update_driver_coordinates" do
     let!(:driver) {
-        Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789)
+        Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+          car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789)
     }
     it "creates a user" do
         post :update_driver_coordinates, params: {id: 1, coordinates: {latitude: 123, longitude: 456}}
@@ -15,10 +16,12 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
 
   describe "#create_reservation" do
     let(:driver) {
-      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789)
+      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789)
     }
     let(:passenger) {
-      Passenger.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", phone_number: 123456789)
+      Passenger.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        phone_number: 123456789)
     }
     describe "when reservation exists" do
       let!(:reservation) {
@@ -30,7 +33,8 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
     end
     describe "when reservation doesn't exists" do
       it "will create reservation" do
-        expect { post :create_reservation, params: {driverId:driver.id, passengerId: passenger.id, pickUpLocation:{lat:1234, lng:7894}, dropOffLocation:{lat:4568, lng:7894}, price:1200} }. to change {Reservation.count}.by(1)
+        expect { post :create_reservation, params: {driverId:driver.id, passengerId: passenger.id, pickUpLocation:{lat:1234, lng:7894}, 
+        dropOffLocation:{lat:4568, lng:7894}, price:1200} }. to change {Reservation.count}.by(1)
       end
     end
   end
@@ -38,8 +42,10 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
   describe "active_drivers" do
     describe "when active drivers exist" do
       let!(:driver) {
-        Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: true, car_level: 'Econom')
-        Driver.create!(id: 2, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456799, is_active: true, car_level: 'Econom')
+        Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password",
+           car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: true, car_level: 'Econom')
+        Driver.create!(id: 2, first_name: "test_first_name", last_name: "test_last_name", password: "test_password",
+           car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456799, is_active: true, car_level: 'Econom')
       }
       
       it "will find active drivers" do
@@ -49,8 +55,10 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
     end
     describe "when active drivers does not exist" do
       let!(:driver) {
-        Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
-        Driver.create!(id: 2, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456799, is_active: false, car_level: 'Econom')
+        Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password",
+           car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
+        Driver.create!(id: 2, first_name: "test_first_name", last_name: "test_last_name", password: "test_password",
+           car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456799, is_active: false, car_level: 'Econom')
       }
 
       it "will not find active drivers" do
@@ -62,7 +70,8 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
 
   describe "rate_driver" do
     let!(:driver) {
-      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
+      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
     }
     let(:passenger) {
       Passenger.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", phone_number: 123456789)
@@ -80,7 +89,8 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
 
   describe "reservation" do
     let!(:driver) {
-      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
+      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
     }
     let(:passenger) {
       Passenger.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", phone_number: 123456789)
@@ -105,10 +115,12 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
 
   describe "confirm_reservation" do
     let!(:driver) {
-      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: true, car_level: 'Econom')
+      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: true, car_level: 'Econom')
     }
     let(:passenger) {
-      Passenger.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", phone_number: 123456789)
+      Passenger.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        phone_number: 123456789)
     }
     let!(:reservation) {
       Reservation.create!(driver_id: driver.id, passenger_id: passenger.id, created_at: '02.05.2021', status: 'unassigned')
@@ -124,10 +136,12 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
 
   describe "assigned_reservation" do
     let!(:driver) {
-      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
+      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
     }
     let(:passenger) {
-      Passenger.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", phone_number: 123456789)
+      Passenger.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        phone_number: 123456789)
     }
     let!(:reservation) {
       Reservation.create!(driver_id: driver.id, passenger_id: passenger.id, created_at: '02.05.2021', status: 'assigned')
@@ -149,7 +163,8 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
 
   describe "delete_reservation" do
     let!(:driver) {
-      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
+      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
     }
     let(:passenger) {
       Passenger.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", phone_number: 123456789)
@@ -168,7 +183,8 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
 
   describe "arrived" do
     let!(:driver) {
-      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
+      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
     }
     let!(:passenger) {
       Passenger.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", phone_number: 123456789)
@@ -187,7 +203,8 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
 
   describe "pickup" do
     let!(:driver) {
-      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
+      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
     }
     let!(:passenger) {
       Passenger.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", phone_number: 123456789)
@@ -206,7 +223,8 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
 
   describe "complete" do
     let!(:driver) {
-      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
+      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
     }
     let!(:passenger) {
       Passenger.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", phone_number: 123456789)
@@ -225,7 +243,8 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
 
   describe "driver_arrived_message" do
     let!(:driver) {
-      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
+      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
     }
     let!(:passenger) {
       Passenger.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", phone_number: 123456789)
