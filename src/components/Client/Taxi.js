@@ -107,17 +107,20 @@ const Taxi = ({ appState }) => {
   return (
     <div>
       {userId
-  && (
-    <UserMenu
-      routes={appRoutes.client}
-      userId={userId}
-      menuButtons={clientPageButtons}
-    />
-  )}
+        && (
+          <UserMenu
+            routes={appRoutes.client}
+            userId={userId}
+            menuButtons={clientPageButtons}
+          />
+        )}
       <div className="ui-component position-relative">
-        <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
+        <div className="card text-center border top-50 start-50 translate-middle" id="mapContainer">
           <p>Passenger Map</p>
-          <div ref={handleMap} className="text-center border position-absolute top-0 start-50 translate-middle mb-6" id="mapWindow" />
+          <div
+            ref={handleMap}
+            className="text-center border start-50 translate-middle maps"
+          />
           { showRate
           && (
           <div className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-4" id="rateButton">
@@ -133,7 +136,11 @@ const Taxi = ({ appState }) => {
           && (
             <button
               type="button"
-              onClick={() => { setShowConfirmOrder(false); setCount(true); setConfirmationMessage('waiting for confirmation from a driver'); }}
+              onClick={() => {
+                setShowConfirmOrder(false);
+                setCount(true);
+                setConfirmationMessage('waiting for confirmation from a driver');
+              }}
               className="btn btn-outline-success "
             >
               Confirm Order
