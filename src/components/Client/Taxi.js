@@ -114,7 +114,7 @@ const Taxi = ({ appState }) => {
             menuButtons={clientPageButtons}
           />
         )}
-      <div className="ui-component position-relative">
+      <div className="ui-component container-md">
         <div className="card text-center border top-50 start-50 translate-middle" id="mapContainer">
           <p>Passenger Map</p>
           <div
