@@ -32,14 +32,14 @@ const ClientFieldDriver = ({
       <small className={`badge ${activeClassName}`}>
         {isActive ? 'Active' : 'Inactive'}
       </small>
-      {driverLicenseImageId && <img className="drivers-list-licence" alt="licence" src={driverLicenseImageId} />}
-      {reservations.length > 0 && <DriverReservChart reservations={reservations} />}
       {(!isVerifiedByAdmin && !filter) ? (
         <VerifyButton
           onClick={onClick}
           text="Verify"
         />
       ) : ''}
+      {driverLicenseImageId && <img className="drivers-list-licence" alt="licence" src={driverLicenseImageId} />}
+      {/* {reservations.length > 0 && <DriverReservChart reservations={reservations} />} */}
     </div>
   );
 };
