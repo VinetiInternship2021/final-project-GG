@@ -1,8 +1,6 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import DriverReservChart from '../../shared/reservationCharts/DriverReservChart';
-import VerifyButton from './verification/VerifyButton';
 
 const ClientFieldDriver = ({
   driver: {
@@ -10,36 +8,33 @@ const ClientFieldDriver = ({
     lastName, isActive, isVerifiedByAdmin,
     driverLicenseImageId, reservations,
   },
-  onClick,
-  filter,
 }) => {
-  const verifiedClassName = isVerifiedByAdmin ? 'bg-success' : 'bg-danger';
-  const activeClassName = isActive && isVerifiedByAdmin ? 'bg-success' : 'bg-danger';
-
+  let verified = 'bg-danger';
+  let active = 'bg-danger';
+  if (isVerifiedByAdmin) {
+    verified = 'bg-success';
+    if (isActive) {
+      active = 'bg-success';
+    }
+  }
   return (
     <div key={id} className="list-group-item list-group-item-action">
       <div className="d-flex w-100 justify-content-between">
         <h5 className="mb-1">
           { `${firstName} ${lastName}` }
         </h5>
-        <span className={`badge ${verifiedClassName}`}>
+        <span className={`badge ${verified}`}>
           {isVerifiedByAdmin ? 'Confirmed' : 'Unconfirmed'}
         </span>
       </div>
       <p className="mb-1">
         { `Phone number ${phoneNumber}`}
       </p>
-      <small className={`badge ${activeClassName}`}>
+      <small className={`badge ${active}`}>
         {isActive ? 'Active' : 'Inactive'}
       </small>
-      {(!isVerifiedByAdmin && !filter) ? (
-        <VerifyButton
-          onClick={onClick}
-          text="Verify"
-        />
-      ) : ''}
       {driverLicenseImageId && <img className="drivers-list-licence" alt="licence" src={driverLicenseImageId} />}
-      {/* {reservations.length > 0 && <DriverReservChart reservations={reservations} />} */}
+      {reservations.length > 0 && <DriverReservChart reservations={reservations} />}
     </div>
   );
 };
