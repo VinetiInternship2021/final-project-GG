@@ -130,7 +130,7 @@ const Taxi = ({ appState }) => {
           )}
           <h6 className="text-center position-absolute bottom-100 start-50 translate-middle-x mb-2">{confirmationMessage}</h6>
           <h6 className="text-center position-absolute top-100 start-50 translate-middle-x mb-2">{message}</h6>
-          <div className="position-absolute top-100 start-100 translate-middle" id="passengerMapButtonsContainer">
+          <div className="position-absolute top-100 start-50 translate-middle" id="passengerMapButtonsContainer">
             {showConfirmOrder
             && (
               <button

@@ -89,7 +89,7 @@ const DriverPage = () => {
             ref={handleMap}
             className="text-center border start-50 translate-middle maps"
           />
-          <div className="position-absolute top-100 start-100 translate-middle" id="passengerMapButtonsContainer">
+          <div className="position-absolute bottom-0 start-50 translate-middle" id="passengerMapButtonsContainer">
             {showConfirm
             && (
               <button
