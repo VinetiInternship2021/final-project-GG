@@ -1,8 +1,5 @@
 import { useEffect } from 'react';
 
-// const useDistanceMatrix = ({
-//   origins, destinations, callback, google,
-// }) => {
 const useDistanceMatrix = (
   origins, destinations, callback, google,
 ) => {

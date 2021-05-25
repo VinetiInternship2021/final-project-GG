@@ -1,11 +1,17 @@
 /* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import VerifyButton from './verification/VerifyButton';
+=======
+import DriverReservChart from '../../shared/reservationCharts/DriverReservChart';
+>>>>>>> main
 
 const ClientFieldDriver = ({
   driver: {
-    id, phoneNumber, firstName, lastName, isActive, isVerifiedByAdmin,
+    id, phoneNumber, firstName,
+    lastName, isActive, isVerifiedByAdmin,
+    driverLicenseImageId, reservations,
   },
   onClick,
   filter,
@@ -29,12 +35,17 @@ const ClientFieldDriver = ({
       <small className={`badge ${activeClassName}`}>
         {isActive ? 'Active' : 'Inactive'}
       </small>
+<<<<<<< HEAD
       {(!isVerifiedByAdmin && !filter) ? (
         <VerifyButton
           onClick={onClick}
           text="Verify"
         />
       ) : ''}
+=======
+      {driverLicenseImageId && <img className="drivers-list-licence" alt="licence" src={driverLicenseImageId} />}
+      {reservations.length > 0 && <DriverReservChart reservations={reservations} />}
+>>>>>>> main
     </div>
   );
 };

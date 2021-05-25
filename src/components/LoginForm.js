@@ -1,4 +1,6 @@
 import React from 'react';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import PropTypes from 'prop-types';
 import ErrorMessages from './layouts/ErrorMessages';
 
@@ -12,12 +14,13 @@ const LoginForm = ({
       <label htmlFor="phone" className="form-label">
         Phone
         <br />
-        <input
-          onClick={() => setFields({ ...fields, alert: [] })}
-          onChange={(e) => setFields({ ...fields, phone_number: e.target.value })}
+        {/* <input */}
+        <PhoneInput
+          country="am"
           id="phone"
-          type="text"
-          className="form-control"
+          value={fields.phone_number}
+          onChange={(e) => setFields({ ...fields, phone_number: e })}
+          inputClass=".form-control"
         />
       </label>
       <label htmlFor="password" className="form-label">

@@ -9,8 +9,7 @@ class Driver < ApplicationRecord
   validates :first_name, presence: true, length: { maximum: 100 }
   validates :last_name, presence: true, length: { maximum: 100 }
   validates :password, length: { minimum: 8 }, allow_blank: true
-  VALID_NUMBER_REGEX = /(^(?!\+.*\(.*\).*--.*$)(?!\+.*\(.*\).*-$)
-(\+[0-9]{3,5}([-0-9]{0,8})?([0-9]{0,3})?)$)|(^(?!0.*\(.*\).*-$)(0[0-9]{2,8})$)/.freeze
+  VALID_NUMBER_REGEX = /(^\+[0-9]{1,15}$)|(^[0-9]{1,15}$)|(^[0-9]{1,16}$)/.freeze
   validates :phone_number, length: { maximum: 12 },
                            format: { with: VALID_NUMBER_REGEX }
   validates :car_manufacturer, presence: true, length: { maximum: 200 }

@@ -8,6 +8,7 @@ import { signParams } from '../utils/configs';
 import UpdateHelper from './UpdateHelper';
 import ErrorMessages from '../components/layouts/ErrorMessages';
 import SettingsHelperFields from './SettingsHelperFields';
+import imgUploadHelper from './imgUploadHelper';
 
 const SettingsHelper = ({
   appState, dispatch, modelName, reqKey, driver,
@@ -18,6 +19,7 @@ const SettingsHelper = ({
     userId,
     isLoading: true,
     user: {},
+    changePassword: false,
   });
   const [fields, setFields] = useState({
     ...signParams,
@@ -27,22 +29,23 @@ const SettingsHelper = ({
   params[reqKey] = { ...fields };
 
   useEffect(() => {
-    getUserData({
-      state, setState, modelName, dispatch,
-    })
-      .then(() => {
-        setFields(state.user);
-      });
-  }, [state.isLoading]);
-
-  const onChange = (event) => {
-    const parameter = {
-      ...fields,
-      alert: '',
-    };
-    parameter[event.target.id] = event.target.value;
-    setFields(parameter);
-  };
+    if (typeof state.userId === 'number') {
+      getUserData({
+        state, setState, modelName, dispatch,
+      })
+        .then(() => {
+          setFields(state.user);
+        });
+    } else {
+      setState(
+        {
+          ...state,
+          exist: false,
+          isLoading: false,
+        },
+      );
+    }
+  }, [state.isLoading, state.changePassword, userId]);
 
   const onClick = (event, Fields, SetFields, State, Dispatch, History, Params) => {
     const newParams = {};
@@ -54,30 +57,75 @@ const SettingsHelper = ({
 
   return (
     <>
-      <form>
-        {fields.alert
-          ? (
-            <ErrorMessages fields={fields} />
-          )
-          : false}
-        <SettingsHelperFields
-          key={fields.phone_number}
-          fields={fields}
-          state={state}
-          driver={driver}
-          setFields={setFields}
-          onChange={onChange}
-        />
-        <button
-          onClick={(e) => {
-            onClick(e, fields, setFields, state, dispatch, history, params);
-          }}
-          type="submit"
-          className="btn btn-outline-success mx-3 mb-3"
-        >
-          Submit
-        </button>
-      </form>
+      {typeof state.userId === 'number'
+        && (
+        <form>
+          {fields.alert
+            ? (
+              <ErrorMessages fields={fields} />
+            )
+            : false}
+          <SettingsHelperFields
+            key={fields.phone_number}
+            fields={fields}
+            state={state}
+            driver={driver}
+            setFields={setFields}
+            onChange={(event) => {
+              imgUploadHelper({ event, fields, setFields });
+            }}
+          />
+          { state.changePassword && (
+          <div>
+            <label htmlFor="password" className="form-label">
+              Password
+              <br />
+              <input
+                onChange={(event) => {
+                  imgUploadHelper({ event, fields, setFields });
+                }}
+                id="password"
+                type="text"
+                className="form-control"
+              />
+            </label>
+            <label htmlFor="password confirmation" className="form-label">
+              Password confirmation
+              <br />
+              <input
+                onChange={(event) => {
+                  imgUploadHelper({ event, fields, setFields });
+                }}
+                id="password_confirmation"
+                type="text"
+                className="form-control"
+              />
+            </label>
+          </div>
+          ) }
+          <button
+            onClick={(e) => {
+              onClick(e, fields, setFields, state, dispatch, history, params);
+            }}
+            type="submit"
+            className="btn btn-outline-success mx-3 mb-3"
+          >
+            Submit
+          </button>
+          <button
+            onClick={() => {
+              setState({
+                ...state,
+                changePassword: !state.changePassword,
+              });
+            }}
+            type="button"
+            className="btn btn-outline-success mx-3 mb-3"
+          >
+            Change password
+          </button>
+        </form>
+        )}
     </>
   );
 };

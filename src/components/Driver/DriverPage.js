@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { Loader } from '@googlemaps/js-api-loader';
 import { appRoutes, DriverPageButtons, baseUrl } from '../../utils/configs';
-import { mapStateToProps } from '../../redux/actions';
 import useMapLocatorRouter from '../../hooks/useMapLocatorRouter';
 import '../../styles/map.css';
 import UserMenu from '../layouts/UserMenu';
@@ -14,17 +12,64 @@ const loader = new Loader({
   version: 'weekly',
 });
 
-const DriverPage = ({ appState }) => {
-  const { userId } = appState;
-  const state = appState;
+const DriverPage = () => {
+  const userId = useSelector((state) => state.rootReducer.userId);
 
   const [showConfirm, setShowConfirm] = useState(false);
-  const handleMap = useMapLocatorRouter(loader, state, setShowConfirm);
+  const [showArrived, setShowArrived] = useState(false);
+  const [showPickup, setShowPickup] = useState(false);
+  const [showComplete, setShowComplete] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleMap = useMapLocatorRouter(
+    loader,
+    userId,
+    setShowConfirm,
+    setMessage,
+  );
 
   const confirmation = () => {
     axios.post(`${baseUrl}/coordinates/confirm`, {
-      id: state.userId,
-    });
+      id: userId,
+    })
+      .then((response) => {
+        console.log('driver confirmation: ', response);
+        setMessage('Approach to the pickup location, then click arrived button. The passenger will be notified.');
+        setShowConfirm(false);
+        setShowArrived(true);
+      });
+  };
+
+  const arrived = () => {
+    axios.post(`${baseUrl}/coordinates/arrived`, {
+      id: userId,
+    })
+      .then(() => {
+        setMessage('Pickup the passenger, then click pickup button.');
+        setShowArrived(false);
+        setShowPickup(true);
+      });
+  };
+
+  const pickup = () => {
+    axios.post(`${baseUrl}/coordinates/pickup`, {
+      id: userId,
+    })
+      .then(() => {
+        setMessage('Ride started. Complete the order, then click on complete button.');
+        setShowPickup(false);
+        setShowComplete(true);
+      });
+  };
+
+  const complete = () => {
+    axios.post(`${baseUrl}/coordinates/complete`, {
+      id: userId,
+    })
+      .then(() => {
+        setMessage('Ride completed.');
+        setShowComplete(false);
+      });
   };
 
   return (
@@ -38,7 +83,8 @@ const DriverPage = ({ appState }) => {
           />
         )}
       <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
-        <p>Driver Map</p>
+        <p data-testid="title">Driver Map</p>
+        <h6>{message}</h6>
         <div
           ref={handleMap}
           className="text-center border position-absolute top-0 start-50 translate-middle maps"
@@ -46,6 +92,7 @@ const DriverPage = ({ appState }) => {
         {showConfirm
           && (
             <button
+              data-testid="confirmation-button"
               type="button"
               onClick={confirmation}
               className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
@@ -53,13 +100,39 @@ const DriverPage = ({ appState }) => {
               Confirm
             </button>
           )}
+        {showArrived
+          && (
+            <button
+              type="button"
+              onClick={arrived}
+              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+            >
+              Arrived
+            </button>
+          )}
+        {showPickup
+          && (
+            <button
+              type="button"
+              onClick={pickup}
+              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+            >
+              Pickup
+            </button>
+          )}
+        {showComplete
+          && (
+            <button
+              type="button"
+              onClick={complete}
+              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+            >
+              Complete
+            </button>
+          )}
       </div>
     </div>
   );
 };
 
-DriverPage.propTypes = {
-  appState: PropTypes.objectOf(PropTypes.any).isRequired,
-};
-
-export default connect(mapStateToProps)(DriverPage);
+export default DriverPage;

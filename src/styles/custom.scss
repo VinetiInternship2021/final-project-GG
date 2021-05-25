@@ -15,6 +15,22 @@ $GridSize: 6.5em;
 
 .list-group-item {
     position: relative;
+    &:hover {
+        .drivers-list-licence {
+            opacity: 1;
+        }
+    }
+    .drivers-list-licence {
+        width: 300px;
+        position: absolute;
+        opacity: 0;
+        left: 0;
+        bottom: -10em;
+    }
+}
+
+.react-tel-input .form-control {
+    width: 100%;
 }
 
 .maps {
@@ -96,6 +112,12 @@ label {
 }
 input {
     padding-top: .5em;
+    margin-top: .5em;
+}
+
+.license {
+    align-items:center;
+    width: 300px;
 }
 
 .home {
