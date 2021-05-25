@@ -1,12 +1,19 @@
-import React from 'react';
+/* eslint-disable */
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { mapStateToProps } from '../../redux/actions';
 import ClientFieldDriver from './ClientFieldDriver';
 import ClientFieldPassenger from './ClientFieldPassenger';
 import ClientFieldDefault from './ClientFieldDefault';
+import Filter from './verification/Filter';
+import UnverifiedDriverList from './verification/UnverifiedDriverList';
 
 const ClientField = ({ usersList, client }) => {
+  const [filter, setFilter] = useState({
+    unverified: false,
+  });
+
   let fields;
   switch (client) {
     case 'passengers':
@@ -22,6 +29,7 @@ const ClientField = ({ usersList, client }) => {
       try {
         fields = usersList.users.map(({ driver }) => (
           <ClientFieldDriver
+            filter={filter.unverified}
             key={driver.id}
             driver={driver}
           />
@@ -36,7 +44,8 @@ const ClientField = ({ usersList, client }) => {
 
   return (
     <div className="list-group">
-      {fields}
+      {client === 'drivers' ? <Filter filter={filter} setFilter={setFilter} /> : ''}
+      {filter.unverified ? <UnverifiedDriverList /> : fields}
     </div>
   );
 };
