@@ -42,7 +42,6 @@ const DriverProfile = ({ match: { params: { id } } }) => {
             : (
               <>
                 <span className={`badge ${state.verified}`}>
-                  {/* eslint-disable-next-line camelcase */}
                   {state.user.is_verified_by_admin ? 'Confirmed' : 'Unconfirmed'}
                 </span>
                 <ProfileInfoTable fieldsData={state.user} />

@@ -29,13 +29,23 @@ const SettingsHelper = ({
   params[reqKey] = { ...fields };
 
   useEffect(() => {
-    getUserData({
-      state, setState, modelName, dispatch,
-    })
-      .then(() => {
-        setFields(state.user);
-      });
-  }, [state.isLoading, state.changePassword]);
+    if (typeof state.userId === 'number') {
+      getUserData({
+        state, setState, modelName, dispatch,
+      })
+        .then(() => {
+          setFields(state.user);
+        });
+    } else {
+      setState(
+        {
+          ...state,
+          exist: false,
+          isLoading: false,
+        },
+      );
+    }
+  }, [state.isLoading, state.changePassword, userId]);
 
   const onClick = (event, Fields, SetFields, State, Dispatch, History, Params) => {
     const newParams = {};
@@ -47,23 +57,25 @@ const SettingsHelper = ({
 
   return (
     <>
-      <form>
-        {fields.alert
-          ? (
-            <ErrorMessages fields={fields} />
-          )
-          : false}
-        <SettingsHelperFields
-          key={fields.phone_number}
-          fields={fields}
-          state={state}
-          driver={driver}
-          setFields={setFields}
-          onChange={(event) => {
-            imgUploadHelper({ event, fields, setFields });
-          }}
-        />
-        { state.changePassword && (
+      {typeof state.userId === 'number'
+        && (
+        <form>
+          {fields.alert
+            ? (
+              <ErrorMessages fields={fields} />
+            )
+            : false}
+          <SettingsHelperFields
+            key={fields.phone_number}
+            fields={fields}
+            state={state}
+            driver={driver}
+            setFields={setFields}
+            onChange={(event) => {
+              imgUploadHelper({ event, fields, setFields });
+            }}
+          />
+          { state.changePassword && (
           <div>
             <label htmlFor="password" className="form-label">
               Password
@@ -90,29 +102,30 @@ const SettingsHelper = ({
               />
             </label>
           </div>
-        ) }
-        <button
-          onClick={(e) => {
-            onClick(e, fields, setFields, state, dispatch, history, params);
-          }}
-          type="submit"
-          className="btn btn-outline-success mx-3 mb-3"
-        >
-          Submit
-        </button>
-        <button
-          onClick={() => {
-            setState({
-              ...state,
-              changePassword: !state.changePassword,
-            });
-          }}
-          type="button"
-          className="btn btn-outline-success mx-3 mb-3"
-        >
-          Change password
-        </button>
-      </form>
+          ) }
+          <button
+            onClick={(e) => {
+              onClick(e, fields, setFields, state, dispatch, history, params);
+            }}
+            type="submit"
+            className="btn btn-outline-success mx-3 mb-3"
+          >
+            Submit
+          </button>
+          <button
+            onClick={() => {
+              setState({
+                ...state,
+                changePassword: !state.changePassword,
+              });
+            }}
+            type="button"
+            className="btn btn-outline-success mx-3 mb-3"
+          >
+            Change password
+          </button>
+        </form>
+        )}
     </>
   );
 };
