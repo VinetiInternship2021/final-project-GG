@@ -95,7 +95,6 @@ const DriverPage = () => {
                 data-testid="confirmation-button"
                 type="button"
                 onClick={confirmation}
-                className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
               >
                 Confirm
               </button>
