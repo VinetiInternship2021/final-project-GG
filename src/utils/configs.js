@@ -14,7 +14,7 @@ export const appRoutes = {
     client: '/passenger/:id',
     signup: '/signup/passenger',
     login: '/login/passenger',
-    history: '#',
+    history: '/passenger/:id/history',
     settings: '/passenger/:id/settings',
     taxi: '/passenger/:id/taxi',
   },
