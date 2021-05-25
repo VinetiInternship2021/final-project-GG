@@ -24,7 +24,7 @@ export const appRoutes = {
     signup: '/signup/driver',
     login: '/login/driver',
     profile: '/driver/:id/profile',
-    history: '#',
+    history: '/driver/:id/history',
     settings: '/driver/:id/settings',
   },
 };
