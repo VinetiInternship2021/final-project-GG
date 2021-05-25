@@ -89,49 +89,49 @@ const DriverPage = () => {
             ref={handleMap}
             className="text-center border start-50 translate-middle maps"
           />
-        </div>
-        <div className="position-absolute start-100 translate-middle" id="passengerMapButtonsContainer">
-          {showConfirm
-          && (
-            <button
-              data-testid="confirmation-button"
-              type="button"
-              onClick={confirmation}
-              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
-            >
-              Confirm
-            </button>
-          )}
-          {showArrived
-          && (
-            <button
-              type="button"
-              onClick={arrived}
-              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
-            >
-              Arrived
-            </button>
-          )}
-          {showPickup
-          && (
-            <button
-              type="button"
-              onClick={pickup}
-              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
-            >
-              Pickup
-            </button>
-          )}
-          {showComplete
-          && (
-            <button
-              type="button"
-              onClick={complete}
-              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
-            >
-              Complete
-            </button>
-          )}
+          <div className="position-absolute top-100 start-100 translate-middle" id="passengerMapButtonsContainer">
+            {showConfirm
+            && (
+              <button
+                data-testid="confirmation-button"
+                type="button"
+                onClick={confirmation}
+                className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+              >
+                Confirm
+              </button>
+            )}
+            {showArrived
+            && (
+              <button
+                type="button"
+                onClick={arrived}
+                className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+              >
+                Arrived
+              </button>
+            )}
+            {showPickup
+            && (
+              <button
+                type="button"
+                onClick={pickup}
+                className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+              >
+                Pickup
+              </button>
+            )}
+            {showComplete
+            && (
+              <button
+                type="button"
+                onClick={complete}
+                className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+              >
+                Complete
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
