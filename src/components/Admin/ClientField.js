@@ -6,7 +6,7 @@ import ClientFieldDriver from './ClientFieldDriver';
 import ClientFieldPassenger from './ClientFieldPassenger';
 import ClientFieldDefault from './ClientFieldDefault';
 
-const ClientField = ({ usersList, client }) => {
+const ClientField = ({ usersList, client, setState }) => {
   let fields;
   switch (client) {
     case 'passengers':
@@ -22,6 +22,7 @@ const ClientField = ({ usersList, client }) => {
       try {
         fields = usersList.users.map(({ driver }) => (
           <ClientFieldDriver
+            setState={setState}
             key={driver.id}
             driver={driver}
           />
@@ -44,6 +45,7 @@ const ClientField = ({ usersList, client }) => {
 ClientField.propTypes = {
   usersList: PropTypes.objectOf(PropTypes.any).isRequired,
   client: PropTypes.string.isRequired,
+  setState: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(ClientField);
