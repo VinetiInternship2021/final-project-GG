@@ -107,17 +107,20 @@ const Taxi = ({ appState }) => {
   return (
     <div>
       {userId
-  && (
-    <UserMenu
-      routes={appRoutes.client}
-      userId={userId}
-      menuButtons={clientPageButtons}
-    />
-  )}
-      <div className="ui-component position-relative">
-        <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
+        && (
+          <UserMenu
+            routes={appRoutes.client}
+            userId={userId}
+            menuButtons={clientPageButtons}
+          />
+        )}
+      <div className="ui-component container-md">
+        <div className="card text-center border top-50 start-50 translate-middle" id="mapContainer">
           <p>Passenger Map</p>
-          <div ref={handleMap} className="text-center border position-absolute top-0 start-50 translate-middle mb-6" id="mapWindow" />
+          <div
+            ref={handleMap}
+            className="text-center border start-50 translate-middle maps"
+          />
           { showRate
           && (
           <div className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-4" id="rateButton">
@@ -125,20 +128,24 @@ const Taxi = ({ appState }) => {
             {rateButton}
           </div>
           )}
-          <h6 className="text-center position-absolute start-50 translate-middle-x mb-2">{confirmationMessage}</h6>
-          <h6 className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-2">{message}</h6>
-        </div>
-        <div className="position-absolute start-100 translate-middle" id="passengerMapButtonsContainer">
-          {showConfirmOrder
-          && (
-            <button
-              type="button"
-              onClick={() => { setShowConfirmOrder(false); setCount(true); setConfirmationMessage('waiting for confirmation from a driver'); }}
-              className="btn btn-outline-success "
-            >
-              Confirm Order
-            </button>
-          )}
+          <h6 className="text-center position-absolute bottom-100 start-50 translate-middle-x mb-2">{confirmationMessage}</h6>
+          <h6 className="text-center position-absolute top-100 start-50 translate-middle-x mb-2">{message}</h6>
+          <div className="position-absolute top-100 start-50 translate-middle" id="passengerMapButtonsContainer">
+            {showConfirmOrder
+            && (
+              <button
+                type="button"
+                onClick={() => {
+                  setShowConfirmOrder(false);
+                  setCount(true);
+                  setConfirmationMessage('waiting for confirmation from a driver');
+                }}
+                className="btn btn-outline-success "
+              >
+                Confirm Order
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

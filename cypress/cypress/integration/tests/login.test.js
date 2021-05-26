@@ -1,7 +1,7 @@
 import LoginPage from '../pom/LoginPage';
 import { passenger, driver } from '../../fixtures/login.json';
 
-describe('Passenger Login', () => {
+describe('User Login', () => {
   const loginPage = new LoginPage();
 
   beforeEach(() => {

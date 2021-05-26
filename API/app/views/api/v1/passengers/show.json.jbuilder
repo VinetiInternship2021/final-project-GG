@@ -9,6 +9,7 @@ if current_user?(@user, 'Passenger')
       json.first_name @user.first_name
       json.last_name @user.last_name
       json.email @user.email
+      json.reservations @user.reservations
     end
   end
 else

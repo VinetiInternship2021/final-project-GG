@@ -12,8 +12,8 @@ const ClientFieldDriver = ({
   },
   setState,
 }) => {
-  const verifiedClassName = isVerifiedByAdmin ? 'bg-success' : 'bg-danger';
-  const activeClassName = isActive && isVerifiedByAdmin ? 'bg-success' : 'bg-danger';
+  const verified = isVerifiedByAdmin ? 'bg-success' : 'bg-danger';
+  const active = isActive && isVerifiedByAdmin ? 'bg-success' : 'bg-danger';
 
   const onClick = () => {
     VerifyHelper({ id, setState });
@@ -25,14 +25,14 @@ const ClientFieldDriver = ({
         <h5 className="mb-1">
           { `${firstName} ${lastName}` }
         </h5>
-        <span className={`badge ${verifiedClassName}`}>
+        <span className={`badge ${verified}`}>
           {isVerifiedByAdmin ? 'Confirmed' : 'Unconfirmed'}
         </span>
       </div>
       <p className="mb-1">
         { `Phone number ${phoneNumber}`}
       </p>
-      <small className={`badge ${activeClassName}`}>
+      <small className={`badge ${active}`}>
         {isActive ? 'Active' : 'Inactive'}
       </small>
       {!isVerifiedByAdmin
