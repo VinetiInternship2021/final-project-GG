@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import getUserData from './ProfilePageHelper';
 import UserMenu from '../components/layouts/UserMenu';
-import { appRoutes, DriverPageButtons } from '../utils/configs';
+import { appRoutes, clientPageButtons, DriverPageButtons } from '../utils/configs';
 import Loading from '../shared/Animations/Loading';
 import { mapStateToProps } from '../redux/actions';
 import ReservationsListHelper from './ReservationsListHelper';
@@ -17,6 +17,16 @@ const DriverReservations = ({ appState: { userId }, modelName }) => {
       reservations: [],
     },
   });
+
+  let routes = null;
+  let menuButtons = null;
+  if (modelName === 'passengers') {
+    routes = appRoutes.client;
+    menuButtons = clientPageButtons;
+  } else {
+    routes = appRoutes.driver;
+    menuButtons = DriverPageButtons;
+  }
 
   useEffect(() => {
     if (typeof userId === 'number') {
@@ -43,7 +53,6 @@ const DriverReservations = ({ appState: { userId }, modelName }) => {
         },
       );
     }
-    console.log(state, ' effect');
   }, [userId, state.isLoading]);
 
   return (
@@ -51,9 +60,9 @@ const DriverReservations = ({ appState: { userId }, modelName }) => {
       {userId
       && (
         <UserMenu
-          routes={appRoutes.driver}
+          routes={routes}
           userId={userId}
-          menuButtons={DriverPageButtons}
+          menuButtons={menuButtons}
         />
       )}
       {typeof userId === 'number'
@@ -64,7 +73,6 @@ const DriverReservations = ({ appState: { userId }, modelName }) => {
               {state.isLoading ? <Loading />
                 : (
                   <div className="list-group">
-                    {console.log(state)}
                     <ReservationsListHelper state={state} />
                   </div>
                 )}
