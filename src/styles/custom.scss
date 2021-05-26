@@ -31,6 +31,11 @@ $GridSize: 6.5em;
 
 .react-tel-input .form-control {
     width: 100%;
+    height: inherit;
+}
+
+.react-tel-input {
+    margin-top: .5em;
 }
 
 .maps {
@@ -137,6 +142,7 @@ input {
         color: #F8F8FF;
     }
 }
+
 ul {
     position: relative;
     padding-bottom: 0.2em;
@@ -161,7 +167,7 @@ ul {
         height: $GridSize;
         width: $GridSize;
         display: inline-grid;
-        box-shadow: 1em 0.5em 0 #e1e1e1;
+        box-shadow: 1em 0.5em 0 rgba(225, 225, 225, 0.4);
 
         &:hover {
             transform: translate(-.9em, -.9em);
@@ -169,7 +175,7 @@ ul {
             background: #198754;
             color: #fffcfb;
             transition: all .25s linear;
-            box-shadow: 1em 1em 0 #e1e1e1;
+            box-shadow: 1em 1em 0 rgba(225, 225, 225, 0.3);
 
             &:before,
             &:after {
@@ -223,14 +229,14 @@ ul {
         height: 8em;
         width: 8em;
         display: block;
-        box-shadow: -2em 1.5em 0 #e1e1e1;
+        box-shadow: -2em 1.5em 0 rgba(225, 225, 225, 0.4);
 
         &:hover {
             background: #198754;
             color: #fffcfb;
             transform: translate(.9em, -.9em);
             transition: all .25s linear;
-            box-shadow: -2em 2em 0 #e1e1e1;
+            box-shadow: -2em 2em 0 rgba(225, 225, 225, 0.3);
 
             &:before,
             &:after {

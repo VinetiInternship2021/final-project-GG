@@ -24,7 +24,6 @@ const RegistrationForm = ({
       <label htmlFor="phone_number" className="form-label">
         Phone (Required)
         <br />
-        {/* <input */}
         <PhoneInput
           country="am"
           id="phone_number"
@@ -38,8 +37,9 @@ const RegistrationForm = ({
             params.phone_number = e;
             setFields(params);
           }}
-          className="form-control"
+          inputClass="form-control"
         />
+        {/* <input */}
       </label>
       <label htmlFor="first_name" className="form-label">
         First name (Required)
