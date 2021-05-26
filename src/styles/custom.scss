@@ -31,12 +31,17 @@ $GridSize: 6.5em;
 
 .react-tel-input .form-control {
     width: 100%;
+    height: inherit;
+}
+
+.react-tel-input {
+    margin-top: .5em;
 }
 
 .maps {
-    position: relative;
-    width: 660px;
-    height: 500px;
+    margin-top: -30px;
+    width: 700px;
+    height: 450px;
 }
 
 .body {
@@ -122,7 +127,6 @@ input {
 
 .home {
     position: absolute;
-    //left: 50%;
     top: 0; left: 0; bottom: 0; right: 0;
     margin: 15% auto auto;
     height: 150px;
@@ -138,6 +142,7 @@ input {
         color: #F8F8FF;
     }
 }
+
 ul {
     position: relative;
     padding-bottom: 0.2em;
@@ -162,7 +167,7 @@ ul {
         height: $GridSize;
         width: $GridSize;
         display: inline-grid;
-        box-shadow: 1em 0.5em 0 #e1e1e1;
+        box-shadow: 1em 0.5em 0 rgba(225, 225, 225, 0.4);
 
         &:hover {
             transform: translate(-.9em, -.9em);
@@ -170,7 +175,7 @@ ul {
             background: #198754;
             color: #fffcfb;
             transition: all .25s linear;
-            box-shadow: 1em 1em 0 #e1e1e1;
+            box-shadow: 1em 1em 0 rgba(225, 225, 225, 0.3);
 
             &:before,
             &:after {
@@ -224,14 +229,14 @@ ul {
         height: 8em;
         width: 8em;
         display: block;
-        box-shadow: -2em 1.5em 0 #e1e1e1;
+        box-shadow: -2em 1.5em 0 rgba(225, 225, 225, 0.4);
 
         &:hover {
             background: #198754;
             color: #fffcfb;
             transform: translate(.9em, -.9em);
             transition: all .25s linear;
-            box-shadow: -2em 2em 0 #e1e1e1;
+            box-shadow: -2em 2em 0 rgba(225, 225, 225, 0.3);
 
             &:before,
             &:after {
@@ -277,6 +282,36 @@ ul {
             left: -.5em;
             transform: skewY(-45deg);
         }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .maps {
+        width: 500px;
+        height: 450px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .maps {
+        width: 350px;
+        height: 450px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .maps {
+        width: 200px;
+        height: 350px;
+    }
+    .menu {
+        position: absolute;
+        display: flex;
+        justify-content: space-between;
+        transform: scale(0.6);
+    }
+    #mapContainer{
+        height: 420px;
     }
 }
 

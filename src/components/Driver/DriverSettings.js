@@ -31,7 +31,6 @@ const DriverSettings = ({ appState }) => {
 };
 
 DriverSettings.propTypes = {
-  // match: PropTypes.objectOf(PropTypes.any).isRequired,
   appState: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
