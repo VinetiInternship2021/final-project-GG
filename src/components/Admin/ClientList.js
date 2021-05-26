@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Loading from '../../shared/Animations/Loading';
@@ -11,10 +11,11 @@ import UserMenu from '../layouts/UserMenu';
 const ClientList = ({ appState, dispatch, match }) => {
   const { client } = match.params;
   const { userId } = appState;
+  const [state, setState] = useState(false);
 
   useEffect(() => {
     GetUsers({ client, dispatch });
-  }, [client]);
+  }, [client, state]);
 
   return (
     <div>
@@ -29,7 +30,7 @@ const ClientList = ({ appState, dispatch, match }) => {
       <div className="ui-component container-md">
         <div className="card text-center top-50 start-50 translate-middle">
           {appState.isLoading ? <Loading /> : false}
-          <ClientField client={client} />
+          <ClientField client={client} setState={setState} />
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { baseUrl } from './configs';
+import { baseUrl, UNVERIFIED_URL } from './configs';
 
 export const userIn = () => new Promise((resolve) => {
   axios.get(`${baseUrl}/user_in`,
@@ -75,6 +75,20 @@ export const updateUser = ({ params, userId }) => new Promise((resolve, reject) 
   axios.defaults.headers.put.Accept = '*/*';
   axios.put(`${baseUrl}/${Object.keys(params)[0]}s/${userId}`,
     params,
+    { withCredentials: true })
+    .then((resp) => {
+      resolve(resp);
+    })
+    .catch((resp) => {
+      reject(resp.response.data);
+    });
+});
+
+export const handleVerify = ({ id }) => new Promise((resolve, reject) => {
+  axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+  axios.defaults.headers.post.Accept = '*/*';
+  axios.post(UNVERIFIED_URL,
+    { id },
     { withCredentials: true })
     .then((resp) => {
       resolve(resp);
