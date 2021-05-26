@@ -32,8 +32,7 @@ const DriverPage = () => {
     axios.post(`${baseUrl}/coordinates/confirm`, {
       id: userId,
     })
-      .then((response) => {
-        console.log('driver confirmation: ', response);
+      .then(() => {
         setMessage('Approach to the pickup location, then click arrived button. The passenger will be notified.');
         setShowConfirm(false);
         setShowArrived(true);
@@ -82,54 +81,58 @@ const DriverPage = () => {
             menuButtons={DriverPageButtons}
           />
         )}
-      <div className="text-center border position-absolute top-50 start-50 translate-middle" id="mapContainer">
-        <p data-testid="title">Driver Map</p>
-        <h6>{message}</h6>
-        <div
-          ref={handleMap}
-          className="text-center border position-absolute top-0 start-50 translate-middle maps"
-        />
-        {showConfirm
-          && (
-            <button
-              data-testid="confirmation-button"
-              type="button"
-              onClick={confirmation}
-              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
-            >
-              Confirm
-            </button>
-          )}
-        {showArrived
-          && (
-            <button
-              type="button"
-              onClick={arrived}
-              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
-            >
-              Arrived
-            </button>
-          )}
-        {showPickup
-          && (
-            <button
-              type="button"
-              onClick={pickup}
-              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
-            >
-              Pickup
-            </button>
-          )}
-        {showComplete
-          && (
-            <button
-              type="button"
-              onClick={complete}
-              className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
-            >
-              Complete
-            </button>
-          )}
+      <div className="ui-component container-md">
+        <div className="card text-center border top-50 start-50 translate-middle" id="mapContainer">
+          <p data-testid="title">Driver Map</p>
+          <h6>{message}</h6>
+          <div
+            ref={handleMap}
+            className="text-center border start-50 translate-middle maps"
+          />
+          <div className="position-absolute bottom-0 start-50 translate-middle" id="passengerMapButtonsContainer">
+            {showConfirm
+            && (
+              <button
+                data-testid="confirmation-button"
+                type="button"
+                onClick={confirmation}
+                className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+              >
+                Confirm
+              </button>
+            )}
+            {showArrived
+            && (
+              <button
+                type="button"
+                onClick={arrived}
+                className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+              >
+                Arrived
+              </button>
+            )}
+            {showPickup
+            && (
+              <button
+                type="button"
+                onClick={pickup}
+                className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+              >
+                Pickup
+              </button>
+            )}
+            {showComplete
+            && (
+              <button
+                type="button"
+                onClick={complete}
+                className="btn btn-outline-success position-absolute bottom-0 start-50 translate-middle-x ms-0"
+              >
+                Complete
+              </button>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

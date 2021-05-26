@@ -36,15 +36,15 @@ const ClientSignup = (props) => {
   };
 
   return (
-    <>
+    <div>
       <form className="text-center w-25 border position-absolute top-50 start-50 translate-middle">
-        {fields.alert
-          && (
-            <ErrorMessages fields={fields} />
-          )}
         <div className="me-3 mx-3">
           <RegistrationForm onChange={onChange} data={[fields, setFields]} header="Client registration" />
         </div>
+        {fields.alert
+        && (
+          <ErrorMessages fields={fields} />
+        )}
         <button
           onClick={(e) => {
             onClick(e, fields, setFields, state, dispatch, history, params);
@@ -55,7 +55,7 @@ const ClientSignup = (props) => {
           Submit
         </button>
       </form>
-    </>
+    </div>
   );
 };
 

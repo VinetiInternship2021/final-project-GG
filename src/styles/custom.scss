@@ -34,9 +34,9 @@ $GridSize: 6.5em;
 }
 
 .maps {
-    position: relative;
-    width: 660px;
-    height: 500px;
+    margin-top: -30px;
+    width: 700px;
+    height: 450px;
 }
 
 .body {
@@ -122,7 +122,6 @@ input {
 
 .home {
     position: absolute;
-    //left: 50%;
     top: 0; left: 0; bottom: 0; right: 0;
     margin: 15% auto auto;
     height: 150px;
@@ -277,6 +276,36 @@ ul {
             left: -.5em;
             transform: skewY(-45deg);
         }
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .maps {
+        width: 500px;
+        height: 450px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .maps {
+        width: 350px;
+        height: 450px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .maps {
+        width: 200px;
+        height: 350px;
+    }
+    .menu {
+        position: absolute;
+        display: flex;
+        justify-content: space-between;
+        transform: scale(0.6);
+    }
+    #mapContainer{
+        height: 420px;
     }
 }
 
