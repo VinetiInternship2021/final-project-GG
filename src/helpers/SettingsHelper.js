@@ -135,7 +135,6 @@ SettingsHelper.defaultProps = {
 };
 
 SettingsHelper.propTypes = {
-  // match: PropTypes.objectOf(PropTypes.any).isRequired,
   appState: PropTypes.objectOf(PropTypes.any).isRequired,
   reqKey: PropTypes.string.isRequired,
   modelName: PropTypes.string.isRequired,

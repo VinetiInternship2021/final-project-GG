@@ -19,7 +19,7 @@ const MenuHelper = ({ event, userId, user }) => {
       path = '/taxi';
       break;
     case 'My history':
-      path = '#';
+      path = `${user.history.replace(':id', userId)}`;
       break;
     default:
       path = '#';

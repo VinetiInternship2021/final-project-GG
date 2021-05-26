@@ -77,7 +77,6 @@ SettingsHelperFields.defaultProps = {
 };
 
 SettingsHelperFields.propTypes = {
-  // match: PropTypes.objectOf(PropTypes.any).isRequired,
   state: PropTypes.objectOf(PropTypes.any).isRequired,
   fields: PropTypes.objectOf(PropTypes.any).isRequired,
   driver: PropTypes.bool,

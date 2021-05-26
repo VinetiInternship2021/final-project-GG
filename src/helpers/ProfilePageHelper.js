@@ -22,6 +22,7 @@ const setUserData = ({
             driver_license_image_id: data.user.driver_license_image_id,
             is_active: data.user.is_active,
             is_verified_by_admin: data.user.is_verified_by_admin,
+            reservations: data.user.reservations,
             car_registration_number: data.user.car_registration_number,
           },
         },
@@ -36,6 +37,7 @@ const setUserData = ({
           first_name: data.user.first_name,
           last_name: data.user.last_name,
           email: data.user.email,
+          reservations: data.user.reservations,
         },
       });
     }
@@ -50,11 +52,16 @@ const setUserData = ({
   }
 };
 
-const getUserData = async ({ state, setState, modelName }) => {
+const getUserData = async ({
+  state, setState, modelName, userId,
+}) => {
   const params = {
     model: modelName,
-    userId: state.userId,
   };
+  if (typeof userId === 'number') {
+    params.userId = userId;
+  } else params.userId = state.userId;
+
   await modelShow(params)
     .then((response) => setUserData({
       response, state, setState, modelName,

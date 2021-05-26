@@ -1,0 +1,20 @@
+{
+    "passenger": {
+        "phoneNumber": "89665513",
+        "password": "Passenger156565",
+        "firstName": "Vrto",
+        "lastName": "Vartanyan",
+        "email": "dablv@gmail.com"
+    },
+    "driver": {
+        "phoneNumber": "22568978",
+        "password": "Driver999",
+        "firstName": "Gagik",
+        "lastName": "Avanesyan",
+        "email": "gavanesyan@mail.ru",
+        "carRegistrationNumber": "00EE456",
+        "carManufacturer": "Nissan",
+        "carModel": "Tiida",
+        "imgPath": "driver-license.jpg"
+    }
+}
