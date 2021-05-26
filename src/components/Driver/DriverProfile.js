@@ -17,14 +17,16 @@ const DriverProfile = ({ match: { params: { id } } }) => {
 
   useEffect(() => {
     const modelName = 'drivers';
-    getUserData({ state, setState, modelName });
-    if (state.user.is_verified_by_admin) {
-      setState({
-        ...state,
-        verified: 'bg-success',
+    getUserData({ state, setState, modelName })
+      .then(() => {
+        if (state.user.is_verified_by_admin) {
+          setState({
+            ...state,
+            verified: 'bg-success',
+          });
+        }
       });
-    }
-  }, []);
+  }, [state.user.is_verified_by_admin]);
 
   return (
     <div>
