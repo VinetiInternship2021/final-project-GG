@@ -5,7 +5,7 @@ class SuperUser < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 100 }
   validates :password, length: { minimum: 8 }, allow_blank: true
   VALID_NUMBER_REGEX = /(^\+[0-9]{1,15}$)|(^[0-9]{1,15}$)|(^[0-9]{1,16}$)/.freeze
-  validates :phone_number, length: { maximum: 12 },
+  validates :phone_number, length: { maximum: 15 },
                            format: { with: VALID_NUMBER_REGEX }
   has_secure_password
 
