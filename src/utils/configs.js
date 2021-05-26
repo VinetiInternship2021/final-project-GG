@@ -64,7 +64,7 @@ export const orderTypes = {
 export const rating = [1, 2, 3, 4, 5];
 
 export const baseUrl = 'http://localhost:3000/api/v1';
-export const baseReactUrl = 'http://localhost:3001';
+export const UNVERIFIED_URL = `${baseUrl}/admin/unverified_drivers`;
 
 export const loginParams = {
   phone_number: '',
