@@ -1,11 +1,5 @@
 #mapContainer{
-    width: 700px;
-    height: 640px;
-}
-
-#mapWindow{
-    width: 660px;
-    height: 500px;
+    height: 550px;
 }
 
 #rateButton{

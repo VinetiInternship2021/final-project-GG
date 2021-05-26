@@ -77,7 +77,7 @@ const DriverSignup = ({ appState, dispatch }) => {
               />
             </label>
             <label htmlFor="car_level" className="form-label">
-              Car Level
+              Car Level (Required)
               <br />
               <input
                 onChange={(e) => onChange(e)}

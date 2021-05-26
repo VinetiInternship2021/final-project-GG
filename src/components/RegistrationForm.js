@@ -22,9 +22,8 @@ const RegistrationForm = ({
       <br />
       <h5>{header}</h5>
       <label htmlFor="phone_number" className="form-label">
-        Phone
+        Phone (Required)
         <br />
-        {/* <input */}
         <PhoneInput
           country="am"
           id="phone_number"
@@ -38,11 +37,12 @@ const RegistrationForm = ({
             params.phone_number = e;
             setFields(params);
           }}
-          className="form-control"
+          inputClass="form-control"
         />
+        {/* <input */}
       </label>
       <label htmlFor="first_name" className="form-label">
-        First name
+        First name (Required)
         <br />
         <input
           onChange={(e) => onChange(e)}
@@ -53,7 +53,7 @@ const RegistrationForm = ({
         />
       </label>
       <label htmlFor="last_name" className="form-label">
-        Last name
+        Last name (Required)
         <br />
         <input
           onChange={(e) => onChange(e)}
@@ -78,7 +78,7 @@ const RegistrationForm = ({
         && (
           <div>
             <label htmlFor="password" className="form-label">
-              Password
+              Password (Required)
               <br />
               <input
                 onChange={(e) => onChange(e)}
@@ -88,7 +88,7 @@ const RegistrationForm = ({
               />
             </label>
             <label htmlFor="password_confirmation" className="form-label">
-              Confirm Password
+              Confirm Password (Required)
               <br />
               <input
                 onChange={(e) => onChange(e)}

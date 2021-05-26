@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 class LoginPage {
   fillPhoneNumber(phoneNumber) {
-    cy.get('form input#phone').type(phoneNumber);
+    cy.get('form input[type="tel"]').type(phoneNumber);
   }
 
   fillPassword(password) {
@@ -13,7 +13,7 @@ class LoginPage {
   }
 
   submit() {
-    cy.get('form button[type="submit"]');
+    cy.get('.body form button[type="submit"]');
   }
 
   selectUserType(type) {
