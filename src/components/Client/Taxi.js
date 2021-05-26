@@ -123,7 +123,7 @@ const Taxi = ({ appState }) => {
           />
           { showRate
           && (
-          <div className="text-center position-absolute bottom-0 start-50 translate-middle-x mb-4" id="rateButton">
+          <div className="text-center position-absolute bottom-0 start-50 translate-middle-x" id="rateButton">
             <p className="mb-1">Rate the driver</p>
             {rateButton}
           </div>
