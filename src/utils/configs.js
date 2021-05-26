@@ -126,10 +126,6 @@ export const AdminPageButtons = {
     text: 'Drivers',
     icon: 'fas fa-taxi',
   },
-  History: {
-    text: 'Drivers history',
-    icon: 'fas fa-history',
-  },
   Settings: {
     text: 'Settings',
     icon: 'fas fa-cog',
