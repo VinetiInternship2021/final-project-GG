@@ -26,7 +26,7 @@ class Api::V1::DriversController < ApplicationController
     if current_user?(@user, 'Driver')
       if @user.update(user_params)
         render json: { 'status': 'saved' }, status: :accepted
-      else render json: @user.errors, status: :unprocessable_entity
+      else render json: @user.errors, status: :unprocessable_entity 
       end
     elsif @user.errors.empty?
       render json: { 'errors': 'dont have access' }, status: :unprocessable_entity

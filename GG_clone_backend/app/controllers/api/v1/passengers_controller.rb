@@ -22,7 +22,7 @@ class Api::V1::PassengersController < ApplicationController
 
   def update
     @user = Passenger.find(params[:id])
-    if current_user?(@user, 'Driver')
+    if current_user?(@user, 'Passenger')
       if @user.update(user_params)
         render json: { 'status': 'saved' }, status: :accepted
       else render json: @user.errors, status: :unprocessable_entity

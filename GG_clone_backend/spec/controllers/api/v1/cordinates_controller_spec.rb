@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe Api::V1::CoordinatesController, type: :controller do
   describe "#update_driver_coordinates" do
     let!(:driver) {
-        Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
-          car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789)
+      Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password", 
+        car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789)
     }
     it "creates a user" do
-        post :update_driver_coordinates, params: {id: 1, coordinates: {latitude: 123, longitude: 456}}
-        driver.reload
-        expect(driver.latitude).to eq(123)
-        expect(driver.longitude).to eq(456)
+      post :update_driver_coordinates, params: {id: 1, coordinates: {latitude: 123, longitude: 456}}
+      driver.reload
+      expect(driver.latitude).to eq(123)
+      expect(driver.longitude).to eq(456)
     end
   end
 
@@ -43,9 +43,9 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
     describe "when active drivers exist" do
       let!(:driver) {
         Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password",
-           car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: true, car_level: 'Econom')
+          car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: true, car_level: 'Econom')
         Driver.create!(id: 2, first_name: "test_first_name", last_name: "test_last_name", password: "test_password",
-           car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456799, is_active: true, car_level: 'Econom')
+          car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456799, is_active: true, car_level: 'Econom')
       }
       
       it "will find active drivers" do
@@ -53,12 +53,13 @@ RSpec.describe Api::V1::CoordinatesController, type: :controller do
         expect(JSON.parse(response.body)).to have_key('drivers')
       end
     end
+
     describe "when active drivers does not exist" do
       let!(:driver) {
         Driver.create!(id: 1, first_name: "test_first_name", last_name: "test_last_name", password: "test_password",
-           car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
+          car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456789, is_active: false, car_level: 'Econom')
         Driver.create!(id: 2, first_name: "test_first_name", last_name: "test_last_name", password: "test_password",
-           car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456799, is_active: false, car_level: 'Econom')
+          car_manufacturer: "test_car_manufacturer", car_model: "test_car_model", phone_number: 123456799, is_active: false, car_level: 'Econom')
       }
 
       it "will not find active drivers" do
