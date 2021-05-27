@@ -53,6 +53,7 @@ $GridSize: 6.5em;
 .translate-middle {
     transform: translate(-50%,50px)!important;
 }
+
 body {
     position: relative;
     background: #F8F8FF;
@@ -115,9 +116,15 @@ h1,h2,h3,h4,h5 {
 label {
     padding: 0.5em 0.5em 0.5em 0.5em;
 }
+
 input {
     padding-top: .5em;
     margin-top: .5em;
+}
+
+.verifyButton {
+    color: #F8F8FF;
+    background-color: #198754;
 }
 
 .license {
