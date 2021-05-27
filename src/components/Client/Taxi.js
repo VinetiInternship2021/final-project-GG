@@ -36,9 +36,11 @@ const Taxi = ({ appState }) => {
   const [status, setStatus] = useState('');
   const [reservationId, setReservationId] = useState('');
   const [rateValue, setRateValue] = useState();
+  const [drivers, setDrivers] = useState();
 
   // Gets and sets the available drivers coordinates
-  const { driversPosition, drivers } = useDriversCoordinates(carType);
+  // const { driversPosition, drivers } = useDriversCoordinates(carType);
+  const { driversPosition } = useDriversCoordinates(carType, setDrivers);
 
   // delete reservation on page refresh or close
   useOnBeforeUnload(status, reservationId);
@@ -86,6 +88,7 @@ const Taxi = ({ appState }) => {
     setPickUpLocation,
     setDropOffLocation,
     setShowConfirmOrder,
+    drivers,
   );
 
   // gets and sets the driver rating

@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { baseUrl } from '../utils/configs';
 
-const useDriversCoordinates = (carType) => {
+const useDriversCoordinates = (carType, setDrivers) => {
   const [driversPosition, setDriversPosition] = useState();
-  const [drivers, setDrivers] = useState();
 
   useEffect(() => {
     const source = axios.CancelToken.source();
@@ -35,7 +34,6 @@ const useDriversCoordinates = (carType) => {
 
   return {
     driversPosition,
-    drivers,
   };
 };
 
