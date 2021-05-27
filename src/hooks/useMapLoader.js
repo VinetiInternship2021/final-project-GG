@@ -1,11 +1,13 @@
 import { useCallback } from 'react';
 import useRoute from './useRoute';
+import carIcon from '../icon/car-png2.png';
 
 const useMapLoader = (
   loader,
   setPickUpLocation,
   setDropOffLocation,
   setShowConfirmOrder,
+  drivers,
 ) => {
   const myLatlng = { lat: 40.18, lng: 44.53 };
   let map;
@@ -26,6 +28,23 @@ const useMapLoader = (
         center: myLatlng,
         zoom: 13,
       });
+      console.log('drivers in useMapLoader', drivers);
+      if (drivers) {
+        drivers.forEach((driver) => {
+          const latlng = {
+            lat: parseFloat(driver.latitude),
+            lng: parseFloat(driver.longitude),
+          };
+          console.log('latlng: ', latlng);
+          // eslint-disable-next-line no-unused-vars
+          const marker = new window.google.maps.Marker({
+            position: latlng,
+            map,
+            icon: carIcon,
+            title: 'Departure!',
+          });
+        });
+      }
 
       directionsService = new window.google.maps.DirectionsService();
       directionsRenderer = new window.google.maps.DirectionsRenderer();
@@ -73,7 +92,7 @@ const useMapLoader = (
         }
       });
     });
-  }, []);
+  }, [drivers]);
   return handleMap;
 };
 
